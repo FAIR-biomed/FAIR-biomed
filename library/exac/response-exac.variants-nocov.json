@@ -1,0 +1,1 @@
+{"consequence": null, "base_coverage": [{"pos": 7572442, "has_coverage": false}], "variant": {"ref": "C", "xpos": 17007572442, "chrom": "17", "pos": 7572442, "alt": "T"}, "metrics": null, "any_covered": false}

@@ -1,0 +1,19 @@
+---
+title: Compound of the day
+output:
+    html_document:
+        mathjax: null
+---
+
+<style>
+body {
+  font-size: 18px;
+}
+h1 {
+  margin-bottom: 1em;
+}
+</style>
+
+
+The compound of the day is Aspirin (CHEMBL25).
+

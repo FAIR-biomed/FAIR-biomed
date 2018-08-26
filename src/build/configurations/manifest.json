@@ -1,0 +1,39 @@
+{
+  "name": "FAIR-biomed",
+  "version": "_version_",
+  "description": "Open data resources in the biomedical domain",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "background": {
+    "scripts": ["library/library-min.js", "resources/bundle-background.js", "js/common.js", "js/background.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "css": ["css/fair.css"],
+    "js": ["resources/bundle.js", "library/library-min.js", "js/common.js", "js/content.js"]
+  }],
+  "options_page": "html/options.html",
+  "browser_action": {
+    "default_popup": "html/popup.html",
+    "default_action": {
+      "16": "resources/images/fair16.png",
+      "32": "resources/images/fair32.png",
+      "128": "resources/images/fair128.png"
+    }
+  },
+  "icons": {
+    "16": "resources/images/fair16.png",
+    "32": "resources/images/fair32.png",
+    "128": "resources/images/fair128.png"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Space",
+        "mac": "MacCtrl+Space"
+      },
+      "description": "Opens popup.html"
+    }
+  },
+  "manifest_version": 2
+}

@@ -1,0 +1,20 @@
+# developer files
+!.gitkeep
+node_modules
+coverage
+tmp
+.DS_Store
+.idea
+*iml
+.nyc*
+*~
+src/app/cache
+
+
+# resource helper files
+*map
+library/plugin_status
+
+
+# compiled/distribution
+dist

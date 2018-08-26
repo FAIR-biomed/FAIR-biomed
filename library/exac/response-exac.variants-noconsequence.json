@@ -1,0 +1,1 @@
+{"consequence": null, "base_coverage": [{"10": 0.9981, "15": 0.9924, "has_coverage": true, "25": 0.9739, "30": 0.9592, "median": 100.0, "pos": 7579579, "50": 0.9263, "1": 1.0, "5": 1.0, "20": 0.9839, "100": 0.8399, "mean": 92.6}], "variant": {"ref": "A", "xpos": 17007579579, "chrom": "17", "pos": 7579579, "alt": "G"}, "metrics": null, "any_covered": true}

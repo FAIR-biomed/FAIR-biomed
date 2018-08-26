@@ -1,0 +1,57 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "4395",
+    "retmax": "6",
+    "retstart": "0",
+    "idlist": [
+      "30123777",
+      "30119662",
+      "30115848",
+      "30115834",
+      "30109021",
+      "30105774"
+    ],
+    "translationset": [
+      {
+        "from": "cancer",
+        "to": "\"neoplasms\"[MeSH Terms] OR \"neoplasms\"[All Fields] OR \"cancer\"[All Fields]"
+      }
+    ],
+    "translationstack": [
+      {
+        "term": "hallmarks[All Fields]",
+        "field": "All Fields",
+        "count": "15459",
+        "explode": "N"
+      },
+      {
+        "term": "\"neoplasms\"[MeSH Terms]",
+        "field": "MeSH Terms",
+        "count": "3073010",
+        "explode": "Y"
+      },
+      {
+        "term": "\"neoplasms\"[All Fields]",
+        "field": "All Fields",
+        "count": "2461945",
+        "explode": "N"
+      },
+      "OR",
+      {
+        "term": "\"cancer\"[All Fields]",
+        "field": "All Fields",
+        "count": "2000208",
+        "explode": "N"
+      },
+      "OR",
+      "GROUP",
+      "AND",
+      "GROUP"
+    ],
+    "querytranslation": "hallmarks[All Fields] AND (\"neoplasms\"[MeSH Terms] OR \"neoplasms\"[All Fields] OR \"cancer\"[All Fields])"
+  }
+}

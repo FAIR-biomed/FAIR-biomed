@@ -1,0 +1,36 @@
+---
+title: Gene of the day
+output:
+    html_document:
+        mathjax: null
+---
+
+<style>
+body {
+  font-size: 18px;
+}
+h1 {
+  margin-bottom: 1em;
+}
+</style>
+
+
+## Mouse
+
+The gene of the day is Myo7a (id MGI:104510).
+
+Phenotypes associated with this gene include:
+
+ - MP:0001262
+ - MP:0011967 and many more.
+
+
+## Human
+
+The human ortholog is MYO7A (HGNC:7606) located on chr11:76,839,310-76,926,286.
+
+Some common variants in this gene:
+
+ - 11:76869348 G / A
+ - 11:76873367 G / T
+

@@ -1,0 +1,261 @@
+{
+  "header": {
+    "type": "esummary",
+    "version": "0.3"
+  },
+  "result": {
+    "uids": [
+      "26545822",
+      "25820428"
+    ],
+    "26545822": {
+      "uid": "26545822",
+      "pubdate": "2016 Mar 1",
+      "epubdate": "2015 Nov 5",
+      "source": "Bioinformatics",
+      "authors": [
+        {
+          "name": "Konopka T",
+          "authtype": "Author",
+          "clusterid": ""
+        },
+        {
+          "name": "Nijman SM",
+          "authtype": "Author",
+          "clusterid": ""
+        }
+      ],
+      "lastauthor": "Nijman SM",
+      "title": "Comparison of genetic variants in matched samples using thesaurus annotation.",
+      "sorttitle": "comparison of genetic variants in matched samples using thesaurus annotation",
+      "volume": "32",
+      "issue": "5",
+      "pages": "657-63",
+      "lang": [
+        "eng"
+      ],
+      "nlmuniqueid": "9808944",
+      "issn": "1367-4803",
+      "essn": "1367-4811",
+      "pubtype": [
+        "Journal Article"
+      ],
+      "recordstatus": "PubMed - indexed for MEDLINE",
+      "pubstatus": "256",
+      "articleids": [
+        {
+          "idtype": "pubmed",
+          "idtypen": 1,
+          "value": "26545822"
+        },
+        {
+          "idtype": "pii",
+          "idtypen": 4,
+          "value": "btv654"
+        },
+        {
+          "idtype": "doi",
+          "idtypen": 3,
+          "value": "10.1093/bioinformatics/btv654"
+        },
+        {
+          "idtype": "pmc",
+          "idtypen": 8,
+          "value": "PMC4795618"
+        },
+        {
+          "idtype": "rid",
+          "idtypen": 8,
+          "value": "26545822"
+        },
+        {
+          "idtype": "eid",
+          "idtypen": 8,
+          "value": "26545822"
+        },
+        {
+          "idtype": "pmcid",
+          "idtypen": 5,
+          "value": "pmc-id: PMC4795618;"
+        }
+      ],
+      "history": [
+        {
+          "pubstatus": "received",
+          "date": "2015/06/23 00:00"
+        },
+        {
+          "pubstatus": "accepted",
+          "date": "2015/10/30 00:00"
+        },
+        {
+          "pubstatus": "entrez",
+          "date": "2015/11/08 06:00"
+        },
+        {
+          "pubstatus": "pubmed",
+          "date": "2015/11/08 06:00"
+        },
+        {
+          "pubstatus": "medline",
+          "date": "2017/08/05 06:00"
+        }
+      ],
+      "references": [
+      ],
+      "attributes": [
+        "Has Abstract"
+      ],
+      "pmcrefcount": 1,
+      "fulljournalname": "Bioinformatics (Oxford, England)",
+      "elocationid": "doi: 10.1093/bioinformatics/btv654",
+      "doctype": "citation",
+      "srccontriblist": [
+      ],
+      "booktitle": "",
+      "medium": "",
+      "edition": "",
+      "publisherlocation": "",
+      "publishername": "",
+      "srcdate": "",
+      "reportnumber": "",
+      "availablefromurl": "",
+      "locationlabel": "",
+      "doccontriblist": [
+      ],
+      "docdate": "",
+      "bookname": "",
+      "chapter": "",
+      "sortpubdate": "2016/03/01 00:00",
+      "sortfirstauthor": "Konopka T",
+      "vernaculartitle": ""
+    },
+    "25820428": {
+      "uid": "25820428",
+      "pubdate": "2015 May 26",
+      "epubdate": "2015 Mar 27",
+      "source": "Nucleic Acids Res",
+      "authors": [
+        {
+          "name": "Kerzendorfer C",
+          "authtype": "Author",
+          "clusterid": ""
+        },
+        {
+          "name": "Konopka T",
+          "authtype": "Author",
+          "clusterid": ""
+        },
+        {
+          "name": "Nijman SM",
+          "authtype": "Author",
+          "clusterid": ""
+        }
+      ],
+      "lastauthor": "Nijman SM",
+      "title": "A thesaurus of genetic variation for interrogation of repetitive genomic regions.",
+      "sorttitle": "thesaurus of genetic variation for interrogation of repetitive genomic regions",
+      "volume": "43",
+      "issue": "10",
+      "pages": "e68",
+      "lang": [
+        "eng"
+      ],
+      "nlmuniqueid": "0411011",
+      "issn": "0305-1048",
+      "essn": "1362-4962",
+      "pubtype": [
+        "Journal Article"
+      ],
+      "recordstatus": "PubMed - indexed for MEDLINE",
+      "pubstatus": "256",
+      "articleids": [
+        {
+          "idtype": "pubmed",
+          "idtypen": 1,
+          "value": "25820428"
+        },
+        {
+          "idtype": "pii",
+          "idtypen": 4,
+          "value": "gkv178"
+        },
+        {
+          "idtype": "doi",
+          "idtypen": 3,
+          "value": "10.1093/nar/gkv178"
+        },
+        {
+          "idtype": "pmc",
+          "idtypen": 8,
+          "value": "PMC4446415"
+        },
+        {
+          "idtype": "rid",
+          "idtypen": 8,
+          "value": "25820428"
+        },
+        {
+          "idtype": "eid",
+          "idtypen": 8,
+          "value": "25820428"
+        },
+        {
+          "idtype": "pmcid",
+          "idtypen": 5,
+          "value": "pmc-id: PMC4446415;"
+        }
+      ],
+      "history": [
+        {
+          "pubstatus": "accepted",
+          "date": "2015/02/22 00:00"
+        },
+        {
+          "pubstatus": "received",
+          "date": "2014/11/10 00:00"
+        },
+        {
+          "pubstatus": "entrez",
+          "date": "2015/03/31 06:00"
+        },
+        {
+          "pubstatus": "pubmed",
+          "date": "2015/03/31 06:00"
+        },
+        {
+          "pubstatus": "medline",
+          "date": "2015/08/19 06:00"
+        }
+      ],
+      "references": [
+      ],
+      "attributes": [
+        "Has Abstract"
+      ],
+      "pmcrefcount": 1,
+      "fulljournalname": "Nucleic acids research",
+      "elocationid": "doi: 10.1093/nar/gkv178",
+      "doctype": "citation",
+      "srccontriblist": [
+      ],
+      "booktitle": "",
+      "medium": "",
+      "edition": "",
+      "publisherlocation": "",
+      "publishername": "",
+      "srcdate": "",
+      "reportnumber": "",
+      "availablefromurl": "",
+      "locationlabel": "",
+      "doccontriblist": [
+      ],
+      "docdate": "",
+      "bookname": "",
+      "chapter": "",
+      "sortpubdate": "2015/05/26 00:00",
+      "sortfirstauthor": "Kerzendorfer C",
+      "vernaculartitle": ""
+    }
+  }
+}
