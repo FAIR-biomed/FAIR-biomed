@@ -37,16 +37,17 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data) {
-        var raw = JSON.parse(data);
         // raw response will be an array
-        var result = {};
-        result['Overview'] = "The IMPC portal contains phenotype data on " + raw.length +
-            " mouse models with a knock-out in this gene (sourced from IMPC and MGI).";
-        result['Models'] = raw.map(function(x) {
+        var raw = JSON.parse(data);
+        // helper function to produce list items
+        format1 = function(x) {
             var phenotypes = x['phenotypes'].map(p => p['term']).join(', ');
             var desc = x['description'].replace(/</g, '&lt;').replace(/>/g, '&gt;');
             return '<h3>'+desc+'</h3><p>'+phenotypes+'</p>';
-        });
+        }
+        var result = {};
+        result['IMPC models'] = raw.filter(x => x['source']!=='MGI').map(format1)
+        result['Other models (MGI)'] = raw.filter(x => x['source']==='MGI').map(format1)
         return {status: 1, data: result};
     };
 

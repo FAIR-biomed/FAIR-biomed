@@ -7,7 +7,7 @@ Browser extension for accessing open data resources in the biomedical domain.
 
 ## Introduction
 
-Vasts amounts of biomedical data are stored in open databases and knowledge-bases. Data in these resources are intended to the findable, accessible, interoperable, and reusable ([FAIR](https://www.nature.com/articles/sdata201618)). However, the data is distributed across many resources and integrating relevant parts within a specific project can be a challenge.
+Vasts amounts of biomedical data are stored in open databases and knowledge-bases. Data in these resources are intended to be findable, accessible, interoperable, and reusable ([FAIR](https://www.nature.com/articles/sdata201618)). However, the data is distributed across many resources and integrating relevant parts within a specific project can be a challenge.
 
 FAIR-biomed is a browser extension (chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a data report in your browser. With the browser extension, you can access additional information on any part of the report without leaving your report page.
 

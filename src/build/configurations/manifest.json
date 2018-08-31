@@ -16,15 +16,13 @@
   "browser_action": {
     "default_popup": "html/popup.html",
     "default_action": {
-      "16": "resources/images/fair16.png",
-      "32": "resources/images/fair32.png",
-      "128": "resources/images/fair128.png"
+      "32": "resources/images/fair-biomed-32.png",
+      "128": "resources/images/fair-biomed-128.png"
     }
   },
   "icons": {
-    "16": "resources/images/fair16.png",
-    "32": "resources/images/fair32.png",
-    "128": "resources/images/fair128.png"
+    "32": "resources/images/fair-biomed-32.png",
+    "128": "resources/images/fair-biomed-128.png"
   },
   "commands": {
     "_execute_browser_action": {

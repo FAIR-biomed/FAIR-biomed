@@ -28,7 +28,7 @@ it("processes response into allele table", function () {
     var r0 = fs.readFileSync(__dirname+'/response-impc.models-0.json').toString();
     var result = plugin.process(r0, 0);
     // this example is for gene Gpa33
-    assert.ok(result.data['Overview'].includes('IMPC'));
-    assert.equal(result.data['Models'].length, 3);
-    assert.ok(result.data['Models'][1].includes('Gpa33'));
+    assert.equal(result.data['IMPC models'].length, 1);
+    assert.equal(result.data['Other models (MGI)'].length, 2)
+    assert.ok(result.data['IMPC models'][0].includes('Gpa33'));
 });

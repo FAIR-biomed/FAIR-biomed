@@ -60,11 +60,48 @@ class PluginLogo extends React.Component {
 }
 
 
+/** Display a div with the info about a plugin **/
+class PluginInfo extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+    componentDidMount() {
+        //console.log("mounting plugin info "+this.props.id);
+        var infofile = this.props.namespace+'.'+ this.props.info;
+        var thislist = this;
+        var promise = new Promise(function(resolve, reject) {
+            var xhr=new XMLHttpRequest();
+            xhr.onload=function(){
+                //console.log(xhr.response)
+                thislist.setState({info: xhr.response})
+                resolve(xhr.response);
+            };
+            xhr.ontimeout=function() {
+                reject("timeout");
+            }
+            xhr.open("GET","/library/info/"+infofile);
+            xhr.send();
+        });
+        promise.then();
+    };
+
+    render() {
+        //console.log("this visible: "+this.props.visible);
+        if (!this.props.visible) {
+            return (null)
+        }
+        return(<div className="fair-container fair-fullwidth fair-info"
+                    dangerouslySetInnerHTML={{__html: this.state.info }}></div>)
+    }
+}
+
+
 /** Display a toggle switch and star-status **/
 class PluginState extends React.Component {
     constructor(props) {
         super(props)
-        console.log("making plugin state");
+        //console.log("making plugin state");
         this.handleActivation = this.handleActivation.bind(this);
         this.handleRating = this.handleRating.bind(this);
         this.state = {active: this.props.active, rating: this.props.rating};
@@ -80,14 +117,14 @@ class PluginState extends React.Component {
     }
 
     handleRating(event) {
-        console.log("setting new rating")
+        //console.log("setting new rating")
         // set the react state
         this.setState(prevState => ({ rating: (prevState.rating+1)%2}))
         // set the extension state on disk
         var rating = {}
         rating["plugin:"+this.props.id] = [this.state.active, (this.state.rating+1)%2]
         chrome.storage.sync.set(rating);
-        console.log(JSON.stringify(rating))
+        //console.log(JSON.stringify(rating))
     }
 
     render() {
@@ -115,9 +152,20 @@ class PluginState extends React.Component {
  * A horizontal strip displaying information on one library plugin
  */
 class LibraryItem extends React.Component {
+    constructor(props) {
+        super(props);
+        this.handleInfo = this.handleInfo.bind(this);
+        this.state = { info: false};
+    }
+
+    /** Toggles a info visibility tag **/
+    handleInfo() {
+        this.setState({info: !this.state.info })
+    }
+
     render() {
-        console.log("rendering item "+this.props.plugin.id+" active:"+this.props.active+ " rating:"+this.props.rating)
-        console.log("plugin namespace: "+this.props.plugin.namespace);
+        //console.log("rendering item "+this.props.plugin.id+" active:"+this.props.active+ " rating:"+this.props.rating)
+        //console.log("plugin namespace: "+this.props.plugin.namespace);
         var plugin = this.props.plugin;
         var tags = plugin.tags.map(function(x) {
             return <PluginTag key={x} tag={x} />;
@@ -128,15 +176,23 @@ class LibraryItem extends React.Component {
                     <div className="fair-col-2 fair-center-center">
                         <PluginLogo id={plugin.id} src={plugin.logo} namespace={plugin.namespace}/>
                     </div>
-                    <div className="fair-col-8 fair-center-center">
-                        <div className="fair-container fair-fullwidth">
-                            <h3>{plugin.title}</h3>
-                            <h4>{plugin.subtitle}</h4>
-                            <p>{tags}</p>
+                    <div className="fair-col-8 fair-info">
+                        <div className="fair-center-center fair-click" onClick={this.handleInfo}>
+                            <div className="fair-container fair-fullwidth">
+                                <h3>{plugin.title}</h3>
+                                <h4>{plugin.subtitle}</h4>
+                                <p>{tags}</p>
+                            </div>
                         </div>
                     </div>
                     <div className="fair-col-2 fair-center-center">
                         <PluginState id={plugin.id} active={this.props.active} rating={this.props.rating}/>
+                    </div>
+                </div>
+                <div className="fair-row fair-info">
+                    <div className="fair-col-2"></div>
+                    <div className="fair-col-8 fair-info">
+                        <PluginInfo namespace={plugin.namespace} info={plugin.info} visible={this.state.info}/>
                     </div>
                 </div>
             </li>
@@ -194,7 +250,7 @@ class LibraryList extends React.Component {
     }
 
     render() {
-        console.log("rendering library list");
+        //console.log("rendering library list");
         var plugins = this.props.plugins;
         var items = this.state.ids.map(function(x) {
             var id= x[0];
@@ -210,7 +266,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // add the plugin details into the page
     ReactDOM.render(
         <LibraryList names={library['names']} plugins={library['plugins']} className="container"/>,
-        document.getElementById('library-list')
+        document.getElementById('fair-library')
     );
 });
 

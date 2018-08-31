@@ -210,7 +210,7 @@ function getExternal(plugin, queries) {
     var urls = queries.map(function(x, i) {
         return plugin.external(x, i);
     });
-    console.log("considering urls: "+JSON.stringify(urls))
+    //console.log("considering urls: "+JSON.stringify(urls))
     var urls = urls.filter(x => !is.null(x));
     return urls[0];
 }
@@ -230,7 +230,7 @@ function processQuery(id, queries, sendResponse, index) {
         index = 0;
     }
 
-    console.log("processing query: "+JSON.stringify(queries));
+    //console.log("processing query: "+JSON.stringify(queries));
 
     // get plugin details
     var plugin = library["plugins"][id];
@@ -283,19 +283,19 @@ function processQuery(id, queries, sendResponse, index) {
     }
      **/
 
-    console.log("processing query");
+    //console.log("processing query");
     // execute the query
     var promise = new Promise(function(resolve, reject) {
         var xhr=new XMLHttpRequest();
         xhr.onload=function() {
-            console.log("response: "+xhr.response);
+            //console.log("response: "+xhr.response);
             var response = plugin.process(xhr.response, index);
             resolve(sanitizeResponse(response));
         };
         xhr.ontimeout=function() {
             reject("timeout");
         }
-        console.log("sending GET request to: "+url);
+        //console.log("sending GET request to: "+url);
         xhr.open("GET", url);
         xhr.send();
     });
@@ -331,16 +331,16 @@ function processInfo(id, sendResponse) {
 /** Assign a new rating to a plugin **/
 function processRating(id, rating, sendResponse) {
     var key = "plugin:" + id;
-    console.log("key: "+key+ " rating: "+rating);
+    //console.log("key: "+key+ " rating: "+rating);
     // fetch existing state current rating
     new Promise(function(resolve, reject) {
         chrome.storage.sync.get(key, function (data) {
-            console.log("-- got data: "+JSON.stringify(data))
+            //console.log("-- got data: "+JSON.stringify(data))
             var state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
             state[1] = rating;
             var msg = {};
             msg[key] = state;
-            console.log("newstate: "+JSON.stringify(msg));
+            //console.log("newstate: "+JSON.stringify(msg));
             chrome.storage.sync.set(msg);
             resolve(msg);
         })
