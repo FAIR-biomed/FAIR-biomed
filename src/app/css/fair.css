@@ -1,4 +1,13 @@
-/** Styles for xAPI extension **/
+/** Styles for extension **/
+
+div.fair-reset {
+    all: unset !important;
+}
+div.fair-outer {
+    box-sizing: border-box;
+    clear: both;
+    display: block;
+}
 
 
 /**
@@ -33,7 +42,7 @@
 .fair-col-6 {
     width: 50%;
 }
-.fair-row {
+div.fair-row {
     display: flex;
     clear: both;
     width: 100%;
@@ -43,7 +52,7 @@
     margin-right: 0px;
 }
 .fair-row .fair-col-2, .fair-row .fair-col-8 {
-    height: 100%;
+    /** height: 100%; **/
     margin: auto;
     overflow: auto;
 }
@@ -58,6 +67,7 @@
     padding-left: 16px;
     margin-left: auto;
     margin-right: auto;
+    text-align: left;
 }
 .fair-pointer {
     cursor: pointer;
@@ -76,11 +86,13 @@ ul.fair-list li {
 .fair-click {
     cursor: pointer;
 }
+.fair-container, .fair-container h1, .fair-container h2, .fair-container h3, .fair-container h4, .fair-container div {
+    box-sizing: border-box;
+    line-height: 1.1em;
+}
 
 
-/**
- * Generic positioning
- */
+/** Generic positioning **/
 .fair-center-center {
     display: flex;
     vertical-align: middle;
@@ -95,11 +107,14 @@ ul.fair-list li {
     width: 100%;
     margin: 0 auto;
 }
-.fair-text-center {
+.fair-container .fair-text-center {
     text-align: center;
 }
 .fair-fill-v {
     flex-basis: available;
+}
+.fair-container svg {
+    box-sizing: border-box;
 }
 
 
@@ -119,11 +134,12 @@ ul.fair-list li {
 .fair-container h1, .fair-container h2, .fair-container h3, .fair-container h4, .fair-container h5 {
     font-family: sans-serif !important;
     text-transform: none;
+    text-align: left;
     margin-top: 1.5em;
     color: #000000;
 }
 .fair-container .fair-result h1, .fair-container .fair-result h2, .fair-container .fair-result h3 {
-    font-weigth: 600;
+    font-weight: 400;
 }
 .fair-container div, .fair-container span {
     font-family: sans-serif !important;
@@ -131,19 +147,19 @@ ul.fair-list li {
 
 
 /** children of fair component **/
-.fair-outer img, .fair-outer h1, .fair-outer h2, .fair-outer h3, .fair-outer h4, .fair-outer div, .fair-outer span {
+.fair-container img, .fair-container h1, .fair-container h2, .fair-container h3, .fair-container h4, .fair-container div, .fair-container span {
     border: none;
     margin-left: 0px;
     margin-right: 0px;
 }
-.fair-outer h1 {
+.fair-container h1 {
     font-size: 18px;
     font-weight: 600;
 }
-.fair-outer h2 {
+.fair-container h2 {
     font-size: 16px;
 }
-.fair-outer h3, .fair-outer h4 {
+.fair-container h3, .fair-container h4 {
     font-size: 16px;
 }
 
@@ -316,6 +332,7 @@ div.fair-inner {
     width: 100%;
     height: 100%;
     margin: 0px;
+    padding: 0px;
 }
 
 /** Header **/
@@ -346,6 +363,7 @@ div.fair-header input {
     color: inherit;
     margin-left: 4px;
     margin-bottom: 0px;
+    width: 80%;
     font-size: 22px;
     padding-bottom: 2px;
     padding-left: 6px;
@@ -373,6 +391,9 @@ div.fair-body li.fair-candidate h3 {
 li.fair-candidate div.fair-row {
     padding-top: 0.2em;
     padding-bottom: 0.2em;
+}
+li.fair-candidate {
+    max-height: 5em;
 }
 
 
@@ -444,10 +465,6 @@ div.fair-result .fair-section svg {
     width: 100%;
     max-width: 100%;
 }
-div.fair-result table td {
-    padding-left: 0em;
-    padding-right: 0.5em;
-}
 div.fair-result ul {
     padding-left: 0px;
 }
@@ -462,9 +479,12 @@ div.fair-result div.fair-subsection {
 div.fair-result table {
     padding-top: 0.2em;
     padding: 0.2em 0em 0.2em 0em;
+    line-height: 1.1em;
 }
-div.fair-result table td {
-    padding-right: 1em;
+div.fair-result table td, div.fair-result table th {
+    border: none;
+    font-size: 1em;
+    padding: 0.5em 1em 0em 0em;
     vertical-align: top;
 }
 div.fair-result-toolbar svg {

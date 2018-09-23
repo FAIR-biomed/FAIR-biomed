@@ -20,6 +20,7 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
+        if (x.trim().length<2) return 0
         var words = x.trim().split(' ');
         if (words.length>2) {
             return 0;

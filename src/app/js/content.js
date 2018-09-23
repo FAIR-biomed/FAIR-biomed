@@ -84,7 +84,6 @@ class FAIROutputTable extends React.Component {
         if (data.length==0) {
             return (<table></table>);
         }
-        //console.log('building table with '+data.length+' rows')
         // construct a header from first element in data
         var header = data.shift();
         if (!is.undefined(header) && header.length !== 0) {
@@ -115,7 +114,6 @@ class FAIROutputTable extends React.Component {
 /** Display <ul> with several items **/
 class FAIROutputList extends React.Component {
     render() {
-        //console.log("rendering output list");
         var content = this.props.data.map(function(x, i) {
             return (<li key={"list-"+i} dangerouslySetInnerHTML={{__html: x}} />)
         })
@@ -221,9 +219,7 @@ class FAIROutput extends React.Component {
     componentDidMount() {
         var thislist = this;
         var msg = {action: 'run', id: this.props.id, query: this.props.query}
-        //console.log('sending msg: '+JSON.stringify(msg));
         chrome.runtime.sendMessage(msg, function(response) {
-            //console.log('got response: '+JSON.stringify(response));
             if (response.status===1) {
                 thislist.setState({
                     type: 'data', data:
@@ -244,7 +240,6 @@ class FAIROutput extends React.Component {
     showInfo() {
         var thislist = this;
         var msg = {action: 'info', id: this.props.id}
-        //console.log('sending msg: '+JSON.stringify(msg));
         chrome.runtime.sendMessage(msg, function(response) {
             thislist.setState({type:'info', info: response.data});
         });
@@ -252,19 +247,16 @@ class FAIROutput extends React.Component {
 
     /** Fetch and trigger display of query results page **/
     showResult() {
-        //console.log('switch to results mode')
         this.setState({type: 'data'});
     }
 
     /** Fetch and trigger display of code display page **/
     showCode() {
-        //console.log('setting code');
         this.setState({type: 'code'})
     }
 
     /** Trigger display of an external link **/
     showExternal() {
-        //console.log('go to external '+this.state.external);
         var ext = this.state.external
         if (!is.null(ext) && !is.undefined(ext)) {
             window.open(ext, '_blank')
@@ -275,15 +267,12 @@ class FAIROutput extends React.Component {
         if (this.state.type==='init') {
             return(<div>Please wait...</div>);
         }
-        //console.log('rendering output:\n'+JSON.stringify(this.state.data));
         // either output a single text object, or partition into sections
         var content = [];
         if (this.state.type=='data') {
             if (is.string(this.state.data)) {
-                //console.log('rendering one section with:\n'+this.state.data);
                 content = [<FAIROutputSection key='section' data={this.state.data}/>]
             } else if (is.array(this.state.data)) {
-                //console.log('rendering one section with:\n'+this.state.data);
                 content = this.state.data.map(function(value, key) {
                     return (<FAIROutputSection key={'section'+key} data={value}/>)
                 });
@@ -359,10 +348,8 @@ class FAIRCandidate extends React.Component {
     }
 
     processRating() {
-        //console.log('current rating: '+this.state.rating)
         var newrating = (this.state.rating+1)%2
         var msg = {action: 'rate', id: this.props.id, rating: newrating};
-        //console.log('sending: '+JSON.stringify(msg))
         chrome.runtime.sendMessage(msg, function(response) {
             // no need to process any response
         });
@@ -409,7 +396,6 @@ class FAIRCandidate extends React.Component {
  * **/
 class FAIRCandidateList extends React.Component {
     render() {
-        //console.log('rendering library list '+JSON.stringify(this.props.candidates));
         var thislist = this;
         var candidates = this.props.candidates.map(function (x) {
             var id = x['id'];
@@ -431,6 +417,7 @@ class FAIRClaimResult extends React.Component {
         super(props);
         this.showList = this.showList.bind(this);
         this.selectPlugin = this.selectPlugin.bind(this);
+        this.claimQuery = this.claimQuery.bind(this);
         /* state.candidates will hold an array of plugins that claim the query
          * state.type will be either 'list' or 'plugin' to toggle views
          * state.selection will hold the selected plugin id
@@ -445,27 +432,36 @@ class FAIRClaimResult extends React.Component {
         return 0;
     }
 
-    /** on load, ask plugins to claim the query **/
-    componentDidMount() {
+    /** look up plugins that claim a query string **/
+    claimQuery() {
         var thislist = this;
         var msg = {action: 'claim', query: this.props.query};
         chrome.runtime.sendMessage(msg, function(response) {
-            //console.log('got response: '+JSON.stringify(response));
             var candidates = response.sort(thislist.compareCandidates);
             thislist.setState({candidates: candidates});
         });
     }
 
+    /** on load, ask plugins to claim the query **/
+    componentDidMount() {
+        this.claimQuery();
+    }
+
+    /** force an update to the plugin cancidates when the query changes **/
+    componentDidUpdate(prevProps) {
+        if (this.props.query!=prevProps.query) {
+            this.claimQuery();
+        }
+    }
+
     /** Toggle into a plugin-speific view **/
     selectPlugin(id) {
-        //console.log('selectPlugin with id '+id);
         this.setState({type: 'plugin', selection: id});
         this.props.setNavState('selection', this.showList)
     }
 
     /** Toggle into a view showing query claim results **/
     showList() {
-        //console.log('in showList');
         this.setState({type: 'list', selection: null});
         this.props.setNavState('search');
     }
@@ -500,6 +496,7 @@ class FAIRHeaderBody extends React.Component {
     constructor(props) {
         super(props);
         this.setNavState = this.setNavState.bind(this);
+        this.setQuery = this.setQuery.bind(this);
         /**
          *
          * @type {{
@@ -517,6 +514,11 @@ class FAIRHeaderBody extends React.Component {
         }
     }
 
+    /** transfer a value from the input box into the component state **/
+    setQuery(event) {
+        this.setState({query: event.target.value})
+    }
+
     render() {
         var navicon = [];
         if (this.state.display === 'search') {
@@ -531,7 +533,9 @@ class FAIRHeaderBody extends React.Component {
             <div className='fair-header-body'>
                 <div className='fair-header'>
                     {navicon}
-                    <input className='fair-query' type='text' defaultValue={this.state.query}/>
+                    <input className='fair-query' type='text'
+                           defaultValue={this.state.query}
+                           onInput={this.setQuery}/>
                 </div>
                 <div className='fair-body'>
                     <FAIRClaimResult query={this.state.query} setNavState={this.setNavState}></FAIRClaimResult>
@@ -564,6 +568,7 @@ function initFAIRAnchor(range) {
     return anchor;
 }
 
+
 /**
  * Holds a div with control buttons and the content.
  */
@@ -577,7 +582,8 @@ class FAIRContainer extends React.Component {
 
     componentDidMount() {
         var container = this;
-        var parent = ReactDOM.findDOMNode(this).parentNode;
+        //var parent = ReactDOM.findDOMNode(this).parentNode;
+        var parent = ReactDOM.findDOMNode(this);
         // adjust the parent container's position and style
         var bounding = this.props.range.getBoundingClientRect();
         var fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
@@ -613,14 +619,16 @@ class FAIRContainer extends React.Component {
 
     render() {
         return (
-            <div className='fair-inner'>
-                <div className='fair-button-panel'>
-                    <FAIRIconLogo type='icon' path='fa window-minimize-solid'
-                                  onClick={this.toggleVisibility}></FAIRIconLogo>
-                    <FAIRIconLogo type='icon' path='fa times-solid'
-                                  onClick={this.close}></FAIRIconLogo>
+            <div className="fair-outer">
+                <div className='fair-inner fair-container'>
+                    <div className='fair-button-panel'>
+                        <FAIRIconLogo type='icon' path='fa window-minimize-solid'
+                                      onClick={this.toggleVisibility}></FAIRIconLogo>
+                        <FAIRIconLogo type='icon' path='fa times-solid'
+                                      onClick={this.close}></FAIRIconLogo>
+                    </div>
+                    <FAIRHeaderBody range={this.props.range} />
                 </div>
-                <FAIRHeaderBody range={this.props.range} />
             </div>
         )
     }
@@ -635,9 +643,9 @@ class FAIRContainer extends React.Component {
 function initFAIRContainer(range) {
     // create a floating div for the fair-container
     var container = document.createElement('div');
-    container.className = 'fair-outer fair-container';
+    container.className = 'fair-reset';
     ReactDOM.render(
-        <FAIRContainer range={range} className='fair-inner'/>,
+        <FAIRContainer range={range}/>,
         container
     );
     document.body.appendChild(container);

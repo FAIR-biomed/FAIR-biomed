@@ -257,7 +257,7 @@ function processQuery(id, queries, sendResponse, index) {
         }
     }
 
-    // TO DO - avoid this repeat here
+    // TO DO - avoid this here
     /**
     if (use_cache) {
         var cached = ["wikipedia", "wiktionary", "ebi.old", "impc.models",

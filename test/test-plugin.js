@@ -118,6 +118,12 @@ function testOnePlugin(plugin) {
             'claim(query) produced ' + JSON.stringify(result));
     });
 
+    it('does not claim empty queries', function () {
+        var result = plugin.claim('')
+        assert.equal(result, 0,
+            'claim("") produced ' + JSON.stringify(result));
+    });
+
     it ('produces a reliable urls', function() {
         var url = plugin.url('').substr(0, 4);
         var external = plugin.external('').substr(0, 4);

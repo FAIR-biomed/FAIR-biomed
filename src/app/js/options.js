@@ -242,9 +242,7 @@ class LibraryList extends React.Component {
         })
     };
 
-    /**
-     * Optimization, only re-render when all activation states have been collected
-     */
+    /** re-render when all activation states have been collected **/
     shouldComponentUpdate(nextProps, nextState) {
         return (nextState.ids.length == this.props.names.length);
     }

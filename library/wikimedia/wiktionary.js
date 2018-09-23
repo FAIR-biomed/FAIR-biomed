@@ -17,6 +17,7 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
+        if (x.trim().length < 1) return 0;
         var words = x.split(' ');
         if (words.length!=1) return 0;
         var score = 1;

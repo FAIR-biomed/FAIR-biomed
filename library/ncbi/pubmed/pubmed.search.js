@@ -24,7 +24,9 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
-        var words = x.trim().split(' ');
+        x = x.trim()
+        if (x.length<2) return 0;
+        var words = x.split(' ');
         if (words.length>4) return 0;
         var score = 1/words.length;
         // penalize some special characters
