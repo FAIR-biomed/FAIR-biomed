@@ -45,7 +45,6 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         var result = JSON.parse(data)
-        //console.log('result is '+JSON.stringify(result));
         if (index === 0) {
             result = result[1];
             if (result.length>0) {

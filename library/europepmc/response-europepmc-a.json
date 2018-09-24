@@ -1,0 +1,66 @@
+{
+  "version": "6.0.2",
+  "hitCount": 39391,
+  "nextCursorMark": "AoIIQNtlmCgzODgyNDc2NA==",
+  "request": {
+    "query": "tp53",
+    "resultType": "lite",
+    "synonym": false,
+    "cursorMark": "*",
+    "pageSize": 2,
+    "sort": ""
+  },
+  "resultList": {
+    "result": [
+      {
+        "id": "30240537",
+        "source": "MED",
+        "pmid": "30240537",
+        "doi": "10.1002/humu.23656",
+        "title": "Current review of TP53 pathogenic germline variants in breast cancer patients outside Li-Fraumeni syndrome.",
+        "authorString": "Fortuno C, James P, Spurdle AB.",
+        "journalTitle": "Hum Mutat",
+        "pubYear": "2018",
+        "journalIssn": "1059-7794; 1098-1004; ",
+        "pubType": "review; journal article; ",
+        "isOpenAccess": "N",
+        "inEPMC": "N",
+        "inPMC": "N",
+        "hasPDF": "N",
+        "hasBook": "N",
+        "citedByCount": 0,
+        "hasReferences": "N",
+        "hasTextMinedTerms": "N",
+        "hasDbCrossReferences": "N",
+        "hasLabsLinks": "N",
+        "hasTMAccessionNumbers": "N",
+        "firstPublicationDate": "2018-09-21"
+      },
+      {
+        "id": "30205729",
+        "source": "MED",
+        "pmid": "30205729",
+        "doi": "10.1080/15548627.2018.1501134",
+        "title": "HMGB1 represses the anti-cancer activity of sunitinib by governing TP53 autophagic degradation via its nucleus-to-cytoplasm transport.",
+        "authorString": "Luo P, Xu Z, Li G, Yan H, Zhu Y, Zhu H, Ma S, Yang B, He Q.",
+        "journalTitle": "Autophagy",
+        "pubYear": "2018",
+        "journalIssn": "1554-8627; 1554-8635; ",
+        "pageInfo": "1-16",
+        "pubType": "journal article",
+        "isOpenAccess": "N",
+        "inEPMC": "N",
+        "inPMC": "N",
+        "hasPDF": "N",
+        "hasBook": "N",
+        "citedByCount": 0,
+        "hasReferences": "N",
+        "hasTextMinedTerms": "N",
+        "hasDbCrossReferences": "N",
+        "hasLabsLinks": "Y",
+        "hasTMAccessionNumbers": "N",
+        "firstPublicationDate": "2018-09-11"
+      }
+    ]
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "version": "6.0.2",
+  "hitCount": 11,
+  "nextCursorMark": "AoIIQQpT1SgzODUxNzk1MQ==",
+  "request": {
+    "query": "298430",
+    "resultType": "lite",
+    "synonym": false,
+    "cursorMark": "*",
+    "pageSize": 1,
+    "sort": ""
+  },
+  "resultList": {
+    "result": [
+      {
+        "id": "PPR14811",
+        "source": "PPR",
+        "doi": "10.1101/298430",
+        "title": "Evaluation of UMAP as an alternative to t-SNE for single-cell data",
+        "authorString": "Becht E, Dutertre C, Kwok IW, Ng LG, Ginhoux F, Newell EW.",
+        "pubYear": "2018",
+        "pubType": "preprint",
+        "bookOrReportDetails": {
+          "publisher": "bioRxiv",
+          "yearOfPublication": 2018
+        },
+        "isOpenAccess": "N",
+        "inEPMC": "N",
+        "inPMC": "N",
+        "hasPDF": "N",
+        "hasBook": "N",
+        "citedByCount": 1,
+        "hasReferences": "N",
+        "hasTextMinedTerms": "N",
+        "hasDbCrossReferences": "N",
+        "hasLabsLinks": "Y",
+        "hasTMAccessionNumbers": "N",
+        "firstPublicationDate": "2018-04-10"
+      }
+    ]
+  }
+}

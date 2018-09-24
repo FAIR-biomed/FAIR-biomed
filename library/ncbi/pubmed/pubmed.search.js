@@ -8,7 +8,7 @@ module.exports = new function() {
     /** declarative attributes **/
     this.id = 'pubmed.search';
     this.title = 'PubMed';
-    this.subtitle = 'Literature search (most relevant articles)';
+    this.subtitle = 'Literature search';
     this.tags = ['articles', 'literature'];
 
     /** accompanying resources **/
@@ -17,7 +17,7 @@ module.exports = new function() {
 
     // parts of api urls
     var eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
-    var suffix = '&tool=FAIR-science-browser-extension&retmax=6&format=json&sort=relevance';
+    var suffix = '&tool=FAIR-science-browser-extension&retmax=8&format=json&sort=relevance';
     var id2link = function(id) {
         return 'https://www.ncbi.nlm.nih.gov/pubmed/'+id;
     };
