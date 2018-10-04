@@ -9,19 +9,20 @@ Browser extension for accessing open data resources in the biomedical domain.
 
 Vasts amounts of biomedical data are stored in open databases and knowledge-bases. Data in these resources are intended to be findable, accessible, interoperable, and reusable ([FAIR](https://www.nature.com/articles/sdata201618)). However, the data is distributed across many resources and integrating relevant parts within a specific project can be a challenge.
 
-FAIR-biomed is a browser extension (chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a data report in your browser. With the browser extension, you can access additional information on any part of the report without leaving your report page.
+FAIR-biomed is a browser extension (chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a data report in your browser. With the browser extension, you can access additional information on any part of the report without leaving the page.
 
-On any page in the browser, highlight some text and press `Ctr+Shift+Z`. A new box should appear prompting you to choose a data source to query with your highlighted query. 
+Highlight some text on any page in the browser, for example, a gene name. Press `Ctr+Shift+Z`. A new box should appear prompting you to choose a data source to query. 
 
-<p float="left">
-<img src="docs/img/bmp4_list.png" style="margin-right:8px; max-width: 30%">
+<p align="center">
+<img src="docs/img/bmp4_list.png" width="340">
 </p>
 
-Clicking on one of the options triggers a query to the corresponding data service and displays a summary of results.   
+Clicking on one of the options triggers a query to the corresponding data service and displays a summary of results.
 
-<p float="left">
-<img src="docs/img/bmp4_europepmc.png" style="margin-right:8px; max-width: 30%">
-<img src="docs/img/bmp4_uniprot.png" style="margin-right:8px; max-width: 30%">
+<p align="center">
+<img src="docs/img/bmp4_europepmc.png" width="340">
+<img src="docs/img/spacer.png" width="16px">
+<img src="docs/img/bmp4_uniprot.png" width="340">
 </p>
 
 Displays with search results provide links to descriptions of the data resource, details of how the data query was executed, and a link out to further data.
@@ -81,7 +82,7 @@ The extension has a dedicated page where you tune which data sources you would l
 
 Once installed, the extension records a small amount of information on each user's computer. This data pertains to which plugins are active (see previous section on Options) and how each plugin is rated.
 
-The extension does not record users' activity. In particular, the extension does not record performed searches or plugin ratings. Note, however, that during use, the extension sends queries to external APIs. Some of these API services may record activity for their own purposes (for example, to demonstrate relevance of their services to the science community). See the privacy policies of those services for details.
+The extension does not record users' activity. In particular, the extension does not record performed searches. Note, however, that the extension sends queries to external APIs. Some of these services may record activity for their own purposes (for example, to demonstrate their relevance to the science community). See the privacy policies of those services for details.
 
 When installing the extension from the chrome web store, google collects some user information. See their [privacy policy](https://policies.google.com/privacy?hl=en-GB) for details.  
 
