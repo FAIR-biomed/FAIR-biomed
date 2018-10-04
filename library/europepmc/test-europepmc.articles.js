@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 var fs = require("fs-extra");
-var plugin = require('./europepmc.articles')
+var plugin = require('./europepmc.articles');
 
 
 it('claims long queries with varying strength', function () {
@@ -39,6 +39,6 @@ it('extracts titles from preprint response', function() {
 })
 
 it('generates external urls', function () {
-    var result1 = plugin.external('Gene');
-    assert.ok(result1.includes('Gene'))
+    var result = plugin.external('Gene');
+    assert.ok(result.includes('Gene'))
 });

@@ -124,7 +124,7 @@ function testOnePlugin(plugin) {
             'claim("") produced ' + JSON.stringify(result));
     });
 
-    it ('produces a reliable urls', function() {
+    it ('produces reliable urls', function() {
         var url = plugin.url('').substr(0, 4);
         var external = plugin.external('').substr(0, 4);
         assert.equal(url, 'http', 'query url')

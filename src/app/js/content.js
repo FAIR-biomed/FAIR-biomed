@@ -220,17 +220,21 @@ class FAIROutput extends React.Component {
         var thislist = this;
         var msg = {action: 'run', id: this.props.id, query: this.props.query}
         chrome.runtime.sendMessage(msg, function(response) {
+            // when the query time out, the response might be null or undefined
+            if (is.undefined(response)) {
+                response = { status: 0, data: "no response"}
+            }
             if (response.status===1) {
                 thislist.setState({
-                    type: 'data', data:
-                    response.data,
+                    type: 'data',
+                    data: response.data,
                     external: response.external,
                     code: response.url
                 })
             } else {
                 thislist.setState({
                     type: 'data',
-                    data: 'failed'
+                    data: response.data
                 })
             }
         });
@@ -474,7 +478,11 @@ class FAIRClaimResult extends React.Component {
             var selection = this.state.selection;
             var candidate = _.find(this.state.candidates, function(x) {
                 return x['id'] === selection;
-            })
+            });
+            // safety check (this is needed for when user changes the query
+            // while already looking at a specific plugin candidate)
+            if (is.undefined(candidate)) return (null)
+            // render a component focusing onjust one plugin
             return(
                 <FAIRCandidateSelection className='fair-output'
                             id={selection}

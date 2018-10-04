@@ -256,8 +256,8 @@ div.fair-options img.fair-logo {
 #fair-library .switch {
     position: relative;
     display: inline-block;
-    width: 52px;
-    height: 24px;
+    width: 46px;
+    height: 22px;
 }
 /* The slider */
 #fair-library .slider {
@@ -269,19 +269,19 @@ div.fair-options img.fair-logo {
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: .3s;
+    transition: .3s;
 }
 #fair-library .slider:before {
     position: absolute;
     content: "";
-    height: 16px;
-    width: 16px;
+    height: 14px;
+    width: 14px;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: .3s;
+    transition: .3s;
 }
 #fair-library input {
     width: 100%;
@@ -290,21 +290,19 @@ div.fair-options img.fair-logo {
     cursor: pointer;
 }
 #fair-library input:checked + .slider {
-    /** background-color: #2196F3; **/
     background-color: #22b5bb;
 }
 #fair-library input:focus + .slider {
-    /** box-shadow: 0 0 1px #5bc0de; **/
     box-shadow: 0 0 1px #22b5bb;
 }
 #fair-library input:checked + .slider:before {
-    -webkit-transform: translateX(28px);
-    -ms-transform: translateX(28px);
-    transform: translateX(28px);
+    -webkit-transform: translateX(24px);
+    -ms-transform: translateX(24px);
+    transform: translateX(24px);
 }
 /* Rounded sliders */
 #fair-library .slider.round {
-    border-radius: 28px;
+    border-radius: 24px;
 }
 #fair-library .slider.round:before {
     border-radius: 50%;
@@ -415,11 +413,11 @@ div.fair-body {
 }
 div.fair-body .fair-logo {
     overflow: hidden;
-    max-width: 100px;
+    max-width: 75px;
 }
 div.fair-body .fair-logo img {
     max-height: 45px;
-    max-width: 100px;
+    max-width: 75px;
 }
 div.fair-body .logo {
     display: flex;

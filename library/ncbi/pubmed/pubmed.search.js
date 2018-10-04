@@ -12,12 +12,12 @@ module.exports = new function() {
     this.tags = ['articles', 'literature'];
 
     /** accompanying resources **/
-    this.logo = 'pubmed-logo2.png';
+    this.logo = '200px-US-NLM-PubMed-Logo.svg.png';
     this.info = 'pubmed-info.html';
 
     // parts of api urls
     var eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
-    var suffix = '&tool=FAIR-science-browser-extension&retmax=8&format=json&sort=relevance';
+    var suffix = '&tool=FAIR-biomed&email=fair.ext@gmail.com&retmax=8&format=json&sort=relevance';
     var id2link = function(id) {
         return 'https://www.ncbi.nlm.nih.gov/pubmed/'+id;
     };

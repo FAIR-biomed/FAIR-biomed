@@ -1,0 +1,11 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":2,
+    "params":{
+      "q":"badquery",
+      "indent":"1",
+      "rows":"1",
+      "wt":"json"}},
+  "response":{"numFound":0,"start":0,"docs":[]
+  }}

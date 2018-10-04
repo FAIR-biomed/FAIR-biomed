@@ -10,9 +10,7 @@
 var icons = {};
 var logos = {};
 
-// TO DO - use a better cache strategy (i.e. populate cache automatically)
-// use_cache can be set to true during development, but should be false in production
-var use_cache = false;
+// TO DO - implement a cache strategy for devlopment
 
 
 // settings for sanitization of data
@@ -188,8 +186,6 @@ function sanitizeResponse(response) {
         });
     }
 
-    //console.log("raw: "+JSON.stringify(raw));
-    //console.log("clean: "+JSON.stringify(clean));
     response.data = clean;
     return response;
 }
@@ -247,6 +243,7 @@ function processQuery(id, queries, sendResponse, index) {
         return response;
     }
 
+    // handlers for promise
     var handleResponse = function(response) {
         // decide whether to output or to do another round trip to url/process
         //console.log("working with promise result "+JSON.stringify(response))
@@ -255,33 +252,10 @@ function processQuery(id, queries, sendResponse, index) {
         } else if (response.status>0 && response.status < 1) {
             processQuery(id, queries.concat([response.data]), sendResponse, index+1)
         }
+    };
+    var handleReject = function(msg) {
+        sendResponse({status: 0, data: msg})
     }
-
-    // TO DO - avoid this here
-    /**
-    if (use_cache) {
-        var cached = ["wikipedia", "wiktionary", "ebi.old", "impc.models",
-        "chembl.image", "exac.genes.in.region", "exac.variants", "pubmed.search", "uniprot.search"]
-        if (cached.includes(id)) {
-            console.log("will try cache");
-            var promise = new Promise(function (resolve, reject) {
-                var xhr = new XMLHttpRequest();
-                xhr.onload = function () {
-                    console.log("from cache: "+xhr.response);
-                    var response = plugin.process(xhr.response, index);
-                    resolve(sanitizeResponse(response));
-                };
-                xhr.ontimeout = function () {
-                    reject("timeout");
-                }
-                xhr.open("GET", "cache/" + id + "-" + index + ".json");
-                xhr.send();
-            });
-            promise.then(handleResponse);
-            return;
-        }
-    }
-     **/
 
     //console.log("processing query");
     // execute the query
@@ -294,12 +268,15 @@ function processQuery(id, queries, sendResponse, index) {
         };
         xhr.ontimeout=function() {
             reject("timeout");
+        };
+        xhr.onerror = function() {
+            reject("error "+xhr.status);
         }
         //console.log("sending GET request to: "+url);
         xhr.open("GET", url);
         xhr.send();
     });
-    promise.then(handleResponse);
+    promise.then(handleResponse, handleReject);
 }
 
 

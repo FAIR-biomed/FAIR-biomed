@@ -1,0 +1,207 @@
+{
+  "results": [
+    {
+      "entries": [
+        {
+          "dbId": "198861",
+          "stId": "R-HSA-198861",
+          "id": "R-HSA-198861",
+          "name": "<span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "ReferenceGeneProduct",
+          "species": [
+            "Homo sapiens"
+          ],
+          "referenceName": "<span class=\"highlighting\" >SLC23A2</span>",
+          "referenceIdentifier": "Q9UGH3",
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false,
+          "databaseName": "UniProt",
+          "referenceURL": "http://www.uniprot.org/entry/Q9UGH3"
+        },
+        {
+          "dbId": "10080020",
+          "stId": "R-RNO-198861",
+          "id": "R-RNO-198861",
+          "name": "<span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "ReferenceGeneProduct",
+          "species": [
+            "Rattus norvegicus"
+          ],
+          "referenceIdentifier": "Q9WTW8",
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false,
+          "databaseName": "UniProt",
+          "referenceURL": "http://www.uniprot.org/entry/Q9WTW8"
+        },
+        {
+          "dbId": "9741380",
+          "stId": "R-SSC-198861-2",
+          "id": "R-SSC-198861-2",
+          "name": "<span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "ReferenceGeneProduct",
+          "species": [
+            "Sus scrofa"
+          ],
+          "referenceIdentifier": "I3LRM4",
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false,
+          "databaseName": "UniProt",
+          "referenceURL": "http://www.uniprot.org/entry/I3LRM4"
+        },
+        {
+          "dbId": "9741378",
+          "stId": "R-SSC-198861",
+          "id": "R-SSC-198861",
+          "name": "<span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "ReferenceGeneProduct",
+          "species": [
+            "Sus scrofa"
+          ],
+          "referenceIdentifier": "I3LV44",
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false,
+          "databaseName": "UniProt",
+          "referenceURL": "http://www.uniprot.org/entry/I3LV44"
+        },
+        {
+          "dbId": "9918721",
+          "stId": "R-CFA-198861-2",
+          "id": "R-CFA-198861-2",
+          "name": "<span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "ReferenceGeneProduct",
+          "species": [
+            "Canis familiaris"
+          ],
+          "referenceIdentifier": "F1Q2E0",
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false,
+          "databaseName": "UniProt",
+          "referenceURL": "http://www.uniprot.org/entry/F1Q2E0"
+        }
+      ],
+      "typeName": "Protein",
+      "entriesCount": 43,
+      "rowCount": 5
+    },
+    {
+      "entries": [
+        {
+          "dbId": "9622619",
+          "stId": "R-DDI-198861-3",
+          "id": "R-DDI-198861-3",
+          "name": "Homologues of <span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "DefinedSet",
+          "species": [
+            "Dictyostelium discoideum"
+          ],
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false
+        },
+        {
+          "dbId": "10535150",
+          "stId": "R-ATH-198861-13",
+          "id": "R-ATH-198861-13",
+          "name": "Homologues of <span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "DefinedSet",
+          "species": [
+            "Arabidopsis thaliana"
+          ],
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false
+        },
+        {
+          "dbId": "9741381",
+          "stId": "R-SSC-198861-3",
+          "id": "R-SSC-198861-3",
+          "name": "Homologues of <span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "DefinedSet",
+          "species": [
+            "Sus scrofa"
+          ],
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false
+        },
+        {
+          "dbId": "9918722",
+          "stId": "R-CFA-198861-3",
+          "id": "R-CFA-198861-3",
+          "name": "Homologues of <span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "DefinedSet",
+          "species": [
+            "Canis familiaris"
+          ],
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false
+        },
+        {
+          "dbId": "10235634",
+          "stId": "R-TGU-198861-3",
+          "id": "R-TGU-198861-3",
+          "name": "Homologues of <span class=\"highlighting\" >SLC23A2</span>",
+          "exactType": "DefinedSet",
+          "species": [
+            "Taeniopygia guttata"
+          ],
+          "compartmentNames": [
+            "plasma membrane"
+          ],
+          "compartmentAccession": [
+            "0005886"
+          ],
+          "isDisease": false
+        }
+      ],
+      "typeName": "Set",
+      "entriesCount": 6,
+      "rowCount": 5
+    }
+  ],
+  "rowCount": 10,
+  "numberOfGroups": 2,
+  "numberOfMatches": 49
+}

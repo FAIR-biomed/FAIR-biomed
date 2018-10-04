@@ -1,0 +1,19 @@
+[
+  {
+    "dbId": 196849,
+    "displayName": "Metabolism of water-soluble vitamins and cofactors",
+    "stId": "R-HSA-196849",
+    "stIdVersion": "R-HSA-196849.1",
+    "isInDisease": false,
+    "isInferred": false,
+    "name": [
+      "Metabolism of water-soluble vitamins and cofactors"
+    ],
+    "releaseDate": "2007-08-21",
+    "speciesName": "Homo sapiens",
+    "doi": "10.3180/REACT_11238.1",
+    "hasDiagram": true,
+    "schemaClass": "Pathway",
+    "className": "Pathway"
+  }
+]

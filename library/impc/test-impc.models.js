@@ -9,9 +9,9 @@ it("does not claim long queries", function () {
     assert.equal(result, 0)
 });
 
-it("does not claim queries that don't start with MGI", function () {
+it("claims single-word queries that don't start with MGI", function () {
     var result = plugin.claim("text");
-    assert.equal(result, 0)
+    assert.equal(result, 0.8)
 });
 
 it("does not claim when 2nd part is not a number", function () {
@@ -19,9 +19,32 @@ it("does not claim when 2nd part is not a number", function () {
     assert.equal(result, 0)
 });
 
+it("does not claim other identifiers", function () {
+    var result = plugin.claim("MP:0000001");
+    assert.equal(result, 0)
+});
+
 it("claims proper-looking terms", function () {
     var result = plugin.claim("MGI:1234");
     assert.equal(result, 1)
+});
+
+it("construct urls differently for ids and searches", function () {
+    var result = plugin.url("MGI:1234");
+    assert.ok(result.includes("mousemodels"));
+    var result2 = plugin.url("abcd");
+    assert.ok(result2.includes("solr"));
+});
+
+it("processes search query without results", function () {
+    var r0 = fs.readFileSync(__dirname + '/response-impc.models-symbol-empty.json').toString();
+    var result = plugin.process(r0, 0);
+});
+
+it("processes search query to extract MGI id", function () {
+    var r0 = fs.readFileSync(__dirname + '/response-impc.models-symbol.json').toString();
+    var result = plugin.process(r0, 0);
+    assert.equal(result.data, 'MGI:1923582')
 });
 
 it("processes response into allele table", function () {
@@ -31,4 +54,11 @@ it("processes response into allele table", function () {
     assert.equal(result.data['IMPC models'].length, 1);
     assert.equal(result.data['Other models (MGI)'].length, 2)
     assert.ok(result.data['IMPC models'][0].includes('Gpa33'));
+});
+
+it("constructs external URL based on MGI id", function () {
+    var result1 = plugin.external('Gene');
+    var result2 = plugin.external('MGI:123');
+    assert.ok(result1===null)
+    assert.ok(result2.includes('genes'))
 });

@@ -1,0 +1,24 @@
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":9,
+    "params":{
+      "q":"Cog2",
+      "indent":"1",
+      "fq":"type:gene",
+      "rows":"10",
+      "wt":"json"}},
+  "response":{"numFound":2,"start":0,"docs":[
+    {
+      "type":"gene",
+      "hgnc_gene_id":"HGNC:6546",
+      "hgnc_gene_symbol":"COG2",
+      "hgnc_gene_symbols_withdrawn":["LDLC"],
+      "hgnc_gene_locus":"1q42.2"},
+    {
+      "type":"gene",
+      "gene_id":"MGI:1923582",
+      "gene_symbol":"Cog2",
+      "gene_symbols_withdrawn":["2700012E02Rik 1190002B08Rik C86089 Ldlc"],
+      "gene_locus":"8:124520767-124552008"}]
+  }}

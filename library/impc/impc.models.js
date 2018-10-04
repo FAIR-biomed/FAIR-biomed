@@ -15,31 +15,41 @@ module.exports = new function() {
     this.logo = 'impc-logo.png';
     this.info = 'impc-info.html';
 
+    // address of solr server for search queries
+    var solr= 'https://www.ebi.ac.uk/mi/impc/solr/phenodigm/select?q=';
+    var suffix = '&wt=json&fq=type:gene';
+    // address for phenodigm2 query
+    var mousephenotype = 'https://www.mousephenotype.org/';
+    var pd2 = mousephenotype + 'data/phenodigm2/mousemodels?geneId=';
+
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
-        // require query to be two-part string like 'MGI:1234'
+        query = query.trim();
+        if (query.length<2) return 0;
+        // avoid multi-word queries
+        if (query.split(' ').length!=1) return 0;
+        // weakly accept single-word queries
         var words = query.split(':');
-        if (words.length!=2 || words[0]!=='MGI') {
-            return 0;
-        }
-        if (isNaN(words[1])) {
-            return 0;
-        }
+        if (words.length==1) return 0.8;
+        // for identifier, require strings like 'MGI:1234'
+        if (words.length!=2 || words[0]!=='MGI')  return 0;
+        if (isNaN(words[1])) return 0;
         return 1;
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        var api = 'https://www.mousephenotype.org/data/phenodigm2/mousemodels'
-        var url = api + '?geneId='+query;
-        return url;
+        query = query.trim();
+        if (query.startsWith('MGI')) {
+            return pd2+query;
+        } else {
+            return solr+query+suffix;
+        }
     };
 
-    /** transform a raw result from an API call into a display object **/
-    this.process = function(data) {
-        // raw response will be an array
-        var raw = JSON.parse(data);
-        // helper function to produce list items
+    /** (helper) extract model info and phenotypes from a phenodigm2 ajax response **/
+    processModels = function(raw) {
+        // produce html descriptor for a model and its phenotypes
         format1 = function(x) {
             var phenotypes = x['phenotypes'].map(p => p['term']).join(', ');
             var desc = x['description'].replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -51,11 +61,38 @@ module.exports = new function() {
         return {status: 1, data: result};
     };
 
+    /** (helper) extract one MGI id from a solr search response **/
+    processSearch = function(raw) {
+        let docs = raw['response']['docs'];
+        docs = docs.filter(function(x) {
+            return x['gene_id'] != undefined;
+        });
+        if (docs.length==0) {
+            return {status:0, data: "no results" };
+        }
+        return {status:0.5, data: docs[0]['gene_id'] }
+    };
+
+    /** transform a raw result from an API call into a display object **/
+    this.process = function(data, index) {
+        var raw = JSON.parse(data);
+        // identify whether this is a solr response or from the phenodigm2 api
+        if (raw["response"] == undefined) {
+            return processModels(raw);
+        } else {
+            return processSearch(raw);
+        }
+    };
+
     /** construct a URL to an external information page **/
-    this.external = function(query) {
-        return 'https://www.mousephenotype.org/data/genes/'+query
+    this.external = function(query, index) {
+        if (query.length<1) {
+            return mousephenotype;
+        }
+        if (query.startsWith("MGI")) {
+            return mousephenotype + 'data/genes/'+query;
+        }
+        return null;
     };
 
 }();
-
-
