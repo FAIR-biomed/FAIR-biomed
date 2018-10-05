@@ -9,23 +9,23 @@ Browser extension for accessing open data resources in the biomedical domain.
 
 Vasts amounts of biomedical data are stored in open databases and knowledge-bases. Data in these resources are intended to be findable, accessible, interoperable, and reusable ([FAIR](https://www.nature.com/articles/sdata201618)). However, the data is distributed across many resources and integrating relevant parts within a specific project can be a challenge.
 
-FAIR-biomed is a browser extension (chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a data report in your browser. With the browser extension, you can access additional information on any part of the report without leaving the page.
+FAIR-biomed is a browser extension (for chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a report in your browser. With FAIR-biomed, you can access additional information on any part of the report without leaving the page.
 
-Highlight some text on any page in the browser, for example, a gene name. Press `Ctr+Shift+Z`. A new box should appear prompting you to choose a data source to query. 
+To make use of the extension, first highlight some text, for example, a gene name. Press `Ctr+Shift+Z`. A new box should appear prompting you to choose a data source to query. 
 
 <p align="center">
-<img src="docs/img/bmp4_list.png" width="340">
+<img src="docs/img/bmp4_list.png" width="310">
 </p>
 
 Clicking on one of the options triggers a query to the corresponding data service and displays a summary of results.
 
 <p align="center">
-<img src="docs/img/bmp4_europepmc.png" width="340">
+<img src="docs/img/bmp4_europepmc.png" width="310">
 <img src="docs/img/spacer.png" width="16px">
-<img src="docs/img/bmp4_uniprot.png" width="340">
+<img src="docs/img/bmp4_uniprot.png" width="310">
 </p>
 
-Displays with search results provide links to descriptions of the data resource, details of how the data query was executed, and a link out to further data.
+Search results provide summaries of the data resource, details of how the data query was executed, and a link to further data.
 
 
 
@@ -53,6 +53,8 @@ The current plugin library provides access to a small but varied set of data sou
 ## Practical Issues
 
 ### Installation
+
+<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58"></a>
 
 The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read any information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.   
 
@@ -90,7 +92,7 @@ When installing the extension from the chrome web store, google collects some us
 
 ## Get involved
 
-Feedback and contributions are welcome. Please raise an issue in the github repository. 
+Feedback and contributions are welcome. Please raise an issue in the github repository.
 
 To incorporate a new data resource or plugin, see the [documentation](docs/).
 
