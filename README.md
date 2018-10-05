@@ -54,7 +54,7 @@ The current plugin library provides access to a small but varied set of data sou
 
 ### Installation
 
-<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58"></a>
+<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58.png"></a>
 
 The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read any information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.   
 
