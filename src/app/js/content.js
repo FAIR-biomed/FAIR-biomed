@@ -410,7 +410,7 @@ class FAIRCandidateList extends React.Component {
                                selectPlugin={thislist.props.selectPlugin}/>
             );
         });
-        return (<ul className='fair-list'>{candidates}</ul>);
+        return (<ul className='fair-list fair-candidate-list'>{candidates}</ul>);
     }
 }
 
@@ -505,6 +505,10 @@ class FAIRHeaderBody extends React.Component {
         super(props);
         this.setNavState = this.setNavState.bind(this);
         this.setQuery = this.setQuery.bind(this);
+        let querystr = "";
+        if (!is.null(this.props.range)) {
+            querystr = this.props.range.toString();
+        }
         /**
          *
          * @type {{
@@ -512,7 +516,7 @@ class FAIRHeaderBody extends React.Component {
          * display: string either 'search' or  'selection',
          * navclick: function called when navigation icon is clicked}}
          */
-        this.state = {query: this.props.range.toString(), display: 'search', navClick: null}
+        this.state = {query: querystr, display: 'search', navClick: null}
     }
 
     /** Set the state of navigation, either search or selection **/
@@ -588,23 +592,26 @@ class FAIRContainer extends React.Component {
         this.state = {anchor: null};
     }
 
+    /** At beginning, inject an achor element and position to FAIR container **/
     componentDidMount() {
         var container = this;
-        //var parent = ReactDOM.findDOMNode(this).parentNode;
         var parent = ReactDOM.findDOMNode(this);
-        // adjust the parent container's position and style
-        var bounding = this.props.range.getBoundingClientRect();
+        var anchor = null;
+        var bounding = {left: 20, top: 20};
+        if (!is.null(this.props.range)) {
+            var bounding = this.props.range.getBoundingClientRect();
+            anchor = initFAIRAnchor(this.props.range);
+            anchor.className = 'fair-anchor';
+            anchor.addEventListener('click', function() {
+                container.toggleVisibility();
+            });
+        }
         var fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
         var offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
         parent.style.left = (offset.left+bounding.left)+'px';
         parent.style.top = (offset.top+bounding.top+fontsize)+'px';
         // adjust the content of the inner container
         // create an anchor span in the main document
-        var anchor = initFAIRAnchor(this.props.range);
-        anchor.className = 'fair-anchor'
-        anchor.addEventListener('click', function() {
-            container.toggleVisibility();
-        });
         // remember links to the parent and to the anchor
         this.setState({parent: parent, anchor: anchor});
     };
@@ -613,16 +620,22 @@ class FAIRContainer extends React.Component {
      * Delete this container entirely.
      */
     close() {
-        var parent = this.state.parent;
-        var anchor = this.state.anchor;
-        anchor.parentNode.removeChild(anchor);
+        var parent = this.state.parent.parentNode;
         parent.parentNode.removeChild(parent);
+        if (this.state.anchor != null) {
+            var anchor = this.state.anchor;
+            anchor.parentNode.removeChild(anchor);
+        }
     }
 
     /** Hide the container temporarily **/
     toggleVisibility() {
-        var current = this.state.parent.style.display;
-        this.state.parent.style.display = (current==='none') ? 'block': 'none';
+        if (this.state.anchor != null) {
+            var current = this.state.parent.style.display;
+            this.state.parent.style.display = (current==='none') ? 'block': 'none';
+        } else {
+            this.close();
+        }
     }
 
     render() {
@@ -644,12 +657,11 @@ class FAIRContainer extends React.Component {
 
 
 /**
- * Create DOM container
+ * Create DOM div for the popup container
  *
  * @param range
  */
 function initFAIRContainer(range) {
-    // create a floating div for the fair-container
     var container = document.createElement('div');
     container.className = 'fair-reset';
     ReactDOM.render(
@@ -669,7 +681,11 @@ window.addEventListener('keypress', function(e){
     if (e.shiftKey && e.ctrlKey && e.keyCode === 26) {
         var selection = window.getSelection();
         if (selection.toString()!=='') {
+            console.log(JSON.stringify(selection.getRangeAt(0)));
             initFAIRContainer(selection.getRangeAt(0));
+        } else {
+            console.log("init with null");
+            initFAIRContainer(null);
         }
     }
 }, false);

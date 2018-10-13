@@ -27,7 +27,7 @@ it('extracts articles from round a typical response', function() {
     assert.equal(result.data.length, 2);
     assert.ok(result.data[0].includes('MED'));
     assert.ok(result.data[1].includes('cancer'));
-})
+});
 
 it('extracts titles from preprint response', function() {
     var r2 = fs.readFileSync(__dirname+'/response-europepmc-b.json').toString();
@@ -36,7 +36,7 @@ it('extracts titles from preprint response', function() {
     // this example has a single hit (a preprint article)
     assert.equal(result.data.length, 1);
     assert.ok(result.data[0].includes('preprint'));
-})
+});
 
 it('generates external urls', function () {
     var result = plugin.external('Gene');

@@ -14,32 +14,32 @@ div.fair-outer {
  Fragments borrowed from bootstrap.
  Here reproduced with prefixes fair- to avoid conflicts between in-page and in-extension styles
  **/
-.fair-col-8, .fair-col-2, .fair-col-3, .fair-col-6, .fair-col-12 {
+div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-12 {
     position: relative;
     display: block;
     float: left;
     padding-left: 0px;
     padding-right: 0px;
 }
-.fair-col-12 {
+div.fair-outer .fair-col-12 {
     width: 100%;
 }
-.fair-col-8 {
+div.fair-outer .fair-col-8 {
     width: 60.00%;
 }
-.fair-col-9 {
+div.fair-outer .fair-col-9 {
     width: 68.4%;
 }
-.fair-col-2 {
+div.fair-outer .fair-col-2 {
     width: 16.6%;
 }
-.fair-col-1 {
+div.fair-outer .fair-col-1 {
     width: 8.4%;
 }
-.fair-col-3 {
+div.fair-outer .fair-col-3 {
     width: 25%;
 }
-.fair-col-6 {
+div.fair-outer .fair-col-6 {
     width: 50%;
 }
 div.fair-row {
@@ -77,6 +77,8 @@ ul.fair-list {
     padding-right: 0.8em;
     list-style-type: none;
     margin: 0px;
+    height: 472px;
+   overflow-y: auto;
 }
 ul.fair-list li {
     padding: 0px;
@@ -346,7 +348,7 @@ div.fair-header {
     padding-top: 0.3em;
     padding-left: 0.3em;
     padding-right: 0.3em;
-    padding-bottom: 1em;
+    padding-bottom: 0.6em;
 }
 div.fair-button-panel {
     position: relative;
@@ -370,9 +372,13 @@ div.fair-header input {
     margin-left: 4px;
     margin-bottom: 0px;
     width: 76%;
+    height: 1.3em;
+    line-height: 1em;
     font-size: 22px;
-    padding-bottom: 2px;
-    padding-left: 6px;
+    float: none;
+    /** padding-bottom: 2px;
+    padding-left: 6px; **/
+    padding: 2px 6px 2px 6px;
 }
 div.fair-header input:focus {
     outline: none;
@@ -409,11 +415,15 @@ div.fair-header-body {
 
 }
 div.fair-body {
-    padding-top: 0.4em;
+
+}
+div.fair-body div.fair-logo-col {
+    overflow: hidden;
+    text-align: center;
 }
 div.fair-body .fair-logo {
     overflow: hidden;
-    max-width: 75px;
+    max-width: 80px;
 }
 div.fair-body .fair-logo img {
     max-height: 45px;
@@ -446,7 +456,7 @@ span.fair-anchor {
 /** Output **/
 
 div.fair-result {
-    margin-top: 1em;
+    margin-top: 0.8em;
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;

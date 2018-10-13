@@ -1,0 +1,42 @@
+{
+    "took": [
+        3
+    ],
+    "timed_out": [
+        false
+    ],
+    "_shards": {
+        "total": [
+            3
+        ],
+        "successful": [
+            3
+        ],
+        "failed": [
+            0
+        ]
+    },
+    "hits": {
+        "total": [
+            10
+        ],
+        "max_score": [
+            23.0381
+        ],
+        "hits": [
+            {
+                "_index": "chembl_24_1_molecule",
+                "_type": "molecule",
+                "_id": "CHEMBL25",
+                "_score": 23.0381
+            },
+            {
+                "_index": "chembl_24_1_molecule",
+                "_type": "molecule",
+                "_id": "CHEMBL2260549",
+                "_score": 18.305
+            }
+        ]
+    }
+}
+
