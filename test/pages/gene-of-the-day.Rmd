@@ -34,3 +34,14 @@ Some common variants in this gene:
  - 11:76869348 G / A
  - 11:76873367 G / T
 
+
+Some SNP ids in this gene:
+
+ - rs781986314
+ - rs57741157
+
+(Not Myo7a, but a SNP with GWAS hits)
+
+ - rs2847281
+
+

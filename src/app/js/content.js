@@ -573,6 +573,7 @@ function initFAIRAnchor(range) {
         template.innerHTML = response.data.trim();
         var el = template.content.firstChild;
         el.setAttribute('width', '12');
+        el.setAttribute('style', 'width: 12px; display: inline');
         anchor.appendChild(el);
     });
     range.collapse(false);

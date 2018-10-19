@@ -1,0 +1,978 @@
+{
+  "_embedded" : {
+    "associations" : [ {
+      "loci" : [ {
+        "haplotypeSnpCount" : null,
+        "description" : "Single variant",
+        "strongestRiskAlleles" : [ {
+          "riskAlleleName" : "rs2847281-C",
+          "riskFrequency" : null,
+          "genomeWide" : null,
+          "limitedList" : null,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        } ],
+        "authorReportedGenes" : [ {
+          "geneName" : "PTPN2",
+          "entrezGeneIds" : [ {
+            "entrezGeneId" : "5771"
+          } ],
+          "ensemblGeneIds" : [ {
+            "ensemblGeneId" : "ENSG00000175354"
+          } ]
+        } ]
+      } ],
+      "range" : "[1.14-1.26]",
+      "riskFrequency" : "0.16",
+      "pvalueDescription" : null,
+      "orPerCopyNum" : 1.2,
+      "snpType" : "novel",
+      "multiSnpHaplotype" : false,
+      "snpInteraction" : false,
+      "pvalueMantissa" : 2,
+      "pvalueExponent" : -11,
+      "standardError" : null,
+      "efoTraits" : [ {
+        "trait" : "esophageal carcinoma",
+        "uri" : "http://www.ebi.ac.uk/efo/EFO_0002916",
+        "shortForm" : "EFO_0002916"
+      }, {
+        "trait" : "squamous cell carcinoma",
+        "uri" : "http://www.ebi.ac.uk/efo/EFO_0000707",
+        "shortForm" : "EFO_0000707"
+      } ],
+      "pvalue" : 2.0E-11,
+      "betaNum" : null,
+      "betaUnit" : null,
+      "betaDirection" : null,
+      "snps" : [ {
+        "rsId" : "rs2847281",
+        "merged" : 0,
+        "functionalClass" : "intron_variant",
+        "lastUpdateDate" : "2018-07-20T23:10:17.571+0000",
+        "locations" : [ {
+          "chromosomeName" : "18",
+          "chromosomePosition" : 12821594,
+          "region" : {
+            "name" : "18p11.21"
+          },
+          "_links" : {
+            "snps" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        } ],
+        "genomicContexts" : [ {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 45457,
+          "gene" : {
+            "geneName" : "AP005482.1",
+            "entrezGeneIds" : [ ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000260302"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 71526,
+          "gene" : {
+            "geneName" : "AP005482.2",
+            "entrezGeneIds" : [ ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000266961"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 72172,
+          "gene" : {
+            "geneName" : "LOC100996324",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "100996324"
+            } ],
+            "ensemblGeneIds" : [ ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : false,
+          "isUpstream" : false,
+          "isDownstream" : false,
+          "distance" : 0,
+          "gene" : {
+            "geneName" : "PTPN2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "5771"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000175354"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 89592,
+          "gene" : {
+            "geneName" : "STK25P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "100533662"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267570"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 60776,
+          "gene" : {
+            "geneName" : "RF00019",
+            "entrezGeneIds" : [ ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000207086"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 91209,
+          "gene" : {
+            "geneName" : "EIF4A2P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "646171"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267336"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 91250,
+          "gene" : {
+            "geneName" : "EIF4A2P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "646171"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267336"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 95854,
+          "gene" : {
+            "geneName" : "PSMG2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "56984"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000128789"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : false,
+          "isUpstream" : false,
+          "isDownstream" : false,
+          "distance" : 0,
+          "gene" : {
+            "geneName" : "PTPN2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "5771"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000175354"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 95854,
+          "gene" : {
+            "geneName" : "PSMG2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "56984"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000128789"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 89623,
+          "gene" : {
+            "geneName" : "STK25P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "100533662"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267570"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        } ]
+      } ],
+      "description" : null,
+      "_links" : {
+        "self" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/23631"
+        },
+        "association" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/23631{?projection}",
+          "templated" : true
+        },
+        "efoTraits" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/23631/efoTraits"
+        },
+        "study" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/23631/study"
+        },
+        "snps" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/23631/snps"
+        }
+      }
+    }, {
+      "loci" : [ {
+        "haplotypeSnpCount" : null,
+        "description" : "Single variant",
+        "strongestRiskAlleles" : [ {
+          "riskAlleleName" : "rs2847281-A",
+          "riskFrequency" : null,
+          "genomeWide" : null,
+          "limitedList" : null,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        } ],
+        "authorReportedGenes" : [ {
+          "geneName" : "PTPN2",
+          "entrezGeneIds" : [ {
+            "entrezGeneId" : "5771"
+          } ],
+          "ensemblGeneIds" : [ {
+            "ensemblGeneId" : "ENSG00000175354"
+          } ]
+        } ]
+      } ],
+      "range" : "[0.02-0.04]",
+      "riskFrequency" : "NR",
+      "pvalueDescription" : null,
+      "orPerCopyNum" : null,
+      "snpType" : "novel",
+      "multiSnpHaplotype" : false,
+      "snpInteraction" : false,
+      "pvalueMantissa" : 2,
+      "pvalueExponent" : -8,
+      "standardError" : null,
+      "efoTraits" : [ {
+        "trait" : "c-reactive protein measurement",
+        "uri" : "http://www.ebi.ac.uk/efo/EFO_0004458",
+        "shortForm" : "EFO_0004458"
+      } ],
+      "pvalue" : 2.0E-8,
+      "betaNum" : 0.031,
+      "betaUnit" : "unit",
+      "betaDirection" : "increase",
+      "snps" : [ {
+        "rsId" : "rs2847281",
+        "merged" : 0,
+        "functionalClass" : "intron_variant",
+        "lastUpdateDate" : "2018-07-20T23:10:17.571+0000",
+        "locations" : [ {
+          "chromosomeName" : "18",
+          "chromosomePosition" : 12821594,
+          "region" : {
+            "name" : "18p11.21"
+          },
+          "_links" : {
+            "snps" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        } ],
+        "genomicContexts" : [ {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 45457,
+          "gene" : {
+            "geneName" : "AP005482.1",
+            "entrezGeneIds" : [ ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000260302"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 71526,
+          "gene" : {
+            "geneName" : "AP005482.2",
+            "entrezGeneIds" : [ ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000266961"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 72172,
+          "gene" : {
+            "geneName" : "LOC100996324",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "100996324"
+            } ],
+            "ensemblGeneIds" : [ ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : false,
+          "isUpstream" : false,
+          "isDownstream" : false,
+          "distance" : 0,
+          "gene" : {
+            "geneName" : "PTPN2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "5771"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000175354"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 89592,
+          "gene" : {
+            "geneName" : "STK25P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "100533662"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267570"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 60776,
+          "gene" : {
+            "geneName" : "RF00019",
+            "entrezGeneIds" : [ ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000207086"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 91209,
+          "gene" : {
+            "geneName" : "EIF4A2P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "646171"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267336"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 91250,
+          "gene" : {
+            "geneName" : "EIF4A2P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "646171"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267336"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 95854,
+          "gene" : {
+            "geneName" : "PSMG2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "56984"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000128789"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : false,
+          "isUpstream" : false,
+          "isDownstream" : false,
+          "distance" : 0,
+          "gene" : {
+            "geneName" : "PTPN2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "5771"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000175354"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : true,
+          "isDownstream" : false,
+          "distance" : 95854,
+          "gene" : {
+            "geneName" : "PSMG2",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "56984"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000128789"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "Ensembl",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : false,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        }, {
+          "isIntergenic" : true,
+          "isUpstream" : false,
+          "isDownstream" : true,
+          "distance" : 89623,
+          "gene" : {
+            "geneName" : "STK25P1",
+            "entrezGeneIds" : [ {
+              "entrezGeneId" : "100533662"
+            } ],
+            "ensemblGeneIds" : [ {
+              "ensemblGeneId" : "ENSG00000267570"
+            } ]
+          },
+          "location" : {
+            "chromosomeName" : "18",
+            "chromosomePosition" : 12821594,
+            "region" : {
+              "name" : "18p11.21"
+            },
+            "_links" : {
+              "snps" : {
+                "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+              }
+            }
+          },
+          "source" : "NCBI",
+          "mappingMethod" : "Ensembl_pipeline",
+          "isClosestGene" : true,
+          "_links" : {
+            "snp" : {
+              "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281"
+            }
+          }
+        } ]
+      } ],
+      "description" : null,
+      "_links" : {
+        "self" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/17264"
+        },
+        "association" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/17264{?projection}",
+          "templated" : true
+        },
+        "efoTraits" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/17264/efoTraits"
+        },
+        "study" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/17264/study"
+        },
+        "snps" : {
+          "href" : "https://www.ebi.ac.uk/gwas/rest/api/associations/17264/snps"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "https://www.ebi.ac.uk/gwas/rest/api/singleNucleotidePolymorphisms/rs2847281/associations?projection=associationBySnp"
+    }
+  }
+}

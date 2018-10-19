@@ -5,18 +5,25 @@ var fs = require("fs-extra");
 var plugin = require('./chembl.image');
 
 
-it("does not claim long queries strongly", function () {
-    var short = ["BRAF", "CHEM5"];
-    short.map(function(x) {
-        assert.deepEqual(plugin.claim(x), 0.5, x);
-    });
+it("claims long terms (for search)", function () {
     var long = ["Savolitinib", "Binimetinib"];
     long.map(function(x) {
         assert.deepEqual(plugin.claim(x), 0.7, x);
     });
 });
 
-it("claims compounds", function () {
+it("claims short terms weakly ", function () {
+    var short = ["BRAF", "CHEM5"];
+    short.map(function(x) {
+        assert.deepEqual(plugin.claim(x), 0.3, x);
+    });
+    var veryshort = ["abc", "xy"];
+    veryshort.map(function(x) {
+        assert.deepEqual(plugin.claim(x), 0, x);
+    });
+});
+
+it("claims CHEMBL ids", function () {
     var good = ["CHEMBL25", "CHEMBL20001"];
     good.map(function(x) {
         assert.deepEqual(plugin.claim(x), 1, x);

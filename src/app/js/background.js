@@ -10,6 +10,14 @@
 var icons = {};
 var logos = {};
 
+// set debugging to True to get some console.log messages
+var verbose = true;
+function developer_log(x) {
+    if (verbose) {
+        console.log(x);
+    }
+}
+
 // TO DO - implement a cache strategy for devlopment
 
 
@@ -161,6 +169,7 @@ function claimQuery(query, sendResponse) {
  * @returns {*}
  */
 function sanitizeResponse(response) {
+    developer_log("sanitizing: "+JSON.stringify(response));
     if (is.undefined(response.data)) {
         return {status: 0, data: "invalid response, no data"};
     }
@@ -206,7 +215,7 @@ function getExternal(plugin, queries) {
     var urls = queries.map(function(x, i) {
         return plugin.external(x, i);
     });
-    //console.log("considering urls: "+JSON.stringify(urls))
+    developer_log("considering urls: "+JSON.stringify(urls));
     var urls = urls.filter(x => !is.null(x));
     return urls[0];
 }
@@ -226,12 +235,13 @@ function processQuery(id, queries, sendResponse, index) {
         index = 0;
     }
 
-    //console.log("processing query: "+JSON.stringify(queries));
+    developer_log("processing query: "+JSON.stringify(queries));
 
     // get plugin details
     var plugin = library["plugins"][id];
     var query = queries.slice(-1)[0].trim();
     var url = plugin.url(query, index);
+    developer_log("url: "+url);
 
     // augment a response object with plugin-specific metadata
     var buildSendResponse = function(response) {
@@ -246,7 +256,7 @@ function processQuery(id, queries, sendResponse, index) {
     // handlers for promise
     var handleResponse = function(response) {
         // decide whether to output or to do another round trip to url/process
-        //console.log("working with promise result "+JSON.stringify(response))
+        developer_log("working with promise result "+JSON.stringify(response))
         if (response.status === 0 || response.status === 1) {
             sendResponse(buildSendResponse(response))
         } else if (response.status>0 && response.status < 1) {
@@ -257,22 +267,27 @@ function processQuery(id, queries, sendResponse, index) {
         sendResponse({status: 0, data: msg})
     }
 
-    //console.log("processing query");
+    developer_log("processing query");
     // execute the query
     var promise = new Promise(function(resolve, reject) {
         var xhr=new XMLHttpRequest();
         xhr.onload=function() {
-            //console.log("response: "+xhr.response);
-            var response = plugin.process(xhr.response, index);
-            resolve(sanitizeResponse(response));
+            developer_log("response: "+xhr.response);
+            try {
+                var response = plugin.process(xhr.response, index);
+                resolve(sanitizeResponse(response));
+            } catch(e) {
+                resolve({status: 0, data: "error parsing server response"});
+            }
         };
         xhr.ontimeout=function() {
             reject("timeout");
         };
         xhr.onerror = function() {
-            reject("error "+xhr.status);
+            developer_log("got error: " + xhr.status);
+            reject('error  or page not available');
         }
-        //console.log("sending GET request to: "+url);
+        developer_log("sending GET request to: "+url);
         xhr.open("GET", url);
         xhr.send();
     });

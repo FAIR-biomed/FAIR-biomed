@@ -24,13 +24,13 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
-        if (query=="") return 0;
-        if (isChemblId(query)) return 1;
         query = query.trim();
+        if (query.length < 4) return 0;
+        if (isChemblId(query)) return 1;
         // long queries can be a drug names, short names possibly gene names
         // so claim long words more strongly
         if (query.length > 6) return 0.7;
-        return 0.5;
+        return 0.3;
     };
 
     /** construct a url for an API call **/

@@ -21,26 +21,29 @@ div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col
     padding-left: 0px;
     padding-right: 0px;
 }
-div.fair-outer .fair-col-12 {
+div.fair-outer .fair-col-12, div.fair-row .fair-col-12 {
     width: 100%;
 }
-div.fair-outer .fair-col-8 {
+div.fair-outer .fair-col-8, div.fair-row .fair-col-8 {
     width: 60.00%;
 }
-div.fair-outer .fair-col-9 {
+div.fair-outer .fair-col-9, div.fair-row .fair-col-9 {
     width: 68.4%;
 }
-div.fair-outer .fair-col-2 {
+div.fair-outer .fair-col-2, div.fair-row .fair-col-2 {
     width: 16.6%;
 }
-div.fair-outer .fair-col-1 {
+div.fair-outer .fair-col-1, div.fair-row .fair-col-1 {
     width: 8.4%;
 }
-div.fair-outer .fair-col-3 {
+div.fair-outer .fair-col-3, div.fair-row .fair-col-3 {
     width: 25%;
 }
-div.fair-outer .fair-col-6 {
+div.fair-outer .fair-col-6, div.fair-row .fair-col-6 {
     width: 50%;
+}
+div.fair-clear {
+    clear: both;
 }
 div.fair-row {
     display: flex;
@@ -52,7 +55,6 @@ div.fair-row {
     margin-right: 0px;
 }
 .fair-row .fair-col-2, .fair-row .fair-col-8 {
-    /** height: 100%; **/
     margin: auto;
     overflow: auto;
 }
@@ -223,11 +225,13 @@ div.fair-options code {
     float: unset;
     overflow: visible;
 }
+#fair-library .fair-info-detail {
+    margin-top: 1.5em;
+}
 #fair-library .fair-badge {
     margin-right: 8px;
     padding: 4px 8px 4px 8px;
     border-radius: 3px;
-    /** background-color: #5bc0de; **/
     background-color: #22b5bb;
     border-color: #333333;
     color: #ffffff;
@@ -376,8 +380,6 @@ div.fair-header input {
     line-height: 1em;
     font-size: 22px;
     float: none;
-    /** padding-bottom: 2px;
-    padding-left: 6px; **/
     padding: 2px 6px 2px 6px;
 }
 div.fair-header input:focus {
@@ -515,6 +517,9 @@ div.fair-result-toolbar .fair-toolbar-selection span {
 .fair-icon {
     margin-left: auto;
     margin-right: auto;
+}
+div.fair-outer svg {
+    display: inline;
 }
 .fair-header .fair-icon svg, .fair-result-toolbar .fair-icon svg {
     padding-top: 0.1em;

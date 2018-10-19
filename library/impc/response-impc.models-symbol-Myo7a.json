@@ -1,0 +1,68 @@
+{
+  "responseHeader": {
+    "status": [
+      0
+    ],
+    "QTime": [
+      0
+    ],
+    "params": {
+      "q": [
+        "Myo7a"
+      ],
+      "fq": [
+        "type:gene"
+      ],
+      "wt": [
+        "json"
+      ]
+    }
+  },
+  "response": {
+    "numFound": [
+      3
+    ],
+    "start": [
+      0
+    ],
+    "docs": [
+      {
+        "type": "gene",
+        "gene_id": "MGI:5469039",
+        "gene_symbol": "Tg(Myo7a-Srrm4)#Bban",
+        "gene_locus": "UN:-",
+        "hgnc_gene_symbols_withdrawn": {
+
+        },
+        "gene_symbols_withdrawn": {
+
+        }
+      },
+      {
+        "type": "gene",
+        "hgnc_gene_id": "HGNC:7606",
+        "hgnc_gene_symbol": "MYO7A",
+        "hgnc_gene_symbols_withdrawn": [
+          "USH1B DFNA11 DFNB2 NSRD2"
+        ],
+        "hgnc_gene_locus": "11q13.5",
+        "gene_symbols_withdrawn": {
+
+        }
+      },
+      {
+        "type": "gene",
+        "gene_id": "MGI:104510",
+        "gene_symbol": "Myo7a",
+        "gene_locus": "7:98051060-98119524",
+        "hgnc_gene_symbols_withdrawn": {
+
+        },
+        "gene_symbols_withdrawn": [
+          "nmf371 sh-1 polka sh1 Hdb Myo7"
+        ]
+      }
+    ]
+  }
+}
+

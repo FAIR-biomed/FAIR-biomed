@@ -67,13 +67,11 @@ class PluginInfo extends React.Component {
     }
 
     componentDidMount() {
-        //console.log("mounting plugin info "+this.props.id);
         var infofile = this.props.namespace+'.'+ this.props.info;
         var thislist = this;
         var promise = new Promise(function(resolve, reject) {
             var xhr=new XMLHttpRequest();
             xhr.onload=function(){
-                //console.log(xhr.response)
                 thislist.setState({info: xhr.response})
                 resolve(xhr.response);
             };
@@ -87,11 +85,10 @@ class PluginInfo extends React.Component {
     };
 
     render() {
-        //console.log("this visible: "+this.props.visible);
         if (!this.props.visible) {
             return (null)
         }
-        return(<div className="fair-container fair-fullwidth fair-info"
+        return(<div className="fair-container fair-fullwidth fair-info fair-info-detail"
                     dangerouslySetInnerHTML={{__html: this.state.info }}></div>)
     }
 }
@@ -101,7 +98,6 @@ class PluginInfo extends React.Component {
 class PluginState extends React.Component {
     constructor(props) {
         super(props)
-        //console.log("making plugin state");
         this.handleActivation = this.handleActivation.bind(this);
         this.handleRating = this.handleRating.bind(this);
         this.state = {active: this.props.active, rating: this.props.rating};
@@ -117,14 +113,12 @@ class PluginState extends React.Component {
     }
 
     handleRating(event) {
-        //console.log("setting new rating")
         // set the react state
         this.setState(prevState => ({ rating: (prevState.rating+1)%2}))
         // set the extension state on disk
         var rating = {}
         rating["plugin:"+this.props.id] = [this.state.active, (this.state.rating+1)%2]
         chrome.storage.sync.set(rating);
-        //console.log(JSON.stringify(rating))
     }
 
     render() {
@@ -164,8 +158,6 @@ class LibraryItem extends React.Component {
     }
 
     render() {
-        //console.log("rendering item "+this.props.plugin.id+" active:"+this.props.active+ " rating:"+this.props.rating)
-        //console.log("plugin namespace: "+this.props.plugin.namespace);
         var plugin = this.props.plugin;
         var tags = plugin.tags.map(function(x) {
             return <PluginTag key={x} tag={x} />;
@@ -177,7 +169,7 @@ class LibraryItem extends React.Component {
                         <PluginLogo id={plugin.id} src={plugin.logo} namespace={plugin.namespace}/>
                     </div>
                     <div className="fair-col-8 fair-info">
-                        <div className="fair-center-center fair-click" onClick={this.handleInfo}>
+                        <div className="fair-center-v fair-click" onClick={this.handleInfo}>
                             <div className="fair-container fair-fullwidth">
                                 <h3>{plugin.title}</h3>
                                 <h4>{plugin.subtitle}</h4>
@@ -248,7 +240,6 @@ class LibraryList extends React.Component {
     }
 
     render() {
-        //console.log("rendering library list");
         var plugins = this.props.plugins;
         var items = this.state.ids.map(function(x) {
             var id= x[0];
@@ -267,5 +258,4 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById('fair-library')
     );
 });
-
 

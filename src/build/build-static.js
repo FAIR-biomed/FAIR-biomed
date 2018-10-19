@@ -41,15 +41,16 @@ function build_static(dependencies_array) {
                 return "";
             }
             return utf8.encode(fs.readFileSync(frompath)+"\n");
-        })
+        });
         fs.writeFileSync(target, result.join("\n"));
     })
 }
 
+var type = process.argv[2]
+
 console.log("Building browser-side bundle")
 build_static(dependencies["background"]);
 
-var type = process.argv[2]
 if (type==="development" || type==="production") {
     console.log("Building client-side bundle ("+type+")")
     build_static(dependencies[type]);
