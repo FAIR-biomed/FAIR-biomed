@@ -672,22 +672,33 @@ function initFAIRContainer(range) {
     document.body.appendChild(container);
 }
 
+/** trigger init of FAIRContainer. Used by key listener and context menu. **/
+function triggerFAIRContainer() {
+    var selection = window.getSelection();
+    if (selection.toString()!=='') {
+        initFAIRContainer(selection.getRangeAt(0));
+    } else {
+        initFAIRContainer(null);
+    }
+}
 
 
 /**
- * Register listeners for all keypresses
+ * Register listeners for keypresses
  */
 window.addEventListener('keypress', function(e){
     // keycode 26 -> Z
     if (e.shiftKey && e.ctrlKey && e.keyCode === 26) {
-        var selection = window.getSelection();
-        if (selection.toString()!=='') {
-            console.log(JSON.stringify(selection.getRangeAt(0)));
-            initFAIRContainer(selection.getRangeAt(0));
-        } else {
-            console.log("init with null");
-            initFAIRContainer(null);
-        }
+        triggerFAIRContainer();
     }
 }, false);
 
+/**
+ * Register listeners catching de-novo messages from background.js
+ */
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse) {
+        if (!sender.tab && request.action === "contextMenuClick") {
+            triggerFAIRContainer();
+        }
+    });

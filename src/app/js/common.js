@@ -36,7 +36,29 @@ var is = new function() {
         return this.array(x[0])
     }
 
+    this.digits = new Set(['0', '1', '2', '3', '4',
+        '5', '6', '7', '8', '9'])
+    // quasiNumeric determines if a string contains several characters [0-9]
+    this.quasiNumeric = function(x, threshold) {
+        if (typeof(threshold) === 'undefined') {
+            threshold = 1;
+        }
+        if (x.length<1) return false;
+
+        let hits = x.split('').filter(x => this.digits.has(x));
+        return (hits.length / x.length) >= threshold;
+    };
+
 }();
+
+
+/**
+ * Summarizes what proportion of a string is made of [0-9]
+ * @returns {number}
+ */
+var numberContent = function() {
+    return 0;
+}
 
 
 // this export is in an "if" block so that the file can work:

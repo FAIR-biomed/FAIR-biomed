@@ -52,7 +52,7 @@ it("processes search query to extract MGI id - 2", function () {
     var r0 = fs.readFileSync(__dirname + '/response-impc.models-symbol-Myo7a.json').toString();
     var result = plugin.process(r0, 0);
     // TO DO - extract the appropriate MGI id (if it is not the first one in the list)
-    //assert.equal(result.data, 'MGI:1923582')
+    assert.equal(result.data, 'MGI:104510')
 });
 
 it("processes response into allele table", function () {

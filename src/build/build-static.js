@@ -17,8 +17,8 @@ fs.ensureDirSync("dist");
 console.log("Preparing manifest");
 var npm_package = JSON.parse(fs.readFileSync("package.json").toString());
 var manifest = fs.readFileSync(__dirname+"/configurations/manifest.json").toString();
-var manifest_file = ['dist', 'manifest.json'].join(path.sep)
-manifest = manifest.replace("_version_", npm_package['version'])
+var manifest_file = ['dist', 'manifest.json'].join(path.sep);
+manifest = manifest.replace("_version_", npm_package['version']);
 fs.writeFileSync(manifest_file, manifest);
 
 
@@ -52,8 +52,17 @@ console.log("Building browser-side bundle")
 build_static(dependencies["background"]);
 
 if (type==="development" || type==="production") {
-    console.log("Building client-side bundle ("+type+")")
+    console.log("Building client-side bundle ("+type+")");
     build_static(dependencies[type]);
 } else {
     console.log("To build a bundle, specify either 'development' or 'production'")
+}
+
+
+if (type==='production') {
+    console.log("Ensuring quiet execution in production mode");
+    var background_file = ['dist','js', 'background.js'].join(path.sep);
+    var background = fs.readFileSync(background_file);
+    background += '\n\nverbose=false;\n';
+    fs.writeFileSync(background_file, background);
 }

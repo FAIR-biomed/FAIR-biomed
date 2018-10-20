@@ -64,12 +64,13 @@ module.exports = new function() {
     /** (helper) extract one MGI id from a solr search response **/
     processSearch = function(raw) {
         let docs = raw['response']['docs'];
+        // look for mouse genes only, sort by length of gene symbol
         docs = docs.filter(function(x) {
             return x['gene_id'] != undefined;
+        }).sort(function(a, b) {
+            return a['gene_id'].length - b['gene_id'].length;
         });
-        if (docs.length==0) {
-            return {status:0, data: "no results" };
-        }
+        if (docs.length==0) return {status:0, data: "no results" };
         return {status:0.5, data: docs[0]['gene_id'] }
     };
 

@@ -18,8 +18,6 @@ function developer_log(x) {
     }
 }
 
-// TO DO - implement a cache strategy for devlopment
-
 
 // settings for sanitization of data
 var sanitize_config = {
@@ -323,16 +321,13 @@ function processInfo(id, sendResponse) {
 /** Assign a new rating to a plugin **/
 function processRating(id, rating, sendResponse) {
     var key = "plugin:" + id;
-    //console.log("key: "+key+ " rating: "+rating);
     // fetch existing state current rating
     new Promise(function(resolve, reject) {
         chrome.storage.sync.get(key, function (data) {
-            //console.log("-- got data: "+JSON.stringify(data))
             var state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
             state[1] = rating;
             var msg = {};
             msg[key] = state;
-            //console.log("newstate: "+JSON.stringify(msg));
             chrome.storage.sync.set(msg);
             resolve(msg);
         })
@@ -372,3 +367,20 @@ chrome.runtime.onMessage.addListener(
         }
 });
 
+
+/**
+ * Handle request from context menu (right click menu)
+ * **/
+chrome.contextMenus.create({
+    id: "FAIR-biomed",
+    title: "FAIR-biomed search",
+    contexts: ["selection", "page"]
+});
+chrome.contextMenus.onClicked.addListener(function(itemData) {
+    if (itemData.menuItemId === "FAIR-biomed") {
+        chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+            chrome.tabs.sendMessage(tabs[0].id,
+                {action: "contextMenuClick"}, function(response) {})
+        });
+    }
+});

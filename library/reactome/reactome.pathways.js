@@ -26,13 +26,13 @@ module.exports = new function() {
     // endpoints for first and second round queries
     var endpoints = ['search/query?query=', 'data/pathways/low/diagram/entity/'];
     // connectors with the suffix for first and second round queries
-    var joins = ['&', '?']
+    var joins = ['&', '?'];
     // the species must be written in words because the search query does not accept 9606
     var suffix = 'species=Homo%20sapiens&format=json';
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
-        x = x.trim()
+        x = x.trim();
         if (x.length<2) return 0;
         var words = x.split(' ');
         if (words.length>2) return 0;

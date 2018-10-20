@@ -8,7 +8,7 @@ module.exports = new function() {
     /** variables **/
     this.id = 'ebi.gwas';
     this.title = 'GWAS catalog';
-    this.subtitle = 'Genome wide associations';
+    this.subtitle = 'Trait associations';
     this.tags = ['human', 'genetics', 'disease'];
 
     /** accompanying resources **/
