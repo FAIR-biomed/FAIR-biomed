@@ -1,0 +1,114 @@
+[
+    {
+        "gene_name": "ATP1B2",
+        "full_gene_name": "ATPase, Na+/K+ transporting, beta 2 polypeptide",
+        "start": 7549946,
+        "omim_description": " ATPase, Na+/K+ TRANSPORTING, BETA-2 POLYPEPTIDE; ATP1B2",
+        "stop": 7561087,
+        "gene_id": "ENSG00000129244",
+        "other_names": [
+            "AMOG"
+        ],
+        "omim_accession": "182331",
+        "xstop": 17007561087,
+        "gene_name_upper": "ATP1B2",
+        "xstart": 17007549946,
+        "canonical_transcript": "ENST00000250111",
+        "chrom": "17",
+        "strand": "+"
+    },
+    {
+        "gene_name": "RP11-199F11.2",
+        "start": 7588579,
+        "stop": 7589690,
+        "gene_id": "ENSG00000262251",
+        "other_names": {
+
+        },
+        "xstop": 17007589690,
+        "gene_name_upper": "RP11-199F11.2",
+        "xstart": 17007588579,
+        "canonical_transcript": "ENST00000571370",
+        "chrom": "17",
+        "strand": "-"
+    },
+    {
+        "gene_name": "TP53",
+        "full_gene_name": "tumor protein p53",
+        "start": 7565098,
+        "omim_description": " TUMOR PROTEIN p53; TP53",
+        "stop": 7590857,
+        "gene_id": "ENSG00000141510",
+        "other_names": [
+            "P53",
+            "LFS1"
+        ],
+        "omim_accession": "191170",
+        "xstop": 17007590857,
+        "gene_name_upper": "TP53",
+        "xstart": 17007565098,
+        "canonical_transcript": "ENST00000269305",
+        "chrom": "17",
+        "strand": "-"
+    },
+    {
+        "gene_name": "WRAP53",
+        "full_gene_name": "WD repeat containing, antisense to TP53",
+        "start": 7589390,
+        "omim_description": " WD REPEAT-CONTAINING PROTEIN ANTISENSE TO TP53; WRAP53",
+        "stop": 7606821,
+        "gene_id": "ENSG00000141499",
+        "other_names": [
+            "WDR79",
+            "FLJ10385",
+            "TCAB1"
+        ],
+        "omim_accession": "612661",
+        "xstop": 17007606821,
+        "gene_name_upper": "WRAP53",
+        "xstart": 17007589390,
+        "canonical_transcript": "ENST00000316024",
+        "chrom": "17",
+        "strand": "+"
+    },
+    {
+        "gene_name": "EFNB3",
+        "full_gene_name": "ephrin-B3",
+        "start": 7608521,
+        "omim_description": " EPHRIN B3; EFNB3",
+        "stop": 7614697,
+        "gene_id": "ENSG00000108947",
+        "other_names": [
+            "EPLG8",
+            "LERK-8"
+        ],
+        "omim_accession": "602297",
+        "xstop": 17007614697,
+        "gene_name_upper": "EFNB3",
+        "xstart": 17007608521,
+        "canonical_transcript": "ENST00000226091",
+        "chrom": "17",
+        "strand": "+"
+    },
+    {
+        "gene_name": "DNAH2",
+        "full_gene_name": "dynein, axonemal, heavy chain 2",
+        "start": 7620673,
+        "omim_description": " DYNEIN, AXONEMAL, HEAVY CHAIN 2; DNAH2",
+        "stop": 7737063,
+        "gene_id": "ENSG00000183914",
+        "other_names": [
+            "DNHD3",
+            "KIAA1503",
+            "FLJ46675"
+        ],
+        "omim_accession": "603333",
+        "xstop": 17007737063,
+        "gene_name_upper": "DNAH2",
+        "xstart": 17007620673,
+        "canonical_transcript": "ENST00000572933",
+        "chrom": "17",
+        "strand": "+"
+    }
+]
+

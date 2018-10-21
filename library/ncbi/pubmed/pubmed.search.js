@@ -12,7 +12,7 @@ module.exports = new function() {
     this.tags = ['articles', 'literature'];
 
     /** accompanying resources **/
-    this.logo = '200px-US-NLM-PubMed-Logo.svg.png';
+    this.logo = '200px-US-NLM-PubMed-Logo-2.svg.png';
     this.info = 'pubmed-info.html';
 
     // parts of api urls

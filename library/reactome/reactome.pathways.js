@@ -59,7 +59,9 @@ module.exports = new function() {
             var entries = result["entries"];
             var hits = entries.filter(function(entry) {
                 return entry["species"][0] == "Homo sapiens";
-            })
+            }).sort(function(a, b) {
+                return a['name'].length - b['name'].length;
+            });
             if (hits.length==0) {
                 return {status: 0, data: "no hits"};
             }

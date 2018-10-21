@@ -1,1 +1,23 @@
-[{"gene_name": "PPARA", "full_gene_name": "peroxisome proliferator-activated receptor alpha", "start": 46546425, "omim_description": " PEROXISOME PROLIFERATOR-ACTIVATED RECEPTOR-ALPHA; PPARA", "stop": 46639654, "gene_id": "ENSG00000186951", "other_names": ["PPAR", "HPPAR", "NR1C1"], "omim_accession": "170998", "xstop": 22046639654, "gene_name_upper": "PPARA", "xstart": 22046546425, "canonical_transcript": "ENST00000396000", "chrom": "22", "strand": "+"}]
+[
+    {
+        "gene_name": "PPARA",
+        "full_gene_name": "peroxisome proliferator-activated receptor alpha",
+        "start": 46546425,
+        "omim_description": " PEROXISOME PROLIFERATOR-ACTIVATED RECEPTOR-ALPHA; PPARA",
+        "stop": 46639654,
+        "gene_id": "ENSG00000186951",
+        "other_names": [
+            "PPAR",
+            "HPPAR",
+            "NR1C1"
+        ],
+        "omim_accession": "170998",
+        "xstop": 22046639654,
+        "gene_name_upper": "PPARA",
+        "xstart": 22046546425,
+        "canonical_transcript": "ENST00000396000",
+        "chrom": "22",
+        "strand": "+"
+    }
+]
+

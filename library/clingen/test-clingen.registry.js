@@ -13,8 +13,12 @@ it("claims canonical allele ids", function() {
     assert.equal(plugin.claim("CA6146346"), 1)
 });
 
+it("claims dbSNP ids", function() {
+    assert.ok(plugin.claim("rs2847281") > 0.8);
+});
+
 it("claims numerical ", function() {
-    assert.equal(plugin.claim("CA6146346"), 1)
+    assert.ok(plugin.claim("6146346") > 0.8)
 });
 
 it("processes search query without results", function () {

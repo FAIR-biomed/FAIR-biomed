@@ -31,11 +31,15 @@ module.exports = new function() {
     /** helper to display one gene's information as a table **/
     var makeTable = function(data) {
         var coords = data['chrom']+':'+data['start']+'-'+data['stop']
+        var othernames = '';
+        try {
+            otherames = data['other_names'].join(', ');
+        } catch(e) {};
         return [
             [],
             ['Name', data['full_gene_name']],
             ['Id', data['gene_id']],
-            ['Other names', data['other_names'].join(', ')],
+            ['Other names', othernames],
             ['Coordinates', coords +' ('+data['strand']+')']
         ];
     }

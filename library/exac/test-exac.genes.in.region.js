@@ -3,17 +3,17 @@
 var assert = require('assert');
 var path = require("path");
 var fs = require("fs-extra");
-var plugin = require('./exac.genes.in.region')
+var plugin = require('./exac.genes.in.region');
 
 it("does not claim non-variant queries", function () {
-    var bad = ["bob", "four but non variant", "X:Y-Z"]
+    var bad = ["bob", "four but non variant", "X:Y-Z"];
     bad.map(function(x) {
         assert.equal(plugin.claim(x), 0);
     })
 });
 
 it("claims region queries (allows malformations)", function () {
-    var examples = ["1:1234-23400", "X 1234 900", "chr1:22,333-22,444"]
+    var examples = ["1:1234-23400", "X 1234 900", "chr1:22,333-22,444"];
     examples.map(function(x) {
         assert.equal(plugin.claim(x), 1, x);
     })
@@ -29,12 +29,25 @@ it("parses response into several tables", function() {
     var rdata = fs.readFileSync(rfile).toString();
     var result = plugin.process(rdata);
     assert.equal(result.status, 1);
-    var data = result.data["PPARA"]
-    assert.equal(typeof(data), "object")
+    var data = result.data["PPARA"];
+    assert.equal(typeof(data), "object");
     // data should be an array of arrays
     // first element is the header, here empty
-    assert.deepEqual(data[0], [])
-    assert.ok(data.length>3, "outbut table should have a few rows")
+    assert.deepEqual(data[0], []);
+    assert.ok(data.length>3, "outbut table should have a few rows");
     assert.deepEqual(data[1][0], "Name");
     assert.deepEqual(data[2][0], "Id");
 })
+
+it("parses response into several tables (longer)", function() {
+    // read in api response from a file about a region around TP53
+    var rfile = __dirname+"/response-exac.genes.in.region-1.json";
+    var rdata = fs.readFileSync(rfile).toString();
+    var result = plugin.process(rdata);
+    assert.equal(result.status, 1);
+    // check that a few of the expected genes
+    var data1 = result.data["TP53"];
+    assert.equal(typeof(data1), "object");
+    var data2 = result.data["DNAH2"];
+    assert.equal(typeof(data2), "object");
+});

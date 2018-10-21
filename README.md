@@ -11,7 +11,7 @@ Vasts amounts of biomedical data are stored in open databases and knowledge-base
 
 FAIR-biomed is a browser extension (for chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a report in your browser. With FAIR-biomed, you can access additional information on any part of the report without leaving the page.
 
-To make use of the extension, first highlight some text, for example, a gene name. Press `Ctr+Shift+Z`. A new box should appear prompting you to choose a data source to query. 
+To make use of the extension, first highlight some text, for example, a gene name. Press `Ctr+Shift+Z` on the keyboard (alternatively `right-click > FAIR-biomed search` with the mouse). A new box should appear prompting you to choose a data source to query. 
 
 <p align="center">
 <img src="docs/img/bmp4_list.png" width="310">
@@ -38,7 +38,8 @@ The current plugin library provides access to a small but varied set of data sou
 
 | Data source      | Plugins      |
 | :----- | :----- |
-| [EBI](https://www.ebi.ac.uk/) | Ontology and chemical data|
+| [ClinGen](https://www.clinicalgenome.org/) | Allele registry |
+| [EBI](https://www.ebi.ac.uk/) | GWAS, Ontology, and chemical data |
 | [Europe PMC](https://www.europepmc.org) | Literature | 
 | [ExAC](http://exac.broadinstitute.org/) | Genomic variant annotation |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |

@@ -26,6 +26,8 @@ module.exports = new function() {
         if (query.length<4) return 0;
         if (query.split(' ').length!=1) return 0;
         if (query.startsWith("CA")) return 1;
+        if (query.startsWith("rs")) return 0.95;
+        if (parseFloat(query)>0) return 0.9;
         return 0.8;
     };
 
