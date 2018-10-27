@@ -28,11 +28,11 @@ it('generates different urls for round 1 and round2', function () {
 it('extracts PMIDs from round 1 response', function() {
     var r1 = fs.readFileSync(__dirname+'/response-pubmed.search-0.json').toString();
     var result = plugin.process(r1, 0);
-    // round 1 should signal status not yet done <!
+    // round 1 should signal status not yet done <1
     assert.ok(result.status<1);
     // in this example, the best hit title is "Gene"
     assert.ok(result.data.includes(','));
-})
+});
 
 it('extracts titles from round 2 response', function() {
     var r2 = fs.readFileSync(__dirname+'/response-pubmed.search-1.json').toString();
@@ -42,11 +42,11 @@ it('extracts titles from round 2 response', function() {
     // in this example, the best hit title is "Gene"
     assert.ok(result.data.length>1);
     assert.ok(result.data[1].includes('thesaurus'));
-})
+});
 
 it('generates external urls based on round 1 query', function () {
     var result1 = plugin.external('Gene', 0);
     var result2 = plugin.external('Gene', 1);
-    assert.ok(result2===null)
-    assert.ok(result1.includes('Gene'))
+    assert.ok(result2===null);
+    assert.ok(result1.includes('Gene'));
 });

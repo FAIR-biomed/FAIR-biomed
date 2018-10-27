@@ -1,0 +1,30 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "389",
+    "retmax": "5",
+    "retstart": "0",
+    "idlist": [
+      "5771",
+      "19255",
+      "117063",
+      "378729",
+      "540888"
+    ],
+    "translationset": [
+    ],
+    "translationstack": [
+      {
+        "term": "PTPN2[All Fields]",
+        "field": "All Fields",
+        "count": "389",
+        "explode": "N"
+      },
+      "GROUP"
+    ],
+    "querytranslation": "PTPN2[All Fields]"
+  }
+}

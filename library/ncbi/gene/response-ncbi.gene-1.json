@@ -1,0 +1,238 @@
+{
+  "header": {
+    "type": "esummary",
+    "version": "0.3"
+  },
+  "result": {
+    "uids": [
+      "5771"
+    ],
+    "5771": {
+      "uid": "5771",
+      "name": "PTPN2",
+      "description": "protein tyrosine phosphatase, non-receptor type 2",
+      "status": "",
+      "currentid": "",
+      "chromosome": "18",
+      "geneticsource": "genomic",
+      "maplocation": "18p11.21",
+      "otheraliases": "PTN2, PTPT, TC-PTP, TCELLPTP, TCPTP",
+      "otherdesignations": "tyrosine-protein phosphatase non-receptor type 2|T-cell protein tyrosine phosphatase",
+      "nomenclaturesymbol": "PTPN2",
+      "nomenclaturename": "protein tyrosine phosphatase, non-receptor type 2",
+      "nomenclaturestatus": "Official",
+      "mim": [
+        "176887"
+      ],
+      "genomicinfo": [
+        {
+          "chrloc": "18",
+          "chraccver": "NC_000018.10",
+          "chrstart": 12884350,
+          "chrstop": 12785477,
+          "exoncount": 15
+        }
+      ],
+      "geneweight": 12955,
+      "summary": "The protein encoded by this gene is a member of the protein tyrosine phosphatase (PTP) family. Members of the PTP family share a highly conserved catalytic motif, which is essential for the catalytic activity. PTPs are known to be signaling molecules that regulate a variety of cellular processes including cell growth, differentiation, mitotic cycle, and oncogenic transformation. Epidermal growth factor receptor and the adaptor protein Shc were reported to be substrates of this PTP, which suggested the roles in growth factor mediated cell signaling. Multiple alternatively spliced transcript variants encoding different isoforms have been found. Two highly related but distinctly processed pseudogenes that localize to chromosomes 1 and 13, respectively, have been reported. [provided by RefSeq, May 2011]",
+      "chrsort": "18",
+      "chrstart": 12785477,
+      "organism": {
+        "scientificname": "Homo sapiens",
+        "commonname": "human",
+        "taxid": 9606
+      },
+      "locationhist": [
+        {
+          "annotationrelease": "109",
+          "assemblyaccver": "GCF_000001405.38",
+          "chraccver": "NC_000018.10",
+          "chrstart": 12884350,
+          "chrstop": 12785477
+        },
+        {
+          "annotationrelease": "108",
+          "assemblyaccver": "GCF_000001405.33",
+          "chraccver": "NC_000018.10",
+          "chrstart": 12884350,
+          "chrstop": 12785477
+        },
+        {
+          "annotationrelease": "108",
+          "assemblyaccver": "GCF_000306695.2",
+          "chraccver": "NC_018929.2",
+          "chrstart": 12883349,
+          "chrstop": 12784827
+        },
+        {
+          "annotationrelease": "107",
+          "assemblyaccver": "GCF_000001405.28",
+          "chraccver": "NC_000018.10",
+          "chrstart": 12884334,
+          "chrstop": 12785477
+        },
+        {
+          "annotationrelease": "107",
+          "assemblyaccver": "GCF_000306695.2",
+          "chraccver": "NC_018929.2",
+          "chrstart": 12883349,
+          "chrstop": 12784827
+        },
+        {
+          "annotationrelease": "106",
+          "assemblyaccver": "GCF_000001405.26",
+          "chraccver": "NC_000018.10",
+          "chrstart": 12884337,
+          "chrstop": 12785477
+        },
+        {
+          "annotationrelease": "106",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739217
+        },
+        {
+          "annotationrelease": "106",
+          "assemblyaccver": "GCF_000306695.2",
+          "chraccver": "NC_018929.2",
+          "chrstart": 12883349,
+          "chrstop": 12784827
+        },
+        {
+          "annotationrelease": "105",
+          "assemblyaccver": "GCF_000001405.25",
+          "chraccver": "NC_000018.9",
+          "chrstart": 12884336,
+          "chrstop": 12785476
+        },
+        {
+          "annotationrelease": "105",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739217
+        },
+        {
+          "annotationrelease": "105",
+          "assemblyaccver": "GCF_000306695.2",
+          "chraccver": "NC_018929.2",
+          "chrstart": 12883349,
+          "chrstop": 12784827
+        },
+        {
+          "annotationrelease": "104",
+          "assemblyaccver": "GCF_000001405.22",
+          "chraccver": "NC_000018.9",
+          "chrstart": 12884333,
+          "chrstop": 12785476
+        },
+        {
+          "annotationrelease": "104",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739217
+        },
+        {
+          "annotationrelease": "104",
+          "assemblyaccver": "GCF_000306695.1",
+          "chraccver": "NC_018929.1",
+          "chrstart": 12872315,
+          "chrstop": 12773817
+        },
+        {
+          "annotationrelease": "103",
+          "assemblyaccver": "GCF_000001405.21",
+          "chraccver": "NC_000018.9",
+          "chrstart": 12884333,
+          "chrstop": 12785476
+        },
+        {
+          "annotationrelease": "103",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739217
+        },
+        {
+          "annotationrelease": "37.3",
+          "assemblyaccver": "GCF_000001405.17",
+          "chraccver": "NC_000018.9",
+          "chrstart": 12884333,
+          "chrstop": 12785476
+        },
+        {
+          "annotationrelease": "37.3",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739217
+        },
+        {
+          "annotationrelease": "37.2",
+          "assemblyaccver": "GCF_000001405.14",
+          "chraccver": "NC_000018.9",
+          "chrstart": 12884333,
+          "chrstop": 12785479
+        },
+        {
+          "annotationrelease": "37.2",
+          "assemblyaccver": "GCF_000002115.2",
+          "chraccver": "AC_000061.1",
+          "chrstart": 12766832,
+          "chrstop": 12668268
+        },
+        {
+          "annotationrelease": "37.2",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739220
+        },
+        {
+          "annotationrelease": "37.1",
+          "assemblyaccver": "GCF_000001405.13",
+          "chraccver": "NC_000018.9",
+          "chrstart": 12884333,
+          "chrstop": 12785479
+        },
+        {
+          "annotationrelease": "37.1",
+          "assemblyaccver": "GCF_000002115.2",
+          "chraccver": "AC_000061.1",
+          "chrstart": 12766832,
+          "chrstop": 12668268
+        },
+        {
+          "annotationrelease": "37.1",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739220
+        },
+        {
+          "annotationrelease": "36.3",
+          "assemblyaccver": "GCF_000001405.12",
+          "chraccver": "NC_000018.8",
+          "chrstart": 12874333,
+          "chrstop": 12775479
+        },
+        {
+          "annotationrelease": "36.3",
+          "assemblyaccver": "GCF_000002115.2",
+          "chraccver": "AC_000061.1",
+          "chrstart": 12766832,
+          "chrstop": 12668268
+        },
+        {
+          "annotationrelease": "36.3",
+          "assemblyaccver": "GCF_000002125.1",
+          "chraccver": "AC_000150.1",
+          "chrstart": 12838297,
+          "chrstop": 12739220
+        }
+      ]
+    }
+  }
+}

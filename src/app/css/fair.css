@@ -2,11 +2,13 @@
 
 div.fair-reset {
     all: unset !important;
+    z-index: 10;
 }
 div.fair-outer {
     box-sizing: border-box;
     clear: both;
     display: block;
+    z-index: 10;
 }
 
 div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-12 {
@@ -332,7 +334,6 @@ div.fair-outer {
     height: 520px;
     background-color: #ffffff;
     border-radius: 2px;
-    z-index: 10;
     box-shadow: 0px 10px 20px 14px #cccccc88;
     padding: 0px;
 }
