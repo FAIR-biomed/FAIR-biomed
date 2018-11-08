@@ -1,0 +1,51 @@
+{
+    "apiVersion": "1.0",
+    "errorMessage": {
+    },
+    "payload": {
+        "resolvedResources": [
+            {
+                "id": "MIR:00100062",
+                "accessUrl": "http://www.informatics.jax.org/accession/MGI:2442292",
+                "info": "Mouse Genome Informatics Database",
+                "institution": "The Jackson Laboratory",
+                "location": "USA",
+                "official": true,
+                "resourceURL": "http://www.informatics.jax.org/",
+                "recommendation": {
+                    "recommendationIndex": 65,
+                    "recommendationExplanation": "Function based recommendation"
+                }
+            },
+            {
+                "id": "MIR:00100894",
+                "resourcePrefix": "bioentitylink",
+                "accessUrl": "https://bioentity.link/#/lexicon/public/MGI:2442292",
+                "info": "MGD through BioEntity Link",
+                "institution": "InSilico Inc, in Eugene, Oregon",
+                "location": "USA",
+                "official": false,
+                "resourceURL": "https://bioentity.link/",
+                "recommendation": {
+                    "recommendationIndex": 40,
+                    "recommendationExplanation": "Function based recommendation"
+                }
+            },
+            {
+                "id": "MIR:00100903",
+                "resourcePrefix": "agr",
+                "accessUrl": "https://www.alliancegenome.org/gene/MGI:2442292",
+                "info": "MGI through the Alliance of Genome Resources",
+                "institution": "Alliance of Genome Resources",
+                "location": "USA",
+                "official": false,
+                "resourceURL": "https://www.alliancegenome.org",
+                "recommendation": {
+                    "recommendationIndex": 40,
+                    "recommendationExplanation": "Function based recommendation"
+                }
+            }
+        ]
+    }
+}
+

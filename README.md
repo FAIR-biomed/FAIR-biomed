@@ -39,7 +39,7 @@ The current plugin library provides access to a small but varied set of data sou
 | Data source      | Plugins      |
 | :----- | :----- |
 | [ClinGen](https://www.clinicalgenome.org/) | Allele registry |
-| [EBI](https://www.ebi.ac.uk/) | GWAS, ontology, and chemical data |
+| [EBI](https://www.ebi.ac.uk/) | Identifiers, ontology, GWAS, and chemical data |
 | [Europe PMC](https://www.europepmc.org) | Literature | 
 | [ExAC](http://exac.broadinstitute.org/) | Genomic variant annotation |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |

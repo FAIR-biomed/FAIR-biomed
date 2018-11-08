@@ -26,7 +26,7 @@ module.exports = new function() {
         if (isNaN(words[1])) {
             return 0;
         }
-        return 1;
+        return 0.95;
     };
 
     /** construct a url for an API call **/

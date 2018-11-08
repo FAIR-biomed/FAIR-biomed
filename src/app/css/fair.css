@@ -8,7 +8,8 @@ div.fair-outer {
     box-sizing: border-box;
     clear: both;
     display: block;
-    z-index: 10;
+    /** set z very high to make appear always on top; some sites use 1000s **/
+    z-index: 100000;
 }
 
 div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-12 {

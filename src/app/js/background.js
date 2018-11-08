@@ -272,7 +272,7 @@ function processQuery(id, queries, sendResponse, index) {
         xhr.onload=function() {
             developer_log("response: "+xhr.response);
             try {
-                var response = plugin.process(xhr.response, index);
+                var response = plugin.process(xhr.response, index, query);
                 resolve(sanitizeResponse(response));
             } catch(e) {
                 resolve({status: 0, data: "error parsing server response"});

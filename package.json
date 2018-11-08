@@ -1,6 +1,6 @@
 {
   "name": "FAIR-biomed",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Browser extension accessing open data resources in the biomedical domain",
   "scripts": {
     "clean": "rm -fr dist && mkdir dist",
