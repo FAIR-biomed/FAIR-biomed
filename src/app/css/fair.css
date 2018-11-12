@@ -503,6 +503,10 @@ div.fair-result table td, div.fair-result table th {
     font-size: 1em;
     padding: 0.5em 1em 0em 0em;
     vertical-align: top;
+    background-color: #ffffff;
+}
+div.fair-result table tr {
+    border: none;
 }
 div.fair-result-toolbar svg {
     margin-top: 1em;

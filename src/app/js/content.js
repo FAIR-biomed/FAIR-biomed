@@ -80,7 +80,7 @@ class FAIRIconLogo extends React.Component {
  */
 class FAIROutputTable extends React.Component {
     render() {
-        var data = this.props.data
+        var data = this.props.data.slice(0);
         if (data.length==0) {
             return (<table></table>);
         }
@@ -116,7 +116,7 @@ class FAIROutputList extends React.Component {
     render() {
         var content = this.props.data.map(function(x, i) {
             return (<li key={"list-"+i} dangerouslySetInnerHTML={{__html: x}} />)
-        })
+        });
         return(<ul>{content}</ul>)
     }
 }
@@ -125,12 +125,12 @@ class FAIROutputList extends React.Component {
 /** Display a title-body combination **/
 class FAIROutputSection extends React.Component {
     render() {
-        var title = ''
+        var title = '';
         if (is.string(this.props.title)) {
             title = (<h1>{this.props.title}</h1>)
         }
         var content = '[unrecognized type of output]';
-        var data = this.props.data
+        var data = this.props.data;
         if (is.string(data)) {
             content = (<div dangerouslySetInnerHTML={{__html: this.props.data}}></div>)
         } else if (is.array(data)) {
@@ -158,13 +158,13 @@ class FAIROutputToolbar extends React.Component {
     render() {
         // determine what icon set to display
         var toolbar_icons = ['data', 'info', 'code', 'external']
-        var handlers = this.props.handlers
-        var icons = this.props.icons
-        var state = this.props.state
+        var handlers = this.props.handlers;
+        var icons = this.props.icons;
+        var state = this.props.state;
         var toolbar_icons = _.map(toolbar_icons, function(value, key) {
             var thishandler = handlers[value];
             var thisicon = icons[value];
-            var addClass = ''
+            var addClass = '';
             if (value===state) {
                 addClass = 'fair-toolbar-selection'
             }
@@ -175,7 +175,6 @@ class FAIROutputToolbar extends React.Component {
                 </div>
             )
         });
-
         return(<div className='fair-row fair-result-toolbar'>{toolbar_icons}</div>)
     }
 }
@@ -205,7 +204,7 @@ class FAIROutput extends React.Component {
             'code': this.showCode,
             'data': this.showResult,
             'external': this.showExternal
-        }
+        };
         this._icons = {
             'back': 'undo-alt-solid',
             'info': 'info',
@@ -243,7 +242,7 @@ class FAIROutput extends React.Component {
     /** Fetch and trigger display of plugin info page **/
     showInfo() {
         var thislist = this;
-        var msg = {action: 'info', id: this.props.id}
+        var msg = {action: 'info', id: this.props.id};
         chrome.runtime.sendMessage(msg, function(response) {
             thislist.setState({type:'info', info: response.data});
         });
@@ -261,7 +260,7 @@ class FAIROutput extends React.Component {
 
     /** Trigger display of an external link **/
     showExternal() {
-        var ext = this.state.external
+        var ext = this.state.external;
         if (!is.null(ext) && !is.undefined(ext)) {
             window.open(ext, '_blank')
         }
