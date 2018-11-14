@@ -19,7 +19,7 @@ module.exports = new function() {
 
     /** helper checks if a string is a valid id, e.g. CHEMBL25 **/
     isChemblId = function(query) {
-        return query.trim().startsWith('CHEMBL');
+        return query.startsWith('CHEMBL');
     };
 
     /** signal whether or not plugin can process a query **/
@@ -29,8 +29,10 @@ module.exports = new function() {
         if (isChemblId(query)) return 1;
         // long queries can be a drug names, short names possibly gene names
         // so claim long words more strongly
-        if (query.length > 6) return 0.7;
-        return 0.3;
+        let parts = query.split(" ");
+        if (parts.length==1 && query.length > 6) return 0.7;
+        if (parts.length==2 && query.length > 12) return 0.6;
+        return 0.6/parts.length;
     };
 
     /** construct a url for an API call **/

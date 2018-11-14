@@ -372,7 +372,7 @@ chrome.runtime.onMessage.addListener(
  * Handle request from context menu (right click menu)
  * **/
 chrome.contextMenus.create({
-    id: "FAIR-biomed",
+    id: "FAIR-biomed-context",
     title: "FAIR-biomed search",
     contexts: ["selection", "page"]
 });
