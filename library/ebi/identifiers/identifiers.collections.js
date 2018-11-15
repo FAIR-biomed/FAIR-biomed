@@ -1,5 +1,9 @@
 /**
- * library plugin for identifiers.org
+ * library plugin for identifiers.org (collections)
+ *
+ * This one shows all data providers/collections for a given identifier
+ * This plugin performs a direct lookup - not a search.
+ *
  */
 
 
@@ -9,7 +13,7 @@ module.exports = new function() {
     this.id = 'identifiers.collections';
     this.title = 'Identifiers';
     this.subtitle = 'Data providers';
-    this.tags = ['identifiers'];
+    this.tags = ['identifiers', 'collections', 'providers'];
 
     /** accompanying resources **/
     this.logo = 'identifiers-logo.png';
@@ -23,7 +27,7 @@ module.exports = new function() {
     this.claim = function(query) {
         query = query.trim();
         if (query.length==0 || query.split(" ")>1) return 0;
-        var words = query.trim().split(':');
+        var words = query.split(':');
         if (words.length==2) return 0.95;
         if (words.length>2) return 0;
         return 0;
@@ -31,8 +35,7 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        query = query.trim();
-        return resolver + query;
+        return resolver + query.trim();
     };
 
     /** transform a raw result from an API call into a display object **/

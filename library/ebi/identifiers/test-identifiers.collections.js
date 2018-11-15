@@ -1,4 +1,4 @@
-/** Unit tests specific to identifiers plugin **/
+/** Unit tests specific to identifiers (collections) plugin **/
 
 var assert = require('assert');
 var fs = require("fs-extra");
@@ -20,8 +20,12 @@ it("does not claim prefixes", function () {
     assert.equal(plugin.claim("go"), 0);
 });
 
+it("constructs urls to a resolver api endpoint", function () {
+    assert.ok(plugin.url("GO:0006355").includes("resolver.api"));
+});
+
 it('extracts resources from round a typical response', function() {
-    var r1 = fs.readFileSync(__dirname+'/response-identifiers-mgi.json').toString();
+    var r1 = fs.readFileSync(__dirname+'/response-identifiers.collections-mgi.json').toString();
     var result = plugin.process(r1, 0, 'MGI:2442292');
     assert.equal(result.status, 1);
     // this example has three hits
@@ -33,7 +37,7 @@ it('extracts resources from round a typical response', function() {
 });
 
 it('extracts message from an empty/error response', function() {
-    var r2 = fs.readFileSync(__dirname+'/response-identifiers-abcd.json').toString();
+    var r2 = fs.readFileSync(__dirname+'/response-identifiers.collections-abcd.json').toString();
     var result = plugin.process(r2, 0, 'abcd:001');
     assert.equal(result.status, 1);
     assert.ok(result.data.includes("No providers"));

@@ -1,0 +1,86 @@
+/**
+ * library plugin for identifiers.org (metadata)
+ *
+ * This one shows metadata for a given identifier.
+ * This plugin performs a direct lookup - not a search.
+ *
+ * Parts of this plugin are a direct repeat of identifiers.collections.
+ * But how to avoid repeating and maintain structure of the test suite?
+ *
+ */
+
+
+module.exports = new function() {
+
+    /** declarative attributes **/
+    this.id = 'identifiers.metadata';
+    this.title = 'Identifiers';
+    this.subtitle = 'Metadata';
+    this.tags = ['identifiers', 'metadata'];
+
+    /** accompanying resources **/
+    this.logo = 'identifiers-logo.png';
+    this.info = 'identifiers-info.html';
+
+    // api urls
+    var api = 'http://metadata.api.identifiers.org/';
+    var idurl = "https://identifiers.org/";
+
+    /** signal whether or not plugin can process a query **/
+    this.claim = function(query) {
+        // this endpoint is currently not working - so always return 0
+        return 0;
+        query = query.trim();
+        if (query.length==0 || query.split(" ")>1) return 0;
+        var words = query.split(':');
+        if (words.length==2) return 0.96; // slightly higher than identifiers.collections
+        if (words.length>2) return 0;
+        return 0;
+    };
+
+    /** construct a url for an API call **/
+    this.url = function(query, index) {
+        return api + query.trim();
+    };
+
+    /** transform a raw result from an API call into a display object **/
+    this.process = function(data, index, query) {
+        query = query.trim();
+        var result = JSON.parse(data);
+        var resources = result['payload']['metadata'];
+        if (resources.length==0) {
+            return { status: 1, data: result['errorMessage'] };
+        }
+        // resources is now a list of several content types - look for dataset
+        //console.log("A: "+JSON.stringify(resources));
+        resources = resources.filter(function(x) {
+            if (x['@type'] === undefined) return false;
+            return (x['@type'] == 'DataSet')
+        });
+        //console.log("B: "+JSON.stringify(resources));
+        var output = resources.map(function(x) {
+            let entry = [['',''],
+                ['Identifier', '<a href="'+x['url']+'>'+query+'</a>']];
+            if (x['name']!==undefined) {
+                entry.push(['Name', x['name']])
+            }
+            if (x['description']!==undefined) {
+                entry.push(['Description', x['description']])
+            }
+            if (x['keywords']!==undefined) {
+                entry.push(['Keywords', x['keywords']])
+            }
+            if (x['license'] !== undefined) {
+                entry.push(['License', x['license']])
+            }
+            return entry;
+        });
+        return { status: 1, data: output };
+    };
+
+    /** construct a URL to an external information page **/
+    this.external = function(query, index) {
+        return idurl+query.trim();
+    };
+
+}();
