@@ -2,7 +2,7 @@
 
 var assert = require('assert');
 var fs = require("fs-extra");
-var plugin = require('./identifiers.metadata');
+var plugin = require('./identifiers.metadata.txt');
 
 
 it("does not claim long queries", function () {

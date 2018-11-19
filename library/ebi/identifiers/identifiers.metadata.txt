@@ -28,8 +28,6 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
-        // this endpoint is currently not working - so always return 0
-        return 0;
         query = query.trim();
         if (query.length==0 || query.split(" ")>1) return 0;
         var words = query.split(':');
