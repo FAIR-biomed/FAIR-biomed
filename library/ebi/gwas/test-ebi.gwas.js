@@ -21,7 +21,6 @@ it("claims dbSNP ids", function() {
 it("processes a valid response", function () {
     var raw = fs.readFileSync(__dirname + '/response-gwas-snp-0.json').toString();
     var result = plugin.process(raw, 0);
-    console.log(JSON.stringify(result));
     assert.equal(result.status, 1);
     var associations = result.data["Associations"];
     assert.equal(associations.length, 2);

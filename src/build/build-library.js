@@ -16,7 +16,7 @@ var libraryloader = require("./library-loader");
 
 /** helper function to copy a resource defined in a plugin to the distribution directory **/
 function copyResource(plugin, type) {
-    var infile = null
+    var infile = null;
     if (type==="logo") {
         var infile = plugin.logo
     } else if (type==="info") {
@@ -27,9 +27,9 @@ function copyResource(plugin, type) {
 
     if (typeof infile !== "undefined" && infile !== null) {
         infile = path.basename(infile)
-        var indir = path.dirname(plugin._filepath)
-        inpath = [indir, infile].join(path.sep)
-        var outpath = [distlibdir, type, plugin.namespace+"."+infile].join(path.sep)
+        var indir = path.dirname(plugin._filepath);
+        inpath = [indir, infile].join(path.sep);
+        var outpath = [distlibdir, type, plugin.namespace+"."+infile].join(path.sep);
         fs.writeFileSync(outpath, fs.readFileSync(inpath))
     }
 }
@@ -44,14 +44,14 @@ var libdir = process.argv[2];
 if (typeof libdir === "undefined") {
     libdir = "library";
 }
-libdir = path.resolve(libdir)
+libdir = path.resolve(libdir);
 
 // default library (the na logo is there)
-var defaultdir = ["library"].join(path.sep)
+var defaultdir = ["library"].join(path.sep);
 // define output directories
-var logodir = ["dist", "library", "logo"].join(path.sep)
-var infodir = ["dist", "library", "info"].join(path.sep)
-var distlibdir = ["dist", "library"].join(path.sep)
+var logodir = ["dist", "library", "logo"].join(path.sep);
+var infodir = ["dist", "library", "info"].join(path.sep);
+var distlibdir = ["dist", "library"].join(path.sep);
 
 
 
@@ -60,12 +60,12 @@ var distlibdir = ["dist", "library"].join(path.sep)
  * Main Script
  *************************************************************************** */
 
-console.log("Building library from: "+libdir)
+console.log("Building library from: "+libdir);
 
 
-console.log("Reading plugin test status")
-var plugin_status = {}
-plugin_status_file = "library"+path.sep+"plugin_status"
+console.log("Reading plugin test status");
+var plugin_status = {};
+plugin_status_file = "library"+path.sep+"plugin_status";
 if (fs.existsSync(plugin_status_file)) {
     fs.readFileSync(plugin_status_file)
         .toString().split("\n")
@@ -75,20 +75,20 @@ if (fs.existsSync(plugin_status_file)) {
             }
         })
 } else {
-    console.log("Plugin status file does not exist. Run tests before building library.")
+    console.log("Plugin status file does not exist. Run tests before building library.");
     return;
 }
 
 
-console.log("Setting up output directories")
+console.log("Setting up output directories");
 fs.ensureDirSync(distlibdir);
 fs.ensureDirSync(logodir);
 fs.ensureDirSync(infodir);
 
 
 // copy the _logo_na.png file
-var na_logo_inpath = [defaultdir, "_logo_na.png"].join(path.sep)
-var na_logo_outpath = [distlibdir, "logo", "_logo_na.png"].join(path.sep)
+var na_logo_inpath = [defaultdir, "_logo_na.png"].join(path.sep);
+var na_logo_outpath = [distlibdir, "logo", "_logo_na.png"].join(path.sep);
 fs.writeFileSync(na_logo_outpath, fs.readFileSync(na_logo_inpath));
 
 
@@ -98,14 +98,14 @@ var plugins = libraryloader.load(libdir);
 
 console.log("Validating plugins");
 plugins = plugins.filter(function(plugin) {
-    var dots = ".".repeat(3+Math.max(0, 30-plugin.id.length))
-    var tested = plugin_status[plugin.id] === true
+    var dots = ".".repeat(3+Math.max(0, 30-plugin.id.length));
+    var tested = plugin_status[plugin.id] === true;
     if (!tested) {
-        var decision = "SKIPPING: not tested"
+        var decision = "SKIPPING: not tested";
     } else {
-        var decision = "OK"
+        var decision = "OK";
     }
-    console.log("  "+plugin.id+ " "+dots+" "+decision)
+    console.log("  "+plugin.id+ " "+dots+" "+decision);
     return tested
 });
 

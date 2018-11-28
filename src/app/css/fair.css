@@ -498,6 +498,9 @@ div.fair-result table {
     padding: 0.2em 0em 0.2em 0em;
     line-height: 1.1em;
 }
+div.fair-result table, div.fair-result thead, div.fair-result tbody {
+    border: none;
+}
 div.fair-result table td, div.fair-result table th {
     border: none;
     font-size: 1em;
