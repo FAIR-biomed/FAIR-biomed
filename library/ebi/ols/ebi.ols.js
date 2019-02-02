@@ -39,11 +39,16 @@ module.exports = new function() {
         var raw = JSON.parse(data);
         var docs = raw['response']['docs'];
         var result = docs.map(function(x) {
+            let desc = x['description'];
+            if (desc === undefined) {
+                desc = [];
+            }
+            desc = desc.join(";");
             return [
                 ['',''],
                 ['Term', '<a href="'+x['iri']+'">'+x['short_form']+'</a>'],
                 ['Label', x['label']],
-                ['Description', x['description'].join('; ')],
+                ['Description', desc],
                 ['Ontology', x['ontology_name']]
             ];
         });
