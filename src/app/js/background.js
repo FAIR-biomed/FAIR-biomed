@@ -377,7 +377,8 @@ chrome.contextMenus.create({
     contexts: ["selection", "page"]
 });
 chrome.contextMenus.onClicked.addListener(function(itemData) {
-    if (itemData.menuItemId === "FAIR-biomed") {
+    let itemId = itemData.menuItemId;
+    if (itemId === "FAIR-biomed" || itemId === "FAIR-biomed-context") {
         chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
             chrome.tabs.sendMessage(tabs[0].id,
                 {action: "contextMenuClick"}, function(response) {})

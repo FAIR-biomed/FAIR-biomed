@@ -700,4 +700,6 @@ chrome.runtime.onMessage.addListener(
         if (!sender.tab && request.action === "contextMenuClick") {
             triggerFAIRContainer();
         }
+        // this send is required to avoid a runtime error
+        sendResponse({});
     });
