@@ -1,5 +1,5 @@
 /**
- * plugin for IMPC mouse model lookup
+- * plugin for IMPC mouse model lookup
  */
 
 

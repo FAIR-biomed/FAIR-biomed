@@ -167,6 +167,9 @@ ul.fair-list li {
 .fair-container h3, .fair-container h4 {
     font-size: 16px;
 }
+.fair-container img {
+    max-width: unset;
+}
 
 
 

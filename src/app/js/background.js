@@ -24,10 +24,10 @@ var sanitize_config = {
     allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
         'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
         'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre', 'span',
-        'svg', 'path', 'text', 'tspan', 'defs', 'g', 'symbol', 'use' ],
+        'img', 'svg', 'path', 'text', 'tspan', 'defs', 'g', 'symbol', 'use' ],
     allowedAttributes: {
         a: [ 'href', 'name', 'target' ],
-        img: [ 'src' ],
+        img: ['src'],
         p: ['class'],
         svg: ['view*', 'version', 'xml*'],
         path: ['*'],
@@ -35,6 +35,9 @@ var sanitize_config = {
         text: ['x', 'y', 'style'],
         g: ['*'],
         use: ['*']
+    },
+    allowedSchemesByTag: {
+        img: [ 'data', 'http', 'https' ]
     }
 };
 
@@ -172,6 +175,7 @@ function sanitizeResponse(response) {
         return {status: 0, data: "invalid response, no data"};
     }
     var sanitizeOne = function (data) {
+        developer_log("sanitizeOne: "+data)
         if (is.string(data) || is.number(data)) {
             return sanitizeHtml(data, sanitize_config);
         } else if (is.array(data)) {
@@ -194,6 +198,7 @@ function sanitizeResponse(response) {
     }
 
     response.data = clean;
+    developer_log("after sanitizing: "+JSON.stringify(response));
     return response;
 }
 
@@ -249,7 +254,7 @@ function processQuery(id, queries, sendResponse, index) {
             response.external = getExternal(plugin, queries);
         }
         return response;
-    }
+    };
 
     // handlers for promise
     var handleResponse = function(response) {
@@ -263,16 +268,24 @@ function processQuery(id, queries, sendResponse, index) {
     };
     var handleReject = function(msg) {
         sendResponse({status: 0, data: msg})
-    }
+    };
 
     developer_log("processing query");
     // execute the query
     var promise = new Promise(function(resolve, reject) {
         var xhr=new XMLHttpRequest();
+        if (url.endsWith(".png")) {
+            xhr.responseType = 'arraybuffer';
+        }
         xhr.onload=function() {
             developer_log("response: "+xhr.response);
             try {
-                var response = plugin.process(xhr.response, index, query);
+                if (url.endsWith(".png")) {
+                    var b64 = bufferToBase64(xhr.response);
+                    response = {status: 1, data: '<img src="data:image/png;base64,'+b64+'">'};
+                } else {
+                    var response = plugin.process(xhr.response, index, query);
+                }
                 resolve(sanitizeResponse(response));
             } catch(e) {
                 resolve({status: 0, data: "error parsing server response"});
@@ -284,7 +297,7 @@ function processQuery(id, queries, sendResponse, index) {
         xhr.onerror = function() {
             developer_log("got error: " + xhr.status);
             reject('error  or page not available');
-        }
+        };
         developer_log("sending GET request to: "+url);
         xhr.open("GET", url);
         xhr.send();

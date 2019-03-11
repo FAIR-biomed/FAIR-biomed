@@ -414,7 +414,7 @@ class FAIRCandidateList extends React.Component {
 }
 
 
-/** Display a list of pluging that claimed the query, or plugin output **/
+/** Display a list of plugins that claimed the query, or plugin output **/
 class FAIRClaimResult extends React.Component {
     constructor(props) {
         super(props);

@@ -45,6 +45,7 @@ The current plugin library provides access to a small but varied set of data sou
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |
 | [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries |
 | [Reactome](https://www.reactome.org/) | Pathways |
+| [STRING](https://string-db.org//) | Protein interaction networks |
 | [Uniprot](https://www.uniprot.org/) | Knowledgebase |
 | [Wikimedia](https://www.wikimedia.org/) | Encyclopaedia and dictionary |
 

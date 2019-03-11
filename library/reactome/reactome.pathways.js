@@ -40,7 +40,7 @@ module.exports = new function() {
         // penalize some special characters
         ['%', '$', '#', '.', ';'].map(function(z) {
             score -= 0.3*(x.includes(z))
-        })
+        });
         return Math.max(0, Math.min(0.9, score));
     };
 
