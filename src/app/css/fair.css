@@ -78,7 +78,6 @@ ul.fair-list {
     list-style-type: none;
     list-style-image: none;
     margin: 0px;
-    height: 472px;
     overflow-y: auto;
 }
 ul.fair-list li {
@@ -349,6 +348,10 @@ div.fair-inner {
     padding: 0px;
 }
 
+div.fair-header-body {
+    height: 100%;
+}
+
 /** Header **/
 div.fair-header {
     padding-top: 0.3em;
@@ -414,10 +417,6 @@ li.fair-candidate {
 
 
 /** Output **/
-
-div.fair-header-body {
-
-}
 div.fair-body {
 
 }
@@ -465,10 +464,9 @@ div.fair-result {
     padding-left: 1em;
     padding-right: 1em;
     border-top: solid 1px #999999;
-    height: 354px;  /** TODO: remove this hard-coded number **/
     width: 100%;
     min-width: 100%;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 div.fair-result div.fair-cb {
     display: block;

@@ -75,9 +75,7 @@ class FAIRIconLogo extends React.Component {
 }
 
 
-/**
- * Display a table with header and body
- */
+/** Display a table with header and body */
 class FAIROutputTable extends React.Component {
     render() {
         var data = this.props.data.slice(0);
@@ -290,15 +288,14 @@ class FAIROutput extends React.Component {
         } else if (this.state.type==='code') {
             content = [<FAIROutputCode key='text-code' data={this.state.code}/>]
         }
-
+        let result_height = (this.props.parentSize[1]-164)+'px';
         return (
             <div className='fair-fill-v'>
-                <div className='fair-row fair-result'>
+                <div className='fair-row fair-result' style={{height: result_height}}>
                     <div className='fair-section fair-col-12'>
                         {content}
                     </div>
                 </div>
-                <div style={{clear: 'both'}}></div>
                 <FAIROutputToolbar state={this.state.type}
                                    handlers={this._handlers}
                                    icons={this._icons} />
@@ -322,16 +319,15 @@ class FAIRCandidateSelection extends React.Component {
                             titles={this.props.titles}
                             rating={this.props.rating}
                             query={this.props.query}
-                            onBack={this.props.onBack} />
+                            onBack={this.props.onBack}
+                            parentSize={this.props.parentSize}/>
             </div>
         );
     }
 }
 
 
-/**
- * Display one candidate plugin to click on.
- */
+/** Display one candidate plugin to click on */
 class FAIRCandidate extends React.Component {
     constructor(props) {
         super(props);
@@ -409,7 +405,8 @@ class FAIRCandidateList extends React.Component {
                                selectPlugin={thislist.props.selectPlugin}/>
             );
         });
-        return (<ul className='fair-list fair-candidate-list'>{candidates}</ul>);
+        let ul_height = (this.props.parentSize[1]-48)+'px';
+        return (<ul className='fair-list fair-candidate-list' style={{height: ul_height}}>{candidates}</ul>);
     }
 }
 
@@ -472,7 +469,8 @@ class FAIRClaimResult extends React.Component {
     render() {
         if (this.state.type==='list') {
             return (<FAIRCandidateList candidates={this.state.candidates}
-                                       selectPlugin={this.selectPlugin} />)
+                                       selectPlugin={this.selectPlugin}
+                                       parentSize={this.props.parentSize}/>)
         } else {
             var selection = this.state.selection;
             var candidate = _.find(this.state.candidates, function(x) {
@@ -489,6 +487,7 @@ class FAIRClaimResult extends React.Component {
                             rating={candidate['rating']}
                             query={this.props.query}
                             onBack={this.showList}
+                            parentSize={this.props.parentSize}
                 />
             )
         }
@@ -549,7 +548,9 @@ class FAIRHeaderBody extends React.Component {
                            onInput={this.setQuery}/>
                 </div>
                 <div className='fair-body'>
-                    <FAIRClaimResult query={this.state.query} setNavState={this.setNavState}></FAIRClaimResult>
+                    <FAIRClaimResult query={this.state.query} setNavState={this.setNavState}
+                                     parentSize={this.props.parentSize}>
+                    </FAIRClaimResult>
                 </div>
             </div>
         );
@@ -589,41 +590,43 @@ class FAIRContainer extends React.Component {
         super(props);
         this.close = this.close.bind(this);
         this.toggleVisibility = this.toggleVisibility.bind(this);
-        this.state = {anchor: null};
+        this.startMouseDown = this.startMouseDown.bind(this);
+        this.startMove = this.startMove.bind(this);
+        this.endMouseDown = this.endMouseDown.bind(this);
+        this.duringMove = this.duringMove.bind(this);
+        this.duringResize = this.duringResize.bind(this);
+        this.state = {anchor: null, size: [480, 520]};
     }
 
-    /** At beginning, inject an achor element and position to FAIR container **/
+    /** At beginning, inject an anchor element and position to FAIR container **/
     componentDidMount() {
-        var container = this;
-        var parent = ReactDOM.findDOMNode(this);
-        var anchor = null;
-        var bounding = {left: 20, top: 20};
+        let container = this;
+        let parent = ReactDOM.findDOMNode(this);
+        let anchor = null;
+        let bounding = {left: 20, top: 20};
         if (!is.null(this.props.range)) {
-            var bounding = this.props.range.getBoundingClientRect();
+            bounding = this.props.range.getBoundingClientRect();
             anchor = initFAIRAnchor(this.props.range);
             anchor.className = 'fair-anchor';
             anchor.addEventListener('click', function() {
                 container.toggleVisibility();
             });
         }
-        var fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
-        var offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
-        parent.style.left = (offset.left+bounding.left)+'px';
-        parent.style.top = (offset.top+bounding.top+fontsize)+'px';
-        // adjust the content of the inner container
-        // create an anchor span in the main document
+        let fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
+        let offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
+        let parent_pos = [offset.left+bounding.left, offset.top+bounding.top+fontsize];
+        parent.style.left = parent_pos[0] + 'px';
+        parent.style.top = parent_pos[1] + 'px';
         // remember links to the parent and to the anchor
         this.setState({parent: parent, anchor: anchor});
     };
 
-    /**
-     * Delete this container entirely.
-     */
+    /** Delete this container entirely. */
     close() {
-        var parent = this.state.parent.parentNode;
+        let parent = this.state.parent.parentNode;
         parent.parentNode.removeChild(parent);
         if (this.state.anchor != null) {
-            var anchor = this.state.anchor;
+            let anchor = this.state.anchor;
             anchor.parentNode.removeChild(anchor);
         }
     }
@@ -638,9 +641,66 @@ class FAIRContainer extends React.Component {
         }
     }
 
+    /** Handlers for moving the container around **/
+    startMouseDown(e) {
+        let parent = this.state.parent;
+        let parent_style = getComputedStyle(parent);
+        let parent_rect = parent.getBoundingClientRect();
+        let x = e.nativeEvent.clientX - parent_rect.left;
+        let y = e.nativeEvent.clientY - parent_rect.top;
+        if (x >= parseInt(parent_style.width) - 24 && y >= parseInt(parent_style.height) - 24) {
+            this.startResize(e);
+        } else {
+            this.startMove(e);
+        }
+    }
+    startMove(e) {
+        let parent = this.state.parent;
+        parent.style.cursor = "move";
+        let parent_pos = [parseInt(parent.style.left), parseInt(parent.style.top)];
+        // in startMove and endMove, e is an object provided by React, so use nativeEvent
+        let move_start = [e.nativeEvent.x, e.nativeEvent.y];
+        // remember position of container and mouse pointer at the begining of the move
+        this.setState({move_start: move_start, parent_pos: parent_pos});
+        document.addEventListener("mousemove", this.duringMove, false);
+    }
+    startResize(e) {
+        let parent = this.state.parent;
+        let parent_style = getComputedStyle(parent);
+        let parent_size = [parseInt(parent_style.width), parseInt(parent_style.height)];
+        parent.style.cursor = "nwse-resize";
+        let mouse_start = [e.nativeEvent.x, e.nativeEvent.y];
+        this.setState({move_start: mouse_start, parent_size: parent_size});
+        document.addEventListener("mousemove", this.duringResize, false);
+    }
+    endMouseDown(e) {
+        // clean up state (not required, just clean)
+        this.setState({parent_pos: null, mouse_start: null, parent_size: null});
+        this.state.parent.style.cursor = "auto";
+        document.removeEventListener("mousemove", this.duringMove, false);
+        document.removeEventListener("mousemove", this.duringResize, false);
+    }
+    duringMove(e) {
+        let parent = this.state.parent;
+        let parent_pos = this.state.parent_pos;
+        let move_start = this.state.move_start;
+        parent.style.left = (parent_pos[0] + e.x - move_start[0]) + 'px';
+        parent.style.top = (parent_pos[1] + e.y - move_start[1]) + 'px';
+    }
+    duringResize(e) {
+        let parent = this.state.parent;
+        let parent_size = this.state.parent_size;
+        let move_start = this.state.move_start;
+        let new_size = [parent_size[0] + e.x - move_start[0],
+                        parent_size[1] + e.y - move_start[1]];
+        parent.style.width = new_size[0] + 'px';
+        parent.style.height = new_size[1] + 'px';
+        this.setState({size: new_size});
+    }
+
     render() {
         return (
-            <div className="fair-outer">
+            <div className="fair-outer" onMouseDown={this.startMouseDown} onMouseUp={this.endMouseDown}>
                 <div className='fair-inner fair-container'>
                     <div className='fair-button-panel'>
                         <FAIRIconLogo type='icon' path='fa window-minimize-solid'
@@ -648,13 +708,15 @@ class FAIRContainer extends React.Component {
                         <FAIRIconLogo type='icon' path='fa times-solid'
                                       onClick={this.close}></FAIRIconLogo>
                     </div>
-                    <FAIRHeaderBody range={this.props.range} />
+                    <FAIRHeaderBody range={this.props.range} parentSize={this.state.size}/>
                 </div>
             </div>
         )
     }
 }
 
+/**
+ **/
 
 /**
  * Create DOM div for the popup container
