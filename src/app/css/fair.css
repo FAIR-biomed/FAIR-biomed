@@ -148,6 +148,10 @@ ul.fair-list li {
 .fair-container div, .fair-container span {
     font-family: sans-serif !important;
 }
+.fair-container a {
+    color: #0366d6;
+    cursor: pointer;
+}
 
 
 /** children of fair component **/
