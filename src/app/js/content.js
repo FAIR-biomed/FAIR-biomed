@@ -265,12 +265,12 @@ class FAIROutput extends React.Component {
     }
 
     render() {
-        if (this.state.type==='init') {
+        if (this.state.type === 'init') {
             return(<div>Please wait...</div>);
         }
         // either output a single text object, or partition into sections
         var content = [];
-        if (this.state.type=='data') {
+        if (this.state.type === 'data') {
             if (is.string(this.state.data)) {
                 content = [<FAIROutputSection key='section' data={this.state.data}/>]
             } else if (is.array(this.state.data)) {
@@ -283,9 +283,9 @@ class FAIROutput extends React.Component {
                     return (<FAIROutputSection key={key} title={key} data={value}/>)
                 })
             }
-        } else if (this.state.type==='info') {
+        } else if (this.state.type === 'info') {
             content = [<FAIROutputSection key='text-info' data={this.state.info}/>]
-        } else if (this.state.type==='code') {
+        } else if (this.state.type === 'code') {
             content = [<FAIROutputCode key='text-code' data={this.state.code}/>]
         }
         let result_height = (this.props.parentSize[1]-164)+'px';
@@ -449,7 +449,7 @@ class FAIRClaimResult extends React.Component {
 
     /** force an update to the plugin cancidates when the query changes **/
     componentDidUpdate(prevProps) {
-        if (this.props.query!=prevProps.query) {
+        if (this.props.query !== prevProps.query) {
             this.claimQuery();
         }
     }
@@ -467,7 +467,7 @@ class FAIRClaimResult extends React.Component {
     }
 
     render() {
-        if (this.state.type==='list') {
+        if (this.state.type === 'list') {
             return (<FAIRCandidateList candidates={this.state.candidates}
                                        selectPlugin={this.selectPlugin}
                                        parentSize={this.props.parentSize}/>)
@@ -478,7 +478,7 @@ class FAIRClaimResult extends React.Component {
             });
             // safety check (this is needed for when user changes the query
             // while already looking at a specific plugin candidate)
-            if (is.undefined(candidate)) return (null)
+            if (is.undefined(candidate)) return (null);
             // render a component focusing onjust one plugin
             return(
                 <FAIRCandidateSelection className='fair-output'
@@ -519,7 +519,7 @@ class FAIRHeaderBody extends React.Component {
 
     /** Set the state of navigation, either search or selection **/
     setNavState(type, navClick) {
-        if (type==='search' || type==='selection') {
+        if (type === 'search' || type === 'selection') {
             this.setState({display: type, navClick: navClick})
         }
     }
@@ -643,6 +643,8 @@ class FAIRContainer extends React.Component {
 
     /** Handlers for moving the container around **/
     startMouseDown(e) {
+        // avoid processing right-clicks
+        if (e.nativeEvent.which === 3) return;
         let parent = this.state.parent;
         let parent_style = getComputedStyle(parent);
         let parent_rect = parent.getBoundingClientRect();
@@ -716,9 +718,6 @@ class FAIRContainer extends React.Component {
 }
 
 /**
- **/
-
-/**
  * Create DOM div for the popup container
  *
  * @param range
@@ -748,7 +747,7 @@ function triggerFAIRContainer() {
  * Register listeners for keypresses
  */
 window.addEventListener('keypress', function(e){
-    // keycode 26 -> Z
+    // keycode 26 means 'Z'
     if (e.shiftKey && e.ctrlKey && e.keyCode === 26) {
         triggerFAIRContainer();
     }

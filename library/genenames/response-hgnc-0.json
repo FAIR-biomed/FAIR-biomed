@@ -1,0 +1,17 @@
+{
+  "responseHeader": {
+    "status":0,
+    "QTime":0
+  },
+  "response": {
+    "numFound":4,
+    "start":0,
+    "maxScore":10.323371,
+    "docs":[
+      {"hgnc_id":"HGNC:1097","symbol":"BRAF","score":10.323371},
+      {"hgnc_id":"HGNC:43877","symbol":"BANCR","score":4.5303016},
+      {"hgnc_id":"HGNC:18615","symbol":"BRAFP1","score":4.5303016},
+      {"hgnc_id":"HGNC:379","symbol":"AKAP9","score":1.2904214}
+    ]
+  }
+}

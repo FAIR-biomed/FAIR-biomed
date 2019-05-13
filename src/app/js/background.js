@@ -270,14 +270,14 @@ function processQuery(id, queries, sendResponse, index) {
         sendResponse({status: 0, data: msg})
     };
 
-    developer_log("processing query");
     // execute the query
+    developer_log("processing query");
     var promise = new Promise(function(resolve, reject) {
-        var xhr=new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         if (url.endsWith(".png")) {
             xhr.responseType = 'arraybuffer';
         }
-        xhr.onload=function() {
+        xhr.onload = function() {
             developer_log("response: "+xhr.response);
             try {
                 if (url.endsWith(".png")) {
@@ -291,7 +291,7 @@ function processQuery(id, queries, sendResponse, index) {
                 resolve({status: 0, data: "error parsing server response"});
             }
         };
-        xhr.ontimeout=function() {
+        xhr.ontimeout = function() {
             reject("timeout");
         };
         xhr.onerror = function() {
@@ -300,6 +300,9 @@ function processQuery(id, queries, sendResponse, index) {
         };
         developer_log("sending GET request to: "+url);
         xhr.open("GET", url);
+        if (!url.endsWith(".png")) {
+            xhr.setRequestHeader('Accept', 'application/json');
+        }
         xhr.send();
     });
     promise.then(handleResponse, handleReject);

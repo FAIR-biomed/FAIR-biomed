@@ -1,0 +1,44 @@
+{
+  "responseHeader": {
+    "status":0,
+    "QTime":0
+  },
+  "response": {
+    "numFound":1,
+    "start":0,
+    "docs": [
+      {
+        "hgnc_id":"HGNC:11998",
+        "symbol":"TP53",
+        "name":"tumor protein p53",
+        "status":"Approved",
+        "locus_type":"gene with protein product",
+        "alias_symbol":["p53","LFS1"],
+        "alias_name":["Li-Fraumeni syndrome"],
+        "location":"17p13.1",
+        "date_approved_reserved":"1986-01-01T00:00:00Z",
+        "date_modified":"2019-05-11T00:00:00Z",
+        "date_name_changed":"2008-01-16T00:00:00Z",
+        "ena":["AF307851"],
+        "entrez_id":"7157",
+        "mgd_id":["MGI:98834"],
+        "cosmic":"TP53",
+        "orphanet":120204,
+        "pubmed_id":[6396087,3456488,2047879],
+        "refseq_accession":["NM_000546"],
+        "vega_id":"OTTHUMG00000162125",
+        "lsdb":["IARC TP53 Mutation Database|http://www-p53.iarc.fr/","p53 UMD TP53 mutation database|http://p53.fr/","Database of Germline p53 Mutations|http://www.lf2.cuni.cz/projects/germline_mut_p53.htm","MUTP53LOAD, Mutant p53 Loss Of Activity Database|http://www.umd.be:2072/","LRG_321|http://ftp.ebi.ac.uk/pub/databases/lrgex/LRG_321.xml"],
+        "ensembl_gene_id":"ENSG00000141510",
+        "ccds_id":["CCDS11118","CCDS45605","CCDS45606","CCDS73963","CCDS73964","CCDS73965","CCDS73966","CCDS73967","CCDS73968","CCDS73969","CCDS73970","CCDS73971"],
+        "locus_group":"protein-coding gene",
+        "omim_id":["191170"],
+        "uniprot_ids":["P04637"],
+        "ucsc_id":"uc060aur.1",
+        "rgd_id":["RGD:3889"],
+        "location_sortable":"17p13.1",
+        "uuid":"e6397fde-0a80-46a2-b7cf-7d9685d743b0",
+        "_version_":1633289740462587907
+      }
+    ]
+  }
+}
