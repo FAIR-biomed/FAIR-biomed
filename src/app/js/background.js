@@ -175,7 +175,7 @@ function sanitizeResponse(response) {
         return {status: 0, data: "invalid response, no data"};
     }
     var sanitizeOne = function (data) {
-        developer_log("sanitizeOne: "+data)
+        //developer_log("sanitizeOne: "+data);
         if (is.string(data) || is.number(data)) {
             return sanitizeHtml(data, sanitize_config);
         } else if (is.array(data)) {

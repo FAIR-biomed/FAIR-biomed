@@ -1,0 +1,34 @@
+{
+  "responseHeader": {
+    "status":0,"QTime":0
+  },
+  "response": {
+    "numFound":1,
+    "start":0,
+    "docs": [
+      {
+        "hgnc_id":"HGNC:37230",
+        "symbol":"PRR25",
+        "name":"proline rich 25",
+        "status":"Approved",
+        "locus_type":"gene with protein product",
+        "alias_symbol":["gs64"],
+        "location":"16p13.3",
+        "date_approved_reserved":"2009-09-11T00:00:00Z","date_modified":"2018-03-28T00:00:00Z",
+        "ena":["BC156145"],
+        "entrez_id":"388199",
+        "cosmic":"PRR25",
+        "pubmed_id":[11157797],
+        "refseq_accession":["NM_001013638"],
+        "vega_id":"OTTHUMG00000178117",
+        "ensembl_gene_id":"ENSG00000167945",
+        "locus_group":"protein-coding gene",
+        "uniprot_ids":["Q96S07"],
+        "ucsc_id":"uc010uut.2",
+        "location_sortable":"16p13.3",
+        "uuid":"ea1bf2d9-ea49-469c-b139-dec4f2731232",
+        "_version_":1633388918173859845
+      }
+    ]
+  }
+}

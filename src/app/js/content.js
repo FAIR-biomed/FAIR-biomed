@@ -163,7 +163,7 @@ class FAIROutputToolbar extends React.Component {
             var thishandler = handlers[value];
             var thisicon = icons[value];
             var addClass = '';
-            if (value===state) {
+            if (value === state) {
                 addClass = 'fair-toolbar-selection'
             }
             return(

@@ -1,6 +1,6 @@
 {
   "name": "FAIR-biomed",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Browser extension accessing open data resources in the biomedical domain",
   "scripts": {
     "clean": "rm -fr dist && mkdir dist",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
-    "browserify": "^16.2.2",
+    "browserify": "^16.2.3",
     "fs-extra": "^7.0.0",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",

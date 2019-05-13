@@ -50,29 +50,39 @@ module.exports = new function() {
 
     /** (helper) extract gene info and arrange it into a table **/
     processGene = function(doc) {
-        // construct a set of links pointing to gene groups
-        let group_text = [''];
-        if (doc['gene_group_id'] !== undefined) {
-            group_text = doc['gene_group_id'].map((group_id, index) => {
-                return '<a href="'+group_url+group_id+'">' + doc['gene_group'][index] + '</a>';
-            });
-        }
         // helper function to construct <a> links to external resources
         id_url = function(url, id) {
             if (id === undefined) return '';
-            return '<a href="' + url + id + '">' + id + '</a>';
+            return '<a href="' + url + id + '" target="_blank">' + id + '</a>';
         };
+        // construct a set of links pointing to disease resources and gene groups
+        let omim = '', orpha = '', cosmic = '';
+        if (doc["omim"] !== undefined) {
+            omim = id_url(omim_url, doc['omim'][0]);
+        }
+        if (doc['orphanet'] !== undefined) {
+            orpha = id_url(orpha_url, doc['orphanet'])
+        }
+        if (doc['cosmic']!== undefined) {
+            cosmic = id_url(cosmic_url, doc['cosmic']);
+        }
+        let group_text = [''];
+        if (doc['gene_group_id'] !== undefined) {
+            group_text = doc['gene_group_id'].map((group_id, index) => {
+                return '<a href="'+group_url+group_id+'" target="_blank">' + doc['gene_group'][index] + '</a>';
+            });
+        }
         let result = [
                 ['', ''],
                 ['Id', doc['hgnc_id']],
-                ['Symbol', doc['symbol']],
-                ['Name', doc['name']],
-                ['Type', doc['locus_type']],
-                ['Location', doc['location']],
-                ['Groups', group_text.join('<br/>')],
-                ['ORPHANET', id_url(orpha_url, doc['orphanet'])],
-                ['OMIM', id_url(omim_url, doc['omim_id'][0])],
-                ['COSMIC', id_url(cosmic_url, doc['cosmic'])]
+                ['Approved symbol', doc['symbol']],
+                ['Approved name', doc['name']],
+                ['Locus type', doc['locus_type']],
+                ['Genome location', doc['location']],
+                ['Gene groups', group_text.join('<br/>')],
+                ['ORPHANET', orpha],
+                ['OMIM', omim],
+                ['COSMIC', cosmic]
             ];
         return {status: 1, data: [result]};
     };

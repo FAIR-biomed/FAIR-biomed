@@ -50,11 +50,20 @@ it("processes response into table of data", function () {
     assert.ok(result_str.includes("BRAF"));
 });
 
-it("processes response into table with gene groups", function () {
+it("processes response into table without gene groups", function () {
     let r0 = fs.readFileSync(__dirname+'/response-hgnc-2.json').toString();
     let result = plugin.process(r0, 1);
+    assert.equal(result.status, 1);
     let result_str = JSON.stringify(result);
     assert.ok(result_str.includes("TP53"));
+});
+
+it("processes response into table without omim", function () {
+    let r0 = fs.readFileSync(__dirname+'/response-hgnc-3.json').toString();
+    let result = plugin.process(r0, 1);
+    assert.equal(result.status, 1);
+    let result_str = JSON.stringify(result);
+    assert.ok(result_str.includes("PRR25"));
 });
 
 it("constructs external URL based on HGNC id", function () {
@@ -70,3 +79,4 @@ it("processes empty search result", function () {
     assert.equal(result.status, 1);
     assert.equal(result.data, 'No results');
 });
+
