@@ -49,7 +49,7 @@ module.exports = new function() {
     };
 
     /** (helper) extract gene info and arrange it into a table **/
-    processGene = function(doc) {
+    this.processGene = function(doc) {
         // helper function to construct <a> links to external resources
         id_url = function(url, id) {
             if (id === undefined) return '';
@@ -97,7 +97,7 @@ module.exports = new function() {
         if (doc["name"] == undefined) {
             return { status: 0.5, data: doc['hgnc_id'] };
         } else {
-            return processGene(doc);
+            return this.processGene(doc);
         }
     };
 

@@ -29,7 +29,7 @@ module.exports = new function() {
         // penalize some special characters
         [':', '%', '$', '#', '.', ';'].map(function(z) {
             score -= 0.2*(x.includes(z))
-        })
+        });
         return Math.max(0, Math.min(0.9, score));
     };
 
@@ -38,7 +38,7 @@ module.exports = new function() {
         var q = query.split(' ').join('+');
         var url = '?query=' + q + '&sort=score&columns='+cols.join(',')+'&format=tab&limit=10';
         return uniprot + url;
-    }
+    };
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
@@ -54,16 +54,16 @@ module.exports = new function() {
                 ['Genes', xdata[3]],
                 ['Organism', xdata[4]]
             ];
-        })
+        });
         return {
             status: 1,
             data: result
         }
-    }
+    };
 
     /** construct a URL to an external information page **/
-    this.external = function(query1, query2) {
-        var q = query1.split(' ').join('+')
+    this.external = function(query, index) {
+        let q = query.split(' ').join('+');
         return uniprot + '?query='+q+'&sort=score';
     }
 

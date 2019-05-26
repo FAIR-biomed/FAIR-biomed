@@ -1,0 +1,275 @@
+{
+  "count": 3,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "gene_data": {
+        "hgnc_id": "HGNC:34",
+        "alias_name": [
+          "Stargardt disease"
+        ],
+        "gene_symbol": "ABCA4",
+        "hgnc_symbol": "ABCA4",
+        "biotype": "protein_coding",
+        "hgnc_date_symbol_changed": "1994-07-14",
+        "hgnc_release": "2017-11-03T00:00:00",
+        "ensembl_genes": {
+          "GRch37": {
+            "82": {
+              "location": "1:94458393-94586688",
+              "ensembl_id": "ENSG00000198691"
+            }
+          },
+          "GRch38": {
+            "90": {
+              "location": "1:93992835-94121132",
+              "ensembl_id": "ENSG00000198691"
+            }
+          }
+        },
+        "gene_name": "ATP binding cassette subfamily A member 4",
+        "omim_gene": [
+          "601691"
+        ],
+        "alias": [
+          "FFM",
+          "ARMD2",
+          "CORD3"
+        ]
+      },
+      "entity_type": "gene",
+      "entity_name": "ABCA4",
+      "confidence_level": "1",
+      "penetrance": "Complete",
+      "mode_of_pathogenicity": "",
+      "publications": [],
+      "evidence": [
+        "Expert Review Red",
+        "Emory Genetics Laboratory"
+      ],
+      "phenotypes": [
+        "Eye Disorders"
+      ],
+      "mode_of_inheritance": "",
+      "tags": [],
+      "panel": {
+        "id": 249,
+        "hash_id": "55507b25bb5a161bf644a3b2",
+        "name": "Glaucoma (developmental)",
+        "disease_group": "Ophthalmological disorders",
+        "disease_sub_group": "Anterior segment abnormalities",
+        "status": "public",
+        "version": "1.4",
+        "version_created": "2017-11-05T02:37:20.299305Z",
+        "relevant_disorders": [],
+        "stats": {
+          "number_of_strs": 0,
+          "number_of_regions": 0,
+          "number_of_genes": 224
+        },
+        "types": [
+          {
+            "name": "Rare Disease 100K",
+            "slug": "rare-disease-100k",
+            "description": "Rare Disease 100K"
+          }
+        ]
+      }
+    },
+    {
+      "gene_data": {
+        "hgnc_id": "HGNC:34",
+        "alias_name": [
+          "Stargardt disease"
+        ],
+        "gene_symbol": "ABCA4",
+        "hgnc_symbol": "ABCA4",
+        "biotype": "protein_coding",
+        "hgnc_date_symbol_changed": "1994-07-14",
+        "hgnc_release": "2017-11-03T00:00:00",
+        "ensembl_genes": {
+          "GRch37": {
+            "82": {
+              "location": "1:94458393-94586688",
+              "ensembl_id": "ENSG00000198691"
+            }
+          },
+          "GRch38": {
+            "90": {
+              "location": "1:93992835-94121132",
+              "ensembl_id": "ENSG00000198691"
+            }
+          }
+        },
+        "gene_name": "ATP binding cassette subfamily A member 4",
+        "omim_gene": [
+          "601691"
+        ],
+        "alias": [
+          "FFM",
+          "ARMD2",
+          "CORD3"
+        ]
+      },
+      "entity_type": "gene",
+      "entity_name": "ABCA4",
+      "confidence_level": "4",
+      "penetrance": "Complete",
+      "mode_of_pathogenicity": "",
+      "publications": [],
+      "evidence": [
+        "NHS GMS",
+        "Expert Review Green"
+      ],
+      "phenotypes": [
+        "Achromatopsia, Cone, and Cone-rod Dystrophy",
+        "Macular Dystrophy/Degeneration/Stargardt Disease",
+        "Stargardt disease 1, 248200",
+        "Macular Degeneration (Dominant)",
+        "Stargardt Disease, Recessive",
+        "Retinitis pigmentosa 19, 601718",
+        "Cone-rod dystrophy 3, 604116",
+        "Macular degeneration, age-related, 2, 153800",
+        "Fundus flavimaculatus, 248200",
+        "Retinal dystrophy, early-onset severe, 248200",
+        "Retinitis pigmentosa",
+        "Retinitis Pigmentosa, Recessive",
+        "Stargardt disease 1, 248200Retinitis pigmentosa 19, 601718Cone-rod dystrophy 3, 604116Macular degeneration, age-related, 2, 153800Fundus flavimaculatus, 248200Retinal dystrophy, early-onset severe, 248200",
+        "Eye Disorders",
+        "Retinitis pigmentosa 19, 601718",
+        "Cone-rod dystrophy 3, 604116",
+        "Macular degeneration, age-related, 2, 153800",
+        "Fundus flavimaculatus, 248200",
+        "Retinal dystrophy, early-onset severe, 248200",
+        "Macular Degeneration",
+        "Stargardt Disease 1",
+        "STGD1"
+      ],
+      "mode_of_inheritance": "BOTH monoallelic and biallelic, autosomal or pseudoautosomal",
+      "tags": [
+        "watchlist"
+      ],
+      "panel": {
+        "id": 307,
+        "hash_id": "56e0238b22c1fc09c97a6e46",
+        "name": "Retinal disorders",
+        "disease_group": "Ophthalmological disorders",
+        "disease_sub_group": "Posterior segment abnormalities",
+        "status": "public",
+        "version": "1.139",
+        "version_created": "2019-04-08T09:56:07.437159Z",
+        "relevant_disorders": [
+          "Posterior segment abnormalities",
+          "Cone Dysfunction Syndrome",
+          "Developmental macular and foveal dystrophy",
+          "Inherited macular dystrophy",
+          "Leber Congenital Amaurosis Early-Onset Severe Retinal Dystrophy",
+          "Leber Congenital Amaurosis / Early-Onset Severe Retinal Dystrophy",
+          "Leber Congenital Amaurosis or Early-Onset Severe Retinal Dystrophy",
+          "Rod Dysfunction Syndrome",
+          "Rod-cone dystrophy",
+          "Familial exudative vitreoretinopathy",
+          "Familial exudative retinopathy"
+        ],
+        "stats": {
+          "number_of_strs": 0,
+          "number_of_regions": 0,
+          "number_of_genes": 316
+        },
+        "types": [
+          {
+            "name": "Rare Disease 100K",
+            "slug": "rare-disease-100k",
+            "description": "Rare Disease 100K"
+          },
+          {
+            "name": "GMS Rare Disease Virtual",
+            "slug": "gms-rare-disease-virtual",
+            "description": "This is a panel for the Genomic Medicine Service for an exome/genome/panel based test that requires a virtual gene panel for rare disease in the Test Directory."
+          }
+        ]
+      }
+    },
+    {
+      "gene_data": {
+        "hgnc_id": "HGNC:34",
+        "alias_name": [
+          "Stargardt disease"
+        ],
+        "gene_symbol": "ABCA4",
+        "hgnc_symbol": "ABCA4",
+        "biotype": "protein_coding",
+        "hgnc_date_symbol_changed": "1994-07-14",
+        "hgnc_release": "2017-11-03",
+        "ensembl_genes": {
+          "GRch37": {
+            "82": {
+              "location": "1:94458393-94586688",
+              "ensembl_id": "ENSG00000198691"
+            }
+          },
+          "GRch38": {
+            "90": {
+              "location": "1:93992835-94121132",
+              "ensembl_id": "ENSG00000198691"
+            }
+          }
+        },
+        "gene_name": "ATP binding cassette subfamily A member 4",
+        "omim_gene": [
+          "601691"
+        ],
+        "alias": [
+          "FFM",
+          "ARMD2",
+          "CORD3"
+        ]
+      },
+      "entity_type": "gene",
+      "entity_name": "ABCA4",
+      "confidence_level": "1",
+      "penetrance": null,
+      "mode_of_pathogenicity": "",
+      "publications": [],
+      "evidence": [
+        "NHS GMS",
+        "Expert Review Red"
+      ],
+      "phenotypes": [
+        "Cone-rod dystrophy 3, 604116",
+        "Retinal dystrophy, early-onset severe",
+        "Eye Disorders",
+        "Fundus flavimaculatus",
+        "{Macular degeneration, age-related, 2}, 153800",
+        "Retinitis pigmentosa 19, 601718",
+        "Stargardt disease 1, 248200"
+      ],
+      "mode_of_inheritance": "BOTH monoallelic and biallelic, autosomal or pseudoautosomal",
+      "tags": [],
+      "panel": {
+        "id": 509,
+        "hash_id": null,
+        "name": "Structural eye disease",
+        "disease_group": "",
+        "disease_sub_group": "",
+        "status": "public",
+        "version": "0.75",
+        "version_created": "2019-04-25T10:04:36.087068Z",
+        "relevant_disorders": [],
+        "stats": {
+          "number_of_strs": 0,
+          "number_of_regions": 2,
+          "number_of_genes": 454
+        },
+        "types": [
+          {
+            "name": "GMS Rare Disease",
+            "slug": "gms-rare-disease",
+            "description": "This panel type is used for GMS panels that are not virtual (i.e. could be a wet lab test)"
+          }
+        ]
+      }
+    }
+  ]
+}
