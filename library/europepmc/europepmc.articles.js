@@ -16,38 +16,37 @@ module.exports = new function() {
     this.info = 'europepmc-info.html';
 
     // parts of api urls
-    var pmc = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=';
-    var suffix = '&format=json&pageSize=8&resultType=lite';
-    var item2link = function(x) {
+    let pmc = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=';
+    let suffix = '&format=json&pageSize=8&resultType=lite';
+    let item2link = function(x) {
         return 'https://europepmc.org/abstract/'+x['source']+'/'+x['id'];
-    }
-
+    };
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
         x = x.trim()
         if (x.length<2) return 0;
-        var words = x.split(' ');
+        let words = x.split(' ');
         if (words.length>4) return 0;
-        var score = 1/words.length;
+        let score = 1/words.length;
         // penalize some special characters
         ['%', '$', '#', '.', ';'].map(function(z) {
             score -= 0.3*(x.includes(z))
-        })
+        });
         return Math.max(0, Math.min(0.9, score));
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        var words = query.trim().split(' ');
+        let words = query.trim().split(' ');
         return pmc + words.join('%20') + suffix;
     };
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        var result = JSON.parse(data)
-        var hits = result['resultList']['result'];
-        var articles = hits.map(function(x) {
+        let result = JSON.parse(data);
+        let hits = result['resultList']['result'];
+        let articles = hits.map(function(x) {
             if (x['journalTitle'] == null) {
                 x['journalTitle'] = '['+x['pubType']+']';
             }
@@ -66,7 +65,7 @@ module.exports = new function() {
 
     /** construct a URL to an external information page **/
     this.external = function(query, index) {
-        var words = query.trim().split(' ');
+        let words = query.trim().split(' ');
         return 'https://europepmc.org/search?query=' + words.join("%20")
     };
 

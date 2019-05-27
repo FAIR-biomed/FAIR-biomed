@@ -18,9 +18,9 @@ module.exports = new function() {
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
         if (x.trim().length<1) return 0;
-        var words = x.trim().split(' ');
+        let words = x.trim().split(' ');
         if (words.length>4) return 0
-        var score = 1/words.length;
+        let score = 1/words.length;
         // penalize some special characters
         [':', '%', '$', '#', '.', ';'].map(function(z) {
             score -= 0.2*(x.includes(z))
@@ -31,20 +31,20 @@ module.exports = new function() {
     /** construct a url for an API call **/
     this.url = function(query, index) {
         query = query.split(' ').join('%20');
-        var url = null;
-        var api = 'https://en.wikipedia.org/w/api.php?action='
-        var suffix = '&format=json&formatversion=2';
+        let url = null;
+        let api = 'https://en.wikipedia.org/w/api.php?action=';
+        let suffix = '&format=json&formatversion=2';
         if (index === 0 || typeof(index)==='undefined') {
-            url = api + 'opensearch&search=' + query + suffix
+            url = api + 'opensearch&search=' + query + suffix;
         } else if (index === 1) {
-            url = api + 'query&titles=' + query + '&prop=extracts&exintro=true'+suffix
+            url = api + 'query&titles=' + query + '&prop=extracts&exintro=true'+suffix;
         }
         return url;
     }
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        var result = JSON.parse(data)
+        let result = JSON.parse(data);
         if (index === 0) {
             result = result[1];
             if (result.length>0) {
@@ -56,17 +56,17 @@ module.exports = new function() {
             if (result['batchcomplete']!==true) {
                 return {status: 0, data: result};
             }
-            result = result['query']['pages'][0]
+            result = result['query']['pages'][0];
             return {
                 status: 1,
                 data: result.extract
             };
         }
-    }
+    };
 
     /** construct a URL to an external information page **/
     this.external = function(query, index) {
-        if (index==0) {
+        if (index === 0) {
             return null;
         }
         query = query.split(' ').join('_');

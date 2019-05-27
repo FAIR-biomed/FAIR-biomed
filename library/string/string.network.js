@@ -17,17 +17,17 @@ module.exports = new function() {
     this.info = 'string-info.html';
 
     // base path to string db and other endpoints
-    var string_db = 'https://string-db.org';
-    var string_network = string_db + '/api/image/network';
-    var string_external = string_db + '/cgi/input.pl';
+    let string_db = 'https://string-db.org';
+    let string_network = string_db + '/api/image/network';
+    let string_external = string_db + '/cgi/input.pl';
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
         x = x.trim();
         if (x.length<2) return 0;
-        var words = x.split(' ');
+        let words = x.split(' ');
         if (words.length>3) return 0;
-        var score = 1/words.length;
+        let score = 1/words.length;
         // penalize some special characters
         ['%', '$', '#', '.', ';'].map(function(z) {
             score -= 0.3*(x.includes(z))
@@ -37,13 +37,13 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        var words = query.split(' ');
+        let words = query.split(' ');
         words = words.map(function(x) {
             return x.trim();
         });
         // make URL, this appends an output.png. It is ignored by the
         // server but signals in the url that output will be a png
-        var result = string_network + '?identifiers=' + words.join("%0d");
+        let result = string_network + '?identifiers=' + words.join("%0d");
         result += '&add_white_nodes=10&network_flavor=actions&output.png';
         return result;
     };

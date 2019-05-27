@@ -20,14 +20,14 @@ module.exports = new function() {
     this.info = 'identifiers-info.html';
 
     // api urls
-    var resolver = 'http://resolver.api.identifiers.org/';
-    var idurl = "https://identifiers.org/";
+    let resolver = 'http://resolver.api.identifiers.org/';
+    let idurl = "https://identifiers.org/";
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
         query = query.trim();
         if (query.length==0 || query.split(" ")>1) return 0;
-        var words = query.split(':');
+        let words = query.split(':');
         if (words.length==2) return 0.95;
         if (words.length>2) return 0;
         return 0;
@@ -41,16 +41,16 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index, query) {
         query = query.trim();
-        var result = JSON.parse(data);
-        var resources = result['payload']['resolvedResources'];
+        let result = JSON.parse(data);
+        let resources = result['payload']['resolvedResources'];
         if (resources.length==0) {
             return { status: 1, data: result['errorMessage'] };
         }
-        var booleanYesNo = function(x) {
+        let booleanYesNo = function(x) {
             if (x) return "yes";
             return "no";
-        }
-        var output = resources.map(function(x) {
+        };
+        let output = resources.map(function(x) {
             return [
                 ['',''],
                 ['Data', '<a href="'+x['accessUrl']+'">'+query+'</a>'],

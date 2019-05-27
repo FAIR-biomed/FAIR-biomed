@@ -15,7 +15,7 @@ module.exports = new function() {
     this.logo = 'ols-logo.jpg';
     this.info = 'ebi.ols-info.html';
 
-    var ols = 'https://www.ebi.ac.uk/ols/';
+    let ols = 'https://www.ebi.ac.uk/ols/';
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
@@ -36,9 +36,9 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data) {
-        var raw = JSON.parse(data);
-        var docs = raw['response']['docs'];
-        var result = docs.map(function(x) {
+        let raw = JSON.parse(data);
+        let docs = raw['response']['docs'];
+        let result = docs.map(function(x) {
             let desc = x['description'];
             if (desc === undefined) {
                 desc = [];
@@ -46,7 +46,7 @@ module.exports = new function() {
             desc = desc.join(";");
             return [
                 ['',''],
-                ['Term', '<a href="'+x['iri']+'">'+x['short_form']+'</a>'],
+                ['Term', '<a href="'+x['iri']+'" target="_blank">'+x['short_form']+'</a>'],
                 ['Label', x['label']],
                 ['Description', desc],
                 ['Ontology', x['ontology_name']]

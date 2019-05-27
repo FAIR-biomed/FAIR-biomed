@@ -260,7 +260,6 @@ div.fair-options img.fair-logo {
     max-width: 120px;
 }
 
-
 /**
  * Styles for on/off switch - copied from https://www.w3schools.com/howto/howto_css_switch.asp
  **/
@@ -430,6 +429,9 @@ div.fair-body div.fair-logo-col {
 }
 div.fair-body .fair-logo {
     overflow: hidden;
+    max-width: 80px;
+}
+div.fair-body .fair-logo svg {
     max-width: 80px;
 }
 div.fair-body .fair-logo img {

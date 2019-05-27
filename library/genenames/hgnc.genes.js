@@ -31,7 +31,7 @@ module.exports = new function() {
         query = query.trim();
         if (query.length<2) return 0;
         if (query.split(' ').length !== 1) return 0;
-        var words = query.split(':');
+        let words = query.split(':');
         if (words.length === 1) return 0.8;
         if (words.length !== 2 || words[0] !== 'HGNC') return 0;
         if (isNaN(words[1])) return 0;
@@ -89,7 +89,7 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a second query or a display object **/
     this.process = function(data, index) {
-        var result = (JSON.parse(data))['response'];
+        let result = (JSON.parse(data))['response'];
         if (result['numFound']==0) {
             return { status: 1, data: 'No results' };
         }

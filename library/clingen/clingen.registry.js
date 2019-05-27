@@ -16,8 +16,8 @@ module.exports = new function() {
     this.info = 'clingen-info.html';
 
     // urls
-    var registry = 'http://reg.test.genome.network/alleles?name=';
-    var genboree = 'http://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/';
+    let registry = 'http://reg.test.genome.network/alleles?name=';
+    let genboree = 'http://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/';
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
@@ -33,22 +33,22 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        return registry+query.trim();;
+        return registry+query.trim();
     };
 
     /** construct html summarizing genomic alleles **/
     var processGenomicAlleles = function(data) {
-        var result = data.map(function(x) {
+        let result = data.map(function(x) {
             if (x['referenceGenome'] == undefined) {
                 return '';
             }
-            var prefix = x['referenceGenome'] + ' ' + x['chromosome'];
-            var position = x['coordinates'][0];
-            var coord = position['start']
+            let prefix = x['referenceGenome'] + ' ' + x['chromosome'];
+            let position = x['coordinates'][0];
+            let coord = position['start']
             if (position['end']!=position['start']+1) {
                 coord += '-'+position['end'];
             }
-            var change = position['referenceAllele'] + '&gt;' + position['allele'];
+            let change = position['referenceAllele'] + '&gt;' + position['allele'];
             return '<div>' + prefix + ':' + coord + ' ' + change + '</div>';
         });
         return '<p>' + result.join("") + '</p>';
@@ -57,11 +57,11 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         if (data.trim()=="[]") return {status: 0, data: "no results"};
-        var hits = JSON.parse(data);
-        var result = hits.map(function(x) {
-            var caid = x["@id"].split("/").pop();
-            var url = genboree + 'by_caid?caid='+caid;
-            return ['<h2><b><a href="'+url+'">'+caid+'</a></b></h2>',
+        let hits = JSON.parse(data);
+        let result = hits.map(function(x) {
+            let caid = x["@id"].split("/").pop();
+            let url = genboree + 'by_caid?caid='+caid;
+            return ['<h2><b><a href="'+url+'" target="_blank">'+caid+'</a></b></h2>',
                 processGenomicAlleles(x['genomicAlleles'])].join('');
         });
         return {status: 1, data: result};

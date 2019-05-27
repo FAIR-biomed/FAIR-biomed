@@ -16,24 +16,24 @@ module.exports = new function() {
     this.info = 'exac-info.html';
 
     /** helpers convert a raw query string into exac-format **/
-    var q2words = function(query) {
+    let q2words = function(query) {
         // remove some known contaminant characters
         query = query.replace(/,|\\.|chr/g, '')
         // split into words by various delimiters
-        var words = query.split(/:|-|\s/).map((x)=>x.trim());
+        let words = query.split(/:|-|\s/).map((x)=>x.trim());
         return words.filter(x=> (x!==''))
     };
     this.q2string = function(query) {
-        var words = q2words(query)
+        let words = q2words(query);
         return words[0]+'-'+words[1]+'-'+words[2];
     };
 
     /** helper to display one gene's information as a table **/
-    var makeTable = function(data) {
-        var coords = data['chrom']+':'+data['start']+'-'+data['stop']
-        var othernames = '';
+    let makeTable = function(data) {
+        let coords = data['chrom']+':'+data['start']+'-'+data['stop']
+        let othernames = '';
         try {
-            otherames = data['other_names'].join(', ');
+            othernames = data['other_names'].join(', ');
         } catch(e) {};
         return [
             [],
@@ -42,24 +42,24 @@ module.exports = new function() {
             ['Other names', othernames],
             ['Coordinates', coords +' ('+data['strand']+')']
         ];
-    }
+    };
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
         // require query to have three parts, e.g. '1:1234-2345'
-        var words = q2words(query);
+        let words = q2words(query);
         if (words.length!=3) {
             return 0
         }
         if (isNaN(words[1]) || isNaN(words[2])) {
             return 0
-        };
+        }
         return 1;
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        var api = 'http://exac.hms.harvard.edu/rest/region/genes_in_region/'
+        let api = 'http://exac.hms.harvard.edu/rest/region/genes_in_region/';
         return api + this.q2string(query);
     };
 

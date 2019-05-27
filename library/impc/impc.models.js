@@ -16,11 +16,11 @@ module.exports = new function() {
     this.info = 'impc-info.html';
 
     // address of solr server for search queries
-    var solr= 'https://www.ebi.ac.uk/mi/impc/solr/phenodigm/select?q=';
-    var suffix = '&wt=json&fq=type:gene';
+    let solr= 'https://www.ebi.ac.uk/mi/impc/solr/phenodigm/select?q=';
+    let suffix = '&wt=json&fq=type:gene';
     // address for phenodigm2 query
-    var mousephenotype = 'https://www.mousephenotype.org/';
-    var pd2 = mousephenotype + 'data/phenodigm2/mousemodels?geneId=';
+    let mousephenotype = 'https://www.mousephenotype.org/';
+    let pd2 = mousephenotype + 'data/phenodigm2/mousemodels?geneId=';
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
@@ -29,7 +29,7 @@ module.exports = new function() {
         // avoid multi-word queries
         if (query.split(' ').length!=1) return 0;
         // weakly accept single-word queries
-        var words = query.split(':');
+        let words = query.split(':');
         if (words.length==1) return 0.8;
         // for identifier, require strings like 'MGI:1234'
         if (words.length!=2 || words[0]!=='MGI')  return 0;
@@ -76,7 +76,7 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        var raw = JSON.parse(data);
+        let raw = JSON.parse(data);
         // identify whether this is a solr response or from the phenodigm2 api
         if (raw["response"] == undefined) {
             return processModels(raw);

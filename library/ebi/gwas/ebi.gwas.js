@@ -15,17 +15,17 @@ module.exports = new function() {
     this.logo = 'gwas-logo.jpeg';
     this.info = 'ebi.gwas-info.html';
 
-    var gwas = 'https://www.ebi.ac.uk/gwas/';
-    var snp_api = 'rest/api/singleNucleotidePolymorphisms/';
-    var snp_suffix = '/associations?projection=associationBySnp';
+    let gwas = 'https://www.ebi.ac.uk/gwas/';
+    let snp_api = 'rest/api/singleNucleotidePolymorphisms/';
+    let snp_suffix = '/associations?projection=associationBySnp';
 
-    cleanQuery = function(query) {
+    this.cleanQuery = function(query) {
         return query.trim().replace('-', '');
-    }
+    };
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
-        query = cleanQuery(query);
+        query = this.cleanQuery(query);
         if (query.length<2) return 0;
         if (query.startsWith('rs')) return 1;
         if (parseFloat(query)>0) return 0;
@@ -34,38 +34,38 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        return gwas + snp_api + cleanQuery(query) + snp_suffix;
+        return gwas + snp_api + this.cleanQuery(query) + snp_suffix;
     };
 
     /** extract associations **/
-    assocInfo = function(data) {
-        var result = data.map(function(z) {
+    this.assocInfo = function(data) {
+        let result = data.map(function(z) {
             // extract trait names
-            var traits = z['efoTraits'];
-            var traitNames = traits.map(x => x['trait']).join(', ');
+            let traits = z['efoTraits'];
+            let traitNames = traits.map(x => x['trait']).join(', ');
             // extract gene names
-            var loci = z['loci'];
-            var geneNames = loci.map(function(x) {
-                var names = x['authorReportedGenes'].map(y => y['geneName']);
+            let loci = z['loci'];
+            let geneNames = loci.map(function(x) {
+                let names = x['authorReportedGenes'].map(y => y['geneName']);
                 return names.join(", ");
             }).join(', ');
-            var pval = z['pvalue'];
+            let pval = z['pvalue'];
             return '<h3>'+geneNames+'</h3><p>Traits: '+traitNames+'</p><p>P-value: '+pval+'</p>';
-        })
+        });
         return result;
-    }
+    };
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         data = JSON.parse(data);
-        var hits = data['_embedded']['associations'];
-        var assocs = assocInfo(hits);
+        let hits = data['_embedded']['associations'];
+        let assocs = this.assocInfo(hits);
         return {status: 1, data: {Associations: assocs}};
     };
 
     /** construct a URL to an external information page **/
     this.external = function(query) {
-        return gwas + 'variants/'+cleanQuery(query);
+        return gwas + 'variants/'+this.cleanQuery(query);
     };
 
 }();

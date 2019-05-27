@@ -16,9 +16,9 @@ module.exports = new function() {
     this.info = 'pubmed-info.html';
 
     // parts of api urls
-    var eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
-    var suffix = '&tool=FAIR-biomed&email=fair.ext@gmail.com&retmax=8&format=json&sort=relevance';
-    var id2link = function(id) {
+    let eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
+    let suffix = '&tool=FAIR-biomed&email=fair.ext@gmail.com&retmax=8&format=json&sort=relevance';
+    let id2link = function(id) {
         return 'https://www.ncbi.nlm.nih.gov/pubmed/'+id;
     };
 
@@ -26,20 +26,20 @@ module.exports = new function() {
     this.claim = function(x) {
         x = x.trim()
         if (x.length<2) return 0;
-        var words = x.split(' ');
+        let words = x.split(' ');
         if (words.length>4) return 0;
-        var score = 1/words.length;
+        let score = 1/words.length;
         // penalize some special characters
         [':', '%', '$', '#', '.', ';'].map(function(z) {
             score -= 0.3*(x.includes(z))
-        })
+        });
         return Math.max(0, Math.min(0.9, score));
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        var words = query.split(' ');
-        var url = eutils;
+        let words = query.split(' ');
+        let url = eutils;
         if (index === 0 || typeof(index)==='undefined') {
             url += 'esearch.fcgi?db=pubmed&term=' + words.join('+')
         } else if (index === 1) {
@@ -50,7 +50,7 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        var result = JSON.parse(data)
+        let result = JSON.parse(data)
         if (index === 0) {
             result = result['esearchresult']['idlist'];
             if (result.length>0) {
@@ -59,9 +59,9 @@ module.exports = new function() {
                 return {status: 0, data: 'failed search'};
             }
         } else if (index === 1) {
-            var uids = result['result']['uids'];
-            var articles = uids.map(function(x) {
-                var xdata = result['result'][x];
+            let uids = result['result']['uids'];
+            let articles = uids.map(function(x) {
+                let xdata = result['result'][x];
                 return [
                     '<h2>'+xdata['title']+'</h2>',
                     '<div>'+xdata['sortfirstauthor']+' et al</div>',

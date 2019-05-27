@@ -112,7 +112,7 @@ class FAIROutputTable extends React.Component {
 /** Display <ul> with several items **/
 class FAIROutputList extends React.Component {
     render() {
-        var content = this.props.data.map(function(x, i) {
+        let content = this.props.data.map(function(x, i) {
             return (<li key={"list-"+i} dangerouslySetInnerHTML={{__html: x}} />)
         });
         return(<ul>{content}</ul>)
@@ -123,12 +123,12 @@ class FAIROutputList extends React.Component {
 /** Display a title-body combination **/
 class FAIROutputSection extends React.Component {
     render() {
-        var title = '';
+        let title = '';
         if (is.string(this.props.title)) {
             title = (<h1>{this.props.title}</h1>)
         }
-        var content = '[unrecognized type of output]';
-        var data = this.props.data;
+        let content = '[unrecognized type of output]';
+        let data = this.props.data;
         if (is.string(data)) {
             content = (<div dangerouslySetInnerHTML={{__html: this.props.data}}></div>)
         } else if (is.array(data)) {
@@ -146,7 +146,8 @@ class FAIROutputSection extends React.Component {
 /** Display a <pre> element **/
 class FAIROutputCode extends React.Component {
     render() {
-        return (<pre dangerouslySetInnerHTML={{__html: this.props.data}}></pre>)
+        return (<pre onMouseDown={e => e.stopPropagation()}
+                     dangerouslySetInnerHTML={{__html: this.props.data}}></pre>)
     }
 }
 
@@ -154,15 +155,15 @@ class FAIROutputCode extends React.Component {
 /** Toolbar to goggle between results, info, api-code, external link **/
 class FAIROutputToolbar extends React.Component {
     render() {
+        let handlers = this.props.handlers;
+        let icons = this.props.icons;
+        let state = this.props.state;
         // determine what icon set to display
-        var toolbar_icons = ['data', 'info', 'code', 'external']
-        var handlers = this.props.handlers;
-        var icons = this.props.icons;
-        var state = this.props.state;
-        var toolbar_icons = _.map(toolbar_icons, function(value, key) {
-            var thishandler = handlers[value];
-            var thisicon = icons[value];
-            var addClass = '';
+        let toolbar_icons = ['data', 'info', 'code', 'external'];
+        toolbar_icons = _.map(toolbar_icons, function(value, key) {
+            let thishandler = handlers[value];
+            let thisicon = icons[value];
+            let addClass = '';
             if (value === state) {
                 addClass = 'fair-toolbar-selection'
             }
@@ -544,6 +545,7 @@ class FAIRHeaderBody extends React.Component {
                 <div className='fair-header'>
                     {navicon}
                     <input className='fair-query' type='text'
+                           onMouseDown={e => e.stopPropagation()}
                            defaultValue={this.state.query}
                            onInput={this.setQuery}/>
                 </div>
