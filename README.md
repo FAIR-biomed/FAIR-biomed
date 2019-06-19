@@ -42,6 +42,8 @@ The current plugin library provides access to a small but varied set of data sou
 | [EBI](https://www.ebi.ac.uk/) | Identifiers, ontology, GWAS, and chemical data |
 | [Europe PMC](https://www.europepmc.org) | Literature | 
 | [ExAC](http://exac.broadinstitute.org/) | Genomic variant annotation |
+| [Genomics England](https://www.genomicsengland.co.uk/) | PanelApp |
+| [HGNC](https://www.genenames.org/) | Gene nomenclature |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |
 | [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries |
 | [Reactome](https://www.reactome.org/) | Pathways |

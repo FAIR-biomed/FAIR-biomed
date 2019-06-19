@@ -6,7 +6,7 @@
 module.exports = new function() {
 
     this.id = 'panelapp.entities';
-    this.title = 'Panel App';
+    this.title = 'PanelApp';
     this.subtitle = 'Knowledgebase for rare diseases and cancer';
     this.tags = ['human', 'gene', 'rare', 'disease', 'cancer'];
     this.logo = 'PanelApp_cropped.jpg';
@@ -46,11 +46,11 @@ module.exports = new function() {
         let p_url = panels_url + panel['id'] + '/gene/' + xname;
         let confidence = x['confidence_level'];
         if (confidence === '4' || confidence === '3') {
-            confidence += ' (green)';
+            confidence += ' <span style="color:#3fad46">(green)</span>';
         } else if (confidence === '1') {
-            confidence += ' (red)';
+            confidence += ' <span style="color:#d9534f">(red)</span>';
         } else if (confidence === '2') {
-            confidence += ' (amber)';
+            confidence += ' <span style="color:#f0ad4e">(amber)</span>';
         }
         return [
             ['',''],

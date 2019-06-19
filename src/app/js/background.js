@@ -31,6 +31,7 @@ var sanitize_config = {
         p: ['class'],
         svg: ['view*', 'version', 'xml*'],
         path: ['*'],
+        span: ['style'],
         symbol: ['overflow', 'id'],
         text: ['x', 'y', 'style'],
         g: ['*'],
