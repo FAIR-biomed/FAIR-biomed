@@ -1,0 +1,45 @@
+{
+    "phenotypes": [
+        {
+            "mimNumber": 1234,
+            "phenotype": "Phenotype Name",
+            "phenotypeMimNumber": 5678,
+            "phenotypicSeriesNumber": "PS000",
+            "phenotypeMappingKey": 3,
+            "phenotypeInheritance": "Autosomal recessive"
+        }
+    ],
+    "allelicVariants": [
+        {
+            "number": 1,
+            "mimNumber": 1234,
+            "status": "live",
+            "name": "P1name",
+            "mutations": "mutation 1",
+            "text": "Description.",
+            "dbSnps": "rs1234",
+            "clinvarAccessions": ["RCV1234"]
+        },
+        {
+            "number": 2,
+            "mimNumber": 1234,
+            "status": "live",
+            "name": "P2name",
+            "mutations": "mutation 2",
+            "text": "Description.",
+            "dbSnps": "rs1234",
+            "clinvarAccessions": [
+                "RCV1",
+                "RCV2",
+                "RCV3"
+            ],
+            "exacDbSnps": "rs23456"
+        }
+    ],
+    "mimNumber": 123,
+    "status": "live",
+    "title": "Gene title",
+    "description": "Gene description.",
+    "lastUpdate": "2019-07-14T03:10:49.751Z",
+    "__v": 0
+}

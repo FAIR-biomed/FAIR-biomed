@@ -1,0 +1,8 @@
+{
+    "mimNumber": 0,
+    "status": "live",
+    "title": "Gene title",
+    "description": "Gene with only a description, missing phenotypes and allelic variants.",
+    "lastUpdate": "2019",
+    "__v": 0
+}

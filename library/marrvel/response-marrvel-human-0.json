@@ -1,0 +1,38 @@
+{
+    "hgncId": 0,
+    "entrezId": 0,
+    "ensemblId": "ENSG0",
+    "gos": [
+        {
+            "goId": "GO:0004842",
+            "goTerm": "ubiquitin-protein transferase activity",
+            "goType": 0
+        },
+        {
+            "goId": "GO:0005654",
+            "goTerm": "nucleoplasm",
+            "goType": 2
+        },
+        {
+            "goId": "GO:0005758",
+            "goTerm": "mitochondrial intermembrane space",
+            "goType": 2
+        }
+    ],
+    "expression": [
+        {
+            "organ": "adipose tissue",
+            "class": "not detected"
+        },
+        {
+            "organ": "adrenal gland",
+            "class": "medium"
+        },
+        {
+            "organ": "appendix",
+            "class": "low"
+        }
+    ],
+    "gtex": {}
+}
+
