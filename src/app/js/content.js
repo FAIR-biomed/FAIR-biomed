@@ -78,27 +78,27 @@ class FAIRIconLogo extends React.Component {
 /** Display a table with header and body */
 class FAIROutputTable extends React.Component {
     render() {
-        var data = this.props.data.slice(0);
+        let data = this.props.data.slice(0);
         if (data.length==0) {
             return (<table></table>);
         }
         // construct a header from first element in data
-        var header = data.shift();
+        let header = data.shift();
         if (!is.undefined(header) && header.length !== 0) {
-            var headeritems = header.map(function (x, i) {
-                var thkey = 'header-'+i;
+            let headeritems = header.map(function (x, i) {
+                let thkey = 'header-'+i;
                 return (<th key={thkey}>{x}</th>);
-            })
+            });
             header = (<tr>{headeritems}</tr>)
         } else if (is.null(header[0])) {
             header = (null);
         }
         // construct a body from remaining elements
-        var body = (<tr></tr>);
+        let body = (<tr></tr>);
         if (data.length>0) {
             body = data.map(function(dataline, i) {
-                var bodyline = dataline.map(function(x, j) {
-                    var tdkey = 'body-'+i+'-'+j;
+                let bodyline = dataline.map(function(x, j) {
+                    let tdkey = 'body-'+i+'-'+j;
                     return (<td key={tdkey} dangerouslySetInnerHTML={{__html: x}}></td>)
                 });
                 return (<tr mylab={'body-'+i} key={'body-'+i}>{bodyline}</tr>)
@@ -191,7 +191,7 @@ class FAIROutput extends React.Component {
          *  external: string (url for external link)
          *  }}
          */
-        this.state = {type: 'init', info: null, data: null, external: null}
+        this.state = {type: 'init', info: null, data: null, external: null};
         this.showInfo = this.showInfo.bind(this);
         this.showCode = this.showCode.bind(this);
         this.showResult = this.showResult.bind(this);
@@ -215,8 +215,8 @@ class FAIROutput extends React.Component {
 
     /** Upon generation of plugin-specific component, fetch plugin-based data **/
     componentDidMount() {
-        var thislist = this;
-        var msg = {action: 'run', id: this.props.id, query: this.props.query}
+        let thislist = this;
+        let msg = {action: 'run', id: this.props.id, query: this.props.query};
         chrome.runtime.sendMessage(msg, function(response) {
             // when the query time out, the response might be null or undefined
             if (is.undefined(response)) {
@@ -240,8 +240,8 @@ class FAIROutput extends React.Component {
 
     /** Fetch and trigger display of plugin info page **/
     showInfo() {
-        var thislist = this;
-        var msg = {action: 'info', id: this.props.id};
+        let thislist = this;
+        let msg = {action: 'info', id: this.props.id};
         chrome.runtime.sendMessage(msg, function(response) {
             thislist.setState({type:'info', info: response.data});
         });
@@ -259,7 +259,7 @@ class FAIROutput extends React.Component {
 
     /** Trigger display of an external link **/
     showExternal() {
-        var ext = this.state.external;
+        let ext = this.state.external;
         if (!is.null(ext) && !is.undefined(ext)) {
             window.open(ext, '_blank')
         }
@@ -270,7 +270,7 @@ class FAIROutput extends React.Component {
             return(<div>Please wait...</div>);
         }
         // either output a single text object, or partition into sections
-        var content = [];
+        let content = [];
         if (this.state.type === 'data') {
             if (is.string(this.state.data)) {
                 content = [<FAIROutputSection key='section' data={this.state.data}/>]
@@ -306,7 +306,7 @@ class FAIROutput extends React.Component {
 }
 
 
-/** Display an area with one candidate ad on top and output below **/
+/** Display an area with a candidate header on top and output below **/
 class FAIRCandidateSelection extends React.Component {
     render() {
         return (
@@ -334,7 +334,7 @@ class FAIRCandidate extends React.Component {
         super(props);
         this.processRequest = this.processRequest.bind(this);
         this.processRating = this.processRating.bind(this);
-        var rating = this.props.rating;
+        let rating = this.props.rating;
         if (is.undefined(rating) || rating===null) {
             rating = 0
         }
@@ -342,14 +342,16 @@ class FAIRCandidate extends React.Component {
     }
 
     processRequest() {
+        let msg = {action: 'update_count', id: this.props.id};
+        chrome.runtime.sendMessage(msg);
         if (this.props.selectPlugin!==null) {
             this.props.selectPlugin(this.props.id);
         }
     }
 
     processRating() {
-        var newrating = (this.state.rating+1)%2
-        var msg = {action: 'rate', id: this.props.id, rating: newrating};
+        let newrating = (this.state.rating+1)%2;
+        let msg = {action: 'rate', id: this.props.id, rating: newrating};
         chrome.runtime.sendMessage(msg, function(response) {
             // no need to process any response
         });
@@ -357,8 +359,8 @@ class FAIRCandidate extends React.Component {
     }
 
     render() {
-        var ratingpath = 'fa star';
-        if (this.state.rating>0) {
+        let ratingpath = 'fa star';
+        if (this.state.rating > 0) {
             ratingpath = 'fa star-filled'
         }
         return(

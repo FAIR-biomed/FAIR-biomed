@@ -10,27 +10,30 @@ var icons = {};
 
 /** fetch an icon content, either from a cache or from disk **/
 function getIcon(iconpath) {
-    var ipath = iconpath.split(" ").join("/");
+    let ipath = iconpath.split(" ").join("/");
     // look up icon in cache first
     if (typeof(icons[ipath])!=="undefined") {
         return icons[ipath];
     }
     // if not in cache, load into cache
-    var promise = new Promise(function(resolve, reject) {
-        var xhr=new XMLHttpRequest();
-        xhr.onload=function(){
+    let promise = new Promise(function(resolve, reject) {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function() {
             icons[ipath] = xhr.response;
             resolve(icons[ipath]);
         };
-        xhr.ontimeout=function() {
+        xhr.ontimeout = function() {
             reject("timeout");
-        }
+        };
         xhr.open("GET","/resources/"+ipath+".svg");
         xhr.send();
     });
     promise.then();
     return icons[ipath]
 }
+['fa star', 'fa star-filled'].forEach(function(x) {
+    getIcon(x);
+});
 
 
 /**
@@ -46,11 +49,10 @@ class PluginTag extends React.Component {
 /** Dislay a logo img if available, or a placeholder **/
 class PluginLogo extends React.Component {
     constructor(props) {
-        super(props)
-        if (this.props.src===null) {
-            var src = "_logo_na.png"
-        } else {
-            var src = this.props.namespace+"."+this.props.src
+        super(props);
+        let src = "_logo_na.png";
+        if (this.props.src!==null) {
+            src = this.props.namespace+"."+this.props.src
         }
         this.state = {src: src};
     }
@@ -62,22 +64,18 @@ class PluginLogo extends React.Component {
 
 /** Display a div with the info about a plugin **/
 class PluginInfo extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
-        var infofile = this.props.namespace+'.'+ this.props.info;
-        var thislist = this;
-        var promise = new Promise(function(resolve, reject) {
-            var xhr=new XMLHttpRequest();
+        let infofile = this.props.namespace+'.'+ this.props.info;
+        let thislist = this;
+        let promise = new Promise(function(resolve, reject) {
+            let xhr=new XMLHttpRequest();
             xhr.onload=function(){
-                thislist.setState({info: xhr.response})
+                thislist.setState({info: xhr.response});
                 resolve(xhr.response);
             };
             xhr.ontimeout=function() {
                 reject("timeout");
-            }
+            };
             xhr.open("GET","/library/info/"+infofile);
             xhr.send();
         });
@@ -97,7 +95,7 @@ class PluginInfo extends React.Component {
 /** Display a toggle switch and star-status **/
 class PluginState extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.handleActivation = this.handleActivation.bind(this);
         this.handleRating = this.handleRating.bind(this);
         this.state = {active: this.props.active, rating: this.props.rating};
@@ -107,17 +105,17 @@ class PluginState extends React.Component {
         // set the react state
         this.setState(prevState => ({ active: !prevState.active}));
         // set the extension state on disk
-        var newstate = {};
+        let newstate = {};
         newstate["plugin:"+this.props.id] = [!this.state.active, this.state.rating];
         chrome.storage.sync.set(newstate);
     }
 
     handleRating(event) {
         // set the react state
-        this.setState(prevState => ({ rating: (prevState.rating+1)%2}))
+        this.setState(prevState => ({ rating: (prevState.rating+1)%2}));
         // set the extension state on disk
-        var rating = {}
-        rating["plugin:"+this.props.id] = [this.state.active, (this.state.rating+1)%2]
+        let rating = {};
+        rating["plugin:"+this.props.id] = [this.state.active, (this.state.rating+1)%2];
         chrome.storage.sync.set(rating);
     }
 
@@ -158,8 +156,8 @@ class LibraryItem extends React.Component {
     }
 
     render() {
-        var plugin = this.props.plugin;
-        var tags = plugin.tags.map(function(x) {
+        let plugin = this.props.plugin;
+        let tags = plugin.tags.map(function(x) {
             return <PluginTag key={x} tag={x} />;
         });
         return (
@@ -199,6 +197,8 @@ class LibraryItem extends React.Component {
 class LibraryList extends React.Component {
     constructor(props) {
         super(props);
+        getIcon("fa star-filled");
+        getIcon("fa star");
         // store a set of ids for which the active state is known
         this.state = {ids: []};
     }
@@ -207,31 +207,25 @@ class LibraryList extends React.Component {
      * upon first mounting the list, look up whether each plugin has been activated
      */
     componentDidMount() {
-        var thislist = this;
+        let thislist = this;
 
         // helper to force x into a proper value
-        var revertToDefault = function(x, def) {
-            if (x===null || typeof(x)==="undefined") {
-                return (def);
-            }
-            return (x);
-        }
+        let fromDataOrDefault = function(data, key, idx, def) {
+            if (JSON.stringify(data)==="{}") return def;
+            if (idx >= data[key].length) return def;
+            return data[key][idx];
+        };
 
         this.props.names.map(function(x) {
-            var key = "plugin:"+x;
+            let key = "plugin:"+x;
             chrome.storage.sync.get(key, function(data) {
-                var active = null;
-                var rating = null;
-                if (JSON.stringify(data)!=="{}") {
-                    active = data[key][0]
-                    rating = data[key][1]
-                }
-                active = revertToDefault(active, true)
-                rating = revertToDefault(rating, 0)
+                let active = fromDataOrDefault(data, key, 0, true);
+                let rating = fromDataOrDefault(data, key, 1, 0);
+                let count = fromDataOrDefault(data, key, 2, 10);
                 thislist.setState(prevState =>
-                    ({ ids: [...thislist.state.ids, [x, active, rating]]}))
+                    ({ ids: [...thislist.state.ids, [x, active, rating, count]]}))
             })
-        })
+        });
     };
 
     /** re-render when all activation states have been collected **/
@@ -241,21 +235,22 @@ class LibraryList extends React.Component {
 
     render() {
         var plugins = this.props.plugins;
+        //console.log("state ids: "+JSON.stringify(this.state.ids));
         var items = this.state.ids.map(function(x) {
             var id= x[0];
             return <LibraryItem key={id} plugin={plugins[id]} active={x[1]} rating={x[2]}/>;
-        })
+        });
         return (<ul className="fair-list">{ items }</ul>);
     }
 }
 
+// create the plugin details when the page loads
 document.addEventListener("DOMContentLoaded", function () {
-    getIcon("fa star")
-    getIcon("fa star-filled")
-    // add the plugin details into the page
-    ReactDOM.render(
-        <LibraryList names={library['names']} plugins={library['plugins']} className="container"/>,
-        document.getElementById('fair-library')
-    );
+    // the setTimeout is annoying, but without it one of the icons doesn't load in time for display?
+    setTimeout(() => {
+        ReactDOM.render(
+                <LibraryList names={library['names']} plugins={library['plugins']} className="container"/>,
+                document.getElementById('fair-library')
+            );
+    }, 0);
 });
-

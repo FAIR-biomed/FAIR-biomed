@@ -10,6 +10,9 @@
 var icons = {};
 var logos = {};
 
+// default value for plugin usage count (dark count)
+const usage_dark_count = 10;
+
 // set debugging to True to get some console.log messages
 var verbose = true;
 function developer_log(x) {
@@ -45,12 +48,12 @@ var sanitize_config = {
 
 /** fetch an icon content, either from a cache or from disk **/
 function getIcon(iconpath, sendResponse) {
-    var promise = new Promise(function(resolve, reject) {
-        var ipath = iconpath.split(" ").join("/");
+    let promise = new Promise(function(resolve, reject) {
+        let ipath = iconpath.split(" ").join("/");
         if (icons[ipath] !== undefined) {
             resolve(icons[ipath]);
         }
-        var xhr = new XMLHttpRequest();
+        let xhr = new XMLHttpRequest();
         xhr.onload=function(){
             icons[ipath] = xhr.response;
             resolve(icons[ipath]);
@@ -87,26 +90,26 @@ function bufferToBase64(buffer) {
 
 /** fetch logo data, either from a cache or from disk **/
 function getLogo(id, sendResponse) {
-    var namespace = library['plugins'][id].namespace;
-    var filename = library['plugins'][id].logo;
+    let namespace = library['plugins'][id].namespace;
+    let filename = library['plugins'][id].logo;
     if (filename===null) {
         filename = '_logo_na.png'
     } else {
         filename = namespace+'.'+filename
     }
 
-    var format = filename.endsWith('.svg') ? 'svg' : 'png';
-    var promise = new Promise(function(resolve, reject) {
+    let format = filename.endsWith('.svg') ? 'svg' : 'png';
+    let promise = new Promise(function(resolve, reject) {
         if (logos[id]!==undefined) {
             resolve(logos[id]);
         }
-        var xhr=new XMLHttpRequest();
+        let xhr=new XMLHttpRequest();
         if (format==='png') {
             xhr.responseType = 'arraybuffer';
         }
         xhr.onload=function() {
             if (format === 'png') {
-                var b64 = bufferToBase64(xhr.response);
+                let b64 = bufferToBase64(xhr.response);
                 logos[id] = '<img src="data:image/png;base64,'+b64+'">';
             } else {
                 logos[id] = xhr.response;
@@ -124,12 +127,15 @@ function getLogo(id, sendResponse) {
 
 
 /** fetch active status for all plugins **/
-function isActive(id) {
-    var key = "plugin:" + id;
+function fetchPluginStatus(id) {
+    let key = "plugin:" + id;
     return new Promise(function(resolve, reject) {
         chrome.storage.sync.get(key, function (data) {
-            var active = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
-            resolve([id, active[0], active[1]]);
+            let status = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
+            if (status[2] === undefined) {
+                status[2] = usage_dark_count;
+            }
+            resolve([id, status[0], status[1], status[2]]);
         })
     });
 }
@@ -137,16 +143,16 @@ function isActive(id) {
 
 /** ask all plugins to claim a certain query string **/
 function claimQuery(query, sendResponse) {
-    // assess which plugins are active
-    var actives = library["names"].map(isActive);
-    var plugins = library["plugins"];
-    Promise.all(actives).then(function(values) {
-        var result = values.map(function(x) {
+    // assess which plugins are active, their usage counts, etc.
+    let status = library["names"].map(fetchPluginStatus);
+    let plugins = library["plugins"];
+    Promise.all(status).then(function(values) {
+        let result = values.map(function(x) {
             if (!x[1]) {
                 return null;
             }
-            var id = x[0], plug = plugins[id];
-            var score = plug.claim(query);
+            let id = x[0], plug = plugins[id];
+            let score = plug.claim(query) * Math.log10(x[3]);
             if (score<=0) {
                 return null;
             }
@@ -158,7 +164,7 @@ function claimQuery(query, sendResponse) {
                 rating: x[2]
             };
         });
-        var hits  = result.filter((x)=> x!== null);
+        let hits = result.filter((x)=> x!== null);
         sendResponse(hits);
     })
 }
@@ -171,11 +177,11 @@ function claimQuery(query, sendResponse) {
  * @returns {*}
  */
 function sanitizeResponse(response) {
-    developer_log("sanitizing: "+JSON.stringify(response));
+    //developer_log("sanitizing: "+JSON.stringify(response));
     if (is.undefined(response.data)) {
         return {status: 0, data: "invalid response, no data"};
     }
-    var sanitizeOne = function (data) {
+    let sanitizeOne = function (data) {
         //developer_log("sanitizeOne: "+data);
         if (is.string(data) || is.number(data)) {
             return sanitizeHtml(data, sanitize_config);
@@ -186,8 +192,8 @@ function sanitizeResponse(response) {
         }
     };
 
-    var clean = {};
-    var raw = response.data;
+    let clean = {};
+    let raw = response.data;
     if (is.string(raw)) {
         clean = sanitizeOne(raw);
     } else if (is.array(raw)) {
@@ -199,7 +205,7 @@ function sanitizeResponse(response) {
     }
 
     response.data = clean;
-    developer_log("after sanitizing: "+JSON.stringify(response));
+    //developer_log("after sanitizing: "+JSON.stringify(response));
     return response;
 }
 
@@ -242,13 +248,13 @@ function processQuery(id, queries, sendResponse, index) {
     developer_log("processing query: "+JSON.stringify(queries));
 
     // get plugin details
-    var plugin = library["plugins"][id];
-    var query = queries.slice(-1)[0].trim();
-    var url = plugin.url(query, index);
+    let plugin = library["plugins"][id];
+    let query = queries.slice(-1)[0].trim();
+    let url = plugin.url(query, index);
     developer_log("url: "+url);
 
     // augment a response object with plugin-specific metadata
-    var buildSendResponse = function(response) {
+    let buildSendResponse = function(response) {
         response.url = url;
         response.external = null;
         if (response.status===1) {
@@ -258,32 +264,32 @@ function processQuery(id, queries, sendResponse, index) {
     };
 
     // handlers for promise
-    var handleResponse = function(response) {
+    let handleResponse = function(response) {
         // decide whether to output or to do another round trip to url/process
-        developer_log("working with promise result "+JSON.stringify(response))
+        //developer_log("working with promise result "+JSON.stringify(response))
         if (response.status === 0 || response.status === 1) {
             sendResponse(buildSendResponse(response))
         } else if (response.status>0 && response.status < 1) {
             processQuery(id, queries.concat([response.data]), sendResponse, index+1)
         }
     };
-    var handleReject = function(msg) {
+    let handleReject = function(msg) {
         sendResponse({status: 0, data: msg})
     };
 
     // execute the query
     developer_log("processing query");
-    var promise = new Promise(function(resolve, reject) {
+    let promise = new Promise(function(resolve, reject) {
         let xhr = new XMLHttpRequest();
         if (url.endsWith(".png")) {
             xhr.responseType = 'arraybuffer';
         }
         xhr.onload = function() {
-            developer_log("response: "+xhr.response);
+            //developer_log("response: "+xhr.response);
             try {
                 if (url.endsWith(".png")) {
-                    var b64 = bufferToBase64(xhr.response);
-                    response = {status: 1, data: '<img src="data:image/png;base64,'+b64+'">'};
+                    let b64 = bufferToBase64(xhr.response);
+                    var response = {status: 1, data: '<img src="data:image/png;base64,'+b64+'">'};
                 } else {
                     var response = plugin.process(xhr.response, index, query);
                 }
@@ -314,13 +320,13 @@ function processQuery(id, queries, sendResponse, index) {
  * Fetch info information about a plugin
  */
 function processInfo(id, sendResponse) {
-    var plugin = library["plugins"][id];
-    var infopath = plugin.info;
-    var promise = new Promise(function(resolve, reject) {
+    let plugin = library["plugins"][id];
+    let infopath = plugin.info;
+    let promise = new Promise(function(resolve, reject) {
         if (infopath===undefined || infopath===null) {
             resolve({data: "No info data available"});
         }
-        var xhr=new XMLHttpRequest();
+        let xhr=new XMLHttpRequest();
         xhr.onload=function() {
             var result = {status: 1, data: xhr.response};
             resolve(sanitizeResponse(result));
@@ -337,13 +343,12 @@ function processInfo(id, sendResponse) {
 
 /** Assign a new rating to a plugin **/
 function processRating(id, rating, sendResponse) {
-    var key = "plugin:" + id;
-    // fetch existing state current rating
+    let key = "plugin:" + id;
     new Promise(function(resolve, reject) {
         chrome.storage.sync.get(key, function (data) {
-            var state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
+            let state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
             state[1] = rating;
-            var msg = {};
+            let msg = {};
             msg[key] = state;
             chrome.storage.sync.set(msg);
             resolve(msg);
@@ -351,6 +356,24 @@ function processRating(id, rating, sendResponse) {
     }).then(sendResponse);
 }
 
+
+/** Update a count field for a plugin **/
+function processCountUpdate(id, sendResponse) {
+    let key = "plugin:" + id;
+    new Promise(function(resolve) {
+        chrome.storage.sync.get(key, function (data) {
+            let state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
+            if (state[2] === undefined) {
+                state[2] = usage_dark_count;
+            }
+            state[2] += 1;
+            let msg = {};
+            msg[key] = state;
+            chrome.storage.sync.set(msg);
+            resolve(msg);
+        })
+    }).then(sendResponse);
+}
 
 
 /**
@@ -361,8 +384,8 @@ chrome.runtime.onMessage.addListener(
         // this function always returns true to signal asynchronous response
 
         /** Handle requests for icons and logos **/
-        var handlers = {icon: getIcon, logo: getLogo};
-        var handler = handlers[request.action];
+        let handlers = {icon: getIcon, logo: getLogo};
+        let handler = handlers[request.action];
         if (!is.undefined(handler)) {
             handler(request.path, sendResponse);
             return true;
@@ -380,6 +403,9 @@ chrome.runtime.onMessage.addListener(
             return true;
         } else if (request.action==="rate") {
             processRating(request.id, request.rating, sendResponse);
+            return true;
+        } else if (request.action==="update_count") {
+            processCountUpdate(request.id, sendResponse);
             return true;
         }
 });
