@@ -23,8 +23,11 @@ function setPluginState(id, value, index) {
     let key = "plugin:" + id;
     return new Promise(function () {
         chrome.storage.sync.get(key, function (data) {
-            data[key][index] = value;
-            chrome.storage.sync.set(data);
+            // only set new value if needed
+            if (data[key][index]!==value) {
+                data[key][index] = value;
+                chrome.storage.sync.set(data);
+            }
         });
     })
 }

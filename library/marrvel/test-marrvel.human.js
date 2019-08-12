@@ -23,7 +23,6 @@ it("processes standard response into series of tables", function () {
     let r0 = fs.readFileSync(__dirname+'/response-marrvel-human-0.json').toString();
     let result = plugin.process(r0, 1);
     let result_str = JSON.stringify(result);
-    console.log(result_str);
     assert.equal(result.status, 1);
     assert.ok(result_str.includes("adipose"));
     assert.ok(result_str.includes("adipose"));

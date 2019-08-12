@@ -198,7 +198,7 @@ div.fair-options code {
 }
 div.fair-options div.fair-reset-button {
     background-color: #333333;
-    border: solid 1px #101010;
+    border: solid 1px #000000;
     border-radius: 2px;
     color: #ffffff;
     padding: 7px 10px;
@@ -206,10 +206,17 @@ div.fair-options div.fair-reset-button {
     text-decoration: none;
     display: inline-block;
     cursor: pointer;
+    transition-duration: 0.1s;
 }
 div.fair-options div.fair-reset-button:hover {
-    background-color: #1d1d1d;
-    color: #f0f0f0;
+    background-color: #111111;
+    color: #f4f4f4;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.15),0 6px 12px 0 rgba(0,0,0,0.15);
+}
+div.fair-options div.fair-reset-button:active {
+    background-color: #f0f0f0;
+    color: #222222;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.15),0 6px 12px 0 rgba(0,0,0,0.15);
 }
 #fair-library ul, #fair-library li {
     clear: both;
