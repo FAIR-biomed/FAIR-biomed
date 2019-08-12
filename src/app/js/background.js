@@ -10,9 +10,6 @@
 var icons = {};
 var logos = {};
 
-// default value for plugin usage count (dark count)
-const usage_dark_count = 10;
-
 // set debugging to True to get some console.log messages
 var verbose = true;
 function developer_log(x) {
@@ -126,16 +123,16 @@ function getLogo(id, sendResponse) {
 }
 
 
-/** fetch active status for all plugins **/
+/** fetch state for all plugins **/
 function fetchPluginStatus(id) {
     let key = "plugin:" + id;
     return new Promise(function(resolve, reject) {
         chrome.storage.sync.get(key, function (data) {
             let status = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
-            if (status[2] === undefined) {
-                status[2] = usage_dark_count;
+            if (status[STATE_INDEX_COUNT] === undefined) {
+                status[STATE_INDEX_COUNT] = DARK_COUNT;
             }
-            resolve([id, status[0], status[1], status[2]]);
+            resolve([id, status[STATE_INDEX_ACTIVE], status[STATE_INDEX_RATING], status[STATE_INDEX_COUNT]]);
         })
     });
 }
@@ -341,41 +338,6 @@ function processInfo(id, sendResponse) {
 }
 
 
-/** Assign a new rating to a plugin **/
-function processRating(id, rating, sendResponse) {
-    let key = "plugin:" + id;
-    new Promise(function(resolve, reject) {
-        chrome.storage.sync.get(key, function (data) {
-            let state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
-            state[1] = rating;
-            let msg = {};
-            msg[key] = state;
-            chrome.storage.sync.set(msg);
-            resolve(msg);
-        })
-    }).then(sendResponse);
-}
-
-
-/** Update a count field for a plugin **/
-function processCountUpdate(id, sendResponse) {
-    let key = "plugin:" + id;
-    new Promise(function(resolve) {
-        chrome.storage.sync.get(key, function (data) {
-            let state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0];
-            if (state[2] === undefined) {
-                state[2] = usage_dark_count;
-            }
-            state[2] += 1;
-            let msg = {};
-            msg[key] = state;
-            chrome.storage.sync.set(msg);
-            resolve(msg);
-        })
-    }).then(sendResponse);
-}
-
-
 /**
  * Handle messages from content scripts
  * **/
@@ -402,10 +364,10 @@ chrome.runtime.onMessage.addListener(
             processInfo(request.id, sendResponse);
             return true;
         } else if (request.action==="rate") {
-            processRating(request.id, request.rating, sendResponse);
+            setPluginRating(request.id, request.rating).then(sendResponse);
             return true;
         } else if (request.action==="update_count") {
-            processCountUpdate(request.id, sendResponse);
+            incrementPluginCount(request.id).then(sendResponse);
             return true;
         }
 });
@@ -428,3 +390,4 @@ chrome.contextMenus.onClicked.addListener(function(itemData) {
         });
     }
 });
+

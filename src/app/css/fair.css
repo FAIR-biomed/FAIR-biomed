@@ -186,12 +186,30 @@ div.fair-options {
 div.fair-options h1.fair-options {
     font-size: 2em;
 }
+div.fair-options h2 {
+    font-size: 1.6em;
+}
 div.fair-options code {
     background-color: #e8e8e8;
     color: #000000;
     padding: 4px 6px 4px 6px;
     border-radius: 4px;
     border: solid 1px #d0d0d0;
+}
+div.fair-options div.fair-reset-button {
+    background-color: #333333;
+    border: solid 1px #101010;
+    border-radius: 2px;
+    color: #ffffff;
+    padding: 7px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+div.fair-options div.fair-reset-button:hover {
+    background-color: #1d1d1d;
+    color: #f0f0f0;
 }
 #fair-library ul, #fair-library li {
     clear: both;

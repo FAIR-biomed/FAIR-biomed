@@ -4,22 +4,28 @@
     <link rel='stylesheet' href='/css/fair.css'>
     <script src="/resources/bundle.js"></script>
     <script src="/library/library-min.js"></script>
+    <script src="/js/state.js"></script>
     <script src="/js/options.js"></script>
 </head>
 <body>
 <div class="fair-options fair-container">
 
     <h1 class="fair-options">FAIR-biomed</h1>
-    <p>Biomedical data are distributed in open databases and knowledge bases. FAIR-biomed browser extension allows you to
-        access snippets of this data from within web pages in your browser.</p>
+    <p>Biomedical data are distributed in open databases and knowledge bases. The FAIR-biomed browser extension allows
+        you to access snippets of this data from any web page.</p>
 
-    <p>To access biomed data resources, select some text in your browser window. With the mouse, open a context menu and
+    <p>Select some text in your browser window. With the mouse, open a context menu and
         select the extension, <code>right-click > FAIR-biomed search</code>. Alternatively, press
         <code>Ctr+Shift+Z</code> on the keyboard. A popup window will show a collection of data resources that may have
         additional information pertaining to the query.</p>
 
     <h2>Plugin library</h2>
     <div id="fair-library"></div>
+
+    <h2>Plugin ranking</h2>
+    <p>The order in which plugins appear in popups is determined by whether each plugin can respond to the query and
+        by the number of times each plugin was used in the past.</p>
+    <div class="fair-reset-button" id="fair-reset-button">Reset plugin usage</div>
 
     <h2>References</h2>
     <ul>

@@ -5,7 +5,8 @@
   "description": "Open data resources in the biomedical domain",
   "permissions": ["activeTab", "declarativeContent", "storage", "contextMenus"],
   "background": {
-    "scripts": ["library/library-min.js", "resources/bundle-background.js", "js/common.js", "js/background.js"],
+    "scripts": ["library/library-min.js", "resources/bundle-background.js", "js/common.js",
+      "js/state.js", "js/background.js"],
     "persistent": false
   },
   "content_scripts": [{

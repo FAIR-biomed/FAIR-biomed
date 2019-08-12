@@ -5,6 +5,7 @@
  * */
 
 
+// cache for storing plugin icons
 var icons = {};
 
 
@@ -101,22 +102,17 @@ class PluginState extends React.Component {
         this.state = {active: this.props.active, rating: this.props.rating};
     }
 
-    handleActivation(event) {
-        // set the react state
-        this.setState(prevState => ({ active: !prevState.active}));
-        // set the extension state on disk
-        let newstate = {};
-        newstate["plugin:"+this.props.id] = [!this.state.active, this.state.rating];
-        chrome.storage.sync.set(newstate);
+    /** two handlers of user clicks - set react state and chrom state **/
+    handleActivation() {
+        let new_active = !this.state.active;
+        this.setState({active: new_active});
+        setPluginActivation(this.props.id, new_active);
     }
 
-    handleRating(event) {
-        // set the react state
-        this.setState(prevState => ({ rating: (prevState.rating+1)%2}));
-        // set the extension state on disk
-        let rating = {};
-        rating["plugin:"+this.props.id] = [this.state.active, (this.state.rating+1)%2];
-        chrome.storage.sync.set(rating);
+    handleRating() {
+        let new_rating = (this.state.rating+1)%2
+        this.setState({rating: new_rating});
+        setPluginRating(this.props.id, new_rating);
     }
 
     render() {
@@ -147,7 +143,7 @@ class LibraryItem extends React.Component {
     constructor(props) {
         super(props);
         this.handleInfo = this.handleInfo.bind(this);
-        this.state = { info: false};
+        this.state = {info: false};
     }
 
     /** Toggles a info visibility tag **/
@@ -219,23 +215,21 @@ class LibraryList extends React.Component {
         this.props.names.map(function(x) {
             let key = "plugin:"+x;
             chrome.storage.sync.get(key, function(data) {
-                let active = fromDataOrDefault(data, key, 0, true);
-                let rating = fromDataOrDefault(data, key, 1, 0);
-                let count = fromDataOrDefault(data, key, 2, 10);
+                let active = fromDataOrDefault(data, key, STATE_INDEX_ACTIVE, true);
+                let rating = fromDataOrDefault(data, key, STATE_INDEX_RATING, 0);
                 thislist.setState(prevState =>
-                    ({ ids: [...thislist.state.ids, [x, active, rating, count]]}))
+                    ({ ids: [...thislist.state.ids, [x, active, rating]]}))
             })
         });
     };
 
     /** re-render when all activation states have been collected **/
     shouldComponentUpdate(nextProps, nextState) {
-        return (nextState.ids.length == this.props.names.length);
+        return (nextState.ids.length === this.props.names.length);
     }
 
     render() {
         var plugins = this.props.plugins;
-        //console.log("state ids: "+JSON.stringify(this.state.ids));
         var items = this.state.ids.map(function(x) {
             var id= x[0];
             return <LibraryItem key={id} plugin={plugins[id]} active={x[1]} rating={x[2]}/>;
@@ -244,8 +238,19 @@ class LibraryList extends React.Component {
     }
 }
 
+
+// assess each plugin state, update the count values back to DARK_COUNT
+function resetAllPluginCounts() {
+    library["names"].map(function (id) {
+        resetPluginCount(id);
+    });
+}
+
+
 // create the plugin details when the page loads
 document.addEventListener("DOMContentLoaded", function () {
+    // register a click handler on the button that resets plugin stats
+    document.getElementById("fair-reset-button").addEventListener("click", resetAllPluginCounts);
     // the setTimeout is annoying, but without it one of the icons doesn't load in time for display?
     setTimeout(() => {
         ReactDOM.render(
