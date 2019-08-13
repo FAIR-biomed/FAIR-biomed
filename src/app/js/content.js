@@ -33,7 +33,7 @@ class FAIRIconLogo extends React.Component {
 
     /** check if an icon/logo is present in cache **/
     getFromCache(path) {
-        var cached = iconcache[this.props.path];
+        let cached = iconcache[this.props.path];
         if (!is.undefined(cached)) return cached;
         return(null);
     }
@@ -43,15 +43,15 @@ class FAIRIconLogo extends React.Component {
      */
     componentDidMount() {
         // check if present in cache
-        var cached = this.getFromCache(this.props.path)
+        let cached = this.getFromCache(this.props.path)
         if (cached===null) {
             if (this.state.data !== cached) {
                 this.setState({data: cached})
                 return;
             }
             // fetch anew
-            var thislist = this;
-            var msg = {action: this.props.type, path: this.props.path}
+            let thislist = this;
+            let msg = {action: this.props.type, path: this.props.path}
             chrome.runtime.sendMessage(msg, function (response) {
                 thislist.setState({data: response.data});
             });
@@ -59,12 +59,12 @@ class FAIRIconLogo extends React.Component {
     }
 
     render() {
-        var cached = this.getFromCache(this.props.path);
+        let cached = this.getFromCache(this.props.path);
         if (this.state.data===null && cached===null) {
             return(null)
         }
-        var showdata = (cached!==null) ? cached : this.state.data;
-        var cursorClass = ' fair-pointer'
+        let showdata = (cached!==null) ? cached : this.state.data;
+        let cursorClass = ' fair-pointer';
         if (this.props.onClick===null || is.undefined(this.props.onClick)) {
             cursorClass = ''
         }
@@ -398,9 +398,9 @@ class FAIRCandidate extends React.Component {
  * **/
 class FAIRCandidateList extends React.Component {
     render() {
-        var thislist = this;
-        var candidates = this.props.candidates.map(function (x) {
-            var id = x['id'];
+        let thislist = this;
+        let candidates = this.props.candidates.map(function (x) {
+            let id = x['id'];
             return (
                 <FAIRCandidate key={id} id={id}
                                titles={[x['title'], x['subtitle']]}
@@ -437,10 +437,10 @@ class FAIRClaimResult extends React.Component {
 
     /** look up plugins that claim a query string **/
     claimQuery() {
-        var thislist = this;
-        var msg = {action: 'claim', query: this.props.query};
+        let thislist = this;
+        let msg = {action: 'claim', query: this.props.query};
         chrome.runtime.sendMessage(msg, function(response) {
-            var candidates = response.sort(thislist.compareCandidates);
+            let candidates = response.sort(thislist.compareCandidates);
             thislist.setState({candidates: candidates});
         });
     }
@@ -475,8 +475,8 @@ class FAIRClaimResult extends React.Component {
                                        selectPlugin={this.selectPlugin}
                                        parentSize={this.props.parentSize}/>)
         } else {
-            var selection = this.state.selection;
-            var candidate = _.find(this.state.candidates, function(x) {
+            let selection = this.state.selection;
+            let candidate = _.find(this.state.candidates, function(x) {
                 return x['id'] === selection;
             });
             // safety check (this is needed for when user changes the query
@@ -533,7 +533,7 @@ class FAIRHeaderBody extends React.Component {
     }
 
     render() {
-        var navicon = [];
+        let navicon = [];
         if (this.state.display === 'search') {
             navicon.push(<FAIRIconLogo key='nav-search'
                                        type='icon' path='fa search' />)
@@ -569,13 +569,13 @@ class FAIRHeaderBody extends React.Component {
  */
 function initFAIRAnchor(range) {
     // create a span element with an icon
-    var anchor = document.createElement('span');
+    let anchor = document.createElement('span');
     anchor.className = 'fair-button';
-    var msg = {action: 'icon', path: 'fa syringe'}
+    let msg = {action: 'icon', path: 'fa syringe'}
     chrome.runtime.sendMessage(msg, function(response) {
-        var template = document.createElement('template');
+        let template = document.createElement('template');
         template.innerHTML = response.data.trim();
-        var el = template.content.firstChild;
+        let el = template.content.firstChild;
         el.setAttribute('width', '12');
         el.setAttribute('style', 'width: 12px; display: inline');
         anchor.appendChild(el);
@@ -638,7 +638,7 @@ class FAIRContainer extends React.Component {
     /** Hide the container temporarily **/
     toggleVisibility() {
         if (this.state.anchor != null) {
-            var current = this.state.parent.style.display;
+            let current = this.state.parent.style.display;
             this.state.parent.style.display = (current==='none') ? 'block': 'none';
         } else {
             this.close();
@@ -727,7 +727,7 @@ class FAIRContainer extends React.Component {
  * @param range
  */
 function initFAIRContainer(range) {
-    var container = document.createElement('div');
+    let container = document.createElement('div');
     container.className = 'fair-reset';
     ReactDOM.render(
         <FAIRContainer range={range}/>,
@@ -736,9 +736,10 @@ function initFAIRContainer(range) {
     document.body.appendChild(container);
 }
 
+
 /** trigger init of FAIRContainer. Used by key listener and context menu. **/
 function triggerFAIRContainer() {
-    var selection = window.getSelection();
+    let selection = window.getSelection();
     if (selection.toString()!=='') {
         initFAIRContainer(selection.getRangeAt(0));
     } else {
@@ -757,14 +758,14 @@ window.addEventListener('keypress', function(e){
     }
 }, false);
 
+
 /**
  * Register listeners catching de-novo messages from background.js
  */
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (!sender.tab && request.action === "contextMenuClick") {
-            triggerFAIRContainer();
-        }
-        // this send is required to avoid a runtime error
-        sendResponse({});
-    });
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (!sender.tab && request.action === "contextMenuClick") {
+        triggerFAIRContainer();
+    }
+    // this send is required to avoid a runtime error
+    sendResponse({});
+});

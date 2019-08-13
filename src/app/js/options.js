@@ -239,7 +239,7 @@ class LibraryList extends React.Component {
 }
 
 
-// assess each plugin state, update the count values back to DARK_COUNT
+/** assess each plugin state, update the count values back to DARK_COUNT **/
 function resetAllPluginCounts() {
     library["names"].map(function (id) {
         resetPluginCount(id);
@@ -247,7 +247,7 @@ function resetAllPluginCounts() {
 }
 
 
-// create the plugin details when the page loads
+/** create the plugin details when the page loads **/
 document.addEventListener("DOMContentLoaded", function () {
     // register a click handler on the button that resets plugin stats
     document.getElementById("fair-reset-button").addEventListener("click", resetAllPluginCounts);
