@@ -46,6 +46,7 @@ The current plugin library provides access to a small but varied set of data sou
 | [HGNC](https://www.genenames.org/) | Gene nomenclature |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |
 | [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries |
+| [MARRVEL](http://marrvel.org/) | Disease associations, gene expression |
 | [Reactome](https://www.reactome.org/) | Pathways |
 | [STRING](https://string-db.org//) | Protein interaction networks |
 | [Uniprot](https://www.uniprot.org/) | Knowledgebase |
@@ -60,10 +61,9 @@ The current plugin library provides access to a small but varied set of data sou
 
 <a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58.png"></a>
 
-The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read any information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.   
+The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read any information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.
 
 To install the FAIR-biomed extension manually using code from this repository, see the [develper's documentation](docs/install.md)
-
 
 ### Local URLs
 
@@ -73,7 +73,6 @@ The extension is automatically active on all pages that you accesss via urls sta
  - Find `FAIR-biomed` and click `Details`; the view should change and display more details on the extension
  - Scroll down to the setting `Allow access to file URLs` and turn on the switch.
 
-
 ### Options
 
 The extension has a dedicated page where you tune which data sources you would like displayed in the popups. 
@@ -81,16 +80,39 @@ The extension has a dedicated page where you tune which data sources you would l
  - Select `Tools > Extensions` from the chrome menu.
  - Find `FAIR-biomed` in the list of installed extensions and click `Details`.
  - Scroll down to the setting `Extension options` and click on the link.
- - On the page that appears, use the switches to turn individual plugins on or off. Use the rating systems to mark which plugins you find most useful.  
- 
+ - On the page that appears, use the switches to turn individual plugins on or off. Use the rating systems to mark which plugins you find most useful.
+
  
 ### Privacy
 
-Once installed, the extension records a small amount of information on each user's computer. This data pertains to which plugins are active (see previous section on Options) and how each plugin is rated.
+Once installed, the extension records a small amount of information to personalize its usage to each user. This data pertains to which plugins are active (see previous section on Options), how many times each plugin is used, and whether each plugin is rated/bookmarked. This information remains on each user's computer and can be adjusted through the Options page. This information is not shared with outside services.
 
-The extension does not record users' activity. In particular, the extension does not record performed searches. Note, however, that the extension sends queries to external APIs. Some of these services may record activity for their own purposes (for example, to demonstrate their relevance to the science community). See the privacy policies of those services for details.
+The extension does not record performed searches. Note, however, that the extension sends queries to external APIs. Some of these services may record activity for their own purposes (for example, to demonstrate their relevance to the science community). See the privacy policies of those services for details.
 
-When installing the extension from the chrome web store, google collects some user information. See their [privacy policy](https://policies.google.com/privacy?hl=en-GB) for details.  
+When installing the extension from the chrome web store, Google collects some user information. See their [privacy policy](https://policies.google.com/privacy?hl=en-GB) for details.
+
+
+
+
+## In the news
+
+FAIR-biomed was featured in the news!
+
+ - [Using Europe PMC RESTful APIs](http://blog.europepmc.org/2019/08/using-europe-pmc-restful-apis.html), August 20 2019.
+
+
+
+
+## Notes and References
+
+The idea of augmenting web pages with additional information has a long history. 
+
+ - [Reflect](https://scholar.google.co.uk/scholar?hl=en&as_sdt=0%2C5&q=Reflect%3A+augmented+browsing+for+the+life+scientist&btnG=) was an early implementation of a browser extension aimed at biomedical research. This extension sent a whole web-page to a server for annotation.
+ 
+ - [Dynamic linking](https://ieeexplore.ieee.org/document/4510879) outlined an idea to infer links to specialist sources by scanning the context of web pages.
+
+ - [GIX](https://www.nature.com/articles/s41592-019-0477-9) described an extension for retrieving information on gene products.
+
 
 
 
@@ -102,17 +124,3 @@ To incorporate a new data resource or plugin, see the [documentation](docs/).
 
 
 
-
-## Notes and References
-
-The idea of augmenting web pages with additional information has a long history. 
-
- - [Reflect](https://scholar.google.co.uk/scholar?hl=en&as_sdt=0%2C5&q=Reflect%3A+augmented+browsing+for+the+life+scientist&btnG=) was an early implementation of a browser extension aimed at biomedical research. This extension sent a whole web-page to a server for annotation.
- 
- - [Dynamic linking](https://ieeexplore.ieee.org/document/4510879) outlined an idea to infer links to specialist sources by scanning the context of web pages.  
-
-The implementation of FAIR-biomed relies on a number of technologies and compoenents.
-
- - [Fontawesome](https://fontawesome.com/icons) - Icons used in the app come from the free set of the Fontawesome collection. 
-
- - Third-party libraries. This browser uses several third-party libraries. These are listed in file `package.json`. 
