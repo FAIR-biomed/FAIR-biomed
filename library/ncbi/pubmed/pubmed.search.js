@@ -17,7 +17,7 @@ module.exports = new function() {
 
     // parts of api urls
     let eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
-    let suffix = '&tool=FAIR-biomed&email=fair.ext@gmail.com&retmax=8&format=json&sort=relevance';
+    let suffix = '&db=pubmed&retmax=8&format=json&sort=relevance&tool=FAIR-biomed&email=fair.ext@gmail.com';
     let id2link = function(id) {
         return 'https://www.ncbi.nlm.nih.gov/pubmed/'+id;
     };
@@ -41,9 +41,9 @@ module.exports = new function() {
         let words = query.split(' ');
         let url = eutils;
         if (index === 0 || typeof(index)==='undefined') {
-            url += 'esearch.fcgi?db=pubmed&term=' + words.join('+')
+            url += 'esearch.fcgi?term=' + words.join('+')
         } else if (index === 1) {
-            url += 'esummary.fcgi?db=pubmed&id='+words.join(',')
+            url += 'esummary.fcgi?id='+words.join(',')
         }
         return url + suffix;
     };

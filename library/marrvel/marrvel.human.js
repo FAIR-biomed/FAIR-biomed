@@ -42,7 +42,6 @@ module.exports = new function() {
         // prepare the individual sections
         let hgnc = data["hgncId"];
         let hgnc_link = '<a href="' + hgnc_url + hgnc+ '" target="_blank">HGNC:'+hgnc+'</a>';
-        //let gtex_link = '<a href="' + gtex_url+ symbol + '" target="_blank">'+symbol+'</a>';
         let summary = [
             ["",""],
             ["Gene summary", hgnc_link],

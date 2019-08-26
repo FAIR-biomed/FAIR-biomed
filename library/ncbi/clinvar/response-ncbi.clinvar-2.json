@@ -1,0 +1,127 @@
+{
+  "header": {
+    "type": "esummary",
+    "version": "0.3"
+  },
+  "result": {
+    "uids": [
+      "301101"
+    ],
+    "301101": {
+      "uid": "301101",
+      "obj_type": "single nucleotide variant",
+      "accession": "VCV000301101",
+      "accession_version": "VCV000301101.",
+      "title": "NM_001002295.2(GATA3):c.-413C&gt;T",
+      "variation_set": [
+        {
+          "measure_id": "316776",
+          "variation_xrefs": [
+            {
+              "db_source": "dbSNP",
+              "db_id": "540527013"
+            }
+          ],
+          "variation_name": "NM_001002295.2(GATA3):c.-413C&gt;T",
+          "cdna_change": "NM_001002295.2(GATA3):c.-413C&gt;T",
+          "aliases": [
+          ],
+          "variation_loc": [
+            {
+              "status": "current",
+              "assembly_name": "GRCh38",
+              "chr": "10",
+              "band": "10p14",
+              "start": "8054848",
+              "stop": "8054848",
+              "inner_start": "",
+              "inner_stop": "",
+              "outer_start": "",
+              "outer_stop": "",
+              "display_start": "8054848",
+              "display_stop": "8054848",
+              "assembly_acc_ver": "GCF_000001405.38",
+              "annotation_release": "",
+              "alt": "T",
+              "ref": "C"
+            },
+            {
+              "status": "previous",
+              "assembly_name": "GRCh37",
+              "chr": "10",
+              "band": "10p14",
+              "start": "8096811",
+              "stop": "8096811",
+              "inner_start": "",
+              "inner_stop": "",
+              "outer_start": "",
+              "outer_stop": "",
+              "display_start": "8096811",
+              "display_stop": "8096811",
+              "assembly_acc_ver": "GCF_000001405.25",
+              "annotation_release": "",
+              "alt": "T",
+              "ref": "C"
+            }
+          ],
+          "allele_freq_set": [
+            {
+              "source": "",
+              "value": "0.00002",
+              "minor_allele": ""
+            }
+          ],
+          "variant_type": "single nucleotide variant"
+        }
+      ],
+      "trait_set": [
+        {
+          "trait_xrefs": [
+            {
+              "db_source": "Orphanet",
+              "db_id": "2237"
+            },
+            {
+              "db_source": "MedGen",
+              "db_id": "C1840333"
+            },
+            {
+              "db_source": "OMIM",
+              "db_id": "146255"
+            }
+          ],
+          "trait_name": "Barakat syndrome"
+        }
+      ],
+      "supporting_submissions": {
+        "scv": [
+          "SCV000365272"
+        ],
+        "rcv": [
+          "RCV000272459"
+        ]
+      },
+      "clinical_significance": {
+        "description": "Uncertain significance",
+        "last_evaluated": "2016/06/14 00:00",
+        "review_status": "criteria provided, single submitter"
+      },
+      "record_status": "",
+      "gene_sort": "GATA3",
+      "chr_sort": "10",
+      "location_sort": "00000000000008054848",
+      "variation_set_name": "",
+      "variation_set_id": "",
+      "genes": [
+        {
+          "symbol": "GATA3",
+          "geneid": "2625",
+          "strand": "+",
+          "source": "submitted"
+        }
+      ],
+      "protein_change": "",
+      "fda_recognized_database": ""
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "125",
+    "retmax": "20",
+    "retstart": "0",
+    "idlist": [
+      "663254",
+      "623732",
+      "612829",
+      "612828",
+      "612827",
+      "600375",
+      "600374",
+      "599307",
+      "591332",
+      "591303",
+      "591111",
+      "585128",
+      "521009",
+      "513653",
+      "505766",
+      "503787",
+      "443260",
+      "442589",
+      "441987",
+      "441986"
+    ],
+    "translationset": [
+    ],
+    "translationstack": [
+      {
+        "term": "GATA3[All Fields]",
+        "field": "All Fields",
+        "count": "125",
+        "explode": "N"
+      },
+      "GROUP"
+    ],
+    "querytranslation": "GATA3[All Fields]"
+  }
+}

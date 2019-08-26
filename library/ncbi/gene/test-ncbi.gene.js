@@ -1,4 +1,4 @@
-/** Unit tests specific to ncbi gene plugin **/
+/** Unit tests specific to NCBI gene plugin **/
 
 var assert = require('assert');
 var fs = require("fs-extra");
@@ -14,31 +14,31 @@ it('claims queries like human gene symbols', function () {
     assert.equal(plugin.claim('KRAS'), 0.95);
 });
 
-it('generates different urls for round 1 and round2', function () {
-    var result1 = plugin.url('Gene', 0);
-    var result2 = plugin.url('Gene', 1);
+it('generates different urls for round 1 and round 2', function () {
+    let result1 = plugin.url('Gene', 0);
+    let result2 = plugin.url('Gene', 1);
     assert.ok(result2.length !== result1.length)
 });
 
 it('extracts a single id from round 1 response', function() {
-    var r1 = fs.readFileSync(__dirname+'/response-ncbi.gene-0.json').toString();
-    var result = plugin.process(r1, 0);
+    let r1 = fs.readFileSync(__dirname+'/response-ncbi.gene-0.json').toString();
+    let result = plugin.process(r1, 0);
     // round 1 should signal status not yet done <1
     assert.ok(result.status<1);
     // in this example, the most relevant hit is PTPN2, id 5771
-    var hits = result.data.split(',');
+    let hits = result.data.split(',');
     assert.ok(hits.length>2);
     assert.equal(hits[0], "5771");
     assert.equal(hits[1], "19255");
 });
 
 it('processes round 2 1 response', function() {
-    var r2 = fs.readFileSync(__dirname+'/response-ncbi.gene-1.json').toString();
-    var result = plugin.process(r2, 1);
+    let r2 = fs.readFileSync(__dirname+'/response-ncbi.gene-1.json').toString();
+    let result = plugin.process(r2, 1);
     // round 1 should signal status not yet done <1
     assert.equal(result.status, 1);
     // in this example, the response only has details for one uid
-    var hits = result.data
+    let hits = result.data
     assert.equal(hits.length, 1);
     // content should be another array with several items
     assert.ok(hits[0].length, 3);
@@ -46,8 +46,8 @@ it('processes round 2 1 response', function() {
 });
 
 it('generates external urls based on round 1 query', function () {
-    var result1 = plugin.external('Gene', 0);
-    var result2 = plugin.external('Gene', 1);
+    let result1 = plugin.external('Gene', 0);
+    let result2 = plugin.external('Gene', 1);
     assert.ok(result2===null);
     assert.ok(result1.includes('Gene'));
 });
