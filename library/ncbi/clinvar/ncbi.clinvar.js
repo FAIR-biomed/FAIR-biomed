@@ -52,7 +52,8 @@ module.exports = new function() {
         let accid = data["accession"];
         let traits = data["trait_set"].map(x => x["trait_name"]);
         let signif = data["clinical_significance"];
-        let locations = data['variation_set'][0]['variation_loc'].map(x => {
+        let varset = data['variation_set'][0];
+        let locations = varset['variation_loc'].map(x => {
             let assembly = x['assembly_name'];
             let pos = x['chr'] + ":" + x['display_start']+"-"+x['display_stop'];
             let refalt = [''];
@@ -64,6 +65,7 @@ module.exports = new function() {
         return [
             ['', ''],
             ['Variant', '<a href="' + id2link(accid) + '" target="_blank">' + data['title']+ '</a>'],
+            ['Type', varset['variant_type']],
             ['Traits', traits.join('<br/>')],
             ['Significance', signif['description'] + ';<br/>' + signif['review_status']],
             ['Location', locations.join('<br/>')]
