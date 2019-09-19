@@ -402,9 +402,10 @@ div.fair-button-panel svg path {
     fill: #fafafa;
 }
 
-div.fair-header input {
+div.fair-header input[type="text"] {
     border: 0px;
     background-color: inherit;
+    box-shadow: none;
     color: inherit;
     margin-left: 4px;
     margin-bottom: 0px;
@@ -415,16 +416,19 @@ div.fair-header input {
     float: none;
     padding: 2px 6px 2px 6px;
 }
-div.fair-header input:focus {
+div.fair-header input[type="text"]:focus {
     outline: none;
+    border: 0px;
     border-bottom: solid 2px; #333333;
     margin-bottom: -2px;
+    box-shadow: none;
 }
 
 ul.fair-list li.fair-candidate, li.fair-candidate {
     margin-bottom: 0.4em;
     margin-top: 0.4em;
     list-style-type: none;
+    list-style-image: none;
     cursor: pointer;
     clear: both;
 }
