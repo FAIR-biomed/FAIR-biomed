@@ -48,7 +48,7 @@ module.exports = new function() {
         let matrices = hits.map(function(x) {
             return [
                 ['',''],
-                ['TF Nam:', x['name']],
+                ['TF Name:', x['name']],
                 ['Motif ID:', '<a href="'+item2link(x)+'" target="_blank">'+x['matrix_id']+'</a>'],
                 ['Collection:', x['collection']],
                 ['Sequence logo:', '<img src="http://jaspar.genereg.net/static/logos/'+x['matrix_id']+'.png" style="height: 50px;">']
