@@ -1,0 +1,34 @@
+{
+"count": 3,
+"next": null,
+"previous": null,
+"results": [
+        {
+        "matrix_id": "MA1622.1",
+        "name": "Smad2::Smad3",
+        "collection": "CORE",
+        "base_id": "MA1622",
+        "version": "1",
+        "sequence_logo": "http://jaspar.genereg.net/static/logos/svg/MA1622.1.svg",
+        "url": "http://jaspar.genereg.net/api/v1/matrix/MA1622.1/"
+        },
+        {
+        "matrix_id": "MA0513.1",
+        "name": "SMAD2::SMAD3::SMAD4",
+        "collection": "CORE",
+        "base_id": "MA0513",
+        "version": "1",
+        "sequence_logo": "http://jaspar.genereg.net/static/logos/svg/MA0513.1.svg",
+        "url": "http://jaspar.genereg.net/api/v1/matrix/MA0513.1/"
+        },
+        {
+        "matrix_id": "MA0795.1",
+        "name": "SMAD3",
+        "collection": "CORE",
+        "base_id": "MA0795",
+        "version": "1",
+        "sequence_logo": "http://jaspar.genereg.net/static/logos/svg/MA0795.1.svg",
+        "url": "http://jaspar.genereg.net/api/v1/matrix/MA0795.1/"
+        }
+]
+}
