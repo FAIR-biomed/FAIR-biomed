@@ -547,6 +547,9 @@ div.fair-result table td, div.fair-result table th {
 div.fair-result table tr {
     border: none;
 }
+div.fair-result table img, div.fair-result table svg {
+    max-width: 110%;
+}
 div.fair-result-toolbar svg {
     margin-top: 1em;
     padding-left: 10px;
