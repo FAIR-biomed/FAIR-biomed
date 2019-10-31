@@ -45,6 +45,7 @@ The current plugin library provides access to a small but varied set of data sou
 | [Genomics England](https://www.genomicsengland.co.uk/) | PanelApp |
 | [HGNC](https://www.genenames.org/) | Gene nomenclature |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |
+| [JASPAR](http://jaspar.genereg.net/) | Transcription factor binding profiles |
 | [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries, significance of genetic variation |
 | [MARRVEL](http://marrvel.org/) | Disease associations, gene expression |
 | [Reactome](https://www.reactome.org/) | Pathways |
