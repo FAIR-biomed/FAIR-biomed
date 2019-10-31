@@ -11,12 +11,12 @@ module.exports = new function() {
     this.tags = ['transcription factors', 'genes', 'TF motifs'];
 
     /** accompanying resources **/
-    this.logo = 'jaspar_logo_2020.png';
+    this.logo = 'jaspar_logo.png';
     this.info = 'jaspar-info.html';
 
     // parts of api urls
     let jaspar = 'http://jaspar.genereg.net/api/v1/matrix/?search=';
-    let suffix = '&format=json&page_size=10';
+    let suffix = '&format=json&page_size=10&version=latest';
     let item2link = function(x) {
         return 'http://jaspar.genereg.net/matrix/'+x['matrix_id'];
     };
@@ -48,10 +48,10 @@ module.exports = new function() {
         let matrices = hits.map(function(x) {
             return [
                 ['',''],
-                ['TF Name:', x['name']],
-                ['Motif ID:', '<a href="'+item2link(x)+'" target="_blank">'+x['matrix_id']+'</a>'],
-                ['Collection:', x['collection']],
-                ['Sequence logo:', '<img src="http://jaspar.genereg.net/static/logos/'+x['matrix_id']+'.png" style="height: 50px;">']
+                ['Name', x['name']],
+                ['Matrix ID', '<a href="'+item2link(x)+'" target="_blank">'+x['matrix_id']+'</a> from '+x['collection']+' \
+                Collection | <a href="http://jaspar.genereg.net/api/v1/matrix/'+x['matrix_id']+'.tranfac" target="_blank"> View PFM</a>'],
+                ['Sequence logo', '<img class="fair-result svg" src="'+x['sequence_logo']+'" style="width: 100%;">']
             ];
 
         });
