@@ -1,0 +1,67 @@
+/** CSS for extension popup window **/
+body {
+  font-family: sans-serif;
+  font-size: 14px;
+  margin: 0;
+  min-height: 180px;
+  padding: 0;
+  width: 360px;
+}
+h1 {
+  font-family: sans-serif, monospace;
+  font-size: 26px;
+  font-weight: 400;
+  margin: 0;
+  color: #000000;
+}
+a:link,
+a:visited {
+  color: #000000;
+  outline: 0;
+  text-decoration: none;
+}
+img {
+  width: 30px;
+}
+.popup-header {
+  align-items: center;
+  border-bottom: 0.5px solid #dadada;
+}
+.popup-content {
+  padding: 15px 22px;
+  font-size: 15px;
+
+}
+.popup-icons {
+  border-top: 0.5px solid #dadada;
+  height: 50px;
+  width: 100%;
+}
+.logo {
+  padding: 10px;
+}
+.logo-icon {
+  vertical-align: text-bottom;
+  margin-right: 12px;
+}
+.version {
+  color: #444;
+  font-size: 12px;
+}
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+}
+.flex {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+  width: 80px;
+}
+.flex:hover {
+  opacity: 0.4;
+}
+.flex .fa {
+  font-size: 30px;
+  color: #22b5bb;
+}
