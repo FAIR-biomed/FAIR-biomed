@@ -53,7 +53,7 @@ module.exports = new function() {
                 ['',''],
                 ['Name', x['name']],
                 ['Matrix ID', '<a href="'+item2link(x)+'" target="_blank">'+x['matrix_id']+'</a> from '+x['collection']+' \
-                Collection | <a href="http://jaspar.genereg.net/api/v1/matrix/'+x['matrix_id']+'.tranfac" target="_blank"> View PFM</a>'],
+                Collection | <a href="http://jaspar.genereg.net/api/v1/matrix/'+x['matrix_id']+'.transfac" target="_blank"> View PFM</a>'],
                 ['Sequence logo', '<img class="fair-result svg" src="'+x['sequence_logo']+'" style="width: 100%;">']
             ];
 
