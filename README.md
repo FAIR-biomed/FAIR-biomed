@@ -1,6 +1,9 @@
 # FAIR-biomed
 
-Browser extension for accessing open data resources in the biomedical domain. 
+
+<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58.png"></a>
+
+FAIR-biomed is a browser extension for accessing open data resources in the biomedical domain. 
 
 
 
@@ -9,7 +12,7 @@ Browser extension for accessing open data resources in the biomedical domain.
 
 Vasts amounts of biomedical data are stored in open databases and knowledge-bases. Data in these resources are intended to be findable, accessible, interoperable, and reusable ([FAIR](https://www.nature.com/articles/sdata201618)). However, the data is distributed across many resources and integrating relevant parts within a specific project can be a challenge.
 
-FAIR-biomed is a browser extension (for chrome) that brings open data resources directly to specific research situations. Consider, for example, reading a report in your browser. With FAIR-biomed, you can access additional information on any part of the report without leaving the page.
+FAIR-biomed brings open data resources directly to specific research situations. Consider, for example, reading a report in the browser. With FAIR-biomed, you can access additional information on any part of the report without leaving the page.
 
 To make use of the extension, first highlight some text, for example, a gene name. Press `Ctr+Shift+Z` on the keyboard (alternatively `right-click > FAIR-biomed search` with the mouse). A new box should appear prompting you to choose a data source to query. 
 
@@ -34,7 +37,7 @@ Search results provide summaries of the data resource, details of how the data q
 
 The FAIR-biomed app is composed of core components and a library of plugins. Each of the plugins provides access to a data resource and a specific query type.
 
-The current plugin library provides access to a small but varied set of data sources.
+The current plugin library provides access to a varied set of data sources.
 
 | Data source      | Plugins      |
 | :----- | :----- |
@@ -46,8 +49,8 @@ The current plugin library provides access to a small but varied set of data sou
 | [HGNC](https://www.genenames.org/) | Gene nomenclature |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |
 | [JASPAR](http://jaspar.genereg.net/) | Transcription factor binding profiles |
-| [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries, significance of genetic variation |
 | [MARRVEL](http://marrvel.org/) | Disease associations, gene expression |
+| [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries, significance of genetic variation |
 | [Reactome](https://www.reactome.org/) | Pathways |
 | [STRING](https://string-db.org//) | Protein interaction networks |
 | [Uniprot](https://www.uniprot.org/) | Knowledgebase |
@@ -60,9 +63,7 @@ The current plugin library provides access to a small but varied set of data sou
 
 ### Installation
 
-<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58.png"></a>
-
-The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read any information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.
+The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read the information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.
 
 To install the FAIR-biomed extension manually using code from this repository, see the [develper's documentation](docs/install.md)
 

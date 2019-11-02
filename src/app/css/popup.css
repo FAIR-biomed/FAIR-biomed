@@ -65,3 +65,7 @@ img {
   font-size: 30px;
   color: #22b5bb;
 }
+.flex i {
+  text-align: center;
+  width: 100%;
+}
