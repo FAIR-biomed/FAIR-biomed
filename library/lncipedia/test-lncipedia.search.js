@@ -1,4 +1,4 @@
-/** Unit tests specific to JASPAR TF motif search plugin **/
+/** Unit tests specific to LNCipedia search plugin **/
 
 var assert = require('assert');
 var fs = require("fs-extra");
