@@ -16,7 +16,7 @@ var strchecker = require('../src/build/string-checker.js');
 plugin_src = process.argv[3];
 
 // check plugin is selected
-var library = null;
+let library = null;
 if (plugin_src===null || typeof(plugin_src)==='undefined') {
     plugin_src = 'library';
     library = libraryloader.load(fs.realpathSync('library'));
@@ -38,7 +38,7 @@ fs.removeSync(plugin_status_file);
 
 
 // expected structure for plugin components
-var expected = {};
+let expected = {};
 expected['reserved'] = ['namespace'];
 expected['strings'] = ['id'];
 expected['titles'] = ['title', 'subtitle'];
@@ -55,89 +55,97 @@ function testOnePlugin(plugin) {
      **/
 
     it ('does not contain reserved fields', function() {
-        var present = expected['reserved'].filter(function(x) {
+        let present = expected['reserved'].filter(function(x) {
             return typeof(plugin[x]) !== 'undefined';
-        })
+        });
         assert.deepEqual(present, []);
-    })
+    });
 
     it ('defines required functions', function() {
-        var missing = expected['functions'].filter(function(x) {
+        let missing = expected['functions'].filter(function(x) {
             return typeof(plugin[x]) !== 'function';
         });
         assert.deepEqual(missing, [])
-    })
+    });
 
     it ('defines all required fields', function() {
-        var strings = expected['strings'].concat(expected['titles']);
-        var missing_strings = strings.filter(function(x) {
+        let strings = expected['strings'].concat(expected['titles']);
+        let missing_strings = strings.filter(function(x) {
             return typeof(plugin[x]) !== 'string';
         });
         assert.deepEqual(missing_strings, [], 'missing strings');
-        var missing_arrays = expected['arrays'].filter(function(x) {
+        let missing_arrays = expected['arrays'].filter(function(x) {
             return  !(typeof(plugin[x]) === 'object' && plugin[x] instanceof Array)
         });
         assert.deepEqual(missing_arrays, [], 'missing arrays');
     });
 
     it ('does not use special characters in strings or unclean html', function() {
-        var invalid = expected['strings'].filter(function(x) {
+        let invalid = expected['strings'].filter(function(x) {
             return (strchecker.badChars(plugin[x])).length>0
-        })
+        });
         assert.deepEqual(invalid, []);
-        var unclean = expected['titles'].filter(function(x) {
+        let unclean = expected['titles'].filter(function(x) {
             return !strchecker.isCleanStrict(plugin[x])
-        })
+        });
         assert.deepEqual(unclean, [], 'unclean html')
     });
 
     it('provides static files for logo and info', function() {
-        var dirpath = path.dirname(plugin._filepath)
-        var missing = expected['files'].filter(function(x) {
+        let dirpath = path.dirname(plugin._filepath);
+        let missing = expected['files'].filter(function(x) {
             if (plugin[x]===null) return false;
             return !fs.existsSync(dirpath+path.sep+plugin[x])
-        })
+        });
         assert.deepEqual(missing, [])
     });
 
-    // TO DO check contents of info page
     it('has clean html in info page', function() {
-        var infopath = plugin.info;
-        var dirname = path.dirname(plugin._filepath);
-        var info = fs.readFileSync(dirname+path.sep+infopath).toString();
+        let infopath = plugin.info;
+        let dirname = path.dirname(plugin._filepath);
+        let info = fs.readFileSync(dirname+path.sep+infopath).toString();
         assert.equal(strchecker.isClean(info), true)
-    })
+    });
 
     /**
      * checks on the plugin functions
      **/
 
     it('produces a number during claim', function () {
-        var result = plugin.claim('abc')
+        let result = plugin.claim('abc');
         assert.equal(typeof(result), 'number',
             'claim(query) produced ' + JSON.stringify(result));
     });
 
     it('does not claim empty queries', function () {
-        var result = plugin.claim('')
+        let result = plugin.claim('');
         assert.equal(result, 0,
             'claim("") produced ' + JSON.stringify(result));
     });
 
-    it ('produces reliable urls', function() {
-        var url = plugin.url('').substr(0, 4);
-        var external = plugin.external('').substr(0, 4);
-        assert.equal(url, 'http', 'query url')
-        assert.equal(external, 'http', 'external url')
-    })
+    it ('produces reliable urls, or null', function() {
+        let result = plugin.url('');
+        if (result === null) {
+            // a null url is allowed
+            assert.equal(result, null);
+        } else {
+            // non-null urls must link to http
+            let url_prefix = plugin.url('').substr(0, 4);
+            assert.equal(url_prefix, 'http', 'query url')
+        }
+    });
 
+    it ('produces reliable external urls', function() {
+        let external = plugin.external('').substr(0, 4);
+        assert.equal(external, 'http', 'external url')
+    });
 
     /**
      * plugin-specific tests (defined next to plugin source file)
      **/
 
-    var plugindir = path.dirname(plugin._filepath) + path.sep;
-    var testfile = plugindir + 'test-'+plugin.id+'.js';
+    let plugindir = path.dirname(plugin._filepath) + path.sep;
+    let testfile = plugindir + 'test-'+plugin.id+'.js';
     if (fs.pathExistsSync(testfile)) {
         require(testfile)
     }
@@ -148,7 +156,7 @@ function testOnePlugin(plugin) {
      **/
 
     after(function () {
-        var allpass = this.test.parent.tests.every((t)=> t.state==='passed');
+        let allpass = this.test.parent.tests.every((t)=> t.state==='passed');
         if (allpass) {
             fs.appendFileSync(plugin_status_file, plugin.id+'\n')
         }

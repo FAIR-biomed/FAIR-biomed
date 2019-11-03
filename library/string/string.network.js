@@ -37,22 +37,22 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        let words = query.split(' ');
-        words = words.map(function(x) {
-            return x.trim();
-        });
-        // make URL, this appends an output.png. It is ignored by the
-        // server but signals in the url that output will be a png
-        let result = string_network + '?identifiers=' + words.join("%0d");
-        result += '&add_white_nodes=10&network_flavor=actions&output.png';
-        return result;
+        // this plugin returns null
+        // this signals that the query will be passed directly to function process
+        return null;
     };
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        // this does not process anything
-        // the data is left to be formatted into an img elsewhere
-        return {status:1, data: data};
+        let words = data.split(' ');
+        words = words.map(function(x) {
+            return x.trim();
+        });
+        // output is a single image with a URL constructed from the original query
+        let url = string_network + '?identifiers=' + words.join("%0d");
+        url += '&add_white_nodes=10&network_flavor=actions';
+        let result = '<img class="fair-result img" src="'+url+'">';
+        return { status: 1, data:  result}
     };
 
     /** construct a URL to an external information page **/

@@ -7,11 +7,11 @@
 'use strict';
 
 // a cache of icons fetched from disk
-var icons = {};
-var logos = {};
+let icons = {};
+let logos = {};
 
 // set debugging to True to get some console.log messages
-var verbose = true;
+let verbose = true;
 function developer_log(x) {
     if (verbose) {
         console.log(x);
@@ -20,7 +20,7 @@ function developer_log(x) {
 
 
 // settings for sanitization of data
-var sanitize_config = {
+let sanitize_config = {
     allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'p', 'a', 'ul', 'ol',
         'nl', 'li', 'b', 'i', 'strong', 'em', 'strike', 'code', 'hr', 'br', 'div',
         'table', 'thead', 'caption', 'tbody', 'tr', 'th', 'td', 'pre', 'span',
@@ -179,7 +179,6 @@ function sanitizeResponse(response) {
         return {status: 0, data: "invalid response, no data"};
     }
     let sanitizeOne = function (data) {
-        //developer_log("sanitizeOne: "+data);
         if (is.string(data) || is.number(data)) {
             return sanitizeHtml(data, sanitize_config);
         } else if (is.array(data)) {
@@ -263,7 +262,6 @@ function processQuery(id, queries, sendResponse, index) {
     // handlers for promise
     let handleResponse = function(response) {
         // decide whether to output or to do another round trip to url/process
-        //developer_log("working with promise result "+JSON.stringify(response))
         if (response.status === 0 || response.status === 1) {
             sendResponse(buildSendResponse(response))
         } else if (response.status>0 && response.status < 1) {
@@ -277,19 +275,15 @@ function processQuery(id, queries, sendResponse, index) {
     // execute the query
     developer_log("processing query");
     let promise = new Promise(function(resolve, reject) {
-        let xhr = new XMLHttpRequest();
-        if (url.endsWith(".png")) {
-            xhr.responseType = 'arraybuffer';
+        if (url === null) {
+            resolve(sanitizeResponse(plugin.process(query)));
+            return;
         }
+        let xhr = new XMLHttpRequest();
         xhr.onload = function() {
             //developer_log("response: "+xhr.response);
             try {
-                if (url.endsWith(".png")) {
-                    let b64 = bufferToBase64(xhr.response);
-                    var response = {status: 1, data: '<img src="data:image/png;base64,'+b64+'">'};
-                } else {
-                    var response = plugin.process(xhr.response, index, query);
-                }
+                var response = plugin.process(xhr.response, index, query);
                 resolve(sanitizeResponse(response));
             } catch(e) {
                 resolve({status: 0, data: "error parsing server response"});
