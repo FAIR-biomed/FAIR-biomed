@@ -65,7 +65,7 @@ The current plugin library provides access to a varied set of data sources.
 
 The extension is available from the chrome [web store](https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn). Select the extension in the web store, click `Add to chrome`, and read the information boxes. Once installed, highlight text on a web page and press `Ctrl+Shift+Z` to perform searches.
 
-To install the FAIR-biomed extension manually using code from this repository, see the [develper's documentation](docs/install.md)
+To install the FAIR-biomed extension manually using code from this repository, see the [developer documentation](docs/install.md)
 
 ### Local URLs
 
@@ -77,21 +77,15 @@ The extension is automatically active on all pages that you accesss via urls sta
 
 ### Options
 
-The extension has a dedicated page where you tune which data sources you would like displayed in the popups. 
+The extension has a dedicated page where you can tune which data sources you would like to use. 
 
- - Select `Tools > Extensions` from the chrome menu.
- - Find `FAIR-biomed` in the list of installed extensions and click `Details`.
- - Scroll down to the setting `Extension options` and click on the link.
- - On the page that appears, use the switches to turn individual plugins on or off. Use the rating systems to mark which plugins you find most useful.
+ - Find the FAIR-biomed icon on the browser toolbar (it's usually on the top-right).
+ - Click on the icon. A popup should appear. Click on the 'cogs' icon to open the Options page.
 
  
 ### Privacy
 
-Once installed, the extension records a small amount of information to personalize its usage to each user. This data pertains to which plugins are active (see previous section on Options), how many times each plugin is used, and whether each plugin is rated/bookmarked. This information remains on each user's computer and can be adjusted through the Options page. This information is not shared with outside services.
-
-The extension does not record performed searches. Note, however, that the extension sends queries to external APIs. Some of these services may record activity for their own purposes (for example, to demonstrate their relevance to the science community). See the privacy policies of those services for details.
-
-When installing the extension from the chrome web store, Google collects some user information. See their [privacy policy](https://policies.google.com/privacy?hl=en-GB) for details.
+Once installed, the extension records a small amount of information to personalize its behavior to each user. See the [privacy policy](docs/privacy.md). 
 
 
 
