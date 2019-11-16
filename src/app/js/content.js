@@ -440,8 +440,11 @@ class FAIRClaimResult extends React.Component {
         let thislist = this;
         let msg = {action: 'claim', query: this.props.query};
         chrome.runtime.sendMessage(msg, function(response) {
-            let candidates = response.sort(thislist.compareCandidates);
+            let candidates = response.hits.sort(thislist.compareCandidates);
             thislist.setState({candidates: candidates});
+            if (response.preferred !== null) {
+                thislist.selectPlugin(response.preferred);
+            }
         });
     }
 
@@ -457,7 +460,7 @@ class FAIRClaimResult extends React.Component {
         }
     }
 
-    /** Toggle into a plugin-speific view **/
+    /** Toggle into a plugin-specific view **/
     selectPlugin(id) {
         this.setState({type: 'plugin', selection: id});
         this.props.setNavState('selection', this.showList)
