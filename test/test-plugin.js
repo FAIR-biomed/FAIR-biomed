@@ -1,11 +1,11 @@
 /** Unit tests for a single plugin */
 
 
-var assert = require('assert');
-var path = require('path');
-var fs = require('fs-extra')
-var libraryloader = require('../src/build/library-loader.js');
-var strchecker = require('../src/build/string-checker.js');
+let assert = require('assert');
+let path = require('path');
+let fs = require('fs-extra');
+let libraryloader = require('../src/build/library-loader.js');
+let strchecker = require('../src/build/string-checker.js');
 
 
 

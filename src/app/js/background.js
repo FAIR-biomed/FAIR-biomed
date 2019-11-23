@@ -199,7 +199,6 @@ function claimQuery(query, sendResponse) {
  * @returns {*}
  */
 function sanitizeResponse(response) {
-    //developer_log("sanitizing: "+JSON.stringify(response));
     if (is.undefined(response.data)) {
         return {status: 0, data: "invalid response, no data"};
     }
@@ -220,13 +219,12 @@ function sanitizeResponse(response) {
     } else if (is.array(raw)) {
         clean = raw.map(sanitizeOne)
     } else {
-        _.each(raw, function(value, key) {
-            clean[key] = sanitizeOne(value);
-        });
+        Object.keys(raw).map(function(key) {
+          clean[key] = sanitizeOne(raw[key])
+        })
     }
 
     response.data = clean;
-    //developer_log("after sanitizing: "+JSON.stringify(response));
     return response;
 }
 

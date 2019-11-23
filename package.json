@@ -1,6 +1,6 @@
 {
   "name": "FAIR-biomed",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Browser extension accessing open data resources in the biomedical domain",
   "scripts": {
     "clean": "rm -fr dist && mkdir dist",
@@ -29,7 +29,7 @@
     "browserify": "^16.2.3",
     "fs-extra": "^7.0.0",
     "mocha": "^5.2.0",
-    "nyc": "^12.0.2",
+    "nyc": "^14.1.1",
     "uglify-es": "^3.3.9",
     "utf8": "^3.0.0"
   },
@@ -38,7 +38,6 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-motion": "^0.5.2",
-    "sanitize-html": "^1.18.2",
-    "underscore": "^1.9.1"
+    "sanitize-html": "^1.18.2"
   }
 }

@@ -4,9 +4,8 @@
  * **/
 
 
-var fs = require("fs");
-var _ = require("underscore");
-var path = require("path");
+let fs = require("fs");
+let path = require("path");
 
 
 /**
@@ -16,7 +15,7 @@ var path = require("path");
  */
 function isDir(x) {
     return fs.lstatSync(x).isDirectory();
-};
+}
 
 
 /**
@@ -30,7 +29,7 @@ function isJson(x) {
         return false;
     }
     return path.extname(x)===".json";
-};
+}
 
 
 /** determine if a file path is a js, not a test **/
@@ -49,17 +48,16 @@ function isJs(x) {
  * @returns {{subdirs: *, configs: *}}
  */
 function getDirContent(dirpath) {
-    var content = fs.readdirSync(dirpath).map(function(x) {
+    let content = fs.readdirSync(dirpath).map(function(x) {
         return dirpath + path.sep + x;
-    })
+    });
     return {
         "path": dirpath,
         "subdirs": content.filter(isDir),
         "configs": content.filter(isJson),
         "plugins": content.filter(isJs)
     };
-};
-
+}
 
 
 /**
@@ -69,22 +67,21 @@ function getDirContent(dirpath) {
  * @returns
  * array of plugins. Each plugin is augmented with private field _filepath
  */
-function loadPlugins(dirpath, rootdir) {
-    var content = getDirContent(dirpath)
-    var subplugins = _.flatten(_.map(content.subdirs, loadPlugins))
-    var plugins = content.plugins.map(function(x) {
-        var plugin = require(x);
+function loadPlugins(dirpath) {
+    let content = getDirContent(dirpath);
+    let plugins = content.plugins.map(function(x) {
+        let plugin = require(x);
         plugin._filepath = x;
         return plugin
-    })
-
-    return [].concat(plugins).concat(subplugins);
+    });
+    if (content.subdirs.length) {
+        let subdir_plugins = (content.subdirs).map(loadPlugins);
+        subdir_plugins.map(function(subplugins) {
+            plugins = plugins.concat(subplugins);
+        });
+    }
+    return plugins;
 }
-
-
-
-
-/** ************************************************************************ */
 
 
 module.exports = new function() {

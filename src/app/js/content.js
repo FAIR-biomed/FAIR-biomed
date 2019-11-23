@@ -32,7 +32,7 @@ class FAIRIconLogo extends React.Component {
     }
 
     /** check if an icon/logo is present in cache **/
-    getFromCache(path) {
+    getFromCache() {
         let cached = iconcache[this.props.path];
         if (!is.undefined(cached)) return cached;
         return(null);
@@ -42,16 +42,15 @@ class FAIRIconLogo extends React.Component {
      * Fetch asynchronous logo or icon content
      */
     componentDidMount() {
-        // check if present in cache
-        let cached = this.getFromCache(this.props.path)
+        // use a cached version, or fetch anew,
+        let cached = this.getFromCache();
         if (cached===null) {
             if (this.state.data !== cached) {
-                this.setState({data: cached})
+                this.setState({data: cached});
                 return;
             }
-            // fetch anew
             let thislist = this;
-            let msg = {action: this.props.type, path: this.props.path}
+            let msg = {action: this.props.type, path: this.props.path};
             chrome.runtime.sendMessage(msg, function (response) {
                 thislist.setState({data: response.data});
             });
@@ -59,7 +58,7 @@ class FAIRIconLogo extends React.Component {
     }
 
     render() {
-        let cached = this.getFromCache(this.props.path);
+        let cached = this.getFromCache();
         if (this.state.data===null && cached===null) {
             return(null)
         }
@@ -79,7 +78,7 @@ class FAIRIconLogo extends React.Component {
 class FAIROutputTable extends React.Component {
     render() {
         let data = this.props.data.slice(0);
-        if (data.length==0) {
+        if (data.length===0) {
             return (<table></table>);
         }
         // construct a header from first element in data
@@ -152,7 +151,7 @@ class FAIROutputCode extends React.Component {
 }
 
 
-/** Toolbar to goggle between results, info, api-code, external link **/
+/** Toolbar (bottom) with results, info, api-code, external link **/
 class FAIROutputToolbar extends React.Component {
     render() {
         let handlers = this.props.handlers;
@@ -160,20 +159,21 @@ class FAIROutputToolbar extends React.Component {
         let state = this.props.state;
         // determine what icon set to display
         let toolbar_icons = ['data', 'info', 'code', 'external'];
-        toolbar_icons = _.map(toolbar_icons, function(value, key) {
-            let thishandler = handlers[value];
-            let thisicon = icons[value];
-            let addClass = '';
-            if (value === state) {
-                addClass = 'fair-toolbar-selection'
-            }
-            return(
-                <div key={key+ thisicon} className={'fair-col-3 fair-text-center '+addClass}>
-                    <FAIRIconLogo type='icon' path={'fa '+thisicon}
-                                  onClick={thishandler}/>
-                </div>
-            )
-        });
+        toolbar_icons = toolbar_icons.map(function(value, key) {
+                let thishandler = handlers[value];
+                let thisicon = icons[value];
+                let addClass = '';
+                if (value === state) {
+                    addClass = 'fair-toolbar-selection'
+                }
+                return(
+                    <div key={key+ thisicon} className={'fair-col-3 fair-text-center '+addClass}>
+                        <FAIRIconLogo type='icon' path={'fa '+thisicon}
+                                      onClick={thishandler}/>
+                    </div>
+                )
+            });
+        //
         return(<div className='fair-row fair-result-toolbar'>{toolbar_icons}</div>)
     }
 }
@@ -266,27 +266,28 @@ class FAIROutput extends React.Component {
     }
 
     render() {
-        if (this.state.type === 'init') {
+        let type = this.state.type;
+        if (type === 'init') {
             return(<div>Please wait...</div>);
         }
         // either output a single text object, or partition into sections
         let content = [];
-        if (this.state.type === 'data') {
-            if (is.string(this.state.data)) {
-                content = [<FAIROutputSection key='section' data={this.state.data}/>]
-            } else if (is.array(this.state.data)) {
-                content = this.state.data.map(function(value, key) {
+        if (type === 'data') {
+            let data = this.state.data;
+            if (is.string(data)) {
+                content = [<FAIROutputSection key='section' data={data}/>]
+            } else if (is.array(data)) {
+                content = data.map(function(value, key) {
                     return (<FAIROutputSection key={'section'+key} data={value}/>)
                 });
             } else {
-                // treat the content as an object
-                content = _.map(this.state.data, function (value, key) {
-                    return (<FAIROutputSection key={key} title={key} data={value}/>)
-                })
+                content = Object.keys(data).map(function(value, key) {
+                    return (<FAIROutputSection key={key} title={value} data={data[value]}/>)
+                });
             }
-        } else if (this.state.type === 'info') {
+        } else if (type === 'info') {
             content = [<FAIROutputSection key='text-info' data={this.state.info}/>]
-        } else if (this.state.type === 'code') {
+        } else if (type === 'code') {
             content = [<FAIROutputCode key='text-code' data={this.state.code}/>]
         }
         let result_height = (this.props.parentSize[1]-164)+'px';
@@ -297,7 +298,7 @@ class FAIROutput extends React.Component {
                         {content}
                     </div>
                 </div>
-                <FAIROutputToolbar state={this.state.type}
+                <FAIROutputToolbar state={type}
                                    handlers={this._handlers}
                                    icons={this._icons} />
             </div>
@@ -479,13 +480,10 @@ class FAIRClaimResult extends React.Component {
                                        parentSize={this.props.parentSize}/>)
         } else {
             let selection = this.state.selection;
-            let candidate = _.find(this.state.candidates, function(x) {
-                return x['id'] === selection;
-            });
+            let candidate = (this.state.candidates).filter((x) => x['id'] === selection)[0];
             // safety check (this is needed for when user changes the query
             // while already looking at a specific plugin candidate)
             if (is.undefined(candidate)) return (null);
-            // render a component focusing onjust one plugin
             return(
                 <FAIRCandidateSelection className='fair-output'
                             id={selection}
