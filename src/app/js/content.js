@@ -622,13 +622,9 @@ class FAIRContainer extends React.Component {
         }
         let fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
         let offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
-        console.log("viewport: "+JSON.stringify(viewport));
-        console.log("offset: "+JSON.stringify(offset));
-        console.log("bounding: "+JSON.stringify(bounding));
         // determine position of the popup
         let parent_pos = [offset.left+bounding.left, offset.top+bounding.top+fontsize];
         if (bounding.top > viewport.height/2 && bounding.top > (this.state.size[1] + fontsize)/2) {
-            console.log("top is big");
             parent_pos[1] -= (this.state.size[1] + 2*fontsize)/2;
             parent_pos[0] += bounding.width + fontsize;
         }
