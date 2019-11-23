@@ -562,6 +562,7 @@ class FAIRHeaderBody extends React.Component {
     }
 }
 
+
 /**
  * Create a DOM element next to a range with a button.
  * This will act as an anchor in the document for a FAIR container.
@@ -608,7 +609,9 @@ class FAIRContainer extends React.Component {
         let container = this;
         let parent = ReactDOM.findDOMNode(this);
         let anchor = null;
+        // collect information about the anchor point and the browser window
         let bounding = {left: 20, top: 20};
+        let viewport = {width: window.innerWidth, height: window.innerHeight};
         if (!is.null(this.props.range)) {
             bounding = this.props.range.getBoundingClientRect();
             anchor = initFAIRAnchor(this.props.range);
@@ -619,7 +622,19 @@ class FAIRContainer extends React.Component {
         }
         let fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
         let offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
+        console.log("viewport: "+JSON.stringify(viewport));
+        console.log("offset: "+JSON.stringify(offset));
+        console.log("bounding: "+JSON.stringify(bounding));
+        // determine position of the popup
         let parent_pos = [offset.left+bounding.left, offset.top+bounding.top+fontsize];
+        if (bounding.top > viewport.height/2 && bounding.top > (this.state.size[1] + fontsize)/2) {
+            console.log("top is big");
+            parent_pos[1] -= (this.state.size[1] + 2*fontsize)/2;
+            parent_pos[0] += bounding.width + fontsize;
+        }
+        if (bounding.left > viewport.width/2 && bounding.left + this.state.size[0] > viewport.width) {
+            parent_pos[0] = bounding.left - this.state.size[0] - fontsize
+        }
         parent.style.left = parent_pos[0] + 'px';
         parent.style.top = parent_pos[1] + 'px';
         // remember links to the parent and to the anchor
@@ -680,7 +695,7 @@ class FAIRContainer extends React.Component {
         this.setState({move_start: mouse_start, parent_size: parent_size});
         document.addEventListener("mousemove", this.duringResize, false);
     }
-    endMouseDown(e) {
+    endMouseDown() {
         // clean up state (not required, just clean)
         this.setState({parent_pos: null, mouse_start: null, parent_size: null});
         this.state.parent.style.cursor = "auto";
