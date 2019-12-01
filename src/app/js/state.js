@@ -19,7 +19,7 @@ function defaultState() {
 }
 
 
-/** generic function to set the state of a pluing
+/** generic function to set a plugin-specific state (active on/off, rating, etc.)
  *
  * @param id string that identifies the plugin
  * @param value new value for the state parameter
@@ -61,8 +61,8 @@ function incrementPluginCount(id) {
     return new Promise(function () {
         chrome.storage.sync.get(key, function (data) {
             let state = (JSON.stringify(data) !== "{}") ? data[key] : [true, 0, DARK_COUNT];
-            if (state[2] === undefined) {
-                state[2] = DARK_COUNT;
+            if (state[STATE_INDEX_COUNT] === undefined) {
+                state[STATE_INDEX_COUNT] = DARK_COUNT;
             }
             setPluginState(id, state[STATE_INDEX_COUNT] + 1, STATE_INDEX_COUNT);
         });
@@ -73,5 +73,27 @@ function incrementPluginCount(id) {
 /** set the count state for a plugin back to the original value **/
 function resetPluginCount(id) {
     return setPluginState(id, DARK_COUNT, STATE_INDEX_COUNT);
+}
+
+
+/** set an extension-wide option/parameter
+ *
+ * @param id string that identifies the option or setting
+ * @param value new value for the parameter
+ */
+function setCustomization(id, value) {
+    let key = "settings:" + id;
+    return new Promise(function () {
+        chrome.storage.sync.get(key, function (data) {
+            if (JSON.stringify(data) === "{}") {
+                data = {};
+                data[key] = null;
+            }
+            if (data[key] !== value) {
+                data[key] = value;
+                chrome.storage.sync.set(data);
+            }
+        });
+    })
 }
 

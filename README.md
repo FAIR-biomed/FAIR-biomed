@@ -49,10 +49,12 @@ The current plugin library provides access to a varied set of data sources.
 | [HGNC](https://www.genenames.org/) | Gene nomenclature |
 | [IMPC](https://www.mousephenotype.org) | Mouse model phenotypes |
 | [JASPAR](http://jaspar.genereg.net/) | Transcription factor binding profiles |
+| [LNCipedia](https://lncipedia.org/) | non-coding RNAs | 
 | [MARRVEL](http://marrvel.org/) | Disease associations, gene expression |
 | [NCBI](https://www.ncbi.nlm.nih.gov/) | Literature, gene summaries, significance of genetic variation |
 | [Reactome](https://www.reactome.org/) | Pathways |
 | [STRING](https://string-db.org//) | Protein interaction networks |
+| [UCSC](https://genome.ucsc.edu/) | Genomic regions |
 | [Uniprot](https://www.uniprot.org/) | Knowledgebase |
 | [Wikimedia](https://www.wikimedia.org/) | Encyclopaedia and dictionary |
 

@@ -5,26 +5,26 @@
  * */
 
 
-var path = require("path");
-var fs = require("fs-extra");
-var utf8 = require("utf8");
+let path = require("path");
+let fs = require("fs-extra");
+let utf8 = require("utf8");
 
 
-console.log("Setting up output directories")
+console.log("Setting up output directories");
 fs.ensureDirSync("dist");
 
 
 console.log("Preparing manifest");
-var npm_package = JSON.parse(fs.readFileSync("package.json").toString());
-var manifest = fs.readFileSync(__dirname+"/configurations/manifest.json").toString();
-var manifest_file = ['dist', 'manifest.json'].join(path.sep);
+let npm_package = JSON.parse(fs.readFileSync("package.json").toString());
+let manifest = fs.readFileSync(__dirname+"/configurations/manifest.json").toString();
+let manifest_file = ['dist', 'manifest.json'].join(path.sep);
 manifest = manifest.replace("_version_", npm_package['version']);
 fs.writeFileSync(manifest_file, manifest);
 
 
-console.log("Reading bundle configuration files")
-var dependencies_path = "./configurations/dependencies-"
-var dependencies = {};
+console.log("Reading bundle configuration files");
+let dependencies_path = "./configurations/dependencies-";
+let dependencies = {};
 for (let type of ["development", "production", "background"]) {
     dependencies[type] = require(dependencies_path+type)
 }
@@ -32,12 +32,12 @@ for (let type of ["development", "production", "background"]) {
 /** process an array of dependency declarations - copy files from one place to another **/
 function build_static(dependencies_array) {
     dependencies_array.forEach(function(x) {
-        var target = x["to"];
+        let target = x["to"];
         // ensure target directory is present
         fs.ensureDirSync(path.dirname(target));
         // read contents of all the source files
-        var result = x['from'].map(function(frompath) {
-            if (frompath=="") {
+        let result = x['from'].map(function(frompath) {
+            if (frompath === "") {
                 return "";
             }
             return utf8.encode(fs.readFileSync(frompath)+"\n");
@@ -46,7 +46,7 @@ function build_static(dependencies_array) {
     })
 }
 
-var type = process.argv[2]
+let type = process.argv[2];
 
 console.log("Building browser-side bundle")
 build_static(dependencies["background"]);
@@ -61,8 +61,8 @@ if (type==="development" || type==="production") {
 
 if (type==='production') {
     console.log("Ensuring quiet execution in production mode");
-    var background_file = ['dist','js', 'background.js'].join(path.sep);
-    var background = fs.readFileSync(background_file);
+    let background_file = ['dist','js', 'background.js'].join(path.sep);
+    let background = fs.readFileSync(background_file);
     background += '\n\nverbose=false;\n';
     fs.writeFileSync(background_file, background);
 }

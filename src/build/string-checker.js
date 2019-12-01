@@ -4,28 +4,28 @@
  * **/
 
 
-var sanitizer = require("sanitize-html")
+let sanitizer = require("sanitize-html");
 
 // minimal set of tags allowed (e.g. for titles)
-var sanitize_config_strict = {
+let sanitize_config_strict = {
     allowedTags: [ 'b', 'i', 'em', 'strike'],
     allowedAttributes: {}
-}
+};
 // small but more expressive set of tags (e.g. for longer descriptions)
-var sanitize_config = {
+let sanitize_config = {
     allowedTags: [ 'h2', 'h3', 'h4', 'h5', 'h6', 'blockquote', 'code',
         'p', 'a', 'b', 'i', 'strong', 'em', 'strike', 'hr', 'br', 'pre'],
     allowedAttributes: {
         a: ['href', 'name', 'target'],
         p: ['class'],
     }
-}
+};
 
 
 module.exports = new function() {
 
     /** set of characters allowed in a plugin id **/
-    var okchars = ["abcdefghijklmnopqrstuvwxyz",
+    let okchars = ["abcdefghijklmnopqrstuvwxyz",
         "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
         "012346789", "._-"].join("");
 
@@ -38,16 +38,16 @@ module.exports = new function() {
             return [];
         }
         // check each characer of x for overlap with string_chars
-        var badchars = x.split("").filter(function (y) {
+        let badchars = x.split("").filter(function (y) {
             return !okchars.includes(y)
         })
         return badchars;
-    }
+    };
 
     /** determine if a string snippet is already sanitized/clean **/
     this.isClean = function(x) {
         return x === sanitizer(x, sanitize_config);
-    }
+    };
 
     /** determine if a string snippet is already sanitized/clean **/
     this.isCleanStrict = function(x) {

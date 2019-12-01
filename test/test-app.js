@@ -1,7 +1,6 @@
 /** Unit tests for library build */
 
-var assert = require('assert');
-var path = require("path");
+let assert = require('assert');
 
 
 /* ==========================================================================

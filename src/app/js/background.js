@@ -10,6 +10,12 @@
 let icons = {};
 let logos = {};
 
+// settings
+let settings = {
+    auto_last: 0,
+    last_used: null
+};
+
 // set debugging to True to get some console.log messages
 let verbose = true;
 function developer_log(x) {
@@ -137,9 +143,20 @@ function fetchPluginStatus(id) {
     });
 }
 
+/** fetch an extension setting from the chrom storage **/
+function fetchExtensionSetting(id) {
+    let key = "settings:" + id;
+    chrome.storage.sync.get(key, function (data) {
+        settings[id] = (JSON.stringify(data) !== "{}") ? data[key] : null;
+    });
+}
+
 
 /** ask all plugins to claim a certain query string **/
 function claimQuery(query, sendResponse) {
+    // refresh values of settings
+    fetchExtensionSetting("last_used");
+    fetchExtensionSetting("auto_last");
     // assess which plugins are active, their usage counts, etc.
     let status = library["names"].map(fetchPluginStatus);
     let plugins = library["plugins"];
@@ -162,7 +179,15 @@ function claimQuery(query, sendResponse) {
             };
         });
         let hits = result.filter((x)=> x!== null);
-        sendResponse(hits);
+        let preferred = null;
+        // check if user has a preferred plugin
+        if (settings["auto_last"]) {
+            let last_used = settings["last_used"];
+            if (hits.filter((x) => x.id == last_used).length) {
+                preferred = settings["last_used"];
+            }
+        }
+        sendResponse({preferred: preferred, hits: hits});
     })
 }
 
@@ -174,7 +199,6 @@ function claimQuery(query, sendResponse) {
  * @returns {*}
  */
 function sanitizeResponse(response) {
-    //developer_log("sanitizing: "+JSON.stringify(response));
     if (is.undefined(response.data)) {
         return {status: 0, data: "invalid response, no data"};
     }
@@ -195,13 +219,12 @@ function sanitizeResponse(response) {
     } else if (is.array(raw)) {
         clean = raw.map(sanitizeOne)
     } else {
-        _.each(raw, function(value, key) {
-            clean[key] = sanitizeOne(value);
-        });
+        Object.keys(raw).map(function(key) {
+          clean[key] = sanitizeOne(raw[key])
+        })
     }
 
     response.data = clean;
-    //developer_log("after sanitizing: "+JSON.stringify(response));
     return response;
 }
 
@@ -221,7 +244,6 @@ function getExternal(plugin, queries) {
     var urls = queries.map(function(x, i) {
         return plugin.external(x, i);
     });
-    developer_log("considering urls: "+JSON.stringify(urls));
     var urls = urls.filter(x => !is.null(x));
     return urls[0];
 }
@@ -241,13 +263,10 @@ function processQuery(id, queries, sendResponse, index) {
         index = 0;
     }
 
-    developer_log("processing query: "+JSON.stringify(queries));
-
     // get plugin details
     let plugin = library["plugins"][id];
     let query = queries.slice(-1)[0].trim();
     let url = plugin.url(query, index);
-    developer_log("url: "+url);
 
     // augment a response object with plugin-specific metadata
     let buildSendResponse = function(response) {
@@ -273,7 +292,7 @@ function processQuery(id, queries, sendResponse, index) {
     };
 
     // execute the query
-    developer_log("processing query");
+    //developer_log("processing query");
     let promise = new Promise(function(resolve, reject) {
         if (url === null) {
             resolve(sanitizeResponse(plugin.process(query)));
@@ -296,7 +315,7 @@ function processQuery(id, queries, sendResponse, index) {
             developer_log("got error: " + xhr.status);
             reject('error  or page not available');
         };
-        developer_log("sending GET request to: "+url);
+        //developer_log("sending GET request to: "+url);
         xhr.open("GET", url);
         if (!url.endsWith(".png")) {
             xhr.setRequestHeader('Accept', 'application/json');
@@ -350,20 +369,17 @@ chrome.runtime.onMessage.addListener(
         /** Handle requests for plugin claims and processing **/
         if (request.action==="claim") {
             claimQuery(request.query, sendResponse);
-            return true;
         } else if (request.action==="run") {
             processQuery(request.id, [request.query], sendResponse);
-            return true;
+            setCustomization("last_used", request.id);
         } else if (request.action==="info") {
             processInfo(request.id, sendResponse);
-            return true;
         } else if (request.action==="rate") {
             setPluginRating(request.id, request.rating).then(sendResponse);
-            return true;
         } else if (request.action==="update_count") {
             incrementPluginCount(request.id).then(sendResponse);
-            return true;
         }
+        return true;
 });
 
 

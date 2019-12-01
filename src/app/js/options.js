@@ -93,6 +93,18 @@ class PluginInfo extends React.Component {
 }
 
 
+/** An on/off switch **/
+class SliderSwitch extends React.Component {
+    render() {
+        return(<span className={"switch"}>
+                    <input type="checkbox" value={this.props.value} checked={this.props.value}
+                           onChange={this.props.onChange}/>
+                    <span className="slider round"></span>
+                </span>)
+    }
+}
+
+
 /** Display a toggle switch and star-status **/
 class PluginState extends React.Component {
     constructor(props) {
@@ -123,11 +135,7 @@ class PluginState extends React.Component {
         }
         return(
             <div>
-                <span className={"switch"}>
-                    <input type="checkbox" value={this.state.active} checked={this.state.active}
-                           onChange={this.handleActivation}/>
-                    <span className="slider round"></span>
-                </span>
+                <SliderSwitch value={this.state.active} onChange={this.handleActivation}/>
                 <span className="fair-rating"
                       dangerouslySetInnerHTML={{__html: starsvg}}
                       onClick={this.handleRating}></span>
@@ -246,6 +254,34 @@ function resetAllPluginCounts() {
     });
 }
 
+/** A switch for recording a boolean setting using chrom storage **/
+class BooleanSetting extends React.Component {
+    constructor(props) {
+        super(props);
+        this.toggle = this.toggle.bind(this);
+        this.state = {value: 0};
+    }
+    componentDidMount() {
+        let thislist = this;
+        let key = "settings:" + this.props.setting;
+        chrome.storage.sync.get(key, function (data) {
+            let value = (JSON.stringify(data) !== "{}") ? data[key] : 0;
+            thislist.setState({value: value})
+        });
+    }
+    toggle() {
+        let id = this.props.setting;
+        this.setState(function(prevState) {
+            let newvalue = (prevState.value + 1) % 2;
+            setCustomization(id, newvalue);
+            return ({value: newvalue})
+        })
+    }
+    render() {
+        return(<SliderSwitch value={this.state.value} onChange={this.toggle}/>)
+    }
+}
+
 
 /** create the plugin details when the page loads **/
 document.addEventListener("DOMContentLoaded", function () {
@@ -258,4 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.getElementById('fair-library')
             );
     }, 0);
+    ReactDOM.render(
+        <BooleanSetting setting={"auto_last"}/>,
+        document.getElementById("fair-auto-last")
+    );
 });
