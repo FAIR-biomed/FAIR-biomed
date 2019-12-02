@@ -20,6 +20,11 @@ let manifest = fs.readFileSync(__dirname+"/configurations/manifest.json").toStri
 let manifest_file = ['dist', 'manifest.json'].join(path.sep);
 manifest = manifest.replace("_version_", npm_package['version']);
 fs.writeFileSync(manifest_file, manifest);
+//manifest for Firefox
+let manifestfx = fs.readFileSync(__dirname+"/configurations/manifest-firefox.json").toString();
+let manifestfx_file = ['dist', 'manifest-firefox.json'].join(path.sep);
+manifestfx = manifestfx.replace("_version_", npm_package['version']);
+fs.writeFileSync(manifestfx_file, manifestfx);
 
 
 console.log("Reading bundle configuration files");
