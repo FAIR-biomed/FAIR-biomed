@@ -9,6 +9,11 @@ let path = require("path");
 let fs = require("fs-extra");
 let utf8 = require("utf8");
 
+// detect build mode - development or production
+// This is specified by a command line positional argument
+let type = process.argv[2];
+
+
 // detect browser - specified by an environment variable
 // e.g. BROWSER=chrome npm run build-static
 // e.g. BROWSER=firefox npm run build-static
@@ -25,12 +30,9 @@ fs.ensureDirSync("dist");
 
 console.log("Preparing manifest");
 let npm_package = JSON.parse(fs.readFileSync("package.json").toString());
-let manifest = fs.readFileSync(__dirname+"/configurations/manifest-chrome.json").toString();
+let manifest_template = fs.readFileSync(__dirname+"/configurations/manifest-"+browser+".json").toString();
 let manifest_file = ['dist', 'manifest.json'].join(path.sep);
-if (browser === "firefox") {
-    manifest = fs.readFileSync(__dirname+"/configurations/manifest-firefox.json").toString();
-}
-manifest = manifest.replace("_version_", npm_package['version']);
+let manifest = manifest_template.replace("_version_", npm_package['version']);
 fs.writeFileSync(manifest_file, manifest);
 
 
@@ -58,12 +60,11 @@ function build_static(dependencies_array) {
     })
 }
 
-let type = process.argv[2];
 
 console.log("Building browser-side bundle");
 build_static(dependencies["background"]);
 
-if (type==="development" || type==="production") {
+if (type === "development" || type === "production") {
     console.log("Building client-side bundle ("+type+")");
     build_static(dependencies[type]);
 } else {
@@ -71,7 +72,7 @@ if (type==="development" || type==="production") {
 }
 
 
-if (type==='production') {
+if (type === 'production') {
     console.log("Ensuring quiet execution in production mode");
     let background_file = ['dist','js', 'background.js'].join(path.sep);
     let background = fs.readFileSync(background_file);
