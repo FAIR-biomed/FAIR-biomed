@@ -9,6 +9,15 @@ let path = require("path");
 let fs = require("fs-extra");
 let utf8 = require("utf8");
 
+// detect browser - specified by an environment variable
+// e.g. BROWSER=chrome npm run build-static
+// e.g. BROWSER=firefox npm run build-static
+let browser = process.env.BROWSER;
+if (browser === undefined || browser !== "firefox") {
+    browser = "chrome"
+}
+console.log("Preparing extension (" + browser+ ")");
+
 
 console.log("Setting up output directories");
 fs.ensureDirSync("dist");
@@ -16,15 +25,13 @@ fs.ensureDirSync("dist");
 
 console.log("Preparing manifest");
 let npm_package = JSON.parse(fs.readFileSync("package.json").toString());
-let manifest = fs.readFileSync(__dirname+"/configurations/manifest.json").toString();
+let manifest = fs.readFileSync(__dirname+"/configurations/manifest-chrome.json").toString();
 let manifest_file = ['dist', 'manifest.json'].join(path.sep);
+if (browser === "firefox") {
+    manifest = fs.readFileSync(__dirname+"/configurations/manifest-firefox.json").toString();
+}
 manifest = manifest.replace("_version_", npm_package['version']);
 fs.writeFileSync(manifest_file, manifest);
-//manifest for Firefox
-let manifestfx = fs.readFileSync(__dirname+"/configurations/manifest-firefox.json").toString();
-let manifestfx_file = ['dist', 'manifest-firefox.json'].join(path.sep);
-manifestfx = manifestfx.replace("_version_", npm_package['version']);
-fs.writeFileSync(manifestfx_file, manifestfx);
 
 
 console.log("Reading bundle configuration files");
@@ -53,7 +60,7 @@ function build_static(dependencies_array) {
 
 let type = process.argv[2];
 
-console.log("Building browser-side bundle")
+console.log("Building browser-side bundle");
 build_static(dependencies["background"]);
 
 if (type==="development" || type==="production") {

@@ -763,9 +763,9 @@ function triggerFAIRContainer() {
 /**
  * Register listeners for keypresses
  */
-window.addEventListener('keypress', function(e){
-    // keycode 26 means 'Z'
-    if (e.shiftKey && e.ctrlKey && e.keyCode === 26) {
+window.addEventListener('keydown', function(e){
+    // keycode 90 means 'Z' (with a shift)
+    if (e.shiftKey && e.ctrlKey && e.keyCode === 90) {
         triggerFAIRContainer();
     }
 }, false);

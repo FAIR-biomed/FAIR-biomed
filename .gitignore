@@ -19,6 +19,5 @@ library/plugin_status
 # compiled/distribution
 dist
 
-# historical files uploaded to the chrome store
-chrome-store
-
+# published files uploaded to the chrome/firefox store
+archive
