@@ -1,0 +1,16 @@
+site_name: FAIR-biomed
+theme: cinder
+
+site_description: "FAIR-biomed is a browser extension for accessing open data resources in the biomedical domain"
+repo_url: "https://github.com/FAIR-biomed/FAIR-biomed"
+copyright: "FAIR-biomed is licensed under the MIT license"
+
+nav:
+- Home: index.md
+- Install: install.md
+- Plugins: plugins.md
+- Contribute: contributing.md
+- Privacy: privacy.md
+
+markdown_extensions:
+  - admonition

@@ -9,7 +9,7 @@ tmp
 .nyc*
 *~
 src/app/cache
-
+site
 
 # resource helper files
 *map

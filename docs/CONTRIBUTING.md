@@ -1,6 +1,6 @@
-# Contributing to the FAIR-science browser extension
+# Contributing
 
-Contributions are welcome. 
+Contributions to the FAIR-biomed browser extension are welcome. 
 
 
 ## Plugins
@@ -19,6 +19,10 @@ To incorporate a new plugin into the main extension:
  2. Fork the parent repo and develop a new plugin within that fork. 
  3. Make sure the plugin passes unit tests and contains appropriate tests of its own. Check that it can be incorporated into the main library, and produces desired output in the browser.
  5. Send a pull request to the parent repo.  
+
+## Code structure
+
+The repo source code is organized in distinct parts. See the [code structure](structure.md). 
 
 
 ## App

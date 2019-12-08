@@ -4,7 +4,7 @@
 
 If you would only like to experiment with the repo, clone it into a local directory. 
 
-If you would like to develop new components and merge with the parent repo, make a fork first and then clone the forked version. (Also see the [guide for contributors](CONTRIBUTING.md)).
+If you would like to develop new components and merge with the parent repo, make a fork first and then clone the forked version. (Also see the [guide for contributors](contributing.md)).
 
 
 ## Install dependencies
