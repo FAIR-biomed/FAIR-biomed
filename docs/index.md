@@ -116,4 +116,4 @@ The idea of augmenting web pages with additional information has a long history.
 
 Feedback and contributions are welcome. Please raise an issue in the github repository.
 
-To incorporate a new data resource or plugin, read how you can [contribute](contributing.md).
+To incorporate a new data resource or plugin, see the documentation on [contributing](contributing.md).
