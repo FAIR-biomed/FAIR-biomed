@@ -382,9 +382,7 @@ div.fair-header-body {
 
 /** Header **/
 div.fair-header {
-    padding-top: 0.3em;
-    padding-left: 0.3em;
-    padding-right: 0.3em;
+    padding: 0.3em;
     padding-bottom: 0.6em;
 }
 div.fair-button-panel {
@@ -423,7 +421,10 @@ div.fair-header input[type="text"]:focus {
     margin-bottom: -2px;
     box-shadow: none;
 }
-
+div.fair-header span.fair-icon {
+    width: 40px;
+    display: inline-block;
+}
 ul.fair-list li.fair-candidate, li.fair-candidate {
     margin-bottom: 0.4em;
     margin-top: 0.4em;
@@ -490,9 +491,38 @@ span.fair-anchor {
 }
 
 
+/** Toolbar at the bottom **/
+div.fair-result-toolbar {
+    height: 48px;
+    background-color: #22b5bb;
+    vertical-align: middle;
+}
+div.fair-result-toolbar-button {
+    text-align: center;
+    line-height: 52px;
+}
+div.fair-result-toolbar .fair-icon {
+    display: inline-block;
+    cursor: pointer;
+}
+div.fair-result-toolbar span {
+    border-top: 4px solid #22b5bb;
+    height: 100%;
+}
+div.fair-result-toolbar .fair-toolbar-selection span {
+    border-top: 4px solid #ffffff;
+}
+div.fair-result-toolbar .fair-icon svg {
+    margin-top: -4px;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+    height: 24px;
+    width: 40px;
+    cursor: pointer;
+}
+
 
 /** Output **/
-
 div.fair-result {
     margin-top: 0.8em;
     padding-top: 1em;
@@ -530,7 +560,6 @@ div.fair-result div.fair-subsection {
     padding-top: 0.5em;
 }
 div.fair-result table {
-    padding-top: 0.2em;
     padding: 0.2em 0em 0.2em 0em;
     line-height: 1.1em;
 }
@@ -550,15 +579,6 @@ div.fair-result table tr {
 div.fair-result table img, div.fair-result table svg {
     max-width: 110%;
 }
-div.fair-result-toolbar svg {
-    margin-top: 1em;
-    padding-left: 10px;
-    padding-right: 10px;
-    cursor: pointer;
-}
-div.fair-result-toolbar .fair-toolbar-selection span {
-    border-top: 4px solid #ffffff;
-}
 .fair-icon {
     margin-left: auto;
     margin-right: auto;
@@ -566,7 +586,7 @@ div.fair-result-toolbar .fair-toolbar-selection span {
 div.fair-outer svg {
     display: inline;
 }
-.fair-header .fair-icon svg, .fair-result-toolbar .fair-icon svg {
+.fair-header .fair-icon svg {
     padding-top: 0.1em;
     padding-bottom: 0.1em;
     max-width: 36px;
@@ -576,12 +596,6 @@ div.fair-outer svg {
     padding-top: 0.3em;
     padding-bottom: 0px;
     width: 34px;
-}
-.fair-result-toolbar .fair-icon {
-    display: inline-block;
-}
-.fair-result-toolbar .fair-icon svg {
-    width: 40px;
 }
 .fair-candidate .fair-icon svg {
     width: 20px;
@@ -596,7 +610,6 @@ div.fair-outer svg {
 
 /** possible classes for use within plugins **/
 div.fair-result .disclaimer, #fair-library .disclaimer {
-    /** font-size: larger; **/
     color: #882222;
     background-color: #ffdddd;
     border: #882222;
@@ -605,7 +618,6 @@ div.fair-result .disclaimer, #fair-library .disclaimer {
     margin: 1em 0em 1.5em 0em;
 }
 div.fair-result p.examples, #fair-library p.examples {
-    /** font-size: larger; **/
     color: #222244;
     background-color: #f0f0ff;
     border: #222244;

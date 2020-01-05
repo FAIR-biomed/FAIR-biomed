@@ -167,7 +167,7 @@ class FAIROutputToolbar extends React.Component {
                     addClass = 'fair-toolbar-selection'
                 }
                 return(
-                    <div key={key+ thisicon} className={'fair-col-3 fair-text-center '+addClass}>
+                    <div key={key+ thisicon} className={'fair-col-3 fair-result-toolbar-button '+addClass}>
                         <FAIRIconLogo type='icon' path={'fa '+thisicon}
                                       onClick={thishandler}/>
                     </div>
