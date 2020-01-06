@@ -24,10 +24,38 @@ it('claims queries like variant accession numbers', function () {
     assert.equal(plugin.claim('VCV000663254'), 1);
 });
 
-it('generates different urls for round 1 and round 2', function () {
+it('claims genomic positions', function () {
+    assert.equal(plugin.claim('10:123'), 0.95);
+    assert.equal(plugin.claim('chr10:1234'), 0.95);
+    assert.equal(plugin.claim('chr5:1,000,000'), 0.95);
+});
+
+it('claims genomic intervals', function () {
+    assert.equal(plugin.claim('10:123-456'), 0.95);
+    assert.equal(plugin.claim('chr10 1000 2000'), 0.95);
+});
+
+it('generates different urls for round 1 and round 2 (symbols)', function () {
     let result1 = plugin.url('LEPR', 0);
     let result2 = plugin.url('LEPR', 1);
-    assert.ok(result2.length !== result1.length)
+    assert.ok(result2.length !== result1.length);
+});
+
+it('generates different urls for round 1 and round 2 (positions)', function () {
+    let result1 = plugin.url('10:123', 0);
+    let result2 = plugin.url('10:123', 1);
+    assert.ok(result2.length !== result1.length);
+});
+
+it('generates urls with both genome37 and genome38', function () {
+    let result = plugin.url('10:102030', 0);
+    assert.ok(result.includes("37"));
+    assert.ok(result.includes("38"));
+});
+
+it('generates urls without string chr', function () {
+    let result = plugin.url('chr10 123', 0);
+    assert.ok(!result.includes("chr10"));
 });
 
 it('detect response with no hits', function() {

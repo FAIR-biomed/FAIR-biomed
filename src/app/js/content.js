@@ -510,13 +510,11 @@ class FAIRHeaderBody extends React.Component {
         let querystr = "";
         if (!is.null(this.props.range)) {
             querystr = this.props.range.toString();
+            querystr = (querystr.trim()).replace(/\s+/g, ' ');
         }
-        /**
-         *
-         * @type {{
-         * query: string, current string query for search,
+        /* query: string, current string query for search,
          * display: string either 'search' or  'selection',
-         * navclick: function called when navigation icon is clicked}}
+         * navclick: function called when navigation icon is clicked
          */
         this.state = {query: querystr, display: 'search', navClick: null}
     }

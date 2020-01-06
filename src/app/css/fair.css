@@ -402,6 +402,7 @@ div.fair-button-panel svg path {
 
 div.fair-header input[type="text"] {
     border: 0px;
+    display: inline-block;
     background-color: inherit;
     box-shadow: none;
     color: inherit;
@@ -496,18 +497,18 @@ div.fair-result-toolbar {
     height: 48px;
     background-color: #22b5bb;
     vertical-align: middle;
+    overflow: hidden;
 }
-div.fair-result-toolbar-button {
+div.fair-result-toolbar .fair-result-toolbar-button {
     text-align: center;
-    line-height: 52px;
 }
 div.fair-result-toolbar .fair-icon {
     display: inline-block;
+    padding-top: 12px;
     cursor: pointer;
 }
 div.fair-result-toolbar span {
     border-top: 4px solid #22b5bb;
-    height: 100%;
 }
 div.fair-result-toolbar .fair-toolbar-selection span {
     border-top: 4px solid #ffffff;
@@ -548,6 +549,9 @@ div.fair-result .fair-section svg {
     width: 100%;
     max-width: 100%;
 }
+div.fair-result p {
+    line-height: 1em;
+}
 div.fair-result ul {
     padding-left: 0px;
 }
@@ -561,6 +565,7 @@ div.fair-result div.fair-subsection {
 }
 div.fair-result table {
     padding: 0.2em 0em 0.2em 0em;
+    margin: 0;
     line-height: 1.1em;
 }
 div.fair-result table, div.fair-result thead, div.fair-result tbody {
