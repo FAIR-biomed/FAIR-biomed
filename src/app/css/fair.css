@@ -12,7 +12,7 @@ div.fair-outer {
     z-index: 100000;
 }
 
-div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-12 {
+div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-10, div.fair-outer .fair-col-12 {
     position: relative;
     display: block;
     float: left;
@@ -22,8 +22,11 @@ div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col
 div.fair-outer .fair-col-12, div.fair-row .fair-col-12 {
     width: 100%;
 }
+div.fair-outer .fair-col-10, div.fair-row .fair-col-10 {
+    width: 80.0%;
+}
 div.fair-outer .fair-col-8, div.fair-row .fair-col-8 {
-    width: 60.00%;
+    width: 60.0%;
 }
 div.fair-outer .fair-col-9, div.fair-row .fair-col-9 {
     width: 68.4%;
@@ -52,9 +55,12 @@ div.fair-row {
     margin-left: 0px !important;
     margin-right: 0px;
 }
-.fair-row .fair-col-2, .fair-row .fair-col-8 {
+.fair-row .fair-col-2, .fair-row .fair-col-8, .fair-row .fair-col-10 {
     margin: auto;
     overflow: auto;
+}
+#fair-library div.fair-info .fair-col-right {
+    float: right;
 }
 .fair-row, .fair-contain er, span {
     box-sizing: border-box;
@@ -180,7 +186,7 @@ ul.fair-list li {
 
 /** Options page **/
 div.fair-options {
-    max-width: 900px;
+    max-width: 664px;
     padding-bottom: 120px;
 }
 div.fair-options h1.fair-options {
@@ -248,7 +254,7 @@ div.fair-options div.fair-reset-button:active {
     margin-top: 0.1em;
     margin-bottom: 0.1em;
     font-weight: 200;
-    color: #999999;
+    color: #888888;
 }
 #fair-library .fair-info {
     clear: both;
@@ -260,7 +266,9 @@ div.fair-options div.fair-reset-button:active {
     margin-top: 1.5em;
 }
 #fair-library .fair-badge {
+    display: inline-block;
     margin-right: 8px;
+    margin-bottom: 4px;
     padding: 4px 8px 4px 8px;
     border-radius: 3px;
     background-color: #22b5bb;
@@ -277,12 +285,11 @@ div.fair-options div.fair-reset-button:active {
     height: 28px;
 }
 .fair-rating svg path {
-    /** fill: #5bc0de; **/
     fill: #22b5bb;
 }
 div.fair-options img.fair-logo {
     max-height: 60px;
-    max-width: 120px;
+    max-width: 100%;
 }
 
 /**

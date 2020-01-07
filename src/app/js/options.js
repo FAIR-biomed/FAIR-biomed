@@ -185,7 +185,7 @@ class LibraryItem extends React.Component {
                 </div>
                 <div className="fair-row fair-info">
                     <div className="fair-col-2"></div>
-                    <div className="fair-col-8 fair-info">
+                    <div className="fair-col-10 fair-info fair-col-right">
                         <PluginInfo namespace={plugin.namespace} info={plugin.info} visible={this.state.info}/>
                     </div>
                 </div>
