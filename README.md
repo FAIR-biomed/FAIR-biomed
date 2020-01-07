@@ -1,7 +1,7 @@
 # FAIR-biomed
 
 
-<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/img/ChromeWebStore_Badge_v2_206x58.png"></a>
+<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/ChromeWebStore_Badge_v2_206x58.png"></a>
 
 FAIR-biomed is a browser extension for accessing open data resources in the biomedical domain. 
 

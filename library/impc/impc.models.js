@@ -9,7 +9,7 @@ module.exports = new function() {
     this.id = 'impc.models';
     this.title = 'Mouse Models';
     this.subtitle = 'Phenotypes from IMPC and MGI';
-    this.tags = ['mouse', 'mice', 'phenotype', 'gene', 'allele'];
+    this.tags = ['mouse', 'phenotype', 'gene', 'allele'];
 
     /** accompanying resources **/
     this.logo = 'impc-logo.png';

@@ -1,11 +1,11 @@
 # Contributing
 
-Contributions to the FAIR-biomed browser extension are welcome. 
+Contributions to the FAIR-biomed browser extension are welcome. Please raise an issue in the github repository. 
 
 
 ## Plugins
 
-Plugins are meant to be lightweight components that link between the core app and science APIs.
+Plugins are meant to be lightweight components that link the core app to external APIs. 
 
  - **Short**. Keep computations within each plugin to a minimum for performance and readability. 
  - **Simple**. Use pure javascript without any external libraries.
@@ -15,14 +15,10 @@ Plugins are meant to be lightweight components that link between the core app an
 
 To incorporate a new plugin into the main extension:
 
- 1. Create an issue in the parent repo with a proposal for a new plugin. This is not a strict requirement, but is a means to gather suggestions and ideas.
+ 1. Create a github issue in the parent repo with a proposal for a new plugin. This is a means to gather suggestions and ideas.
  2. Fork the parent repo and develop a new plugin within that fork. 
  3. Make sure the plugin passes unit tests and contains appropriate tests of its own. Check that it can be incorporated into the main library, and produces desired output in the browser.
  5. Send a pull request to the parent repo.  
-
-## Code structure
-
-The repo source code is organized in distinct parts. See the [code structure](structure.md). 
 
 
 ## App
