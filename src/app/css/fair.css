@@ -425,7 +425,7 @@ div.fair-header input[type="text"] {
 div.fair-header input[type="text"]:focus {
     outline: none;
     border: 0px;
-    border-bottom: solid 2px; #333333;
+    border-bottom: solid 2px;
     margin-bottom: -2px;
     box-shadow: none;
 }

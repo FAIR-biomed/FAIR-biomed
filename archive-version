@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# script to prepare zip files for archiving
+#
+# USAGE:
+#  ./archive-version 1.2.3
+#
+# This will build for production and zip
+# Output files:
+#  - FAIR-biomed-chrome-1.2.3.zip
+#  - FAIR-biomed-firefox-1.2.3.zip
+#
+# Output files will be moved into a directory "archive"
+
+if [ -z $1 ]
+then
+  echo "USAGE: ./archive-version VERSION_NUMBER"
+  exit
+fi
+
+
+# prepare production builds for browsers
+for BROWSER in chrome firefox
+do
+  npm run clean
+  BROWSER=$BROWSER npm run production
+  cd dist
+  zip -r FAIR-biomed-$BROWSER-$1.zip *
+  mv FAIR-biomed-$BROWSER-$1.zip ../
+  cd ..
+  chmod u+r-wx FAIR-biomed-$BROWSER-$1.zip
+done
+
+
+# prepare a zip with source code
+zip -r FAIR-biomed-src-$1.zip docs library src test \
+		package.json \
+		README.md CONTRIBUTING.md .gitignore
+
+
+# move files into archive folder
+mv FAIR-biomed-*.zip archive/

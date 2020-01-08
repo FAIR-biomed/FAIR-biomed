@@ -1,6 +1,6 @@
 {
   "name": "FAIR-biomed",
-  "version": "0.0.23",
+  "version": "0.0.24",
   "description": "Browser extension accessing open data resources in the biomedical domain",
   "scripts": {
     "clean": "rm -fr dist && mkdir dist",
@@ -10,7 +10,7 @@
     "build-dev": "node src/build/build-static.js development",
     "build-prod": "node src/build/build-static.js production",
     "build": "npm run babel; npm run build-dev; npm run build-lib",
-    "production": "npm run clean; npm run build-lib; npm run babel-prod; npm run build-prod;",
+    "production": "npm run clean; npm run test; npm run build-lib; npm run babel-prod; npm run build-prod;",
     "upgrade-version": "node src/build/increase-version.js",
     "test": "node_modules/mocha/bin/_mocha",
     "test-app": "node_modules/mocha/bin/_mocha test/test-app.js",
