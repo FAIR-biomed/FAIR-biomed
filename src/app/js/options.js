@@ -251,28 +251,19 @@ class LibraryList extends React.Component {
  * A grid/matrix showing all available plugin logos
  */
 class LibraryGrid extends React.Component {
-    constructor(props) {
-        super(props);
-        console.log("LibraryGrid constructor");
-
-    }
-
     render() {
-        console.log("LibraryGrid render");
         let plugins = this.props.plugins;
-        let plugin_names = this.props.names
-        console.log("names: "+JSON.stringify(plugin_names));
-        //console.log("plugins: "+JSON.stringify(this.props.plugins));
         let logo_filenames = new Set()
-        let logos = plugin_names.map(function(id) {
+        let logos = this.props.names.map(function(id) {
             let plugin = plugins[id];
-            if (logo_filenames.has(plugin.logo)) {
-                return(null);
-            }
+            if (logo_filenames.has(plugin.logo)) return (null);
             logo_filenames.add(plugin.logo);
-            return (<div className="fair-library-grid-element fair-center-center">
-                <PluginLogo id={plugin.id} src={plugin.logo} namespace={plugin.namespace}/>
-            </div>);
+            return (
+                <div className="fair-library-grid-element fair-center-center"
+                     key={"grid-logo-"+plugin.id}>
+                    <PluginLogo id={plugin.id} src={plugin.logo} namespace={plugin.namespace}/>
+                </div>
+            );
         });
         return (<div>{logos}</div>);
     }
@@ -325,9 +316,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <LibraryList names={library['names']} plugins={library['plugins']} className="container"/>,
                 document.getElementById('fair-library')
             );
-    }, 0);
-    setTimeout(() => {
-        console.log("rending grid");
         ReactDOM.render(
             <LibraryGrid names={library['names']} plugins={library['plugins']} className="container"/>,
             document.getElementById('fair-library-grid')
