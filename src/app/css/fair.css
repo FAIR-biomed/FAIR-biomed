@@ -292,6 +292,20 @@ div.fair-options img.fair-logo {
     max-width: 100%;
 }
 
+/** library grid **/
+#fair-library-grid .fair-library-grid-element {
+    display: inline-block;
+    max-width: 13%;
+    width: 13%;
+    text-align: center;
+    margin: 4px;
+}
+#fair-library-grid img {
+    max-width: 100%;
+    max-height: 45px;
+}
+
+
 /**
  * Styles for on/off switch - copied from https://www.w3schools.com/howto/howto_css_switch.asp
  **/
@@ -637,4 +651,5 @@ div.fair-result p.examples, #fair-library p.examples {
     padding: 0.6em;
     margin: 1em 0em 1.5em 0em;
 }
+
 
