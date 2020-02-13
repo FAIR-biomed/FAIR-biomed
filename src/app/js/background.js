@@ -386,11 +386,14 @@ chrome.runtime.onMessage.addListener(
 /**
  * Handle request from context menu (right click menu)
  * **/
-chrome.contextMenus.create({
-    id: "FAIR-biomed-context",
-    title: "FAIR-biomed search",
-    contexts: ["selection", "page"]
+chrome.runtime.onInstalled.addListener(function(details) {
+    chrome.contextMenus.create({
+        id: "FAIR-biomed-context",
+        title: "FAIR-biomed search",
+        contexts: ["selection", "page"]
+    });
 });
+
 chrome.contextMenus.onClicked.addListener(function(itemData) {
     let itemId = itemData.menuItemId;
     if (itemId === "FAIR-biomed" || itemId === "FAIR-biomed-context") {
