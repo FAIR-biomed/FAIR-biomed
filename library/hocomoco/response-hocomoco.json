@@ -1,0 +1,842 @@
+[
+  {
+    "full_name": "P53_HUMAN.H11MO.0.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.0.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.0.A_revcomp.png",
+    "gene_names": [
+      "TP53"
+    ],
+    "model_length": 20,
+    "rank": 0,
+    "quality": "A",
+    "consensus": "dRRCWWGYYCWRRCATGYYh",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9953157015440742,
+    "best_auc_mouse": 0.9792336386099629,
+    "num_datasets_human": 141,
+    "num_datasets_mouse": 39,
+    "num_words_in_alignment": 487,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p53{6.3.1.0.1}"
+    ],
+    "hgnc_ids": [
+      "11998"
+    ],
+    "entrezgene_ids": [
+      "7157"
+    ],
+    "uniprot_id": "P53_HUMAN",
+    "uniprot_acs": [
+      "P04637"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9953157015440742,
+      "best_auc_mouse": 0.9792336386099629,
+      "num_datasets_human": 141,
+      "num_datasets_mouse": 39,
+      "num_words_in_alignment": 487
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P53_HUMAN.H11MO.0.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P53_HUMAN.H11MO.0.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P53_HUMAN.H11MO.0.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.0.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.0.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0106.1 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.1/"
+          },
+          {
+            "title": "MA0106.2 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.2/"
+          },
+          {
+            "title": "MA0106.3 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.3/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=TP53&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P53_HUMAN.H11MO.1.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.1.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.1.A_revcomp.png",
+    "gene_names": [
+      "TP53"
+    ],
+    "model_length": 13,
+    "rank": 1,
+    "quality": "A",
+    "consensus": "dRRCATGYCYRKR",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9883596437267886,
+    "best_auc_mouse": 0.9812134622410779,
+    "num_datasets_human": 141,
+    "num_datasets_mouse": 39,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p53{6.3.1.0.1}"
+    ],
+    "hgnc_ids": [
+      "11998"
+    ],
+    "entrezgene_ids": [
+      "7157"
+    ],
+    "uniprot_id": "P53_HUMAN",
+    "uniprot_acs": [
+      "P04637"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9883596437267886,
+      "best_auc_mouse": 0.9812134622410779,
+      "num_datasets_human": 141,
+      "num_datasets_mouse": 39,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P53_HUMAN.H11MO.1.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P53_HUMAN.H11MO.1.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P53_HUMAN.H11MO.1.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.1.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P53_HUMAN.H11MO.1.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0106.1 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.1/"
+          },
+          {
+            "title": "MA0106.2 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.2/"
+          },
+          {
+            "title": "MA0106.3 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.3/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=TP53&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P63_HUMAN.H11MO.0.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.0.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.0.A_revcomp.png",
+    "gene_names": [
+      "TP63"
+    ],
+    "model_length": 19,
+    "rank": 0,
+    "quality": "A",
+    "consensus": "dRCRWGYhCWRRCWKGYhb",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9963451944574002,
+    "best_auc_mouse": null,
+    "num_datasets_human": 79,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p63{6.3.1.0.2}"
+    ],
+    "hgnc_ids": [
+      "15979"
+    ],
+    "entrezgene_ids": [
+      "8626"
+    ],
+    "uniprot_id": "P63_HUMAN",
+    "uniprot_acs": [
+      "Q9H3D4"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9963451944574002,
+      "best_auc_mouse": null,
+      "num_datasets_human": 79,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P63_HUMAN.H11MO.0.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P63_HUMAN.H11MO.0.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P63_HUMAN.H11MO.0.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.0.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.0.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0525.1 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.1/"
+          },
+          {
+            "title": "MA0525.2 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.2/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=TP63&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P63_HUMAN.H11MO.1.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.1.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.1.A_revcomp.png",
+    "gene_names": [
+      "TP63"
+    ],
+    "model_length": 11,
+    "rank": 1,
+    "quality": "A",
+    "consensus": "vdRCMWGYCWR",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9356479638966833,
+    "best_auc_mouse": null,
+    "num_datasets_human": 79,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 502,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p63{6.3.1.0.2}"
+    ],
+    "hgnc_ids": [
+      "15979"
+    ],
+    "entrezgene_ids": [
+      "8626"
+    ],
+    "uniprot_id": "P63_HUMAN",
+    "uniprot_acs": [
+      "Q9H3D4"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9356479638966833,
+      "best_auc_mouse": null,
+      "num_datasets_human": 79,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 502
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P63_HUMAN.H11MO.1.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P63_HUMAN.H11MO.1.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P63_HUMAN.H11MO.1.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.1.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P63_HUMAN.H11MO.1.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0525.1 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.1/"
+          },
+          {
+            "title": "MA0525.2 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.2/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=TP63&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P73_HUMAN.H11MO.0.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.0.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.0.A_revcomp.png",
+    "gene_names": [
+      "TP73"
+    ],
+    "model_length": 19,
+    "rank": 0,
+    "quality": "A",
+    "consensus": "dddCWWGYYMMdRCWdGYh",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9963702372799416,
+    "best_auc_mouse": null,
+    "num_datasets_human": 10,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p73{6.3.1.0.3}"
+    ],
+    "hgnc_ids": [
+      "12003"
+    ],
+    "entrezgene_ids": [
+      "7161"
+    ],
+    "uniprot_id": "P73_HUMAN",
+    "uniprot_acs": [
+      "O15350"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9963702372799416,
+      "best_auc_mouse": null,
+      "num_datasets_human": 10,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P73_HUMAN.H11MO.0.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P73_HUMAN.H11MO.0.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P73_HUMAN.H11MO.0.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.0.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.0.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0861.1 (TP73; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0861.1/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=TP73&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P73_HUMAN.H11MO.1.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.1.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.1.A_revcomp.png",
+    "gene_names": [
+      "TP73"
+    ],
+    "model_length": 12,
+    "rank": 1,
+    "quality": "A",
+    "consensus": "vdRCWWGYCYRR",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9075867384656592,
+    "best_auc_mouse": null,
+    "num_datasets_human": 10,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p73{6.3.1.0.3}"
+    ],
+    "hgnc_ids": [
+      "12003"
+    ],
+    "entrezgene_ids": [
+      "7161"
+    ],
+    "uniprot_id": "P73_HUMAN",
+    "uniprot_acs": [
+      "O15350"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9075867384656592,
+      "best_auc_mouse": null,
+      "num_datasets_human": 10,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P73_HUMAN.H11MO.1.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P73_HUMAN.H11MO.1.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P73_HUMAN.H11MO.1.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.1.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/HUMAN/mono/logo_large/P73_HUMAN.H11MO.1.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0861.1 (TP73; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0861.1/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=TP73&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P53_MOUSE.H11MO.0.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.0.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.0.A_revcomp.png",
+    "gene_names": [
+      "Tp53"
+    ],
+    "model_length": 20,
+    "rank": 0,
+    "quality": "A",
+    "consensus": "RRRCAWGYMYRGRCWdRhMh",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9946412783587992,
+    "best_auc_mouse": 0.9876582185642943,
+    "num_datasets_human": 141,
+    "num_datasets_mouse": 39,
+    "num_words_in_alignment": 498,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p53{6.3.1.0.1}"
+    ],
+    "mgi_ids": [
+      "98834"
+    ],
+    "entrezgene_ids": [
+      "22059"
+    ],
+    "uniprot_id": "P53_MOUSE",
+    "uniprot_acs": [
+      "P02340"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9946412783587992,
+      "best_auc_mouse": 0.9876582185642943,
+      "num_datasets_human": 141,
+      "num_datasets_mouse": 39,
+      "num_words_in_alignment": 498
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P53_MOUSE.H11MO.0.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P53_MOUSE.H11MO.0.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P53_MOUSE.H11MO.0.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.0.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.0.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0106.1 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.1/"
+          },
+          {
+            "title": "MA0106.2 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.2/"
+          },
+          {
+            "title": "MA0106.3 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.3/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=Tp53&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P53_MOUSE.H11MO.1.A",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.1.A_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.1.A_revcomp.png",
+    "gene_names": [
+      "Tp53"
+    ],
+    "model_length": 13,
+    "rank": 1,
+    "quality": "A",
+    "consensus": "dRRCAWGYCYRGR",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.986626413159086,
+    "best_auc_mouse": 0.9811088905242323,
+    "num_datasets_human": 141,
+    "num_datasets_mouse": 39,
+    "num_words_in_alignment": 504,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p53{6.3.1.0.1}"
+    ],
+    "mgi_ids": [
+      "98834"
+    ],
+    "entrezgene_ids": [
+      "22059"
+    ],
+    "uniprot_id": "P53_MOUSE",
+    "uniprot_acs": [
+      "P02340"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.986626413159086,
+      "best_auc_mouse": 0.9811088905242323,
+      "num_datasets_human": 141,
+      "num_datasets_mouse": 39,
+      "num_words_in_alignment": 504
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P53_MOUSE.H11MO.1.A/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P53_MOUSE.H11MO.1.A/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P53_MOUSE.H11MO.1.A/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.1.A_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P53_MOUSE.H11MO.1.A_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0106.1 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.1/"
+          },
+          {
+            "title": "MA0106.2 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.2/"
+          },
+          {
+            "title": "MA0106.3 (TP53; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0106.3/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=Tp53&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P63_MOUSE.H11MO.0.B",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.0.B_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.0.B_revcomp.png",
+    "gene_names": [
+      "Tp63"
+    ],
+    "model_length": 19,
+    "rank": 0,
+    "quality": "B",
+    "consensus": "dRCRWGYhCWRRCWKGYhb",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9963451944574002,
+    "best_auc_mouse": null,
+    "num_datasets_human": 79,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p63{6.3.1.0.2}"
+    ],
+    "mgi_ids": [
+      "1330810"
+    ],
+    "entrezgene_ids": [
+      "22061"
+    ],
+    "uniprot_id": "P63_MOUSE",
+    "uniprot_acs": [
+      "O88898"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9963451944574002,
+      "best_auc_mouse": null,
+      "num_datasets_human": 79,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P63_MOUSE.H11MO.0.B/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P63_MOUSE.H11MO.0.B/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P63_MOUSE.H11MO.0.B/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.0.B_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.0.B_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0525.1 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.1/"
+          },
+          {
+            "title": "MA0525.2 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.2/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=Tp63&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P63_MOUSE.H11MO.1.B",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.1.B_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.1.B_revcomp.png",
+    "gene_names": [
+      "Tp63"
+    ],
+    "model_length": 11,
+    "rank": 1,
+    "quality": "B",
+    "consensus": "vdRCMWGYCWR",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9356479638966833,
+    "best_auc_mouse": null,
+    "num_datasets_human": 79,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 502,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p63{6.3.1.0.2}"
+    ],
+    "mgi_ids": [
+      "1330810"
+    ],
+    "entrezgene_ids": [
+      "22061"
+    ],
+    "uniprot_id": "P63_MOUSE",
+    "uniprot_acs": [
+      "O88898"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9356479638966833,
+      "best_auc_mouse": null,
+      "num_datasets_human": 79,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 502
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P63_MOUSE.H11MO.1.B/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P63_MOUSE.H11MO.1.B/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P63_MOUSE.H11MO.1.B/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.1.B_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P63_MOUSE.H11MO.1.B_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0525.1 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.1/"
+          },
+          {
+            "title": "MA0525.2 (TP63; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0525.2/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=Tp63&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P73_MOUSE.H11MO.0.B",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.0.B_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.0.B_revcomp.png",
+    "gene_names": [
+      "Tp73"
+    ],
+    "model_length": 19,
+    "rank": 0,
+    "quality": "B",
+    "consensus": "dddCWWGYYMMdRCWdGYh",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9963702372799416,
+    "best_auc_mouse": null,
+    "num_datasets_human": 10,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p73{6.3.1.0.3}"
+    ],
+    "mgi_ids": [
+      "1336991"
+    ],
+    "entrezgene_ids": [
+      "22062"
+    ],
+    "uniprot_id": "P73_MOUSE",
+    "uniprot_acs": [
+      "Q9JJP2"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9963702372799416,
+      "best_auc_mouse": null,
+      "num_datasets_human": 10,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P73_MOUSE.H11MO.0.B/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P73_MOUSE.H11MO.0.B/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P73_MOUSE.H11MO.0.B/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.0.B_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.0.B_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0861.1 (TP73; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0861.1/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=Tp73&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  },
+  {
+    "full_name": "P73_MOUSE.H11MO.1.B",
+    "direct_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.1.B_direct.png",
+    "revcomp_logo_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.1.B_revcomp.png",
+    "gene_names": [
+      "Tp73"
+    ],
+    "model_length": 12,
+    "rank": 1,
+    "quality": "B",
+    "consensus": "vdRCWWGYCYRR",
+    "motif_source": "ChIP-Seq",
+    "release": "HOCOMOCOv11",
+    "best_auc_human": 0.9075867384656592,
+    "best_auc_mouse": null,
+    "num_datasets_human": 10,
+    "num_datasets_mouse": null,
+    "num_words_in_alignment": 500,
+    "motif_families": [
+      "p53-related factors{6.3.1}"
+    ],
+    "motif_subfamilies": [
+      "p73{6.3.1.0.3}"
+    ],
+    "mgi_ids": [
+      "1336991"
+    ],
+    "entrezgene_ids": [
+      "22062"
+    ],
+    "uniprot_id": "P73_MOUSE",
+    "uniprot_acs": [
+      "Q9JJP2"
+    ],
+    "comment": "",
+    "quality_metrics": {
+      "best_auc_human": 0.9075867384656592,
+      "best_auc_mouse": null,
+      "num_datasets_human": 10,
+      "num_datasets_mouse": null,
+      "num_words_in_alignment": 500
+    },
+    "related_urls": {
+      "internal": {
+        "pcm_url": "http://hocomoco11.autosome.ru/motif/P73_MOUSE.H11MO.1.B/pcm.json",
+        "pwm_url": "http://hocomoco11.autosome.ru/motif/P73_MOUSE.H11MO.1.B/pwm.json",
+        "thresholds_url": "http://hocomoco11.autosome.ru/motif/P73_MOUSE.H11MO.1.B/thresholds.json",
+        "sequence_logo": {
+          "large": {
+            "direct_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.1.B_direct.png",
+            "revcomp_url": "/final_bundle/hocomoco11/full/MOUSE/mono/logo_large/P73_MOUSE.H11MO.1.B_revcomp.png"
+          }
+        }
+      },
+      "external": {
+        "jaspar_urls": [
+          {
+            "title": "MA0861.1 (TP73; Homo sapiens)",
+            "url": "http://jaspar.genereg.net/api/v1/matrix/MA0861.1/"
+          }
+        ],
+        "gtex_url": "https://gtexportal.org/rest/v1/dataset/expression?gene_id=Tp73&boxplot=true&isoforms=true"
+      }
+    },
+    "retracted": false
+  }
+]
