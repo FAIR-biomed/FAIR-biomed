@@ -22,6 +22,7 @@ module.exports = new function() {
     // api urls
     let resolver = 'http://resolver.api.identifiers.org/';
     let idurl = "https://identifiers.org/";
+    this.permissions = [resolver + '*'];
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {

@@ -16,6 +16,8 @@ module.exports = new function() {
     this.info = 'uniprot-info.html';
 
     let uniprot = 'https://www.uniprot.org/uniprot/';
+    this.permissions = [uniprot];
+
     let cols = ['id', 'entry%20name', 'protein%20names', 'genes', 'organism'];
 
     /** signal whether or not plugin can process a query **/

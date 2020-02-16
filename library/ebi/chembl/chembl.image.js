@@ -15,7 +15,11 @@ module.exports = new function() {
     this.logo = 'ChEMBL_clear.png';
     this.info = "chembl-info.html";
 
-    let chembl = "https://www.ebi.ac.uk/chembl/"
+    let chembl = "https://www.ebi.ac.uk/chembl/";
+    this.permissions = [
+        chembl + "api/data/image/*",
+        chembl + "glados-es/chembl_molecule/_search",
+    ];
 
     /** helper checks if a string is a valid id, e.g. CHEMBL25 **/
     this.isChemblId = function(query) {

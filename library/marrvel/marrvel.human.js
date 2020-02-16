@@ -16,7 +16,10 @@ module.exports = new function() {
     this.info = 'marrvel-info.html';
 
     // urls for API and external pages
-    let api_url = 'http://marrvel.org/data/human?geneSymbol=';
+    let api_base = 'http://marrvel.org/data/human';
+    let api_url = api_base + '?geneSymbol=';
+    this.permissions = [api_base];
+
     let gene_url = 'http://marrvel.org/search/gene/';
     let gtex_url = 'https://gtexportal.org/home/gene/';
     let hgnc_url = 'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/';

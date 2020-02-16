@@ -64,18 +64,11 @@ console.log("Building library from: "+libdir);
 
 
 console.log("Reading plugin test status");
-let plugin_status = {};
-plugin_status_file = "library"+path.sep+"plugin_status";
-if (fs.existsSync(plugin_status_file)) {
-    fs.readFileSync(plugin_status_file)
-        .toString().split("\n")
-        .map(function(x) {
-            if (x!="") {
-                plugin_status[x] = true
-            }
-        })
-} else {
-    console.log("Plugin status file does not exist. Run tests before building library.");
+let plugin_status;
+try {
+    plugin_status = libraryloader.loadPluginStatuses(libdir + path.sep + "plugin_status");
+} catch (e) {
+    console.error(e);
     return;
 }
 

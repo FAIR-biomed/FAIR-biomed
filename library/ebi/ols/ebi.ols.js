@@ -16,6 +16,7 @@ module.exports = new function() {
     this.info = 'ebi.ols-info.html';
 
     let ols = 'https://www.ebi.ac.uk/ols/';
+    this.permissions = [ols + 'api/search'];
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {

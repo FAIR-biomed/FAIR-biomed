@@ -19,6 +19,8 @@ module.exports = new function() {
     let clinvar = 'https://www.ncbi.nlm.nih.gov/clinvar/';
     let eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
     let suffix = '&db=clinvar&retmax=99999&format=json&sort=relevance&tool=FAIR-biomed&email=fair.ext@gmail.com';
+    this.permissions = [eutils + 'esearch.fcgi', eutils + 'esummary.fcgi'];
+
     let id2link = function(id) {
         return clinvar + 'variation/' + id
     };
