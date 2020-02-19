@@ -475,6 +475,10 @@ li.fair-candidate {
 div.fair-body {
 
 }
+div.fair-body ul {
+    border: none;
+    background-color: #ffffff;
+}
 div.fair-body div.fair-logo-col {
     overflow: hidden;
     text-align: center;
@@ -575,6 +579,7 @@ div.fair-result p {
 }
 div.fair-result ul {
     padding-left: 0px;
+    border: none;
 }
 div.fair-result li {
     color: #777777;
@@ -588,6 +593,7 @@ div.fair-result table {
     padding: 0.2em 0em 0.2em 0em;
     margin: 0;
     line-height: 1.1em;
+    border: none;
 }
 div.fair-result table, div.fair-result thead, div.fair-result tbody {
     border: none;
