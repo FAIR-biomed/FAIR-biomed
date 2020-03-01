@@ -16,7 +16,7 @@ module.exports = new function() {
     this.info = "chembl-info.html";
 
     let chembl = "https://www.ebi.ac.uk/chembl/";
-    this.permissions = [
+    this.endpoints = [
         chembl + "api/data/image/*",
         chembl + "glados-es/chembl_molecule/_search",
     ];

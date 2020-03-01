@@ -16,7 +16,7 @@ module.exports = new function() {
     // parts of api urls
     let api_base = 'http://hocomoco.autosome.ru/search.json';
     let url_prefix = api_base + '?detailed=true&arity=mono&query=';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
 
     let item2link = function(x) {
         return 'http://hocomoco.autosome.ru/motif/' + x['full_name'];

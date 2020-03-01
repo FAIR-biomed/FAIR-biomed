@@ -12,7 +12,7 @@ module.exports = new function() {
     this.tags = ['human', 'genetics', 'genes'];
 
     let api_base = 'http://exac.hms.harvard.edu/rest/region/genes_in_region/';
-    this.permissions = [api_base + '*'];
+    this.endpoints = [api_base + '*'];
 
     /** accompanying resources **/
     this.logo = 'exac-screenshot-logo.png';

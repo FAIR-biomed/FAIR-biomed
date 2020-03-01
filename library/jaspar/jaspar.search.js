@@ -18,7 +18,7 @@ module.exports = new function() {
     let api_base = 'http://jaspar.genereg.net/api/v1/matrix/';
     let jaspar = api_base + '?search=';
     let suffix = '&format=json&page_size=10&version=latest';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
 
     let item2link = function(x) {
         return 'http://jaspar.genereg.net/matrix/'+x['matrix_id'];

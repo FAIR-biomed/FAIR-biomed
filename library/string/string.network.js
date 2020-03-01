@@ -11,7 +11,7 @@ module.exports = new function() {
     this.title = 'STRING DB';
     this.subtitle = 'Protein interaction network';
     this.tags = ['genes', 'proteins', 'ppi', 'network', 'human'];
-    this.permissions = [];
+    this.endpoints = [];
 
     /** accompanying resources **/
     this.logo = 'string-logo.png';

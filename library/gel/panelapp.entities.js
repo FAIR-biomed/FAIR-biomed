@@ -14,7 +14,7 @@ module.exports = new function() {
 
     // urls for API and external pages
     let api_url = 'https://panelapp.genomicsengland.co.uk/api/v1/entities/';
-    this.permissions = [api_url + '*'];
+    this.endpoints = [api_url + '*'];
 
     // external page for panels
     let panels_url = 'https://panelapp.genomicsengland.co.uk/panels/';

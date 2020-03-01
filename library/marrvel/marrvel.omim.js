@@ -18,7 +18,7 @@ module.exports = new function() {
     // urls for API and external pages
     let api_base = 'http://marrvel.org/data/OMIM';
     let api_url = api_base + '?geneSymbol=';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
 
     let gene_url = 'http://marrvel.org/search/gene/';
     let omim_url = 'https://www.omim.org/entry/';

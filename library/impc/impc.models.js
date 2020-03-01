@@ -23,7 +23,7 @@ module.exports = new function() {
     let mousephenotype = 'https://www.mousephenotype.org/';
     let pd2_base = mousephenotype + 'data/phenodigm2/mousemodels';
     let pd2 = pd2_base + '?geneId=';
-    this.permissions = [solr_base, pd2_base];
+    this.endpoints = [solr_base, pd2_base];
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {

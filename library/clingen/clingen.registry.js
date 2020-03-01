@@ -19,7 +19,7 @@ module.exports = new function() {
     let api_base = 'http://reg.test.genome.network/alleles';
     let registry = api_base + '?name=';
     let genboree = 'http://reg.clinicalgenome.org/redmine/projects/registry/genboree_registry/';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {

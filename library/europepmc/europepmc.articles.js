@@ -18,7 +18,7 @@ module.exports = new function() {
     // parts of api urls
     let api_base = 'https://www.ebi.ac.uk/europepmc/webservices/rest/search';
     let pmc = api_base + '?query=';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
     let suffix = '&format=json&pageSize=8&resultType=lite';
     let item2link = function(x) {
         return 'https://europepmc.org/abstract/'+x['source']+'/'+x['id'];

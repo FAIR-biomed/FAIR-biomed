@@ -25,7 +25,7 @@ module.exports = new function() {
     let api = "ContentService/";
     // endpoints for first and second round queries
     let endpoints = ['search/query?query=', 'data/pathways/low/diagram/entity/'];
-    this.permissions = [
+    this.endpoints = [
         reactome + api + 'search/query',
         reactome + api + 'data/pathways/low/diagram/entity/*'
     ];

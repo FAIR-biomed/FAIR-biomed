@@ -12,7 +12,7 @@ module.exports = new function() {
     this.tags = ['dictionary'];
 
     let api_base = 'https://en.wiktionary.org/w/api.php';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
 
     /** accompanying resources **/
     this.logo = '99px-WiktionaryEn.svg.png';

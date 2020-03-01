@@ -18,7 +18,7 @@ module.exports = new function() {
     let gwas = 'https://www.ebi.ac.uk/gwas/';
     let snp_api = 'rest/api/singleNucleotidePolymorphisms/';
     let snp_suffix = '/associations?projection=associationBySnp';
-    this.permissions = [gwas + snp_api + '*'];
+    this.endpoints = [gwas + snp_api + '*'];
 
     this.cleanQuery = function(query) {
         return query.trim().replace('-', '');

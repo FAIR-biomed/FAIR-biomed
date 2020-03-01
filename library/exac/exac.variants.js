@@ -12,7 +12,7 @@ module.exports = new function() {
     this.tags = ['human', 'genetics', 'population'];
 
     let api_base = 'http://exac.hms.harvard.edu/rest/variant/';
-    this.permissions = [api_base + '*'];
+    this.endpoints = [api_base + '*'];
 
     /** accompanying resources **/
     this.logo = 'exac-screenshot-logo.png';

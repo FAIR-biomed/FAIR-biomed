@@ -18,7 +18,7 @@ module.exports = new function() {
     // parts of api urls
     let eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
     let suffix = '&db=pubmed&retmax=8&format=json&sort=relevance&tool=FAIR-biomed&email=fair.ext@gmail.com';
-    this.permissions = [eutils + 'esearch.fcgi', eutils + 'esummary.fcgi'];
+    this.endpoints = [eutils + 'esearch.fcgi', eutils + 'esummary.fcgi'];
 
     let id2link = function(id) {
         return 'https://www.ncbi.nlm.nih.gov/pubmed/'+id;

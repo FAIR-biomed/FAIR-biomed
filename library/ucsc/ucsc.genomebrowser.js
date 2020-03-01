@@ -11,7 +11,7 @@ module.exports = new function() {
     this.title = 'UCSC Genome Browser';
     this.subtitle = 'Viewer of genomic regions';
     this.tags = ['genome', 'tracks', 'annotations'];
-    this.permissions = [];
+    this.endpoints = [];
 
     /** accompanying resources **/
     this.logo = 'ucsc_genome_browser_logo.png';

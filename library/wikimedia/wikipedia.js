@@ -12,7 +12,7 @@ module.exports = new function() {
     this.tags = ['encyclopaedia'];
 
     let api_base = 'https://en.wikipedia.org/w/api.php';
-    this.permissions = [api_base];
+    this.endpoints = [api_base];
 
     /** accompanying resources **/
     this.logo = '103px-Wikipedia-logo-v2.svg.png';

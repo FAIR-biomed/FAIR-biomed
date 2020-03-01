@@ -33,7 +33,7 @@ let libdir = "library";
 libdir = path.resolve(libdir);
 let plugin_status = libraryloader.loadPluginStatuses(libdir + path.sep + "plugin_status");
 let plugins = libraryloader.load(libdir).filter((plugin) => plugin_status[plugin.id] === true);
-let plugin_permissions = plugins.map(plugin => plugin.permissions).filter((v) => v !== undefined).flat();
+let plugin_endpoints = plugins.map(plugin => plugin.endpoints).filter((v) => v !== undefined).flat();
 
 console.log("Preparing manifest");
 let npm_package = JSON.parse(fs.readFileSync("package.json").toString());
@@ -42,7 +42,7 @@ let manifest_file = ['dist', 'manifest.json'].join(path.sep);
 let manifest = manifest_template.replace("_version_", npm_package['version']);
 if (browser === "firefox") {
     let manifest_json = JSON.parse(manifest);
-    manifest_json.permissions = [...new Set([...manifest_json.permissions,...plugin_permissions])];
+    manifest_json.permissions = [...new Set([...manifest_json.permissions,...plugin_endpoints])];
     manifest = JSON.stringify(manifest_json);
 }
 fs.writeFileSync(manifest_file, manifest);

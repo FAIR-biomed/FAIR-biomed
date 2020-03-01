@@ -18,7 +18,7 @@ module.exports = new function() {
     // urls for API and external pages
     let search_url = 'http://rest.genenames.org/search/';
     let fetch_url = 'http://rest.genenames.org/fetch/hgnc_id/';
-    this.permissions = [search_url + '*', fetch_url + '*'];
+    this.endpoints = [search_url + '*', fetch_url + '*'];
 
     let www_url = 'https://www.genenames.org/';
     let report_url = www_url + 'data/gene-symbol-report/#!/hgnc_id/';
