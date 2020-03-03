@@ -15,7 +15,10 @@ module.exports = new function() {
     this.info = 'lncipedia-info.html';
 
     // parts of api urls
-    let lncipedia = 'https://lncipedia.org/api/search?id=';
+    let api_base = 'https://lncipedia.org/api/search';
+    let lncipedia = api_base + '?id=';
+    this.endpoints = [api_base];
+
     let item2link = function(x) {
         return 'https://lncipedia.org/db/gene/'+x['lncipediaGeneID'];
     };

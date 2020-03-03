@@ -13,9 +13,11 @@ module.exports = new function() {
     /** accompanying resources **/
     this.logo = 'hocomoco_logo.png';
     this.info = 'hocomoco-info.html';
-
     // parts of api urls
-    let url_prefix = 'http://hocomoco.autosome.ru/search.json?detailed=true&arity=mono&query=';
+    let api_base = 'http://hocomoco.autosome.ru/search.json';
+    let url_prefix = api_base + '?detailed=true&arity=mono&query=';
+    this.endpoints = [api_base];
+
     let item2link = function(x) {
         return 'http://hocomoco.autosome.ru/motif/' + x['full_name'];
     };

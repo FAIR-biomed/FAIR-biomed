@@ -25,6 +25,10 @@ module.exports = new function() {
     let api = "ContentService/";
     // endpoints for first and second round queries
     let endpoints = ['search/query?query=', 'data/pathways/low/diagram/entity/'];
+    this.endpoints = [
+        reactome + api + 'search/query',
+        reactome + api + 'data/pathways/low/diagram/entity/*'
+    ];
     // connectors with the suffix for first and second round queries
     let joins = ['&', '?'];
     // the species must be written in words because the search query does not accept 9606

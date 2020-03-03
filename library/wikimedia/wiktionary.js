@@ -11,6 +11,9 @@ module.exports = new function() {
     this.subtitle = 'The free dictionary';
     this.tags = ['dictionary'];
 
+    let api_base = 'https://en.wiktionary.org/w/api.php';
+    this.endpoints = [api_base];
+
     /** accompanying resources **/
     this.logo = '99px-WiktionaryEn.svg.png';
     this.info = 'wiktionary-info.html';
@@ -30,7 +33,7 @@ module.exports = new function() {
     /** construct a url for an API call **/
     this.url = function(query) {
         query = query.split(' ').join('%20');
-        let url = 'https://en.wiktionary.org/w/api.php?action=query'
+        let url = api_base + '?action=query'
             +'&titles='+query+'&prop=extracts&format=json&formatversion=2'
         return url;
     };

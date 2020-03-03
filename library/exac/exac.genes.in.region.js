@@ -11,6 +11,9 @@ module.exports = new function() {
     this.subtitle = 'Genes within genomic range';
     this.tags = ['human', 'genetics', 'genes'];
 
+    let api_base = 'http://exac.hms.harvard.edu/rest/region/genes_in_region/';
+    this.endpoints = [api_base + '*'];
+
     /** accompanying resources **/
     this.logo = 'exac-screenshot-logo.png';
     this.info = 'exac-info.html';
@@ -59,8 +62,7 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        let api = 'http://exac.hms.harvard.edu/rest/region/genes_in_region/';
-        return api + this.q2string(query);
+        return api_base + this.q2string(query);
     };
 
     /** transform a raw result from an API call into a display object **/

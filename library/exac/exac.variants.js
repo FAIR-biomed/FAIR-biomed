@@ -11,6 +11,9 @@ module.exports = new function() {
     this.subtitle = 'Variants in humans';
     this.tags = ['human', 'genetics', 'population'];
 
+    let api_base = 'http://exac.hms.harvard.edu/rest/variant/';
+    this.endpoints = [api_base + '*'];
+
     /** accompanying resources **/
     this.logo = 'exac-screenshot-logo.png';
     this.info = 'exac-info.html';
@@ -47,8 +50,7 @@ module.exports = new function() {
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        let api = 'http://exac.hms.harvard.edu/rest/variant/';
-        return api + q2string(query)
+        return api_base + q2string(query)
     };
 
     /** transform a raw result from an API call into a display object **/

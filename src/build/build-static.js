@@ -8,6 +8,7 @@
 let path = require("path");
 let fs = require("fs-extra");
 let utf8 = require("utf8");
+let libraryloader = require("./library-loader");
 
 // detect build mode - development or production
 // This is specified by a command line positional argument
@@ -27,12 +28,23 @@ console.log("Preparing extension (" + browser+ ")");
 console.log("Setting up output directories");
 fs.ensureDirSync("dist");
 
+console.log("Load library infos")
+let libdir = "library";
+libdir = path.resolve(libdir);
+let plugin_status = libraryloader.loadPluginStatuses(libdir + path.sep + "plugin_status");
+let plugins = libraryloader.load(libdir).filter((plugin) => plugin_status[plugin.id] === true);
+let plugin_endpoints = plugins.map(plugin => plugin.endpoints).filter((v) => v !== undefined).flat();
 
 console.log("Preparing manifest");
 let npm_package = JSON.parse(fs.readFileSync("package.json").toString());
 let manifest_template = fs.readFileSync(__dirname+"/configurations/manifest-"+browser+".json").toString();
 let manifest_file = ['dist', 'manifest.json'].join(path.sep);
 let manifest = manifest_template.replace("_version_", npm_package['version']);
+if (browser === "firefox") {
+    let manifest_json = JSON.parse(manifest);
+    manifest_json.permissions = [...new Set([...manifest_json.permissions,...plugin_endpoints])];
+    manifest = JSON.stringify(manifest_json);
+}
 fs.writeFileSync(manifest_file, manifest);
 
 

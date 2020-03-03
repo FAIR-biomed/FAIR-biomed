@@ -11,6 +11,9 @@ module.exports = new function() {
     this.subtitle = 'The free encyclopaedia';
     this.tags = ['encyclopaedia'];
 
+    let api_base = 'https://en.wikipedia.org/w/api.php';
+    this.endpoints = [api_base];
+
     /** accompanying resources **/
     this.logo = '103px-Wikipedia-logo-v2.svg.png';
     this.info = 'wikipedia-info.html';
@@ -32,7 +35,7 @@ module.exports = new function() {
     this.url = function(query, index) {
         query = query.split(' ').join('%20');
         let url = null;
-        let api = 'https://en.wikipedia.org/w/api.php?action=';
+        let api = api_base + '?action=';
         let suffix = '&format=json&formatversion=2';
         if (index === 0 || typeof(index)==='undefined') {
             url = api + 'opensearch&search=' + query + suffix;

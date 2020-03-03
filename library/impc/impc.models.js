@@ -16,11 +16,14 @@ module.exports = new function() {
     this.info = 'impc-info.html';
 
     // address of solr server for search queries
-    let solr= 'https://www.ebi.ac.uk/mi/impc/solr/phenodigm/select?q=';
+    let solr_base = 'https://www.ebi.ac.uk/mi/impc/solr/phenodigm/select';
+    let solr = solr_base + '?q=';
     let suffix = '&wt=json&fq=type:gene';
     // address for phenodigm2 query
     let mousephenotype = 'https://www.mousephenotype.org/';
-    let pd2 = mousephenotype + 'data/phenodigm2/mousemodels?geneId=';
+    let pd2_base = mousephenotype + 'data/phenodigm2/mousemodels';
+    let pd2 = pd2_base + '?geneId=';
+    this.endpoints = [solr_base, pd2_base];
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {

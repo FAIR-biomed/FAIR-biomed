@@ -83,10 +83,24 @@ function loadPlugins(dirpath) {
     return plugins;
 }
 
+function loadPluginStatuses(plugin_status_file) {
+    if (!fs.existsSync(plugin_status_file))
+        throw "Plugin status file does not exist. Run tests before building library.";
+    let plugin_status = {};
+    fs.readFileSync(plugin_status_file)
+        .toString().split("\n")
+        .map(function(x) {
+            if (x!="") {
+                plugin_status[x] = true
+            }
+        });
+    return plugin_status;
+}
 
 module.exports = new function() {
     this.load = function(dirpath) {
         return loadPlugins(dirpath);
     };
+    this.loadPluginStatuses = loadPluginStatuses;
 }();
 
