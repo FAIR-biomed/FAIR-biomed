@@ -1,8 +1,8 @@
 /**
  *  Executable build script
- *  Generates a browser-ready file with the api library
+ *  Generates a browser-ready file with the plugin library
  *
- *  **/
+ */
 
 
 // node dependencies
@@ -14,7 +14,7 @@ let uglify = require("uglify-es");
 let libraryloader = require("./library-loader");
 
 
-/** helper function to copy a resource defined in a plugin to the distribution directory **/
+/** copy a resource defined in a plugin to the distribution directory **/
 function copyResource(plugin, type) {
     let infile = null;
     if (type==="logo") {
@@ -40,18 +40,18 @@ function copyResource(plugin, type) {
  *************************************************************************** */
 
 // get source directory
-var libdir = process.argv[2];
+let libdir = process.argv[2];
 if (typeof libdir === "undefined") {
     libdir = "library";
 }
 libdir = path.resolve(libdir);
 
 // default library (the na logo is there)
-var defaultdir = ["library"].join(path.sep);
+let defaultdir = ["library"].join(path.sep);
 // define output directories
-var logodir = ["dist", "library", "logo"].join(path.sep);
-var infodir = ["dist", "library", "info"].join(path.sep);
-var distlibdir = ["dist", "library"].join(path.sep);
+let logodir = ["dist", "library", "logo"].join(path.sep);
+let infodir = ["dist", "library", "info"].join(path.sep);
+let distlibdir = ["dist", "library"].join(path.sep);
 
 
 

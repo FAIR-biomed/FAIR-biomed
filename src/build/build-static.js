@@ -28,12 +28,15 @@ console.log("Preparing extension (" + browser+ ")");
 console.log("Setting up output directories");
 fs.ensureDirSync("dist");
 
-console.log("Load library infos")
-let libdir = "library";
-libdir = path.resolve(libdir);
-let plugin_status = libraryloader.loadPluginStatuses(libdir + path.sep + "plugin_status");
-let plugins = libraryloader.load(libdir).filter((plugin) => plugin_status[plugin.id] === true);
-let plugin_endpoints = plugins.map(plugin => plugin.endpoints).filter((v) => v !== undefined).flat();
+console.log("Loading library info");
+let libdir = path.resolve("library");
+let status_file = libdir + path.sep + "plugin_status";
+let plugin_status = libraryloader.loadPluginStatuses(status_file);
+let plugins = libraryloader.load(libdir)
+    .filter((plugin) => plugin_status[plugin.id] === true);
+let plugin_endpoints = plugins.map(plugin => plugin.endpoints)
+    .filter((v) => v !== undefined).flat();
+plugin_endpoints = [...new Set(plugin_endpoints)].sort();
 
 console.log("Preparing manifest");
 let npm_package = JSON.parse(fs.readFileSync("package.json").toString());
@@ -41,9 +44,9 @@ let manifest_template = fs.readFileSync(__dirname+"/configurations/manifest-"+br
 let manifest_file = ['dist', 'manifest.json'].join(path.sep);
 let manifest = manifest_template.replace("_version_", npm_package['version']);
 if (browser === "firefox") {
-    let manifest_json = JSON.parse(manifest);
-    manifest_json.permissions = [...new Set([...manifest_json.permissions,...plugin_endpoints])];
-    manifest = JSON.stringify(manifest_json);
+    let manifest_raw = JSON.parse(manifest);
+    manifest_raw.permissions = manifest_raw.permissions.concat(plugin_endpoints);
+    manifest = JSON.stringify(manifest_raw, null, 2);
 }
 fs.writeFileSync(manifest_file, manifest);
 
@@ -59,7 +62,6 @@ for (let type of ["development", "production", "background"]) {
 function build_static(dependencies_array) {
     dependencies_array.forEach(function(x) {
         let target = x["to"];
-        // ensure target directory is present
         fs.ensureDirSync(path.dirname(target));
         // read contents of all the source files
         let result = x['from'].map(function(frompath) {

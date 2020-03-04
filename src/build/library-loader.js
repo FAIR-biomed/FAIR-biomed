@@ -1,7 +1,7 @@
 /**
  * Module for loading info on the api library from original disk files
  *
- * **/
+ **/
 
 
 let fs = require("fs");
@@ -83,6 +83,7 @@ function loadPlugins(dirpath) {
     return plugins;
 }
 
+/** helper creates a map from plugin id to a boolean status code **/
 function loadPluginStatuses(plugin_status_file) {
     if (!fs.existsSync(plugin_status_file))
         throw "Plugin status file does not exist. Run tests before building library.";
@@ -90,7 +91,7 @@ function loadPluginStatuses(plugin_status_file) {
     fs.readFileSync(plugin_status_file)
         .toString().split("\n")
         .map(function(x) {
-            if (x!="") {
+            if (x !== "") {
                 plugin_status[x] = true
             }
         });
