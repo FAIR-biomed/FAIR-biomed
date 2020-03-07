@@ -19,7 +19,6 @@ module.exports = new function() {
     let solr_base = 'https://www.ebi.ac.uk/mi/impc/solr/phenodigm/select';
     let solr = solr_base + '?q=';
     let suffix = '&wt=json&fq=type:gene';
-    // address for phenodigm2 query
     let mousephenotype = 'https://www.mousephenotype.org/';
     let pd2_base = mousephenotype + 'data/phenodigm2/mousemodels';
     let pd2 = pd2_base + '?geneId=';

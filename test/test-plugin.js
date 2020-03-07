@@ -38,20 +38,21 @@ fs.removeSync(plugin_status_file);
 
 
 // expected structure for plugin components
-let expected = {};
-expected['reserved'] = ['namespace'];
-expected['strings'] = ['id'];
-expected['titles'] = ['title', 'subtitle'];
-expected['functions'] = ['claim', 'process', 'url', 'external'];
-expected['arrays'] = ['tags'];
-expected['files'] = ['info', 'logo'];
+let expected = {
+    'reserved': ['namespace'],
+    'strings': ['id'],
+    'titles': ['title', 'subtitle'],
+    'functions': ['claim', 'process', 'url', 'external'],
+    'arrays': ['tags', 'endpoints'],
+    'files': ['info', 'logo']
+};
 
 
 // helper function to carry out tests for one specific plugin object
 function testOnePlugin(plugin) {
 
     /**
-     * checks on the plugin structure
+     * check plugin structure
      **/
 
     it ('does not contain reserved fields', function() {
@@ -108,7 +109,7 @@ function testOnePlugin(plugin) {
     });
 
     /**
-     * checks on the plugin functions
+     * check plugin actions
      **/
 
     it('produces a number during claim', function () {
@@ -138,6 +139,13 @@ function testOnePlugin(plugin) {
     it ('produces reliable external urls', function() {
         let external = plugin.external('').substr(0, 4);
         assert.equal(external, 'http', 'external url')
+    });
+
+    it ('declares reliable API endpoints', function() {
+        plugin.endpoints.map(function(x) {
+            let url_prefix = x.substr(0, 4);
+            return assert.equal(url_prefix, "http", "endpoint url")
+        })
     });
 
     /**
