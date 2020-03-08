@@ -1,6 +1,6 @@
 /**
  * Handling of FAIR-biomed components in extension background
- * Copyright 2018 Tomasz Konopka. All rights reserved.
+ * (API transactions, sanitizing API content, etc.)
  *
  * */
 

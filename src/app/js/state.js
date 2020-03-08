@@ -1,6 +1,5 @@
 /**
  * Handling of FAIR-biomed plugin state from options and background code.
- * Copyright 2018 Tomasz Konopka. All rights reserved.
  *
  * */
 

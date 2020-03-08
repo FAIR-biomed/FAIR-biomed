@@ -1,6 +1,5 @@
 /**
- * Handling of FAIR-biomed components on user web pages
- * Copyright 2018 Tomasz Konopka. All rights reserved.
+ * FAIR-biomed components on user web pages
  *
  * */
 
@@ -23,7 +22,7 @@ var iconcache = {};
  *  - type: logo or icon
  *  - path: string with path to file
  *
- */
+ * */
 class FAIRIconLogo extends React.Component {
     constructor(props) {
         super(props);
@@ -31,16 +30,14 @@ class FAIRIconLogo extends React.Component {
         this.state = { data: null};
     }
 
-    /** check if an icon/logo is present in cache **/
+    /* check if an icon/logo is present in cache */
     getFromCache() {
         let cached = iconcache[this.props.path];
         if (!is.undefined(cached)) return cached;
-        return(null);
+        return null;
     }
 
-    /**
-     * Fetch asynchronous logo or icon content
-     */
+    /* Fetch asynchronous logo or icon content */
     componentDidMount() {
         // use a cached version, or fetch anew,
         let cached = this.getFromCache();
@@ -60,7 +57,7 @@ class FAIRIconLogo extends React.Component {
     render() {
         let cached = this.getFromCache();
         if (this.state.data===null && cached===null) {
-            return(null)
+            return null;
         }
         let showdata = (cached!==null) ? cached : this.state.data;
         let cursorClass = ' fair-pointer';
@@ -665,8 +662,11 @@ class FAIRContainer extends React.Component {
         let x = e.nativeEvent.clientX - parent_rect.left;
         let y = e.nativeEvent.clientY - parent_rect.top;
         if (x >= parseInt(parent_style.width) - 24 && y >= parseInt(parent_style.height) - 24) {
+            // if clicked in bottom-right corner, start move
             this.startResize(e);
-        } else {
+        } else if (e.target.tagName == "DIV") {
+            // if clicked outside bottom-right, but only withing a div, start moving
+            // the "else if" condition avoids moving on p, span, etc. elements
             this.startMove(e);
         }
     }
@@ -676,7 +676,7 @@ class FAIRContainer extends React.Component {
         let parent_pos = [parseInt(parent.style.left), parseInt(parent.style.top)];
         // in startMove and endMove, e is an object provided by React, so use nativeEvent
         let move_start = [e.nativeEvent.x, e.nativeEvent.y];
-        // remember position of container and mouse pointer at the begining of the move
+        // remember position of container and mouse pointer at the beginning of the move
         this.setState({move_start: move_start, parent_pos: parent_pos});
         document.addEventListener("mousemove", this.duringMove, false);
     }

@@ -1,6 +1,5 @@
 /**
  * Handling of FAIR-biomed components on extension options page.
- * Copyright 2018 Tomasz Konopka. All rights reserved.
  *
  * */
 
