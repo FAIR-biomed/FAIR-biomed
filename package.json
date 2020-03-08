@@ -4,8 +4,8 @@
   "description": "Browser extension accessing open data resources in the biomedical domain",
   "scripts": {
     "clean": "rm -fr dist && mkdir dist",
-    "babel": "npx babel --copy-files src/app --out-dir dist --presets react-app/prod",
-    "babel-prod": "npx babel --copy-files src/app --out-dir dist --presets react-app/prod --ignore src/app/cache",
+    "babel": "npx babel --copy-files src/app --out-dir dist --presets @babel/preset-react",
+    "babel-prod": "npx babel --copy-files src/app --out-dir dist --presets @babel/preset-react --ignore src/app/cache",
     "build-lib": "node src/build/build-library.js",
     "build-dev": "node src/build/build-static.js development",
     "build-prod": "node src/build/build-static.js production",
@@ -16,7 +16,7 @@
     "test-app": "node_modules/mocha/bin/_mocha test/test-app.js",
     "test-plugin": "node_modules/mocha/bin/_mocha test/test-plugin.js",
     "coverage": "node_modules/nyc/bin/nyc.js --reporter=text --reporter=html node_modules/mocha/bin/_mocha",
-    "watch": "npm run clean; npm run build; npx babel --copy-files --watch src/app --out-dir dist --presets react-app/prod"
+    "watch": "npm run clean; npm run build; npx babel --copy-files --watch src/app --out-dir dist --presets @babel/preset-react"
   },
   "keywords": [
     "science",
@@ -24,8 +24,9 @@
   ],
   "author": "Tomasz Konopka",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-react-app": "^3.1.2",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-react": "^7.8.3",
     "browserify": "^16.2.3",
     "fs-extra": "^7.0.0",
     "mocha": "^5.2.0",
