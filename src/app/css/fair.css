@@ -604,6 +604,7 @@ div.fair-result table td, div.fair-result table th {
     padding: 0.5em 1em 0em 0em;
     vertical-align: top;
     background-color: #ffffff;
+    color: #777777;
 }
 div.fair-result table tr {
     border: none;
@@ -657,5 +658,3 @@ div.fair-result p.examples, #fair-library p.examples {
     padding: 0.6em;
     margin: 1em 0em 1.5em 0em;
 }
-
-
