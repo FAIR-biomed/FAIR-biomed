@@ -8,7 +8,7 @@ module.exports = new function () {
     this.id = 'gtex.search';
     this.title = 'GTex';
     this.subtitle = 'Tissue-specific gene expression';
-    this.tags = ['proteins'];
+    this.tags = ['genes'];
 
     /** accompanying resources **/
     this.logo = 'gtex_logo.png';
