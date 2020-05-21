@@ -18,6 +18,10 @@ it('check successfully substituting gene name to ensembl ID', function () {
 
 it('check output once index is 1, Ensembl ID', function () {
     var result_tnf = plugin.url('ENSG00000232810.3', 1);
+    let r1 = fs.readFileSync(__dirname+'/ENSG00000164308.16_test.json').toString();
+    var result_ens_process = plugin.process(r1, 1);
+
+    assert.ok(JSON.stringify(result_ens_process).includes("36.6296"))
 });
 
 it('generates different urls for round 1 and round 2', function () {
