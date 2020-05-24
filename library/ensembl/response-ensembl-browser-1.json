@@ -1,0 +1,17 @@
+{
+  "start":77128246,
+  "db_type":"core",
+  "object_type":"Gene",
+  "description":"myosin VIIA [Source:HGNC Symbol;Acc:HGNC:7606]",
+  "assembly_name":"GRCh38",
+  "strand":1,
+  "version":22,
+  "end":77215241,
+  "id":"ENSG00000137474",
+  "logic_name":"ensembl_havana_gene_homo_sapiens",
+  "display_name":"MYO7A",
+  "seq_region_name":"11",
+  "source":"ensembl_havana",
+  "biotype":"protein_coding",
+  "species":"homo_sapiens"
+}
