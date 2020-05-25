@@ -3,6 +3,7 @@
  * This plugin only provides forwarding links to the UCSC browser.
  */
 
+let qt = require("../_querytools.js");
 
 module.exports = new function() {
 
@@ -23,37 +24,22 @@ module.exports = new function() {
     let genomes = ["hg38", "hg19", "mm10", "mm9",
                    "rn6", "danRer11", "dm6", "ce11", "sacCer3"];
 
-    /** helper to convert a string like 1:123-456 into parts ["1", "123", "456"] **/
-    let query2tokens = function(query) {
-        query = query.replace(/,/g, '');
-        let words = query.split(/:|-|\s/).map((x) => x.trim());
-        return words.filter(x => (x!==''));
-    };
-
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
-        // split the query into tokens
-        let words = query2tokens(query);
-        if (words.length < 2 || words.length > 4) return 0;
-        if (isNaN(words[1])) return 0;
-        if (words.length === 3) {
-            if (isNaN(words[2])) return 0;
-        }
-        return 1;
+        if (qt.isGenomicPosition(query)) return 0.9;
+        if (qt.isGenomicInterval(query)) return 1;
+        return 0;
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        // this plugin returns null
-        // this signals that the query will be passed directly to function process
+        // null signals that the query will be passed directly to function process
         return null;
     };
-
 
     /** helpers to process, for single genomic positions, for genomic intervals **/
     let processSite = function(chr, position) {
         let result = [["genome", "site", "1kb region"]];
-        position = parseInt(position);
         let single_query = chr + ":" + position;
         let kb_query = chr + ":" + (position-500) + "-" + (position+500);
         genomes.map(x => {
@@ -78,12 +64,12 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        let words = query2tokens(data);
         let result = null;
-        if (words.length === 2) {
-            result = processSite(words[0], words[1]);
-        } else {
-            result = processInterval(words[0], words[1], words[2]);
+        let genomic = qt.parseGenomic(data);
+        if (qt.isGenomicInterval(data)) {
+            result = processInterval(genomic[0], genomic[1], genomic[2]);
+        } else if (qt.isGenomicPosition(data)) {
+            result = processSite(genomic[0], genomic[1]);
         }
         return { status: 1, data:  result}
     };

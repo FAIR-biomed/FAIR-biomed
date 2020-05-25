@@ -2,6 +2,7 @@
  * plugin for displaying links to the ensembl genome browser
  */
 
+let qt = require("../_querytools.js");
 
 module.exports = new function() {
 
@@ -22,47 +23,35 @@ module.exports = new function() {
     let lookup_url = api_base + '/lookup/id/';
     this.endpoints = [xref_url, lookup_url];
 
-    let query2tokens = function(query) {
-        query = query.replace(/,/g, '');
-        let words = query.split(/:|-|\s/).map((x) => x.trim());
-        return words.filter(x => (x!==''));
-    };
-
     /** signal whether or not plugin can process a query **/
     this.claim = function(query) {
-        query = query.trim();
-        if (query.length<1) return 0;
-        let words = query2tokens(query);
-        if (words.length === 2) {
-            if (isNaN(words[1])) return 0;
-            return 0.8;
-        }
-        if (words.length === 3) {
-            if (isNaN(words[1]) || isNaN(words[2])) return 0;
-            return 0.8;
-        }
-        if (words.length>1) return 0;
-        if (query.startsWith("ENSG")) return 1;
-        return 0.8;
+        if (qt.isIdentifier(query, "ENSG")) return 1;
+        if (qt.isIdentifier(query, "HGNC:")) return 0.8;
+        if (qt.isGenomicPosition(query)) return 0.8;
+        if (qt.isGenomicInterval(query)) return 0.8;
+        if (qt.isGeneSymbol(query)) return 0.8;
+        return 0;
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        query = query.trim();
-        let words = query2tokens(query);
-        // if the query is composed of three items, that is interpreted as [chr, start, end]
-        // the url function returns null, and the query will pass directly to process
-        if (words.length===2 || words.length===3) return null;
+        let suffix = '?content-type=application/json';
+        if (index===0 && qt.isIdentifier(query, "HGNC:")) {
+            return xref_url + query.trim() + suffix;
+        }
+        // if the query is for a genomic interval, url returns null
+        // this signals the query will pass directly to process
+        if (qt.isGenomicPosition(query) || qt.isGenomicInterval(query)) return null;
         let result = (index===0) ? xref_url : lookup_url;
-        return result + query.trim() + '?content-type=application/json';
+        return result + query.trim() + suffix;
     };
 
     /** transform a raw result into a second query or a display object **/
     this.process = function(data, index) {
         data = data.trim();
         // check for a special case - genomic position or interval
-        let words = query2tokens(data);
-        if (!data.startsWith("[") && (words.length === 3 || words.length === 2)) {
+        if (!data.startsWith("[") && (qt.isGenomicPosition(data) || qt.isGenomicInterval(data))) {
+            let words = qt.parseGenomic(data)
             let start = parseInt(words[1]);
             let region = words[0] + ":" + (start-100) + "-" + (start+100);
             if (words.length===3) {
@@ -74,6 +63,10 @@ module.exports = new function() {
             ];
             return { status: 1, data: [result] };
         }
+        // special case - empty results
+        if (data==="[]") {
+            return {status: 1, data: "no data; try a gene symbol or genomic interval"};
+        }
         // special case - lookup from gene symbol to gene id
         let raw = JSON.parse(data);
         if (index===0 && typeof(raw["id"]) === 'undefined') {
@@ -81,7 +74,8 @@ module.exports = new function() {
         }
         // general case - information from API
         let region = raw["seq_region_name"]+":"+raw["start"]+"-"+raw["end"];
-        let summary_url = ensembl_url + '/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000137474';
+        let gene_id = raw["id"];
+        let summary_url = ensembl_url + '/Homo_sapiens/Gene/Summary?db=core;g='+gene_id;
         let location_url = ensembl_url + '/Homo_sapiens/Location/View?db=core;r=' + region;
         let description = raw["description"].split(" [Source");
         let result = [ ["", ""],
@@ -96,9 +90,17 @@ module.exports = new function() {
 
     /** construct a URL to an external information page **/
     this.external = function(query, index) {
-        if (query.startsWith("ENSG")) {
+        if (query.length<1) return ensembl_url;
+        if (qt.isIdentifier(query, "ENSG")) {
             return ensembl_url + '/Homo_sapiens/Gene/Summary?db=core;g='+query.trim();
+        } else if (qt.isGenomicInterval(query)) {
+            let words = qt.parseGenomic(query);
+            let region = words[0]+":"+words[1];
+            if (words.length>2) {
+                region += "-"+words[2]
+            }
+            return ensembl_url + '/Homo_sapiens/Location/View?db=core;r=' + region;
         }
-        return ensembl_url;
+        return null;
     };
 }();

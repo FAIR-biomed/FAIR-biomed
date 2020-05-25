@@ -30,7 +30,7 @@ fs.ensureDirSync("dist");
 
 console.log("Loading library info");
 let libdir = path.resolve("library");
-let status_file = libdir + path.sep + "plugin_status";
+let status_file = libdir + path.sep + "_plugin_status";
 let plugin_status = libraryloader.loadPluginStatuses(status_file);
 let plugins = libraryloader.load(libdir)
     .filter((plugin) => plugin_status[plugin.id] === true);

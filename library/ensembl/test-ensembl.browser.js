@@ -8,8 +8,12 @@ it("does not claim multi word items", function () {
     assert.equal(plugin.claim("abc xyz"), 0)
 });
 
-it("claims single word items", function () {
+it("claims single gene symbols", function () {
     assert.equal(plugin.claim("KRAS"), 0.8)
+});
+
+it("claims HGNC gene ids", function () {
+    assert.equal(plugin.claim("HGNC:1234"), 0.8)
 });
 
 it("claims ensembl gene ids", function () {
@@ -28,6 +32,12 @@ it("processes translation from gene symbol to gene id", function() {
     let result = plugin.process(rdata, 0);
     assert.equal(result.status, 0.5);
     assert.equal(result.data.substr(0, 4), "ENSG");
+});
+
+it("processes empty translation into an informative message", function() {
+    let result = plugin.process("[]", 0);
+    assert.equal(result.status, 1);
+    assert.ok(JSON.stringify(result.data).includes("no data"));
 });
 
 it("processes gene information into a table", function() {

@@ -66,7 +66,7 @@ console.log("Building library from: "+libdir);
 console.log("Reading plugin test status");
 let plugin_status;
 try {
-    plugin_status = libraryloader.loadPluginStatuses(libdir + path.sep + "plugin_status");
+    plugin_status = libraryloader.loadPluginStatuses(libdir + path.sep + "_plugin_status");
 } catch (e) {
     console.error(e);
     return;

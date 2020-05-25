@@ -26,7 +26,7 @@ if (plugin_src===null || typeof(plugin_src)==='undefined') {
 }
 
 // remove the plugin status file
-plugin_status_file = 'library'+path.sep+'plugin_status';
+plugin_status_file = 'library'+path.sep+'_plugin_status';
 fs.removeSync(plugin_status_file);
 
 

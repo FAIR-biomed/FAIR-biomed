@@ -5,10 +5,11 @@ const plugin = require('./ucsc.genomebrowser');
 
 
 it('claims genomic sites', function () {
-    assert.equal(plugin.claim('chr1:123'), 1);
-    assert.equal(plugin.claim('chr1 123'), 1);
-    assert.equal(plugin.claim('X 456'), 1);
-    assert.equal(plugin.claim("Y 123,456"), 1);
+    // claims weaker than 1 because sites can be confused with identifiers (HGNC:123)
+    assert.equal(plugin.claim('chr1:123'), 0.9);
+    assert.equal(plugin.claim('chr1 123'), 0.9);
+    assert.equal(plugin.claim('X 456'), 0.9);
+    assert.equal(plugin.claim("Y 123,456"), 0.9);
 });
 
 it('does not claim very short or very long queries', function () {

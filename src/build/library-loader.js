@@ -37,7 +37,9 @@ function isJs(x) {
     if (!fs.lstatSync(x).isFile()) {
         return false;
     }
-    return path.extname(x)===".js" && !path.basename(x).startsWith("test");
+    return path.extname(x)===".js" &&
+        !path.basename(x).startsWith("test") &&
+        !path.basename(x).startsWith("_");
 }
 
 
