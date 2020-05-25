@@ -11,7 +11,7 @@ module.exports = new function () {
     this.tags = ['genes'];
 
     /** accompanying resources **/
-    this.logo = 'gtex_logo.png';
+    this.logo = 'gtex_logo_small.png';
     this.info = 'gtex-info.html';
     let api_base = 'https://gtexportal.org/rest/v1/'
     this.endpoints = [api_base];
