@@ -78,12 +78,12 @@ function build_static(dependencies_array) {
 console.log("Building browser-side bundle");
 build_static(dependencies["background"]);
 
-if (type === "development" || type === "production") {
+/* if (type === "development" || type === "production") {
     console.log("Building client-side bundle ("+type+")");
     build_static(dependencies[type]);
 } else {
     console.log("To build a bundle, specify either 'development' or 'production'")
-}
+} */
 
 
 if (type === 'production') {
