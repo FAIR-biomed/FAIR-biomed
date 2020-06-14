@@ -3,6 +3,8 @@
  *
  * */
 
+ var React = require('react');
+ var ReactDOM = require('react-dom');
 
 // cache for storing plugin icons
 var icons = {};
