@@ -21,7 +21,7 @@ it('check output once index is 1, Ensembl ID', function () {
     let r1 = fs.readFileSync(__dirname+'/ENSG00000164308.16_test.json').toString();
     var result_ens_process = plugin.process(r1, 1);
 
-    assert.ok(JSON.stringify(result_ens_process).includes("36.6296"))
+    assert.ok(JSON.stringify(result_ens_process).includes("36.6"))
 });
 
 it('generates different urls for round 1 and round 2', function () {
