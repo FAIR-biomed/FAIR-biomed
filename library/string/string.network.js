@@ -3,6 +3,7 @@
  * This plugin only search human genes and proteins.
  */
 
+let qt = require("../_querytools.js");
 
 module.exports = new function() {
 
@@ -26,6 +27,7 @@ module.exports = new function() {
     this.claim = function(x) {
         x = x.trim();
         if (x.length<2) return 0;
+        if (qt.isIdentifier(x, "rs")) return 0;
         let words = x.split(' ');
         if (words.length>3) return 0;
         let score = 1/words.length;

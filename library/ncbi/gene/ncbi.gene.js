@@ -2,6 +2,8 @@
  * library plugin for NCBI gene summary search
  */
 
+let qt = require("../../_querytools.js");
+
 module.exports = new function() {
 
     /** declarative attributes **/
@@ -27,6 +29,7 @@ module.exports = new function() {
     this.claim = function(x) {
         x = x.trim();
         if (x.length<2) return 0;
+        if (qt.isIdentifier(x, "rs")) return 0;
         let words = x.split(' ');
         if (words.length>4) return 0;
         if (words.length==1 && words[0].toUpperCase() == words[0]) return 0.95;
