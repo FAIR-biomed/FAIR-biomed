@@ -7,7 +7,7 @@
     "babel": "npx babel --copy-files src/app --out-dir dist --presets @babel/preset-react",
     "babel-prod": "npx babel --copy-files src/app --out-dir dist --presets @babel/preset-react --ignore src/app/cache",
     "bundle-licenses": "brlicenses --modules react react-dom react-rnd --format=full --output=dist/resources/LICENSE",
-    "bundle-prod": "browserify -r react  -r react-dom -r react-rnd  -o dist/resources/bundle.js",
+    "bundle-prod": "browserify -r react  -r react-dom -r react-rnd  -o dist/resources/bundle.js; npm run bundle-licenses",
     "build-lib": "node src/build/build-library.js",
     "build-dev": "node src/build/build-static.js development",
     "build-prod": "node src/build/build-static.js production",
@@ -18,7 +18,7 @@
     "test-app": "node_modules/mocha/bin/_mocha test/test-app.js",
     "test-plugin": "node_modules/mocha/bin/_mocha test/test-plugin.js",
     "coverage": "node_modules/nyc/bin/nyc.js --reporter=text --reporter=html node_modules/mocha/bin/_mocha",
-    "watch": "npm run clean; npm run build; npx babel --copy-files --watch src/app --out-dir dist --presets @babel/preset-react"
+    "watch": "npm run clean; npm run build; npm run bundle-prod; npx babel --copy-files --watch src/app --out-dir dist --presets @babel/preset-react"
   },
   "keywords": [
     "science",
