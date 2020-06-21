@@ -120,6 +120,7 @@ ul.fair-list li {
 }
 .fair-fill-v {
     flex-basis: available;
+    height: 100%;
 }
 .fair-container svg {
     box-sizing: border-box;
@@ -403,6 +404,7 @@ div.fair-header-body {
 
 /** Header **/
 div.fair-header {
+    white-space: nowrap;
     padding: 0.3em;
     padding-bottom: 0.6em;
 }
@@ -470,9 +472,13 @@ li.fair-candidate {
     max-height: 5em;
 }
 
+.fair-candidate-list {
+  height: calc(100% - 48px);
+}
 
 /** Output **/
 div.fair-body {
+  height: 100%;
 
 }
 div.fair-body ul {
@@ -520,6 +526,8 @@ span.fair-anchor {
 /** Toolbar at the bottom **/
 div.fair-result-toolbar {
     height: 48px;
+    position: absolute;
+    bottom: 0;
     background-color: #22b5bb;
     vertical-align: middle;
     overflow: hidden;
@@ -554,6 +562,7 @@ div.fair-result {
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
+    height: calc(100% - 164px);
     border-top: solid 1px #999999;
     width: 100%;
     min-width: 100%;

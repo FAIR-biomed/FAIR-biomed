@@ -294,10 +294,10 @@ class FAIROutput extends React.Component {
         }
         let result_height = (this.props.parentSize[1]-164)+'px';
         //console.log('render: ',result_height);
+        //style={{height: result_height}}>
         return (
             <div className='fair-fill-v'>
-                <div className='fair-row fair-result'
-                  style={{height: result_height}}>
+                <div className='fair-row fair-result'>
                     <div className='fair-section fair-col-12'>
                         {content}
                     </div>
@@ -413,8 +413,9 @@ class FAIRCandidateList extends React.Component {
                                selectPlugin={thislist.props.selectPlugin}/>
             );
         });
-        let ul_height = (this.props.parentSize[1]-48)+'px';
-        return (<ul className='fair-list fair-candidate-list' style={{height: ul_height}}>{candidates}</ul>);
+        //let ul_height = (this.props.parentSize[1]-48)+'px';
+        //style={{height: ul_height}}
+        return (<ul className='fair-list fair-candidate-list' >{candidates}</ul>);
     }
 }
 
@@ -658,7 +659,7 @@ class FAIRContainer extends React.Component {
     render() {
         return (
             <Rnd size={{ width: this.state.size[0], height: this.state.size[1] }}
-              className="fair-outer"      
+              className="fair-outer"
               onDragStop={(e, d) => {
                   this.setState({ x: d.x, y: d.y });
                 }}
