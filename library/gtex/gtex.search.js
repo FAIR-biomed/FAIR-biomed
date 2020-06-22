@@ -50,7 +50,7 @@ module.exports = new function () {
       var details = data[1].geneSymbol + ' (' + data[1].gencodeId + ')'
       let expression = [["Tissue", "Median TPM"]];
       expression = expression.concat(data.map((row)=> {
-          return [row["tissueSiteDetailId"], row["median"]];
+          return [row["tissueSiteDetailId"], row["median"].toPrecision(4)];
       }));
 
       // assemble the final output

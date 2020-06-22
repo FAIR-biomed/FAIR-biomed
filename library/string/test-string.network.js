@@ -5,12 +5,14 @@ const plugin = require('./string.network');
 
 
 it('claims long queries with varying strength', function () {
-    let result1 = plugin.claim('BRCA1');
-    let result2 = plugin.claim('KRAS HRAS');
-    let result3 = plugin.claim('KRAS KRAS KRAS');
-    assert.equal(result1, 0.9);
-    assert.equal(result2, 0.5);
-    assert.equal(result3, 1/3);
+    assert.equal(plugin.claim('BRCA1'), 0.9);
+    assert.equal(plugin.claim('RS1'), 0.9);
+    assert.equal(plugin.claim('KRAS HRAS'), 0.5);
+    assert.equal(plugin.claim('KRAS KRAS KRAS'), 1/3);
+});
+
+it('does not claim dbsnp identifiers', function () {
+    assert.equal(plugin.claim('rs123'), 0);
 });
 
 it('claims more weakly when special characters are present', function () {

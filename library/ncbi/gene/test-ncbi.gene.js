@@ -14,6 +14,10 @@ it('claims queries like human gene symbols', function () {
     assert.equal(plugin.claim('KRAS'), 0.95);
 });
 
+it('does not claim dbsnp ids', function () {
+    assert.equal(plugin.claim('rs123'), 0);
+});
+
 it('generates different urls for round 1 and round 2', function () {
     let result1 = plugin.url('Gene', 0);
     let result2 = plugin.url('Gene', 1);
