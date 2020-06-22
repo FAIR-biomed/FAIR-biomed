@@ -548,7 +548,7 @@ class FAIRHeaderBody extends React.Component {
         }
         return(
             <div className='fair-header-body'>
-                <div className='fair-header'>
+                <div className='fair-header fair-handle'>
                     {navicon}
                     <input className='fair-query' type='text'
                            onMouseDown={e => e.stopPropagation()}
@@ -660,6 +660,9 @@ class FAIRContainer extends React.Component {
         return (
             <Rnd size={{ width: this.state.size[0], height: this.state.size[1] }}
               className="fair-outer"
+              dragHandlerClassName=".handle"
+              cancel="div.fair-body > *"
+
               onDragStop={(e, d) => {
                   this.setState({ x: d.x, y: d.y });
                 }}

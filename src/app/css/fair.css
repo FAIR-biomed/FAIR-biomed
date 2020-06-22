@@ -10,6 +10,11 @@ div.fair-outer {
     display: block;
     /** set z very high to make appear always on top; some sites use 1000s **/
     z-index: 100000;
+    cursor: auto !important;
+}
+
+div.fair-outer .fair-handle {
+  cursor: move !important;
 }
 
 div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-10, div.fair-outer .fair-col-12 {
@@ -119,8 +124,10 @@ ul.fair-list li {
     text-align: center;
 }
 .fair-fill-v {
-    flex-basis: available;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 .fair-container svg {
     box-sizing: border-box;
@@ -400,6 +407,8 @@ div.fair-inner {
 
 div.fair-header-body {
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /** Header **/
@@ -407,10 +416,13 @@ div.fair-header {
     white-space: nowrap;
     padding: 0.3em;
     padding-bottom: 0.6em;
+    height: 48px;
 }
 div.fair-button-panel {
-    position: relative;
-    float: right;
+    /* position: relative;
+    float: right; */
+    position: absolute;
+    right: 0;
     padding: 0.6em;
 }
 div.fair-button-panel svg {
@@ -473,13 +485,16 @@ li.fair-candidate {
 }
 
 .fair-candidate-list {
-  height: calc(100% - 48px);
+  height: auto;
 }
 
 /** Output **/
 div.fair-body {
+  flex: 1;
   height: 100%;
-
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
 }
 div.fair-body ul {
     border: none;
@@ -559,10 +574,11 @@ div.fair-result-toolbar .fair-icon svg {
 /** Output **/
 div.fair-result {
     margin-top: 0.8em;
+    margin-bottom: 48px;
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
-    height: calc(100% - 164px);
+    height: 100%;
     border-top: solid 1px #999999;
     width: 100%;
     min-width: 100%;
