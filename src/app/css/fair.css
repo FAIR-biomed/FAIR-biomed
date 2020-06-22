@@ -89,7 +89,7 @@ ul.fair-list {
     list-style-type: none;
     list-style-image: none;
     margin: 0px;
-    overflow-y: auto;
+    /** overflow-y: auto; **/
 }
 ul.fair-list li {
     padding: 0px;
@@ -127,7 +127,8 @@ ul.fair-list li {
     height: 100%;
     display: flex;
     flex-direction: column;
-    flex: 1;
+    overflow: hidden;
+    /** flex: 1; **/
 }
 .fair-container svg {
     box-sizing: border-box;
@@ -407,6 +408,7 @@ div.fair-inner {
 
 div.fair-header-body {
     height: 100%;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
@@ -485,16 +487,17 @@ li.fair-candidate {
 }
 
 .fair-candidate-list {
-  height: auto;
+  height: inherit;
 }
 
 /** Output **/
 div.fair-body {
   flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: scroll;
+  overflow: auto;
+
+  /** display: flex;
+  flex-direction: column; **/
+
 }
 div.fair-body ul {
     border: none;
@@ -573,7 +576,7 @@ div.fair-result-toolbar .fair-icon svg {
 
 /** Output **/
 div.fair-result {
-    margin-top: 0.8em;
+    margin-top: 0.4em;
     margin-bottom: 48px;
     padding-top: 1em;
     padding-left: 1em;
@@ -583,6 +586,7 @@ div.fair-result {
     width: 100%;
     min-width: 100%;
     overflow-y: scroll;
+    flex: 1;
 }
 div.fair-result div.fair-cb {
     display: block;
@@ -683,3 +687,5 @@ div.fair-result p.examples, #fair-library p.examples {
     padding: 0.6em;
     margin: 1em 0em 1.5em 0em;
 }
+
+body { margin: 0 }
