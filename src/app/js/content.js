@@ -5,6 +5,9 @@
 
 'use strict';
 
+var React = require('react');
+var ReactDOM = require('react-dom');
+var Rnd = require('react-rnd').Rnd;
 
 // load a few icons into an icon cache
 var iconcache = {};
@@ -23,6 +26,8 @@ var iconcache = {};
  *  - path: string with path to file
  *
  * */
+
+
 class FAIRIconLogo extends React.Component {
     constructor(props) {
         super(props);
@@ -62,7 +67,7 @@ class FAIRIconLogo extends React.Component {
         let showdata = (cached!==null) ? cached : this.state.data;
         let cursorClass = ' fair-pointer';
         if (this.props.onClick===null || is.undefined(this.props.onClick)) {
-            cursorClass = ''
+            cursorClass = '';
         }
         return(<span className={'fair-'+this.props.type+cursorClass}
                      dangerouslySetInnerHTML={{__html: showdata}}
@@ -288,9 +293,11 @@ class FAIROutput extends React.Component {
             content = [<FAIROutputCode key='text-code' data={this.state.code}/>]
         }
         let result_height = (this.props.parentSize[1]-164)+'px';
+        //console.log('render: ',result_height);
+        //style={{height: result_height}}>
         return (
             <div className='fair-fill-v'>
-                <div className='fair-row fair-result' style={{height: result_height}}>
+                <div className='fair-row fair-result'>
                     <div className='fair-section fair-col-12'>
                         {content}
                     </div>
@@ -406,8 +413,9 @@ class FAIRCandidateList extends React.Component {
                                selectPlugin={thislist.props.selectPlugin}/>
             );
         });
-        let ul_height = (this.props.parentSize[1]-48)+'px';
-        return (<ul className='fair-list fair-candidate-list' style={{height: ul_height}}>{candidates}</ul>);
+        //let ul_height = (this.props.parentSize[1]-48)+'px';
+        //style={{height: ul_height}}
+        return (<ul className='fair-list fair-candidate-list' >{candidates}</ul>);
     }
 }
 
@@ -540,7 +548,7 @@ class FAIRHeaderBody extends React.Component {
         }
         return(
             <div className='fair-header-body'>
-                <div className='fair-header'>
+                <div className='fair-header fair-handle'>
                     {navicon}
                     <input className='fair-query' type='text'
                            onMouseDown={e => e.stopPropagation()}
@@ -591,12 +599,7 @@ class FAIRContainer extends React.Component {
         super(props);
         this.close = this.close.bind(this);
         this.toggleVisibility = this.toggleVisibility.bind(this);
-        this.startMouseDown = this.startMouseDown.bind(this);
-        this.startMove = this.startMove.bind(this);
-        this.endMouseDown = this.endMouseDown.bind(this);
-        this.duringMove = this.duringMove.bind(this);
-        this.duringResize = this.duringResize.bind(this);
-        this.state = {anchor: null, size: [480, 520]};
+        this.state = {anchor: null, x:null, y:null, size: [480, 520]};
     }
 
     /** At beginning, inject an anchor element and position to FAIR container **/
@@ -628,6 +631,7 @@ class FAIRContainer extends React.Component {
         }
         parent.style.left = parent_pos[0] + 'px';
         parent.style.top = parent_pos[1] + 'px';
+        this.setState({ x: parent_pos[0], y: parent_pos[1] });
         // remember links to the parent and to the anchor
         this.setState({parent: parent, anchor: anchor});
     };
@@ -652,71 +656,23 @@ class FAIRContainer extends React.Component {
         }
     }
 
-    /** Handlers for moving the container around **/
-    startMouseDown(e) {
-        // avoid processing right-clicks
-        if (e.nativeEvent.which === 3) return;
-        let parent = this.state.parent;
-        let parent_style = getComputedStyle(parent);
-        let parent_rect = parent.getBoundingClientRect();
-        let x = e.nativeEvent.clientX - parent_rect.left;
-        let y = e.nativeEvent.clientY - parent_rect.top;
-        if (x >= parseInt(parent_style.width) - 24 && y >= parseInt(parent_style.height) - 24) {
-            // if clicked in bottom-right corner, start move
-            this.startResize(e);
-        } else if (e.target.tagName == "DIV") {
-            // if clicked outside bottom-right, but only withing a div, start moving
-            // the "else if" condition avoids moving on p, span, etc. elements
-            this.startMove(e);
-        }
-    }
-    startMove(e) {
-        let parent = this.state.parent;
-        parent.style.cursor = "move";
-        let parent_pos = [parseInt(parent.style.left), parseInt(parent.style.top)];
-        // in startMove and endMove, e is an object provided by React, so use nativeEvent
-        let move_start = [e.nativeEvent.x, e.nativeEvent.y];
-        // remember position of container and mouse pointer at the beginning of the move
-        this.setState({move_start: move_start, parent_pos: parent_pos});
-        document.addEventListener("mousemove", this.duringMove, false);
-    }
-    startResize(e) {
-        let parent = this.state.parent;
-        let parent_style = getComputedStyle(parent);
-        let parent_size = [parseInt(parent_style.width), parseInt(parent_style.height)];
-        parent.style.cursor = "nwse-resize";
-        let mouse_start = [e.nativeEvent.x, e.nativeEvent.y];
-        this.setState({move_start: mouse_start, parent_size: parent_size});
-        document.addEventListener("mousemove", this.duringResize, false);
-    }
-    endMouseDown() {
-        // clean up state (not required, just clean)
-        this.setState({parent_pos: null, mouse_start: null, parent_size: null});
-        this.state.parent.style.cursor = "auto";
-        document.removeEventListener("mousemove", this.duringMove, false);
-        document.removeEventListener("mousemove", this.duringResize, false);
-    }
-    duringMove(e) {
-        let parent = this.state.parent;
-        let parent_pos = this.state.parent_pos;
-        let move_start = this.state.move_start;
-        parent.style.left = (parent_pos[0] + e.x - move_start[0]) + 'px';
-        parent.style.top = (parent_pos[1] + e.y - move_start[1]) + 'px';
-    }
-    duringResize(e) {
-        let parent = this.state.parent;
-        let parent_size = this.state.parent_size;
-        let move_start = this.state.move_start;
-        let new_size = [parent_size[0] + e.x - move_start[0],
-                        parent_size[1] + e.y - move_start[1]];
-        parent.style.width = new_size[0] + 'px';
-        parent.style.height = new_size[1] + 'px';
-        this.setState({size: new_size});
-    }
-
     render() {
         return (
-            <div className="fair-outer" onMouseDown={this.startMouseDown} onMouseUp={this.endMouseDown}>
+            <Rnd size={{ width: this.state.size[0], height: this.state.size[1] }}
+              className="fair-outer"
+              dragHandlerClassName=".handle"
+              cancel="div.fair-body > *"
+
+              onDragStop={(e, d) => {
+                  this.setState({ x: d.x, y: d.y });
+                }}
+                onResizeStop={(e, direction, ref, delta, position) => {
+                  this.setState({
+                    size: [ref.offsetWidth, ref.offsetHeight],
+                    parent_size: [ref.offsetWidth, ref.offsetHeight],
+                    ...position
+                  });
+                }}>
                 <div className='fair-inner fair-container'>
                     <div className='fair-button-panel'>
                         <FAIRIconLogo type='icon' path='fa window-minimize-solid'
@@ -726,7 +682,7 @@ class FAIRContainer extends React.Component {
                     </div>
                     <FAIRHeaderBody range={this.props.range} parentSize={this.state.size}/>
                 </div>
-            </div>
+            </Rnd>
         )
     }
 }

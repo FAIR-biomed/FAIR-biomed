@@ -10,6 +10,11 @@ div.fair-outer {
     display: block;
     /** set z very high to make appear always on top; some sites use 1000s **/
     z-index: 100000;
+    cursor: auto !important;
+}
+
+div.fair-outer .fair-handle {
+  cursor: move !important;
 }
 
 div.fair-outer .fair-col-8, div.fair-outer .fair-col-2, div.fair-outer .fair-col-3, div.fair-outer .fair-col-6, div.fair-outer .fair-col-10, div.fair-outer .fair-col-12 {
@@ -84,7 +89,7 @@ ul.fair-list {
     list-style-type: none;
     list-style-image: none;
     margin: 0px;
-    overflow-y: auto;
+    /** overflow-y: auto; **/
 }
 ul.fair-list li {
     padding: 0px;
@@ -119,7 +124,11 @@ ul.fair-list li {
     text-align: center;
 }
 .fair-fill-v {
-    flex-basis: available;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /** flex: 1; **/
 }
 .fair-container svg {
     box-sizing: border-box;
@@ -399,16 +408,23 @@ div.fair-inner {
 
 div.fair-header-body {
     height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 /** Header **/
 div.fair-header {
+    white-space: nowrap;
     padding: 0.3em;
     padding-bottom: 0.6em;
+    height: 48px;
 }
 div.fair-button-panel {
-    position: relative;
-    float: right;
+    /* position: relative;
+    float: right; */
+    position: absolute;
+    right: 0;
     padding: 0.6em;
 }
 div.fair-button-panel svg {
@@ -470,9 +486,17 @@ li.fair-candidate {
     max-height: 5em;
 }
 
+.fair-candidate-list {
+  height: inherit;
+}
 
 /** Output **/
 div.fair-body {
+  flex: 1;
+  overflow: auto;
+
+  /** display: flex;
+  flex-direction: column; **/
 
 }
 div.fair-body ul {
@@ -520,6 +544,8 @@ span.fair-anchor {
 /** Toolbar at the bottom **/
 div.fair-result-toolbar {
     height: 48px;
+    position: absolute;
+    bottom: 0;
     background-color: #22b5bb;
     vertical-align: middle;
     overflow: hidden;
@@ -550,14 +576,17 @@ div.fair-result-toolbar .fair-icon svg {
 
 /** Output **/
 div.fair-result {
-    margin-top: 0.8em;
+    margin-top: 0.4em;
+    margin-bottom: 48px;
     padding-top: 1em;
     padding-left: 1em;
     padding-right: 1em;
+    height: 100%;
     border-top: solid 1px #999999;
     width: 100%;
     min-width: 100%;
     overflow-y: scroll;
+    flex: 1;
 }
 div.fair-result div.fair-cb {
     display: block;
@@ -658,3 +687,5 @@ div.fair-result p.examples, #fair-library p.examples {
     padding: 0.6em;
     margin: 1em 0em 1.5em 0em;
 }
+
+body { margin: 0 }

@@ -6,17 +6,19 @@
     "clean": "rm -fr dist && mkdir dist",
     "babel": "npx babel --copy-files src/app --out-dir dist --presets @babel/preset-react",
     "babel-prod": "npx babel --copy-files src/app --out-dir dist --presets @babel/preset-react --ignore src/app/cache",
+    "bundle-licenses": "brlicenses --modules react react-dom react-rnd --format=full --output=dist/resources/LICENSE",
+    "bundle-prod": "browserify -r react  -r react-dom -r react-rnd  -o dist/resources/bundle.js; npm run bundle-licenses",
     "build-lib": "node src/build/build-library.js",
     "build-dev": "node src/build/build-static.js development",
     "build-prod": "node src/build/build-static.js production",
     "build": "npm run babel; npm run build-dev; npm run build-lib",
-    "production": "npm run clean; npm run test; npm run build-lib; npm run babel-prod; npm run build-prod;",
+    "production": "npm run clean; npm run test; npm run build-lib; npm run babel-prod; npm run build-prod; npm run bundle-prod",
     "upgrade-version": "node src/build/increase-version.js",
     "test": "node_modules/mocha/bin/_mocha",
     "test-app": "node_modules/mocha/bin/_mocha test/test-app.js",
     "test-plugin": "node_modules/mocha/bin/_mocha test/test-plugin.js",
     "coverage": "node_modules/nyc/bin/nyc.js --reporter=text --reporter=html node_modules/mocha/bin/_mocha",
-    "watch": "npm run clean; npm run build; npx babel --copy-files --watch src/app --out-dir dist --presets @babel/preset-react"
+    "watch": "npm run clean; npm run build; npm run bundle-prod; npx babel --copy-files --watch src/app --out-dir dist --presets @babel/preset-react"
   },
   "keywords": [
     "science",
@@ -33,6 +35,8 @@
     "@babel/core": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
     "browserify": "^16.2.3",
+    "browserify-licenses": "^1.4.7-1",
+    "browserify-shim": "^3.8.14",
     "fs-extra": "^7.0.0",
     "mocha": "^7.2.0",
     "nyc": "^14.1.1",
@@ -44,6 +48,12 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-motion": "^0.5.2",
+    "react-rnd": "^10.0.1",
     "sanitize-html": "^1.18.2"
+  },
+  "browserify-shim": {
+    "react": "React",
+    "react-dom": "ReactDOM",
+    "react-rnd": "Rnd"
   }
 }
