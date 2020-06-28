@@ -187,6 +187,8 @@ ul.fair-list li {
 }
 .fair-container img {
     max-width: unset;
+    margin-bottom: 0px;
+    padding: 0px;
 }
 
 

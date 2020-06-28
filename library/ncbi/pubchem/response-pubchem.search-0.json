@@ -1,0 +1,33 @@
+{
+  "header": {
+    "type": "esearch",
+    "version": "0.3"
+  },
+  "esearchresult": {
+    "count": "40",
+    "retmax": "8",
+    "retstart": "0",
+    "idlist": [
+      "66250",
+      "16134896",
+      "6102",
+      "16131423",
+      "16131047",
+      "56841902",
+      "16131187",
+      "3083473"
+    ],
+    "translationset": [
+    ],
+    "translationstack": [
+      {
+        "term": "Gene[All Fields]",
+        "field": "All Fields",
+        "count": "65",
+        "explode": "N"
+      },
+      "GROUP"
+    ],
+    "querytranslation": "Gene[All Fields]"
+  }
+}

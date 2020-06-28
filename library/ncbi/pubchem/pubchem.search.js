@@ -1,5 +1,5 @@
 /**
- * library plugin for Pubmed Article search
+ * library plugin for Pubchem search for compounds
  */
 
 let qt = require("../../_querytools.js");
@@ -7,22 +7,22 @@ let qt = require("../../_querytools.js");
 module.exports = new function() {
 
     /** declarative attributes **/
-    this.id = 'pubmed.search';
-    this.title = 'PubMed';
-    this.subtitle = 'Literature search';
-    this.tags = ['articles', 'literature'];
+    this.id = 'pubchem.search';
+    this.title = 'PubChem';
+    this.subtitle = 'Chemical compounds';
+    this.tags = ['chemistry', 'compounds', 'drugs'];
 
     /** accompanying resources **/
-    this.logo = '200px-US-NLM-PubMed-Logo-2.svg.png';
-    this.info = 'pubmed-info.html';
+    this.logo = 'pubchem_logo.png';
+    this.info = 'pubchem-info.html';
 
     // parts of api urls
     let eutils = 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/';
-    let suffix = '&db=pubmed&retmax=8&format=json&sort=relevance&tool=FAIR-biomed&email=fair.ext@gmail.com';
+    let suffix = '&db=pccompound&retmax=8&format=json&sort=relevance&tool=FAIR-biomed&email=fair.ext@gmail.com';
     this.endpoints = [eutils + 'esearch.fcgi', eutils + 'esummary.fcgi'];
 
     let id2link = function(id) {
-        return 'https://www.ncbi.nlm.nih.gov/pubmed/'+id;
+        return 'https://pubchem.ncbi.nlm.nih.gov/compound/' + id;
     };
 
     /** signal whether or not plugin can process a query **/
@@ -30,7 +30,7 @@ module.exports = new function() {
         x = x.trim();
         if (x.length<2) return 0;
         let words = x.split(' ');
-        if (words.length>4) return 0;
+        if (words.length>2) return 0;
         return Math.min(0.9, qt.scoreQuery(x)/words.length);
     };
 
@@ -48,7 +48,7 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        let result = JSON.parse(data)
+        let result = JSON.parse(data);
         if (index === 0) {
             result = result['esearchresult']['idlist'];
             if (result.length>0) {
@@ -58,28 +58,33 @@ module.exports = new function() {
             }
         } else if (index === 1) {
             let uids = result['result']['uids'];
-            let articles = uids.map(function(x) {
+            let compounds = uids.map(function(x) {
                 let xdata = result['result'][x];
+                let xid = xdata['uid'];
+                let xnames = xdata['synonymlist'];
+                let xname = xnames[0];
+                if (xnames.length>1)
+                    xname += '; '+(xnames.length-1) + ' synonym';
+                if (xnames.length>2)
+                    xname += 's';
                 return [
-                    '<h2>'+xdata['title']+'</h2>',
-                    '<div>'+xdata['sortfirstauthor']+' et al</div>',
-                    '<div>'+xdata['source']+' ('+xdata['pubdate']+')</div>',
-                    '<div><a href="'+id2link(xdata['uid'])+'" target="_blank">',
-                    'PMID: '+xdata['uid']+'</a></div>'].join('')
+                    ['', ''],
+                    ['Compound', '<a href="'+id2link(xid)+'" target="_blank">' + xname+ '</a>'],
+                    ['IUPAC name', xdata['iupacname']],
+                    ['Molecular weight', xdata['molecularweight']],
+                    ['Molecular formula', xdata['molecularformula']]
+                ]
             });
-            return {
-                status: 1,
-                data: articles
-            }
+            return { status: 1,  data: compounds}
         }
     };
 
     /** construct a URL to an external information page **/
     this.external = function(query, index) {
         if (index>0) return null;
-        return 'https://www.ncbi.nlm.nih.gov/pubmed/?term=' + query;
+        query = query.trim().split(" ");
+        return 'https://pubchem.ncbi.nlm.nih.gov/#query=' + query.join("%20");
     };
 
 }();
-
 
