@@ -30,7 +30,6 @@ module.exports = new function() {
         x = x.trim();
         if (x.length<2) return 0;
         let words = x.split(' ');
-        if (words.length>4) return 0;
         return Math.min(0.9, qt.scoreQuery(x)/words.length);
     };
 

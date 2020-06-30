@@ -34,6 +34,7 @@ module.exports = new function() {
         // long queries can be a drug names, short names possibly gene names
         // so claim long words more strongly
         let parts = query.split(" ");
+        if (parts.length>4) return 0;
         if (parts.length==1 && query.length > 6) return 0.7;
         if (parts.length==2 && query.length > 12) return 0.6;
         return 0.6/parts.length;

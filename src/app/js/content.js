@@ -660,7 +660,6 @@ class FAIRContainer extends React.Component {
         return (
             <Rnd size={{ width: this.state.size[0], height: this.state.size[1] }}
               className="fair-outer"
-              dragHandlerClassName=".handle"
               cancel="div.fair-body > *"
 
               onDragStop={(e, d) => {
