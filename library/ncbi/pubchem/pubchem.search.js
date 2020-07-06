@@ -1,5 +1,5 @@
 /**
- * library plugin for Pubchem search for compounds
+ * library plugin for PubChem search for compounds
  */
 
 let qt = require("../../_querytools.js");
@@ -71,7 +71,7 @@ module.exports = new function() {
                     ['', ''],
                     ['Compound', '<a href="'+id2link(xid)+'" target="_blank">' + xname+ '</a>'],
                     ['IUPAC name', xdata['iupacname']],
-                    ['Molecular weight', xdata['molecularweight']],
+                    ['Molecular weight', xdata['molecularweight'] + " g/mol"],
                     ['Molecular formula', xdata['molecularformula']]
                 ]
             });

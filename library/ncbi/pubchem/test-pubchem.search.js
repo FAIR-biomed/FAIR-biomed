@@ -29,7 +29,8 @@ it('extracts ids from round 1 response', function() {
     let r1 = fs.readFileSync(__dirname+'/response-pubchem.search-0.json').toString();
     let result = plugin.process(r1, 0);
     // round 1 should signal status not yet done <1
-    assert.ok(result.status<1);
+    assert.ok(result.status < 1);
+    assert.ok(JSON.stringify(result).includes("66250"));
 });
 
 it('extracts titles from round 2 response', function() {
@@ -37,6 +38,7 @@ it('extracts titles from round 2 response', function() {
     let result = plugin.process(r2, 1);
     console.log(JSON.stringify(result));
     assert.equal(result.status, 1);
-    assert.ok(result.data.length>1);
+    assert.ok(result.data.length > 1);
+    assert.ok(JSON.stringify(result).includes("aspirin"));
 });
 
