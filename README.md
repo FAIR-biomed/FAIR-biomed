@@ -1,9 +1,9 @@
 # FAIR-biomed
 
 
-<a href="https://addons.mozilla.org/en-GB/firefox/addon/fair-biomed/"><img align="right" src="docs/firefox_addons.png" width="206"></a>
+<a href="https://addons.mozilla.org/en-GB/firefox/addon/fair-biomed/"><img align="right" src="docs/firefox_addons.png" width="176" style="margin-top:4px"></a>
 
-<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/ChromeWebStore_Badge_v2_206x58.png" width="198"></a>
+<a href="https://chrome.google.com/webstore/detail/fair-biomed/kaacnnmpcdbebmkbcddpckgpgphhcdhn"><img align="right" src="docs/ChromeWebStore_Badge_v2_206x58.png" width="206"></a>
 
 FAIR-biomed is a browser extension for accessing open data resources in the biomedical domain. 
 
