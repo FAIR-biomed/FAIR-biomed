@@ -2,6 +2,8 @@
  * library plugin for EuropePMC article search
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -28,13 +30,7 @@ module.exports = new function() {
     this.claim = function(x) {
         x = x.trim();
         if (x.length<2) return 0;
-        let words = x.split(' ');
-        let score = 1/words.length;
-        // penalize some special characters
-        ['%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.3*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        return Math.min(0.9, qt.scoreQuery(x)/qt.numWords(x));
     };
 
     /** construct a url for an API call **/
@@ -47,6 +43,9 @@ module.exports = new function() {
     this.process = function(data, index) {
         let result = JSON.parse(data);
         let hits = result['resultList']['result'];
+        if (hits.length == 0) {
+            return { status: 1, data: msg.empty_server_output }
+        }
         let articles = hits.map(function(x) {
             if (x['journalTitle'] == null) {
                 x['journalTitle'] = '['+x['pubType']+']';
@@ -58,10 +57,7 @@ module.exports = new function() {
                 '<div><a href="'+item2link(x)+'" target="_blank">',
                 x['source']+'/'+x['id']+'</a></div>'].join('')
         });
-        return {
-            status: 1,
-            data: articles
-        }
+        return { status: 1, data: articles }
     };
 
     /** construct a URL to an external information page **/

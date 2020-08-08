@@ -2,6 +2,8 @@
  * library plugin for wiktionary search
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -21,31 +23,29 @@ module.exports = new function() {
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
         if (x.trim().length < 1) return 0;
-        let words = x.split(' ');
-        if (words.length!=1) return 0;
-        let score = 1;
-        [':', '#', '$', '%'].map(function(z) {
-            if (x.includes(z)) score = 0;
-        });
-        return Math.min(0.8, Math.max(0, score));
+        if (qt.numWords(x)>1) return 0;
+        return Math.min(0.8, qt.scoreQuery(x, 1));
     };
 
     /** construct a url for an API call **/
     this.url = function(query) {
         query = query.split(' ').join('%20');
         let url = api_base + '?action=query'
-            +'&titles='+query+'&prop=extracts&format=json&formatversion=2'
+            +'&titles='+query+'&prop=extracts&format=json&formatversion=2';
         return url;
     };
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data) {
-        let result = JSON.parse(data)
+        let result = JSON.parse(data);
         if (result['batchcomplete']!==true) {
             return {status: 0, data: result};
         }
-        result = result['query']['pages'][0]
-        return {status: 1, data: result.extract};
+        result = result['query']['pages'][0];
+        if (result.extract === undefined) {
+            return { status: 1, data: msg.empty_server_output }
+        }
+        return {status: 1, data: result.extract };
     };
 
     /** construct a URL to an external information page **/

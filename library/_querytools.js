@@ -96,18 +96,29 @@ module.exports = new function() {
     /**
      * produce a score that penalizes certain characters
      * @param x string
+     * @param penalty number, score decreases by this amount for each character
+     * type listed in the penalize array
      * @param penalize array of character to penalize
-     * @param penalty number
      * @returns {number} score in [0, 1]
      */
     this.scoreQuery = function(x,
-                               penalize=["#", "$", "%", ":", ";", "&", "?"],
-                               penalty=0.2) {
+                               penalty=0.2,
+                               penalize=["#", "$", "%", ":", ";", "&", "?"]) {
         let result = 1;
         penalize.map(function(z) {
             result -= penalty*(x.includes(z))
         });
         return Math.max(0, result);
+    };
+
+    /**
+     * count the number of words (separated by a space) in a string
+     *
+     * @param x string
+     * @return {number} number of words in the string
+     */
+    this.numWords = function(x) {
+        return x.split(" ").length;
     }
 }();
 

@@ -3,6 +3,7 @@
  */
 
 let qt = require("../../_querytools.js");
+let msg = require("../../_messages.js");
 
 module.exports = new function() {
 
@@ -73,7 +74,7 @@ module.exports = new function() {
                 // only identify the top hit, ignore the rest
                 return {status: 0.5, data: idlist[0]};
             } else {
-                return {status: 0, data: 'No results'};
+                return { status: 1, data: msg.empty_server_output };
             }
         }
         let id = result["result"]["uids"][0];

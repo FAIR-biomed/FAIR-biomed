@@ -1,9 +1,8 @@
 /** Unit tests specific to NCBI Clinvar plugin **/
 
-var assert = require('assert');
-var fs = require("fs-extra");
-var plugin = require('./ncbi.clinvar');
-
+let assert = require('assert');
+let fs = require("fs-extra");
+let plugin = require('./ncbi.clinvar');
 
 it('does not claim extremely long queries', function () {
     assert.equal(plugin.claim('ignore more than four words'), 0.0);
@@ -61,7 +60,8 @@ it('generates urls without string chr', function () {
 it('detect response with no hits', function() {
     let r1 = fs.readFileSync(__dirname+'/response-ncbi.clinvar-0.json').toString();
     let result = plugin.process(r1, 0);
-    assert.equal(result.status, 0);
+    assert.equal(result.status, 1);
+    assert.ok(result.data.includes("no hits"));
 });
 
 it('extracts ids from first-round response', function() {

@@ -3,6 +3,7 @@
  */
 
 let qt = require("../../_querytools.js");
+let msg = require("../../_messages.js");
 
 module.exports = new function() {
 
@@ -29,9 +30,9 @@ module.exports = new function() {
     this.claim = function(x) {
         x = x.trim();
         if (x.length<2) return 0;
-        let words = x.split(' ');
-        if (words.length>2) return 0;
-        return Math.min(0.9, qt.scoreQuery(x)/words.length);
+        if (qt.numWords(x)>2) return 0;
+        if (qt.isIdentifier(x, "CHEMBL")) return 1;
+        return Math.min(0.9, qt.scoreQuery(x)/qt.numWords(x));
     };
 
     /** construct a url for an API call **/
@@ -52,9 +53,9 @@ module.exports = new function() {
         if (index === 0) {
             result = result['esearchresult']['idlist'];
             if (result.length>0) {
-                return {status: 0.5, data: result.join(',')};
+                return { status: 0.5, data: result.join(',') };
             } else {
-                return {status: 0, data: 'failed search'};
+                return { status: 1, data: msg.empty_server_output };
             }
         } else if (index === 1) {
             let uids = result['result']['uids'];

@@ -2,6 +2,8 @@
  * library plugin for NCBI Clinvar search
  */
 
+let msg = require("../../_messages.js");
+
 module.exports = new function() {
 
     /** declarative attributes **/
@@ -57,8 +59,7 @@ module.exports = new function() {
         if (is_genomic(tokens)) return 0.95;
         if (words.length==1 && words[0].toUpperCase() == words[0]) return 0.9;
         if (words.length==1) return 0.8;
-        let score = 1/words.length;
-        return Math.max(0, Math.min(0.9, score));
+        return Math.max(0, Math.min(0.9, 1/words.length));
     };
 
     /** construct a url for an API call **/
@@ -122,7 +123,7 @@ module.exports = new function() {
             if (idlist.length>0) {
                 return {status: 0.5, data: idlist.join(',')};
             } else {
-                return {status: 0, data: 'No results'};
+                return { status: 1, data: msg.empty_server_output };
             }
         } else if (index === 1) {
             let uids = result['result']['uids'];

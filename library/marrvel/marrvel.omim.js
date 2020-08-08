@@ -2,6 +2,7 @@
  * plugin for fetching OMIM data from MARRVEL
  */
 
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -24,12 +25,12 @@ module.exports = new function() {
     let omim_url = 'https://www.omim.org/entry/';
 
     /** signal whether or not plugin can process a query **/
-    this.claim = function(query) {
-        query = query.trim();
-        if (query.length<2 || query.length>30) return 0;
-        if (query.split(' ').length !== 1) return 0;
-        if (query.split("-").length > 2) return 0;
-        let words = query.split(':');
+    this.claim = function(x) {
+        x = x.trim();
+        if (x.length<2 || x.length>30) return 0;
+        if (x.split(' ').length !== 1) return 0;
+        if (x.split("-").length > 2) return 0;
+        let words = x.split(':');
         if (words.length === 1) return 0.8;
         return 0.5;
     };
@@ -72,7 +73,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let raw = JSON.parse(data);
         if (raw["message"] !== undefined) {
-            return { status: 0, data: "No results" };
+            return { status: 1, data: msg.empty_server_output };
         }
         let result = this.makeDescription(raw);
         return { status: 1, data: [result] };

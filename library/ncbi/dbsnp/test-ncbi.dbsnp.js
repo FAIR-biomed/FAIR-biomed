@@ -4,7 +4,6 @@ let assert = require('assert');
 let fs = require("fs-extra");
 let plugin = require('./ncbi.dbsnp');
 
-
 it('does not claim non-rs strings', function () {
     assert.equal(plugin.claim('abc def'), 0.0);
     assert.equal(plugin.claim('aaa'), 0.0);

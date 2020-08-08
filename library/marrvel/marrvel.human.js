@@ -2,6 +2,7 @@
  * plugin for fetching data from MARRVEL on human genes (phenotypes and expression)
  */
 
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -21,7 +22,6 @@ module.exports = new function() {
     this.endpoints = [api_base];
 
     let gene_url = 'http://marrvel.org/search/gene/';
-    let gtex_url = 'https://gtexportal.org/home/gene/';
     let hgnc_url = 'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/';
 
     /** signal whether or not plugin can process a query **/
@@ -70,7 +70,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let raw = JSON.parse(data);
         if (raw["hgncId"] === undefined) {
-            return { status: 0, data: "No results" };
+            return { status: 1, data: msg.empty_server_output };
         }
         let result = this.makeExpressionData(raw);
         return { status: 1, data: result };

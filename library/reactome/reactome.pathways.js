@@ -3,6 +3,8 @@
  * This plugin only search human genes and pathways.
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -40,12 +42,7 @@ module.exports = new function() {
         if (x.length<2) return 0;
         let words = x.split(' ');
         if (words.length>2) return 0;
-        let score = 1/words.length;
-        // penalize some special characters
-        ['%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.3*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        return Math.min(0.9, qt.scoreQuery(x)/words.length);
     };
 
     /** construct a url for an API call **/
@@ -57,7 +54,7 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        let result = JSON.parse(data)
+        let result = JSON.parse(data);
         if (index==0) {
             result = result["results"][0];
             let entries = result["entries"];
@@ -70,6 +67,9 @@ module.exports = new function() {
                 return {status: 0, data: "no hits"};
             }
             return {status: 0.5, data: hits[0]["id"]};
+        }
+        if (result["code"] !== undefined) {
+            return { status: 1, data: msg.empty_server_output };
         }
         let hits = result.map(function(entry) {
             let name = entry["displayName"];

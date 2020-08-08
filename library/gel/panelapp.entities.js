@@ -2,6 +2,8 @@
  * plugin for Panel App from Genomics England
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -24,16 +26,12 @@ module.exports = new function() {
     // https://panelapp.genomicsengland.co.uk/panels/307/gene/ABCA4
 
     /** signal whether or not plugin can process a query **/
-    this.claim = function(query) {
-        query = query.trim();
-        if (query.length<2) return 0;
-        if (query.split(' ').length !== 1) return 0;
-        if (query.split(':').length !== 1) return 0;
-        let score = 0.8;
-        [':', '%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.2*(query.includes(z))
-        });
-        return Math.max(0, score);
+    this.claim = function(x) {
+        x = x.trim();
+        if (x.length<2) return 0;
+        if (qt.numWords(x)>1) return 0;
+        if (x.split(':').length !== 1) return 0;
+        return Math.min(0.8, qt.scoreQuery(x));
     };
 
     /** construct a url for an API call **/
@@ -71,7 +69,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let parsed = JSON.parse(data);
         if (parsed['count'] === 0) {
-            return { status: 1, data: 'No results' };
+            return { status: 1, data: msg.empty_server_output };
         }
         let docs = parsed['results'];
         let result = docs.map(this.processGene);

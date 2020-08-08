@@ -3,6 +3,7 @@
  */
 
 let qt = require("../../_querytools.js");
+let msg = require("../../_messages.js");
 
 module.exports = new function() {
 
@@ -33,8 +34,7 @@ module.exports = new function() {
         let words = x.split(' ');
         if (words.length>4) return 0;
         if (words.length==1 && words[0].toUpperCase() == words[0]) return 0.95;
-        let score = 1/words.length;
-        return Math.max(0, Math.min(0.9, score));
+        return Math.max(0, Math.min(0.9, 1/words.length));
     };
 
     /** construct a url for an API call **/
@@ -44,7 +44,7 @@ module.exports = new function() {
         if (index === 0 || typeof(index)==='undefined') {
             url += 'esearch.fcgi?term=' + words.join('+')
         } else if (index === 1) {
-            url += 'esummary.fcgi?id='+words.join(',')
+            url += 'esummary.fcgi?id=' + words.join(',')
         }
         return url + suffix;
     };
@@ -57,7 +57,7 @@ module.exports = new function() {
             if (result.length>0) {
                 return {status: 0.5, data: result.join(',')};
             } else {
-                return {status: 0, data: 'failed search'};
+                return { status: 1, data: msg.empty_server_output };
             }
         } else if (index === 1) {
             let uids = result['result']['uids'];
@@ -79,9 +79,7 @@ module.exports = new function() {
 
     /** construct a URL to an external information page **/
     this.external = function(query, index) {
-        if (index>0) {
-            return null;
-        }
+        if (index>0) return null;
         return 'https://www.ncbi.nlm.nih.gov/gene/?term='+query;
     };
 

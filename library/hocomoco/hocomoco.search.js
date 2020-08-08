@@ -1,6 +1,9 @@
 /**
- * library plugin for JASPAR search
+ * library plugin for HOCOMOCO search
  */
+
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -31,16 +34,9 @@ module.exports = new function() {
         if (x.match(/^\w+_\w+\.H(\d+)(MO|DI)\.\d+\..+]/)) return 0.99;
         // hocomoco can search by hgnc/mgi/entrezgene ids
         if (x.match(/^(HGNC|MGI|entrez(\s*gene)?):?\s*\d+/)) return 0.9;
-        // the rest is taken from JASPAR
         if (x.length<2) return 0;
-        let words = x.split(' ');
-        if (words.length>4) return 0;
-        let score = 1/words.length;
-        // penalize some special characters
-        ['%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.3*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        if (qt.numWords(x)>4) return 0;
+        return Math.max(0, Math.min(0.9, qt.scoreQuery(x)/qt.numWords(x)));
     };
 
     /** construct a url for an API call **/
@@ -52,8 +48,8 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         let result = JSON.parse(data);
-        if (result.length == 0) {
-            return {status: 0, data: "No TF binding profiles found!"};
+        if (result.length === 0) {
+            return {status: 1, data: msg.empty_server_output };
         }
         let matrices = result.map(function(x) {
             return [

@@ -2,6 +2,8 @@
  * library plugin for JASPAR search
  */
 
+let qt = require("../_querytools.js");
+
 module.exports = new function() {
 
     /** declarative attributes **/
@@ -26,22 +28,18 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
-        x = x.trim()
+        x = x.trim();
         if (x.length<2) return 0;
         let words = x.split(' ');
-        if (words.length>4) return 0;
-        let score = 1/words.length;
-        // penalize some special characters
-        ['%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.3*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        if (words.length>1) return 0;
+        return Math.min(0.9, qt.scoreQuery(x));
     };
 
     /** construct a url for an API call **/
     this.url = function(query, index) {
-        let words = query.trim().split(' ');
-        return jaspar + words.join('%20') + suffix;
+        // only use one word from the query, and trim decimal points
+        let x = query.trim().split(' ')[0];
+        return jaspar + x.split(".")[0] + suffix;
     };
 
     /** transform a raw result from an API call into a display object **/

@@ -2,6 +2,9 @@
  * library plugin for LNCipedia search
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
+
 module.exports = new function() {
 
     /** declarative attributes **/
@@ -19,22 +22,12 @@ module.exports = new function() {
     let lncipedia = api_base + '?id=';
     this.endpoints = [api_base];
 
-    let item2link = function(x) {
-        return 'https://lncipedia.org/db/gene/'+x['lncipediaGeneID'];
-    };
-
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
-        x = x.trim()
+        x = x.trim();
         if (x.length<2) return 0;
-        let words = x.split(' ');
-        if (words.length>4) return 0;
-        let score = 1/words.length;
-        // penalize some special characters
-        ['%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.3*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        if (qt.numWords(x)>4) return 0;
+        return Math.max(0, Math.min(0.8, qt.scoreQuery(x)/qt.numWords(x)));
     };
 
     /** construct a url for an API call **/
@@ -48,8 +41,8 @@ module.exports = new function() {
         let result = JSON.parse(data);
         let hits = result['transcripts'];
         if (result['count']==0) {
-                return {status: 0, data: "No long non-coding RNA transcripts found!"};
-            }
+            return {status: 1, data: msg.empty_server_output };
+        }
         let lnrnas = hits.map(function(x) {
             return [
                 ['',''],

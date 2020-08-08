@@ -1,9 +1,8 @@
 /** Unit tests specific to NCBI gene plugin **/
 
-var assert = require('assert');
-var fs = require("fs-extra");
-var plugin = require('./ncbi.gene');
-
+let assert = require('assert');
+let fs = require("fs-extra");
+let plugin = require('./ncbi.gene');
 
 it('claims long queries with varying strength', function () {
     assert.equal(plugin.claim('Brca1'), 0.9);

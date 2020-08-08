@@ -10,7 +10,7 @@ module.exports = new function() {
     /** declarative attributes **/
     this.id = 'string.network';
     this.title = 'STRING DB';
-    this.subtitle = 'Protein interaction network';
+    this.subtitle = 'Protein interactions (human)';
     this.tags = ['genes', 'proteins', 'ppi', 'network', 'human'];
     this.endpoints = [];
 
@@ -28,14 +28,8 @@ module.exports = new function() {
         x = x.trim();
         if (x.length<2) return 0;
         if (qt.isIdentifier(x, "rs")) return 0;
-        let words = x.split(' ');
-        if (words.length>3) return 0;
-        let score = 1/words.length;
-        // penalize some special characters
-        ['%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.3*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        if (qt.numWords(x)>3) return 0;
+        return Math.max(0, Math.min(0.9, qt.scoreQuery(x)/qt.numWords(x)));
     };
 
     /** construct a url for an API call **/

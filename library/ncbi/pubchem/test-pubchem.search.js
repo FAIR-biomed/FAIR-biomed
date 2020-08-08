@@ -5,6 +5,10 @@ let fs = require("fs-extra");
 let plugin = require('./pubchem.search');
 
 
+it('claims CHEMBL identifiers', function () {
+    assert.equal(plugin.claim('CHEMBL25'), 1);
+});
+
 it('claims long queries with varying strength', function () {
     let result1 = plugin.claim('aspirin');
     let result2 = plugin.claim('EGFR inhibitor');
@@ -36,7 +40,6 @@ it('extracts ids from round 1 response', function() {
 it('extracts titles from round 2 response', function() {
     let r2 = fs.readFileSync(__dirname+'/response-pubchem.search-1.json').toString();
     let result = plugin.process(r2, 1);
-    console.log(JSON.stringify(result));
     assert.equal(result.status, 1);
     assert.ok(result.data.length > 1);
     assert.ok(JSON.stringify(result).includes("aspirin"));

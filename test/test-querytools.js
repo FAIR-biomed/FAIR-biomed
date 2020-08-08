@@ -79,8 +79,8 @@ describe('Query tools', function () {
         assert.ok(querytools.scoreQuery("abc#2$")< 0.61);
         assert.ok(querytools.scoreQuery("abc#2$%&?;")>= 0.0);
         // scores with custom penalties
-        assert.ok(querytools.scoreQuery("abc#4$1", ["#", "$"], 0.4)< 0.4);
-        assert.ok(querytools.scoreQuery("abc$4$1", ["#"], 0.4)> 0.5);
+        assert.ok(querytools.scoreQuery("abc#4$1", 0.4, ["#", "$"])< 0.4);
+        assert.ok(querytools.scoreQuery("abc$4$1", 0.4, ["#"])> 0.5);
     });
 });
 

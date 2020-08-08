@@ -77,6 +77,6 @@ it("processes empty search result", function () {
     let empty = fs.readFileSync(__dirname + '/response-hgnc-empty.json').toString();
     let result = plugin.process(empty, 0);
     assert.equal(result.status, 1);
-    assert.equal(result.data, 'No results');
+    assert.ok(result.data.includes("no hits"));
 });
 

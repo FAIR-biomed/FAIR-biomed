@@ -1,8 +1,8 @@
 /** Unit tests specific to marrvel human plugin  **/
 
-var assert = require('assert');
-var fs = require('fs-extra');
-var plugin = require('./marrvel.human');
+let assert = require('assert');
+let fs = require('fs-extra');
+let plugin = require('./marrvel.human');
 
 it("does not claim variants", function () {
     let result = plugin.claim("1-100-A-T");
@@ -32,5 +32,6 @@ it("processes standard response into series of tables", function () {
 it("gracefully handling of server-error ", function () {
     let r0 = '{"gos": []}';
     let result = plugin.process(r0, 1);
-    assert.equal(result.status, 0);
+    assert.equal(result.status, 1);
+    assert.ok(result.data.includes("no hits"));
 });

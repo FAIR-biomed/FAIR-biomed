@@ -2,6 +2,7 @@
  * plugin for HGNC gene
  */
 
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -93,7 +94,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let result = (JSON.parse(data))['response'];
         if (result['numFound']==0) {
-            return { status: 1, data: 'No results' };
+            return { status: 1, data: msg.empty_server_output };
         }
         let doc = result['docs'][0];
         if (doc["name"] == undefined) {

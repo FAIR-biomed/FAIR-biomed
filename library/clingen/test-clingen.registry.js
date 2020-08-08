@@ -17,14 +17,15 @@ it("claims dbSNP ids", function() {
     assert.ok(plugin.claim("rs2847281") > 0.8);
 });
 
-it("claims numerical ", function() {
+it("claims plain numbers", function() {
     assert.ok(plugin.claim("6146346") > 0.8)
 });
 
 it("processes search query without results", function () {
     let r0 = fs.readFileSync(__dirname + '/response-clingen.registry-empty.json').toString();
     let result = plugin.process(r0, 0);
-    assert.equal(result.status, 0);
+    assert.equal(result.status, 1);
+    assert.ok(result.data.includes("no hits"));
 });
 
 it("processes search query with some hits", function () {

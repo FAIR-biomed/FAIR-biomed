@@ -2,6 +2,8 @@
  * plugin for search of the ClinGen allele registry
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -22,14 +24,13 @@ module.exports = new function() {
     this.endpoints = [api_base];
 
     /** signal whether or not plugin can process a query **/
-    this.claim = function(query) {
-        query = query.trim();
-        // avoid short and multi-word queries
-        if (query.length<4) return 0;
-        if (query.split(' ').length!=1) return 0;
-        if (query.startsWith("CA")) return 1;
-        if (query.startsWith("rs")) return 0.95;
-        if (parseFloat(query)>0) return 0.9;
+    this.claim = function(x) {
+        x = x.trim();
+        if (x.length<4) return 0;
+        if (qt.numWords(x)!=1) return 0;
+        if (qt.isIdentifier(x, "CA")) return 1;
+        if (qt.isIdentifier(x, "rs")) return 0.95;
+        if (parseFloat(x)>0) return 0.9;
         return 0.8;
     };
 
@@ -58,7 +59,9 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        if (data.trim()=="[]") return {status: 0, data: "no results"};
+        if (data.trim()=="[]") {
+            return { status: 1, data: msg.empty_server_output }
+        }
         let hits = JSON.parse(data);
         let result = hits.map(function(x) {
             let caid = x["@id"].split("/").pop();
@@ -66,7 +69,7 @@ module.exports = new function() {
             return ['<h2><b><a href="'+url+'" target="_blank">'+caid+'</a></b></h2>',
                 processGenomicAlleles(x['genomicAlleles'])].join('');
         });
-        return {status: 1, data: result};
+        return { status: 1, data: result };
     };
 
     /** construct a URL to an external information page **/

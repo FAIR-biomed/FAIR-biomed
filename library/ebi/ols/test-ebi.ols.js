@@ -1,8 +1,8 @@
 /** Unit tests specific to ols plugin **/
 
-var assert = require('assert');
-var fs = require('fs-extra');
-var plugin = require('./ebi.ols');
+let assert = require('assert');
+let fs = require('fs-extra');
+let plugin = require('./ebi.ols');
 
 
 it("does not claim long queries", function () {
@@ -23,18 +23,18 @@ it("claims proper-looking terms", function () {
 });
 
 it('extracts result from response to ontology-term query', function() {
-    var r0 = fs.readFileSync(__dirname+'/response-ebi.ols-0.json').toString();
-    var result = plugin.process(r0, 0);
+    let r0 = fs.readFileSync(__dirname+'/response-ebi.ols-0.json').toString();
+    let result = plugin.process(r0, 0);
     assert.equal(result.status, 1);
     assert.equal(result.data.length, 6);
     // this example is for term MP:0001262 which is "decreased body weight"
-    var result_str = JSON.stringify(result.data);
+    let result_str = JSON.stringify(result.data);
     assert.ok(result_str.includes('weight'))
 });
 
 it('extracts result from response to free-text query', function() {
-    var r0 = fs.readFileSync(__dirname+'/response-ebi.ols-1.json').toString();
-    var result = plugin.process(r0, 0);
+    let r0 = fs.readFileSync(__dirname+'/response-ebi.ols-1.json').toString();
+    let result = plugin.process(r0, 0);
     assert.equal(result.status, 1);
     assert.equal(result.data.length, 6);
     // this example is for "transcription factor"
@@ -45,11 +45,11 @@ it('extracts result from response to free-text query', function() {
 
 it('extracts result when description is empty', function() {
     // some results in example 2 have no description field
-    var r0 = fs.readFileSync(__dirname+'/response-ebi.ols-2.json').toString();
-    var result = plugin.process(r0, 0);
+    let r0 = fs.readFileSync(__dirname+'/response-ebi.ols-2.json').toString();
+    let result = plugin.process(r0, 0);
     // processing should succeed even though some items don't have a description
     assert.equal(result.status, 1);
-    var result_str = JSON.stringify(result.data);
+    let result_str = JSON.stringify(result.data);
     // check that there is some output
     assert.ok(result_str.includes('phenotype'),  'phenotype')
 });

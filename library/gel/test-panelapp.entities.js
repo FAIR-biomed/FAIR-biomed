@@ -1,8 +1,8 @@
 /** Unit tests specific to panelapp plugin **/
 
-var assert = require('assert');
-var fs = require('fs-extra');
-var plugin = require('./panelapp.entities');
+let assert = require('assert');
+let fs = require('fs-extra');
+let plugin = require('./panelapp.entities');
 
 it("does not claim long queries", function () {
     let result = plugin.claim("rare disease");
@@ -15,7 +15,7 @@ it("does not claim identifiers", function () {
 });
 
 it("penalizes special characters", function () {
-    let result = plugin.claim("abc$2");
+    let result = plugin.claim("abc#$2");
     assert.ok(result < 0.7);
 });
 
@@ -40,6 +40,6 @@ it("processes empty search result", function () {
     let empty = fs.readFileSync(__dirname + '/response-entities-empty.json').toString();
     let result = plugin.process(empty, 0);
     assert.equal(result.status, 1);
-    assert.equal(result.data, 'No results');
+    assert.ok(result.data.includes("no hits"));
 });
 

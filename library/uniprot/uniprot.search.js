@@ -2,6 +2,8 @@
  * library plugin for Uniprot search
  */
 
+let qt = require("../_querytools.js");
+let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -22,17 +24,10 @@ module.exports = new function() {
 
     /** signal whether or not plugin can process a query **/
     this.claim = function(x) {
-        if (x.trim().length<2) return 0;
-        let words = x.trim().split(' ');
-        if (words.length>2) {
-            return 0;
-        }
-        let score = 1/words.length;
-        // penalize some special characters
-        [':', '%', '$', '#', '.', ';'].map(function(z) {
-            score -= 0.2*(x.includes(z))
-        });
-        return Math.max(0, Math.min(0.9, score));
+        x = x.trim();
+        if (x.length<2) return 0;
+        if (qt.numWords(x)>2) return 0;
+        return Math.min(0.9, qt.scoreQuery(x)/qt.numWords(x));
     };
 
     /** construct a url for an API call **/
@@ -44,6 +39,9 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
+        if (data === "") {
+            return { status: 1, data: msg.empty_server_output }
+        }
         // input will be tab-separated table -> parse into lines
         let parsed = data.split('\n').filter((x) => x!=='');
         let header = parsed.shift();
@@ -57,10 +55,7 @@ module.exports = new function() {
                 ['Organism', xdata[4]]
             ];
         });
-        return {
-            status: 1,
-            data: result
-        }
+        return { status: 1, data: result }
     };
 
     /** construct a URL to an external information page **/
