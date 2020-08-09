@@ -6,6 +6,12 @@
 
 'use strict';
 
+let err_msg = "<p>An error occurred while processing content.</p> " +
+    "<p>This is likely a bug in the FAIR-biomed plugin. For more information, " +
+    "please see our "+
+    "<a href=\"https://fair-biomed.github.io/questionsanswers/\" target=\"_blank\">"+
+    "documentation</a>.</p>";
+
 // a cache of icons fetched from disk
 let icons = {};
 let logos = {};
@@ -302,20 +308,19 @@ function processQuery(id, queries, sendResponse, index) {
         xhr.onload = function() {
             //developer_log("response: "+xhr.response);
             try {
-                var response = plugin.process(xhr.response, index, query);
+                let response = plugin.process(xhr.response, index, query);
                 resolve(sanitizeResponse(response));
             } catch(e) {
-                resolve({status: 0, data: "error parsing server response"});
+                resolve({status: 0, data: err_msg });
             }
         };
         xhr.ontimeout = function() {
             reject("timeout");
         };
         xhr.onerror = function() {
-            developer_log("got error: " + xhr.status);
-            reject('error  or page not available');
+            //developer_log("got error: " + xhr.status);
+            reject('error or page not available');
         };
-        //developer_log("sending GET request to: "+url);
         xhr.open("GET", url);
         if (!url.endsWith(".png")) {
             xhr.setRequestHeader('Accept', 'application/json');
@@ -338,7 +343,7 @@ function processInfo(id, sendResponse) {
         }
         let xhr=new XMLHttpRequest();
         xhr.onload=function() {
-            var result = {status: 1, data: xhr.response};
+            let result = {status: 1, data: xhr.response};
             resolve(sanitizeResponse(result));
         };
         xhr.ontimeout=function() {

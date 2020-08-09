@@ -19,16 +19,6 @@ it("claims single-word queries that don't start with HGNC", function () {
     assert.equal(result, 0.8)
 });
 
-it("does not claim when 2nd part is not a number", function () {
-    let result = plugin.claim("HGNC:text");
-    assert.equal(result, 0)
-});
-
-it("does not claim other identifiers", function () {
-    let result = plugin.claim("MP:0000001");
-    assert.equal(result, 0)
-});
-
 it("construct urls differently for ids and searches", function () {
     let result = plugin.url("HGNC:1097");
     assert.ok(result.includes("fetch"));
@@ -69,7 +59,7 @@ it("processes response into table without omim", function () {
 it("constructs external URL based on HGNC id", function () {
     let result1 = plugin.external('BRAF');
     let result2 = plugin.external('HGNC:1097');
-    assert.ok(result1===null);
+    assert.ok(result1.includes("search"));
     assert.ok(result2.includes('symbol-report'));
 });
 

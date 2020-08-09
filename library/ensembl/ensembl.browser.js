@@ -102,6 +102,6 @@ module.exports = new function() {
             }
             return ensembl_url + '/Homo_sapiens/Location/View?db=core;r=' + region;
         }
-        return null;
+        return ensembl_url
     };
 }();

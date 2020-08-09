@@ -2,6 +2,7 @@
  * plugin for HGNC gene
  */
 
+let qt = require("../_querytools.js");
 let msg = require("../_messages.js");
 
 module.exports = new function() {
@@ -30,15 +31,12 @@ module.exports = new function() {
     let cosmic_url = 'https://cancer.sanger.ac.uk/cosmic/gene/analysis?ln=';
 
     /** signal whether or not plugin can process a query **/
-    this.claim = function(query) {
-        query = query.trim();
-        if (query.length<2) return 0;
-        if (query.split(' ').length !== 1) return 0;
-        let words = query.split(':');
-        if (words.length === 1) return 0.8;
-        if (words.length !== 2 || words[0] !== 'HGNC') return 0;
-        if (isNaN(words[1])) return 0;
-        return 1;
+    this.claim = function(x) {
+        x = x.trim();
+        if (x.length<2) return 0;
+        if (qt.numWords(x)>1) return 0;
+        if (qt.isIdentifier(x, "HGNC:")) return 1;
+        return Math.min(0.8, qt.scoreQuery(x));
     };
 
     /** construct a url for an API call **/
@@ -110,7 +108,7 @@ module.exports = new function() {
         if (query.startsWith("HGNC:")) {
             return report_url + query;
         }
-        return null;
+        return www_url + "tools/search/#!/all?query=" + query.split(" ").join("%20");
     };
 
 }();

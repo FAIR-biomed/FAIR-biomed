@@ -2,6 +2,7 @@
  * plugin for EBI's Ontology Lookup Service
  */
 
+let msg = require("../../_messages.js");
 
 module.exports = new function() {
 
@@ -39,6 +40,9 @@ module.exports = new function() {
     this.process = function(data) {
         let raw = JSON.parse(data);
         let docs = raw['response']['docs'];
+        if (docs.length === 0) {
+            return { status: 1, data: msg.empty_server_output };
+        }
         let result = docs.map(function(x) {
             let desc = x['description'];
             if (desc === undefined) {

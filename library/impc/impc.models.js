@@ -90,9 +90,7 @@ module.exports = new function() {
 
     /** construct a URL to an external information page **/
     this.external = function(query, index) {
-        if (query.length<1) {
-            return mousephenotype;
-        }
+        if (query.length<1) return mousephenotype;
         if (query.startsWith("MGI")) {
             return mousephenotype + 'data/genes/'+query;
         }
