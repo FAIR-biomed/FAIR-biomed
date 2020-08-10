@@ -3,7 +3,6 @@
  */
 
 let qt = require("../../_querytools.js");
-let msg = require("../../_messages.js");
 
 module.exports = new function() {
 
@@ -57,7 +56,7 @@ module.exports = new function() {
             if (result.length>0) {
                 return {status: 0.5, data: result.join(',')};
             } else {
-                return { status: 1, data: msg.empty_server_output };
+                return { status: 0 };
             }
         } else if (index === 1) {
             let uids = result['result']['uids'];

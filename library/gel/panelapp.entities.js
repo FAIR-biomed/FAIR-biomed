@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -69,7 +68,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let parsed = JSON.parse(data);
         if (parsed['count'] === 0) {
-            return { status: 1, data: msg.empty_server_output };
+            return { status: 0 };
         }
         let docs = parsed['results'];
         let result = docs.map(this.processGene);

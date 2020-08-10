@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -43,7 +42,7 @@ module.exports = new function() {
         }
         result = result['query']['pages'][0];
         if (result.extract === undefined) {
-            return { status: 1, data: msg.empty_server_output }
+            return { status: 0 }
         }
         return {status: 1, data: result.extract };
     };

@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -60,7 +59,7 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         if (data.trim()=="[]") {
-            return { status: 1, data: msg.empty_server_output }
+            return { status: 0 }
         }
         let hits = JSON.parse(data);
         let result = hits.map(function(x) {

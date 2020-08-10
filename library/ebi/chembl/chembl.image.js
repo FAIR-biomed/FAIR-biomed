@@ -2,8 +2,6 @@
  * plugin for EBI's Chembl Compound Image
  */
 
-let msg = require("../../_messages.js");
-
 module.exports = new function() {
 
     /** variables **/
@@ -37,7 +35,7 @@ module.exports = new function() {
         if (data.startsWith(prefix)) {
             return {status: 1, data: data.substr(data.search("<svg")) };
         }
-        return { status: 1, data: msg.empty_server_output };
+        return { status: 0 };
     };
 
     /** construct a URL to an external information page **/

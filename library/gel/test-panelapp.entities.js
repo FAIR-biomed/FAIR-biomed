@@ -39,7 +39,6 @@ it("processes search query to extract id", function () {
 it("processes empty search result", function () {
     let empty = fs.readFileSync(__dirname + '/response-entities-empty.json').toString();
     let result = plugin.process(empty, 0);
-    assert.equal(result.status, 1);
-    assert.ok(result.data.includes("no hits"));
+    assert.equal(result.status, 0);
 });
 

@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -40,7 +39,7 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         if (data === "") {
-            return { status: 1, data: msg.empty_server_output }
+            return { status: 0 }
         }
         // input will be tab-separated table -> parse into lines
         let parsed = data.split('\n').filter((x) => x!=='');

@@ -50,8 +50,7 @@ it('processes second round data', function() {
 it('processes second round data, signals empty result', function() {
     let r2 = fs.readFileSync(__dirname+'/response-wikipedia-2.json').toString();
     let result = plugin.process(r2, 1);
-    assert.equal(result.status, 1);
-    assert.ok(result.data.includes("no hits"));
+    assert.equal(result.status, 0);
 });
 
 

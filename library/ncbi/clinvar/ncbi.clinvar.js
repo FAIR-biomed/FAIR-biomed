@@ -2,8 +2,6 @@
  * library plugin for NCBI Clinvar search
  */
 
-let msg = require("../../_messages.js");
-
 module.exports = new function() {
 
     /** declarative attributes **/
@@ -123,7 +121,7 @@ module.exports = new function() {
             if (idlist.length>0) {
                 return {status: 0.5, data: idlist.join(',')};
             } else {
-                return { status: 1, data: msg.empty_server_output };
+                return { status: 0 };
             }
         } else if (index === 1) {
             let uids = result['result']['uids'];

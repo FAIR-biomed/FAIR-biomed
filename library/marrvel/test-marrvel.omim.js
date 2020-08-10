@@ -32,7 +32,7 @@ it("processes response into table without gene groups", function () {
 it("gracefully handling of server-error ", function () {
     let r0 = '{"message": "Server error occurred"}';
     let result = plugin.process(r0, 1);
-    assert.equal(result.status, 1);
+    assert.equal(result.status, 0);
 });
 
 it("processes response when no phenotypes", function () {

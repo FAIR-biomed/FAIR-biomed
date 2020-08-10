@@ -30,7 +30,6 @@ it('processes round 1 data', function() {
 it('processes round 1 data, signal empty result', function() {
     let r1 = fs.readFileSync(__dirname+'/response-wiktionary-1.json').toString();
     let result = plugin.process(r1);
-    assert.equal(result.status, 1);
-    assert.ok(result.data.includes("no hits"));
+    assert.equal(result.status, 0);
 });
 

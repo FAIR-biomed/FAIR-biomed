@@ -39,8 +39,7 @@ it("construct urls differently for ids and searches", function () {
 it("processes search query without results", function () {
     let r0 = fs.readFileSync(__dirname + '/response-impc.models-symbol-empty.json').toString();
     let result = plugin.process(r0, 0);
-    assert.equal(result.status, 1);
-    assert.ok(result.data.includes("no hits"));
+    assert.equal(result.status, 0);
 });
 
 it("processes search query to extract MGI id", function () {

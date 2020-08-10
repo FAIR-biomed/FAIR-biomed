@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -49,7 +48,7 @@ module.exports = new function() {
             if (result.length>0) {
                 return { status: 0.5, data: result[0] };
             } else {
-                return { status: 0, data: msg.empty_server_output };
+                return { status: 0 };
             }
         } else if (index === 1) {
             if (result['batchcomplete']!==true) {
@@ -57,7 +56,7 @@ module.exports = new function() {
             }
             result = result['query']['pages'][0];
             if (result.extract === "") {
-                return { status: 1, data: msg.empty_server_output }
+                return { status: 0 }
             }
             return { status: 1, data: result.extract };
         }

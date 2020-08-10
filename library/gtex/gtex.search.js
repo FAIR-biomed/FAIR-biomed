@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function () {
 
@@ -67,9 +66,7 @@ module.exports = new function () {
     this.process = function(data, index) {
         let json_obj = JSON.parse(data);
         if (index === 0 || typeof(index)==='undefined') {
-            if (json_obj.gene.length===0) {
-                return { status: 1, data: msg.empty_server_output };
-            }
+            if (json_obj.gene.length===0) return { status: 0 };
             // returns all genes containing gene name
             let allgenes = json_obj.gene.map(item => item.geneSymbol);
             // Queried gene must be the shortest geneSymbol
@@ -85,7 +82,7 @@ module.exports = new function () {
                 let result = this.makeExpressionData(meanExp);
                 return { status: 1, data: result };
             } else {
-                return { status: 1, data: msg.empty_server_output };
+                return { status: 0 };
             }
         }
     };

@@ -6,11 +6,16 @@
 
 'use strict';
 
-let err_msg = "<p>An error occurred while processing content.</p> " +
-    "<p>This is likely a bug in the FAIR-biomed plugin. For more information, " +
-    "please see our "+
-    "<a href=\"https://fair-biomed.github.io/questionsanswers/\" target=\"_blank\">"+
-    "documentation</a>.</p>";
+let err_msg = {
+    more_info: "For more information, please see the " +
+        "<a href=\"https://fair-biomed.github.io/questionsanswers/\" target=\"_blank\">" +
+        "online documentation</a>.",
+    plugin_error: "Error processing server response.",
+    server_error: 'Error, or server not available.',
+    server_timeout: "Server timed out.",
+    empty: "The database reported no hits for this query."
+}
+
 
 // a cache of icons fetched from disk
 let icons = {};
@@ -206,7 +211,7 @@ function claimQuery(query, sendResponse) {
  */
 function sanitizeResponse(response) {
     if (is.undefined(response.data)) {
-        return {status: 0, data: "invalid response, no data"};
+        return response;
     }
     let sanitizeOne = function (data) {
         if (is.string(data) || is.number(data)) {
@@ -278,8 +283,9 @@ function processQuery(id, queries, sendResponse, index) {
     let buildSendResponse = function(response) {
         response.url = url;
         response.external = null;
-        if (response.status===1) {
-            response.external = getExternal(plugin, queries);
+        response.external = getExternal(plugin, queries);
+        if (response.data===undefined) {
+            response.data = [err_msg.empty, err_msg.more_info];
         }
         return response;
     };
@@ -306,20 +312,21 @@ function processQuery(id, queries, sendResponse, index) {
         }
         let xhr = new XMLHttpRequest();
         xhr.onload = function() {
-            //developer_log("response: "+xhr.response);
+            //developer_log("onload: "+xhr.response);
             try {
                 let response = plugin.process(xhr.response, index, query);
                 resolve(sanitizeResponse(response));
             } catch(e) {
-                resolve({status: 0, data: err_msg });
+                resolve({status: 1, data: [err_msg.plugin_error, err_msg.more_info] });
             }
         };
         xhr.ontimeout = function() {
-            reject("timeout");
+            //developer_log("ontimeout: " + xhr.status);
+            resolve({status: 0, data: [err_msg.server_timeout, err_msg.more_info] });
         };
         xhr.onerror = function() {
-            //developer_log("got error: " + xhr.status);
-            reject('error or page not available');
+            //developer_log("onerror: " + xhr.status);
+            resolve({status: 0, data: [err_msg.server_error, err_msg.more_info] });
         };
         xhr.open("GET", url);
         if (!url.endsWith(".png")) {

@@ -32,6 +32,5 @@ it("processes standard response into series of tables", function () {
 it("gracefully handling of server-error ", function () {
     let r0 = '{"gos": []}';
     let result = plugin.process(r0, 1);
-    assert.equal(result.status, 1);
-    assert.ok(result.data.includes("no hits"));
+    assert.equal(result.status, 0);
 });

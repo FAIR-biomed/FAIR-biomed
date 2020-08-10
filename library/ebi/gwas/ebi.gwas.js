@@ -2,8 +2,6 @@
  * plugin for EBI's GWAS catalog
  */
 
-let msg = require("../../_messages.js");
-
 module.exports = new function() {
 
     /** variables **/
@@ -59,9 +57,7 @@ module.exports = new function() {
 
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
-        if (data==="") {
-            return { status: 1, data: msg.empty_server_output };
-        }
+        if (data==="") return { status: 0 };
         data = JSON.parse(data);
         let hits = data['_embedded']['associations'];
         let assocs = this.assocInfo(hits);

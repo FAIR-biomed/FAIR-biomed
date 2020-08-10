@@ -222,21 +222,14 @@ class FAIROutput extends React.Component {
         chrome.runtime.sendMessage(msg, function(response) {
             // when the query time out, the response might be null or undefined
             if (is.undefined(response)) {
-                response = { status: 0, data: "no response"}
+                response = { status: 0, data: "extension error"}
             }
-            if (response.status===1) {
-                thislist.setState({
-                    type: 'data',
-                    data: response.data,
-                    external: response.external,
-                    code: response.url
-                })
-            } else {
-                thislist.setState({
-                    type: 'data',
-                    data: response.data
-                })
-            }
+            thislist.setState({
+                type: 'data',
+                data: response.data,
+                external: response.external,
+                code: response.url
+            })
         });
     }
 

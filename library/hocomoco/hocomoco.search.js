@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -48,9 +47,7 @@ module.exports = new function() {
     /** transform a raw result from an API call into a display object **/
     this.process = function(data, index) {
         let result = JSON.parse(data);
-        if (result.length === 0) {
-            return {status: 1, data: msg.empty_server_output };
-        }
+        if (result.length === 0) return {status: 0 };
         let matrices = result.map(function(x) {
             return [
                 ['',''],

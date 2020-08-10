@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -66,7 +65,7 @@ module.exports = new function() {
         }
         // special case - empty results
         if (data==="[]") {
-            return { status: 1, data: msg.empty_server_output };
+            return { status: 0 };
         }
         // special case - lookup from gene symbol to gene id
         let raw = JSON.parse(data);

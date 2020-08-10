@@ -2,8 +2,6 @@
 - * plugin for IMPC mouse model lookup
  */
 
-let msg = require("../_messages.js");
-
 module.exports = new function() {
 
     /** variables **/
@@ -73,7 +71,7 @@ module.exports = new function() {
         }).sort(function(a, b) {
             return a['gene_id'].length - b['gene_id'].length;
         });
-        if (docs.length==0) return { status: 1, data: msg.empty_server_output };
+        if (docs.length==0) return { status: 0 };
         return {status:0.5, data: docs[0]['gene_id'] }
     };
 

@@ -24,8 +24,7 @@ it("claims plain numbers", function() {
 it("processes search query without results", function () {
     let r0 = fs.readFileSync(__dirname + '/response-clingen.registry-empty.json').toString();
     let result = plugin.process(r0, 0);
-    assert.equal(result.status, 1);
-    assert.ok(result.data.includes("no hits"));
+    assert.equal(result.status, 0);
 });
 
 it("processes search query with some hits", function () {

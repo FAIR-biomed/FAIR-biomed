@@ -28,5 +28,5 @@ it ('parses response table', function() {
 
 it('signals when response is empty', function () {
     let result = plugin.process("", 1);
-    assert.ok(JSON.stringify(result).includes("no hits"))
+    assert.equal(result.status, 0);
 });

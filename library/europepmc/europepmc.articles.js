@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -43,9 +42,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let result = JSON.parse(data);
         let hits = result['resultList']['result'];
-        if (hits.length == 0) {
-            return { status: 1, data: msg.empty_server_output }
-        }
+        if (hits.length == 0) return { status: 0 };
         let articles = hits.map(function(x) {
             if (x['journalTitle'] == null) {
                 x['journalTitle'] = '['+x['pubType']+']';

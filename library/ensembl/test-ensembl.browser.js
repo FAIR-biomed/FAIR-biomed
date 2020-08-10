@@ -36,8 +36,7 @@ it("processes translation from gene symbol to gene id", function() {
 
 it("processes empty translation into an informative message", function() {
     let result = plugin.process("[]", 0);
-    assert.equal(result.status, 1);
-    assert.ok(JSON.stringify(result.data).includes("no hits"));
+    assert.equal(result.status, 0);
 });
 
 it("processes gene information into a table", function() {

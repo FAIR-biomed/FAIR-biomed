@@ -2,8 +2,6 @@
  * plugin for fetching OMIM data from MARRVEL
  */
 
-let msg = require("../_messages.js");
-
 module.exports = new function() {
 
     /** variables **/
@@ -73,7 +71,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let raw = JSON.parse(data);
         if (raw["message"] !== undefined) {
-            return { status: 1, data: msg.empty_server_output };
+            return { status: 0 };
         }
         let result = this.makeDescription(raw);
         return { status: 1, data: [result] };

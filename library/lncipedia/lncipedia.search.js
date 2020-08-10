@@ -3,7 +3,6 @@
  */
 
 let qt = require("../_querytools.js");
-let msg = require("../_messages.js");
 
 module.exports = new function() {
 
@@ -40,9 +39,7 @@ module.exports = new function() {
     this.process = function(data, index) {
         let result = JSON.parse(data);
         let hits = result['transcripts'];
-        if (result['count']==0) {
-            return {status: 1, data: msg.empty_server_output };
-        }
+        if (result['count']==0) return {status: 0 };
         let lnrnas = hits.map(function(x) {
             return [
                 ['',''],
