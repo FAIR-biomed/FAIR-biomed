@@ -15,11 +15,11 @@ module.exports = new function() {
     this.info = 'marrvel-info.html';
 
     // urls for API and external pages
-    let api_base = 'http://marrvel.org/data/OMIM';
+    let api_base = 'http://v1.marrvel.org/data/OMIM';
     let api_url = api_base + '?geneSymbol=';
     this.endpoints = [api_base];
 
-    let gene_url = 'http://marrvel.org/search/gene/';
+    let gene_url = 'http://v1.marrvel.org/search/gene/';
     let omim_url = 'https://www.omim.org/entry/';
 
     /** signal whether or not plugin can process a query **/

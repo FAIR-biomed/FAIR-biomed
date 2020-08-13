@@ -15,11 +15,11 @@ module.exports = new function() {
     this.info = 'marrvel-info.html';
 
     // urls for API and external pages
-    let api_base = 'http://marrvel.org/data/human';
+    let api_base = 'http://v1.marrvel.org/data/human';
     let api_url = api_base + '?geneSymbol=';
     this.endpoints = [api_base];
 
-    let gene_url = 'http://marrvel.org/search/gene/';
+    let gene_url = 'http://v1.marrvel.org/search/gene/';
     let hgnc_url = 'https://www.genenames.org/data/gene-symbol-report/#!/hgnc_id/';
 
     /** signal whether or not plugin can process a query **/
