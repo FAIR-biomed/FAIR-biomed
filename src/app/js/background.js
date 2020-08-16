@@ -281,7 +281,8 @@ function processQuery(id, queries, sendResponse, index) {
 
     // augment a response object with plugin-specific metadata
     let buildSendResponse = function(response) {
-        response.url = url;
+        response.url = queries.map(function(x, i) { return plugin.url(x, i); });
+        response.url = response.url.join("\n\n")
         response.external = null;
         response.external = getExternal(plugin, queries);
         if (response.data===undefined) {
@@ -312,7 +313,6 @@ function processQuery(id, queries, sendResponse, index) {
         }
         let xhr = new XMLHttpRequest();
         xhr.onload = function() {
-            //developer_log("onload: "+xhr.response);
             try {
                 let response = plugin.process(xhr.response, index, query);
                 resolve(sanitizeResponse(response));
@@ -321,11 +321,9 @@ function processQuery(id, queries, sendResponse, index) {
             }
         };
         xhr.ontimeout = function() {
-            //developer_log("ontimeout: " + xhr.status);
             resolve({status: 0, data: [err_msg.server_timeout, err_msg.more_info] });
         };
         xhr.onerror = function() {
-            //developer_log("onerror: " + xhr.status);
             resolve({status: 0, data: [err_msg.server_error, err_msg.more_info] });
         };
         xhr.open("GET", url);
