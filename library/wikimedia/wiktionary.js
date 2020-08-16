@@ -38,7 +38,7 @@ module.exports = new function() {
     this.process = function(data) {
         let result = JSON.parse(data);
         if (result['batchcomplete']!==true) {
-            return {status: 0, data: result};
+            return {status: 0 };
         }
         result = result['query']['pages'][0];
         if (result.extract === undefined) {

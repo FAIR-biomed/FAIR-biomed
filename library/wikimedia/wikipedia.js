@@ -52,7 +52,7 @@ module.exports = new function() {
             }
         } else if (index === 1) {
             if (result['batchcomplete']!==true) {
-                return { status: 0, data: result };
+                return { status: 0 };
             }
             result = result['query']['pages'][0];
             if (result.extract === "") {

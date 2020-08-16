@@ -47,8 +47,8 @@ module.exports = new function() {
         let result = JSON.parse(data);
         let hits = result['results'];
         if (result['count']==0) {
-                return {status: 0, data: "No TF binding profiles found!"};
-            }
+            return { status: 0 };
+        }
         let matrices = hits.map(function(x) {
             return [
                 ['',''],
@@ -59,8 +59,7 @@ module.exports = new function() {
             ];
 
         });
-        return { status: 1, data: matrices
-        }
+        return { status: 1, data: matrices }
     };
 
     /** construct a URL to an external information page **/

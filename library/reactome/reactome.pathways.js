@@ -63,7 +63,7 @@ module.exports = new function() {
                 return a['name'].length - b['name'].length;
             });
             if (hits.length==0) {
-                return {status: 0, data: "no hits"};
+                return {status: 0 };
             }
             return {status: 0.5, data: hits[0]["id"]};
         }
