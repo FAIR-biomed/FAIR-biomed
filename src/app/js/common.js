@@ -5,7 +5,7 @@
  * Functions for checking type
  * (Some overlap with npm package 'is', but these are fairly generic
  */
-var is = new function() {
+const is = new function() {
 
     // simple typeof checks
     this.array = (x) => (typeof(x) === 'object') && ((x) instanceof Array);
@@ -56,7 +56,7 @@ var is = new function() {
  * Summarizes what proportion of a string is made of [0-9]
  * @returns {number}
  */
-var numberContent = function() {
+const numberContent = function() {
     return 0;
 }
 

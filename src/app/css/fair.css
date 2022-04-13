@@ -235,6 +235,9 @@ div.fair-options div.fair-reset-button:active {
     color: #222222;
     box-shadow: 0 6px 10px 0 rgba(0,0,0,0.15),0 6px 12px 0 rgba(0,0,0,0.15);
 }
+div.fair-options .fair-padtop {
+    padding-top: 0.8em;
+}
 #fair-library ul, #fair-library li {
     clear: both;
     height: auto;
@@ -496,10 +499,6 @@ li.fair-candidate {
 div.fair-body {
   flex: 1;
   overflow: auto;
-
-  /** display: flex;
-  flex-direction: column; **/
-
 }
 div.fair-body ul {
     border: none;

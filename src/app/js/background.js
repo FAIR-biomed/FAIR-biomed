@@ -6,6 +6,9 @@
 
 'use strict';
 
+const sanitizeHtml = require("sanitize-html")
+
+
 let err_msg = {
     more_info: "For more information, please see the " +
         "<a href=\"https://fair-biomed.github.io/questionsanswers/\" target=\"_blank\">" +
@@ -62,23 +65,14 @@ let sanitize_config = {
 
 /** fetch an icon content, either from a cache or from disk **/
 function getIcon(iconpath, sendResponse) {
-    let promise = new Promise(function(resolve, reject) {
-        let ipath = iconpath.split(" ").join("/");
-        if (icons[ipath] !== undefined) {
-            resolve(icons[ipath]);
-        }
-        let xhr = new XMLHttpRequest();
-        xhr.onload=function(){
-            icons[ipath] = xhr.response;
-            resolve(icons[ipath]);
-        };
-        xhr.ontimeout=function() {
-            reject("timeout");
-        };
-        xhr.open("GET","resources/"+ipath+".svg");
-        xhr.send();
-    });
-    promise.then((data) => sendResponse({data: data}));
+    let ipath = iconpath.split(" ").join("/");
+    let url = chrome.runtime.getURL("resources/" + ipath + ".svg")
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            icons[ipath] = data;
+            sendResponse({data: data})
+        })
 }
 
 
@@ -98,7 +92,7 @@ function bufferToBase64(buffer) {
     for (let i = 0; i < len; i++) {
         binary += String.fromCharCode(bytes[i]);
     }
-    return window.btoa(binary);
+    return btoa(binary);
 }
 
 
@@ -109,34 +103,26 @@ function getLogo(id, sendResponse) {
     if (filename===null) {
         filename = '_logo_na.png'
     } else {
-        filename = namespace+'.'+filename
+        filename = namespace + '.' + filename
     }
-
-    let format = filename.endsWith('.svg') ? 'svg' : 'png';
-    let promise = new Promise(function(resolve, reject) {
-        if (logos[id]!==undefined) {
-            resolve(logos[id]);
-        }
-        let xhr=new XMLHttpRequest();
-        if (format==='png') {
-            xhr.responseType = 'arraybuffer';
-        }
-        xhr.onload=function() {
-            if (format === 'png') {
-                let b64 = bufferToBase64(xhr.response);
+    let url = chrome.runtime.getURL("library/logo/" + filename)
+    let format = filename.endsWith('.svg') ? 'svg' : 'base64';
+    if (format !== 'svg') {
+        fetch(url)
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                let b64 = bufferToBase64(data);
                 logos[id] = '<img src="data:image/png;base64,'+b64+'">';
-            } else {
-                logos[id] = xhr.response;
-            }
-            resolve(logos[id]);
-        };
-        xhr.ontimeout=function() {
-            reject('timeout');
-        };
-        xhr.open('GET', 'library/logo/'+filename);
-        xhr.send();
-    });
-    promise.then((data)=> sendResponse({ data: data}));
+                sendResponse({data: logos[id]})
+            })
+    } else {
+        fetch(url)
+            .then(response => response.text())
+            .then(data => {
+                logos[id] = data;
+                sendResponse({data: logos[id]})
+            })
+    }
 }
 
 
@@ -204,7 +190,7 @@ function claimQuery(query, sendResponse) {
 
 
 /**
- * apply sanitization to all components of the response
+ * apply sanitization to all components of the response.data
  *
  * @param response
  * @returns {*}
@@ -243,7 +229,7 @@ function sanitizeResponse(response) {
 /** get an external url from a plugin.
  *
  * This queries the plugin for multiple query/index.
- * It thus allows the plugin to choose whether to contruct
+ * It thus allows the plugin to choose whether to construct
  * the external url based on the round 1 query, round 2 query, etc.
  *
  * @param plugin object
@@ -252,11 +238,10 @@ function sanitizeResponse(response) {
  *
  */
 function getExternal(plugin, queries) {
-    var urls = queries.map(function(x, i) {
+    let urls = queries.map(function(x, i) {
         return plugin.external(x, i);
     });
-    var urls = urls.filter(x => !is.null(x));
-    return urls[0];
+    return urls.filter(x => !is.null(x))[0]
 }
 
 
@@ -269,7 +254,6 @@ function getExternal(plugin, queries) {
  * @param index integer, keeps track of processing round
  * **/
 function processQuery(id, queries, sendResponse, index) {
-    // force index into an integer
     if (is.undefined(index)) {
         index = 0;
     }
@@ -291,73 +275,56 @@ function processQuery(id, queries, sendResponse, index) {
         return response;
     };
 
-    // handlers for promise
     let handleResponse = function(response) {
         // decide whether to output or to do another round trip to url/process
         if (response.status === 0 || response.status === 1) {
             sendResponse(buildSendResponse(response))
-        } else if (response.status>0 && response.status < 1) {
+        } else if (response.status > 0 && response.status < 1) {
             processQuery(id, queries.concat([response.data]), sendResponse, index+1)
         }
     };
-    let handleReject = function(msg) {
-        sendResponse({status: 0, data: msg})
-    };
 
     // execute the query
-    //developer_log("processing query");
-    let promise = new Promise(function(resolve, reject) {
-        if (url === null) {
-            resolve(sanitizeResponse(plugin.process(query)));
-            return;
-        }
-        let xhr = new XMLHttpRequest();
-        xhr.onload = function() {
-            try {
-                let response = plugin.process(xhr.response, index, query);
-                resolve(sanitizeResponse(response));
-            } catch(e) {
-                resolve({status: 1, data: [err_msg.plugin_error, err_msg.more_info] });
+    developer_log("processing query: " + query);
+    if (url === null) {
+        handleResponse(sanitizeResponse(plugin.process(query)))
+        return
+    }
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                handleResponse({status: 0, data: [err_msg.server_error, err_msg.more_info] });
             }
-        };
-        xhr.ontimeout = function() {
-            resolve({status: 0, data: [err_msg.server_timeout, err_msg.more_info] });
-        };
-        xhr.onerror = function() {
-            resolve({status: 0, data: [err_msg.server_error, err_msg.more_info] });
-        };
-        xhr.open("GET", url);
-        if (!url.endsWith(".png")) {
-            xhr.setRequestHeader('Accept', 'application/json');
-        }
-        xhr.send();
-    });
-    promise.then(handleResponse, handleReject);
+            return response
+        })
+        .then(response => {
+            if (url.endsWith(".png")) return response.arrayBuffer()
+            return response.text()
+        })
+        .then(data => {
+            developer_log(data)
+            try {
+                let result = plugin.process(data, index, query);
+                handleResponse(sanitizeResponse(result));
+            } catch(e) {
+                handleResponse({status: 1, data: [err_msg.plugin_error, err_msg.more_info] });
+            }
+        }).catch(function(error) {
+            handleResponse({status: 0, data: [err_msg.server_error, err_msg.more_info] });
+        });
 }
 
 
-/**
- * Fetch info information about a plugin
- */
+/** fetch info information about a plugin **/
 function processInfo(id, sendResponse) {
     let plugin = library["plugins"][id];
     let infopath = plugin.info;
-    let promise = new Promise(function(resolve, reject) {
-        if (infopath===undefined || infopath===null) {
-            resolve({data: "No info data available"});
-        }
-        let xhr=new XMLHttpRequest();
-        xhr.onload=function() {
-            let result = {status: 1, data: xhr.response};
-            resolve(sanitizeResponse(result));
-        };
-        xhr.ontimeout=function() {
-            reject("timeout");
-        };
-        xhr.open("GET", "library/info/"+plugin.namespace+"."+infopath);
-        xhr.send();
-    });
-    promise.then((data)=> sendResponse(data));
+    let url = chrome.runtime.getURL("library/info/"+plugin.namespace+"."+infopath)
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            sendResponse({status: 1, data: sanitizeResponse(data)})
+        })
 }
 
 

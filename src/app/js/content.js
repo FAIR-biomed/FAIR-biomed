@@ -5,17 +5,19 @@
 
 'use strict';
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Rnd = require('react-rnd').Rnd;
+const React = require('react')
+const ReactDOM = require('react-dom/client')
+const Rnd = require('react-rnd').Rnd
+
 
 // load a few icons into an icon cache
-var iconcache = {};
-['fa star', 'fa star-filled', 'fa search', 'fa arrow-left-solid'].forEach(function(x) {
-    chrome.runtime.sendMessage({action: 'icon', path: x}, function(response) {
-        iconcache[x] = response.data
-    })
-});
+const iconcache = {};
+['fa star', 'fa star-filled', 'fa search', 'fa arrow-left-solid']
+    .forEach(function(x) {
+        chrome.runtime.sendMessage({action: 'icon', path: x}, function(response) {
+            iconcache[x] = response.data
+        })
+    });
 
 
 /**
@@ -26,367 +28,273 @@ var iconcache = {};
  *  - path: string with path to file
  *
  * */
+function FAIRIconLogo({type, path, onClick}) {
+    const [data, setData] = React.useState(null)
 
-
-class FAIRIconLogo extends React.Component {
-    constructor(props) {
-        super(props);
-        this.getFromCache = this.getFromCache.bind(this);
-        this.state = { data: null};
-    }
-
-    /* check if an icon/logo is present in cache */
-    getFromCache() {
-        let cached = iconcache[this.props.path];
-        if (!is.undefined(cached)) return cached;
-        return null;
-    }
-
-    /* Fetch asynchronous logo or icon content */
-    componentDidMount() {
-        // use a cached version, or fetch anew,
-        let cached = this.getFromCache();
-        if (cached===null) {
-            if (this.state.data !== cached) {
-                this.setState({data: cached});
-                return;
-            }
-            let thislist = this;
-            let msg = {action: this.props.type, path: this.props.path};
+    // fetch the icon from cache or from the extension
+    React.useEffect(() => {
+        let cached = iconcache[path]
+        if (is.undefined(cached)) {
+            let msg = {action: type, path: path};
             chrome.runtime.sendMessage(msg, function (response) {
-                thislist.setState({data: response.data});
+                setData(response.data);
             });
+        } else {
+            setData(cached)
         }
-    }
+    })
 
-    render() {
-        let cached = this.getFromCache();
-        if (this.state.data===null && cached===null) {
-            return null;
-        }
-        let showdata = (cached!==null) ? cached : this.state.data;
-        let cursorClass = ' fair-pointer';
-        if (this.props.onClick===null || is.undefined(this.props.onClick)) {
-            cursorClass = '';
-        }
-        return(<span className={'fair-'+this.props.type+cursorClass}
-                     dangerouslySetInnerHTML={{__html: showdata}}
-                     onClick={this.props.onClick}></span>);
-    }
+    if (data===null) return(null)
+    let cursorClass = (onClick === null) ? '' : ' fair-pointer';
+    return(<span className={'fair-'+type+cursorClass}
+                 dangerouslySetInnerHTML={{__html: data}}
+                 onClick={onClick}></span>);
 }
 
 
-/** Display a table with header and body */
-class FAIROutputTable extends React.Component {
-    render() {
-        let data = this.props.data.slice(0);
-        if (data.length===0) {
-            return (<table></table>);
-        }
-        // construct a header from first element in data
-        let header = data.shift();
-        if (!is.undefined(header) && header.length !== 0) {
-            let headeritems = header.map(function (x, i) {
-                let thkey = 'header-'+i;
-                return (<th key={thkey}>{x}</th>);
-            });
-            header = (<tr>{headeritems}</tr>)
-        } else if (is.null(header[0])) {
-            header = (null);
-        }
-        // construct a body from remaining elements
-        let body = (<tr></tr>);
-        if (data.length>0) {
-            body = data.map(function(dataline, i) {
-                let bodyline = dataline.map(function(x, j) {
-                    let tdkey = 'body-'+i+'-'+j;
-                    return (<td key={tdkey} dangerouslySetInnerHTML={{__html: x}}></td>)
-                });
-                return (<tr mylab={'body-'+i} key={'body-'+i}>{bodyline}</tr>)
-            });
-        }
-        return(<table><thead>{header}</thead><tbody>{body}</tbody></table>)
+/** display a table with header and body */
+function FAIROutputTable({data}) {
+    data = data.slice(0);
+    if (data.length === 0) {
+        return (<table></table>);
     }
+    // construct a header from first element in data
+    let header = data.shift();
+    if (!is.undefined(header) && header.length !== 0) {
+        let headeritems = header.map(function (x, i) {
+            let thkey = 'header-'+i;
+            return (<th key={thkey}>{x}</th>);
+        });
+        header = (<tr>{headeritems}</tr>)
+    } else if (is.null(header[0])) {
+        header = (null);
+    }
+    // construct a body from remaining elements
+    let body = (<tr></tr>);
+    if (data.length>0) {
+        body = data.map(function(dataline, i) {
+            let bodyline = dataline.map(function(x, j) {
+                let tdkey = 'body-'+i+'-'+j;
+                return (<td key={tdkey} dangerouslySetInnerHTML={{__html: x}}></td>)
+            });
+            return (<tr mylab={'body-'+i} key={'body-'+i}>{bodyline}</tr>)
+        });
+    }
+    return(<table><thead>{header}</thead><tbody>{body}</tbody></table>)
 }
 
 
 /** Display <ul> with several items **/
-class FAIROutputList extends React.Component {
-    render() {
-        let content = this.props.data.map(function(x, i) {
-            return (<li key={"list-"+i} dangerouslySetInnerHTML={{__html: x}} />)
-        });
-        return(<ul>{content}</ul>)
-    }
+function FAIROutputList({data}) {
+    let content = data.map(function(x, i) {
+        return (<li key={"list-"+i} dangerouslySetInnerHTML={{__html: x}} />)
+    });
+    return(<ul>{content}</ul>)
 }
 
 
-/** Display a title-body combination **/
-class FAIROutputSection extends React.Component {
-    render() {
-        let title = '';
-        if (is.string(this.props.title)) {
-            title = (<h1>{this.props.title}</h1>)
-        }
-        let content = '[unrecognized type of output]';
-        let data = this.props.data;
-        if (is.string(data)) {
-            content = (<div dangerouslySetInnerHTML={{__html: this.props.data}}></div>)
-        } else if (is.array(data)) {
-            if (is.array2(data)) {
-                content = (<FAIROutputTable data={this.props.data}/>)
-            } else if (is.array1(data)) {
-                content = (<FAIROutputList data={this.props.data}/>)
-            }
-        }
-        return (<div className='fair-subsection'>{title}{content}</div>)
+/** display a title-body combination **/
+function FAIROutputSection({title, data}) {
+    let header = <></>;
+    if (is.string(title)) {
+        header = (<h1>{title}</h1>)
     }
+    let content = '[unrecognized type of output]';
+    if (is.string(data)) {
+        content = (<div dangerouslySetInnerHTML={{__html: data}}></div>)
+    } else if (is.array(data)) {
+        if (is.array2(data)) {
+            content = (<FAIROutputTable data={data}/>)
+        } else if (is.array1(data)) {
+            content = (<FAIROutputList data={data}/>)
+        }
+    }
+    return (<div className='fair-subsection'>{header}{content}</div>)
 }
 
 
 /** Display a <pre> element **/
-class FAIROutputCode extends React.Component {
-    render() {
-        return (<pre onMouseDown={e => e.stopPropagation()}
-                     dangerouslySetInnerHTML={{__html: this.props.data}}></pre>)
-    }
+function FAIROutputCode({data}) {
+    return (<pre onMouseDown={e => e.stopPropagation()}
+                 dangerouslySetInnerHTML={{__html: data}}></pre>)
 }
 
 
-/** Toolbar (bottom) with results, info, api-code, external link **/
-class FAIROutputToolbar extends React.Component {
-    render() {
-        let handlers = this.props.handlers;
-        let icons = this.props.icons;
-        let state = this.props.state;
-        // determine what icon set to display
-        let toolbar_icons = ['data', 'info', 'code', 'external'];
-        toolbar_icons = toolbar_icons.map(function(value, key) {
-                let thishandler = handlers[value];
-                let thisicon = icons[value];
-                let addClass = '';
-                if (value === state) {
-                    addClass = 'fair-toolbar-selection'
-                }
-                return(
-                    <div key={key+ thisicon} className={'fair-col-3 fair-result-toolbar-button '+addClass}>
-                        <FAIRIconLogo type='icon' path={'fa '+thisicon}
-                                      onClick={thishandler}/>
-                    </div>
-                )
-            });
-        //
-        return(<div className='fair-row fair-result-toolbar'>{toolbar_icons}</div>)
-    }
-}
-
-
-/** Display the output of a plugin, and a toolbar to toggle between views **/
-class FAIROutput extends React.Component {
-    constructor(props) {
-        super(props);
-        /**
-         * @type {{
-         *  type: string code used to toggle between views,
-         *  info: string with a synopsis of the plugin,
-         *  data: object with output from plugin processing,
-         *  external: string (url for external link)
-         *  }}
-         */
-        this.state = {type: 'init', info: null, data: null, external: null};
-        this.showInfo = this.showInfo.bind(this);
-        this.showCode = this.showCode.bind(this);
-        this.showResult = this.showResult.bind(this);
-        this.showExternal = this.showExternal.bind(this);
-        // some class specific items
-        this._handlers = {
-            'back': this.props.onBack,
-            'info': this.showInfo,
-            'code': this.showCode,
-            'data': this.showResult,
-            'external': this.showExternal
-        };
-        this._icons = {
-            'back': 'undo-alt-solid',
-            'info': 'info',
-            'code': 'code',
-            'data': 'table-solid',
-            'external': 'external-link-alt'
+/** display a toolbar (bottom) with buttons for: main results, info, api-code, external link **/
+function FAIROutputToolbar({handlers, icons, state}) {
+    let toolbar_icons = ['data', 'info', 'code', 'external'];
+    toolbar_icons = toolbar_icons.map(function(value, key) {
+        let thishandler = handlers[value];
+        let thisicon = icons[value];
+        let addClass = '';
+        if (value === state) {
+            addClass = 'fair-toolbar-selection'
         }
-    }
+        return(
+            <div key={key + thisicon}
+                 className={'fair-col-3 fair-result-toolbar-button '+addClass}>
+                <FAIRIconLogo type='icon' path={'fa '+thisicon}
+                              onClick={thishandler}/>
+            </div>
+        )
+    });
+    return(<div className='fair-row fair-result-toolbar'>{toolbar_icons}</div>)
+}
+
+
+/** display the output of a plugin, and a toolbar to toggle between views **/
+function FAIROutput({id, query}) {
+    const [type, setType] = React.useState('init')
+    const [data, setData] = React.useState(null)
+    const [info, setInfo] = React.useState(null)
+    const [code, setCode] = React.useState(null)
+    const [external, setExternal] = React.useState(null)
 
     /** Upon generation of plugin-specific component, fetch plugin-based data **/
-    componentDidMount() {
-        let thislist = this;
-        let msg = {action: 'run', id: this.props.id, query: this.props.query};
+    React.useEffect(() => {
+        let msg = {action: 'run', id: id, query: query};
         chrome.runtime.sendMessage(msg, function(response) {
             // when the query time out, the response might be null or undefined
             if (is.undefined(response)) {
                 response = { status: 0, data: "extension error"}
             }
-            thislist.setState({
-                type: 'data',
-                data: response.data,
-                external: response.external,
-                code: response.url
-            })
+            setType("data")
+            setData(response.data)
+            setExternal(response.external)
+            setCode(response.url)
         });
-    }
+    }, [])
 
     /** Fetch and trigger display of plugin info page **/
-    showInfo() {
-        let thislist = this;
-        let msg = {action: 'info', id: this.props.id};
+    const showInfo = () => {
+        let msg = {action: 'info', id: id};
         chrome.runtime.sendMessage(msg, function(response) {
-            thislist.setState({type:'info', info: response.data});
+            setType("info")
+            setInfo(response.data)
         });
     }
-
-    /** Fetch and trigger display of query results page **/
-    showResult() {
-        this.setState({type: 'data'});
+    const showResult = () => {
+        setType('data');
     }
-
-    /** Fetch and trigger display of code display page **/
-    showCode() {
-        this.setState({type: 'code'})
+    const showCode = () => {
+        setType('code')
     }
-
-    /** Trigger display of an external link **/
-    showExternal() {
-        let ext = this.state.external;
-        if (!is.null(ext) && !is.undefined(ext)) {
-            window.open(ext, '_blank')
+    const showExternal = () => {
+        if (!is.null(external) && !is.undefined(external)) {
+            window.open(external, '_blank')
         }
     }
 
-    render() {
-        let type = this.state.type;
-        if (type === 'init') {
-            return(<div>Please wait...</div>);
+    if (type === 'init') {
+        return(<div>Please wait...</div>);
+    }
+    // either output a single text object, or partition into sections
+    let content = [];
+    if (type === 'data') {
+        if (is.string(data)) {
+            content = [<FAIROutputSection key='section' data={data}/>]
+        } else if (is.array(data)) {
+            content = data.map(function(value, key) {
+                return (<FAIROutputSection key={'section'+key} data={value}/>)
+            });
+        } else {
+            content = Object.keys(data).map(function(value, key) {
+                return (<FAIROutputSection key={key} title={value} data={data[value]}/>)
+            });
         }
-        // either output a single text object, or partition into sections
-        let content = [];
-        if (type === 'data') {
-            let data = this.state.data;
-            if (is.string(data)) {
-                content = [<FAIROutputSection key='section' data={data}/>]
-            } else if (is.array(data)) {
-                content = data.map(function(value, key) {
-                    return (<FAIROutputSection key={'section'+key} data={value}/>)
-                });
-            } else {
-                content = Object.keys(data).map(function(value, key) {
-                    return (<FAIROutputSection key={key} title={value} data={data[value]}/>)
-                });
-            }
-        } else if (type === 'info') {
-            content = [<FAIROutputSection key='text-info' data={this.state.info}/>]
-        } else if (type === 'code') {
-            content = [<FAIROutputCode key='text-code' data={this.state.code}/>]
-        }
-        let result_height = (this.props.parentSize[1]-164)+'px';
-        //console.log('render: ',result_height);
-        //style={{height: result_height}}>
-        return (
-            <div className='fair-fill-v'>
-                <div className='fair-row fair-result'>
-                    <div className='fair-section fair-col-12'>
-                        {content}
-                    </div>
+    } else if (type === 'info') {
+        content = [<FAIROutputSection key='text-info' data={info}/>]
+    } else if (type === 'code') {
+        content = [<FAIROutputCode key='text-code' data={code}/>]
+    }
+
+    const _handlers = {
+        'info': showInfo, 'code': showCode,
+        'data': showResult, 'external': showExternal
+    }
+    const _icons = {
+        'info': 'info', 'code': 'code',
+        'data': 'table-solid', 'external': 'external-link-alt'
+    }
+
+    return (
+        <div className='fair-fill-v'>
+            <div className='fair-row fair-result'>
+                <div className='fair-section fair-col-12'>
+                    {content}
                 </div>
-                <FAIROutputToolbar state={type}
-                                   handlers={this._handlers}
-                                   icons={this._icons} />
             </div>
-        );
-    }
+            <FAIROutputToolbar state={type}
+                               handlers={_handlers}
+                               icons={_icons} />
+        </div>
+    );
 }
 
 
-/** Display an area with a candidate header on top and output below **/
-class FAIRCandidateSelection extends React.Component {
-    render() {
-        return (
-            <div className='fair-fill-v'>
-                <FAIRCandidate id={this.props.id}
-                               titles={this.props.titles}
-                               rating={this.props.rating}
-                               selectPlugin={null} />
-                <FAIROutput className='fair-output'
-                            id={this.props.id}
-                            titles={this.props.titles}
-                            rating={this.props.rating}
-                            query={this.props.query}
-                            onBack={this.props.onBack}
-                            parentSize={this.props.parentSize}/>
-            </div>
-        );
-    }
+/** display an area with a candidate header on top and output below **/
+function FAIRCandidateSelection({id, titles, rating, query}) {
+    return (
+        <div className='fair-fill-v'>
+            <FAIRCandidate id={id}
+                           titles={titles}
+                           rating={rating}
+                           selectPlugin={null} />
+            <FAIROutput className='fair-output'
+                        id={id}
+                        query={query} />
+        </div>
+    );
 }
 
 
-/** Display one candidate plugin to click on */
-class FAIRCandidate extends React.Component {
-    constructor(props) {
-        super(props);
-        this.processRequest = this.processRequest.bind(this);
-        this.processRating = this.processRating.bind(this);
-        let rating = this.props.rating;
-        if (is.undefined(rating) || rating===null) {
-            rating = 0
-        }
-        this.state = {rating: rating};
-    }
+/** Display one candidate plugin as a list item to click on */
+function FAIRCandidate({id, titles, rating, selectPlugin}) {
+    const icon_paths = ["fa star", "fa star-filled"]
+    const [currentRating, setRating] = React.useState(rating)
 
-    processRequest() {
-        let msg = {action: 'update_count', id: this.props.id};
+    const handleSelection = () => {
+        let msg = {action: 'update_count', id: id};
         chrome.runtime.sendMessage(msg);
-        if (this.props.selectPlugin!==null) {
-            this.props.selectPlugin(this.props.id);
+        if (selectPlugin !== null) {
+            selectPlugin(id);
         }
     }
 
-    processRating() {
-        let newrating = (this.state.rating+1)%2;
-        let msg = {action: 'rate', id: this.props.id, rating: newrating};
+    const handleRating = () => {
+        let newRating = (currentRating+1) % 2
+        let msg = {action: 'rate', id: id, rating: newRating}
         chrome.runtime.sendMessage(msg, function(response) {
             // no need to process any response
         });
-        this.setState({rating: newrating});
+        setRating(newRating)
     }
 
-    render() {
-        let ratingpath = 'fa star';
-        if (this.state.rating > 0) {
-            ratingpath = 'fa star-filled'
-        }
-        return(
-            <li className='fair-candidate' >
-                <div className='fair-row'>
-                    <div className='fair-col-2 fair-logo-col fair-center-center'
-                         onClick={this.processRequest}>
-                        <FAIRIconLogo type='logo' path={this.props.id}/>
-                    </div>
-                    <div className='fair-col-9 fair-center-center'
-                         onClick={this.processRequest}>
-                        <div className='fair-container fair-fullwidth'>
-                            <h3>{this.props.titles[0]}</h3>
-                            <h4>{this.props.titles[1]}</h4>
-                        </div>
-                    </div>
-                    <div className='fair-col-1 fair-center-center fair-rating'>
-                        <FAIRIconLogo type='icon' key={this.props.id+this.state.rating}
-                                      path={ratingpath} onClick={this.processRating}/>
+    return(
+        <li className='fair-candidate' >
+            <div className='fair-row'>
+                <div className='fair-col-2 fair-logo-col fair-center-center'
+                     onClick={handleSelection}>
+                    <FAIRIconLogo type='logo' path={id}/>
+                </div>
+                <div className='fair-col-9 fair-center-center'
+                     onClick={handleSelection}>
+                    <div className='fair-container fair-fullwidth'>
+                        <h3>{titles[0]}</h3>
+                        <h4>{titles[1]}</h4>
                     </div>
                 </div>
-            </li>
-        )
-    }
+                <div className='fair-col-1 fair-center-center fair-rating'>
+                    <FAIRIconLogo type='icon' key={id + currentRating}
+                                  path={icon_paths[currentRating]} onClick={handleRating}/>
+                </div>
+            </div>
+        </li>
+    )
 }
 
 
-/** Display <ul> element with multiple FAIRCandidate elements
+/** display a list with multiple FAIRCandidate items
  *
  * required props
  *
@@ -394,308 +302,175 @@ class FAIRCandidate extends React.Component {
  *  - selectPlugin, function to act on a user selection
  *
  * **/
-class FAIRCandidateList extends React.Component {
-    render() {
-        let thislist = this;
-        let candidates = this.props.candidates.map(function (x) {
-            let id = x['id'];
-            return (
-                <FAIRCandidate key={id} id={id}
-                               titles={[x['title'], x['subtitle']]}
-                               rating={x['rating']}
-                               selectPlugin={thislist.props.selectPlugin}/>
-            );
-        });
-        //let ul_height = (this.props.parentSize[1]-48)+'px';
-        //style={{height: ul_height}}
-        return (<ul className='fair-list fair-candidate-list' >{candidates}</ul>);
-    }
+function FAIRCandidateList({candidates, selectPlugin}) {
+    let items = candidates.map(function (x) {
+        let id = x['id'];
+        return (
+            <FAIRCandidate key={id} id={id}
+                           titles={[x['title'], x['subtitle']]}
+                           rating={x['rating']}
+                           selectPlugin={selectPlugin}/>
+        );
+    });
+    return (<ul className='fair-list fair-candidate-list' >{items}</ul>);
 }
 
 
-/** Display a list of plugins that claimed the query, or plugin output **/
-class FAIRClaimResult extends React.Component {
-    constructor(props) {
-        super(props);
-        this.showList = this.showList.bind(this);
-        this.selectPlugin = this.selectPlugin.bind(this);
-        this.claimQuery = this.claimQuery.bind(this);
-        /* state.candidates will hold an array of plugins that claim the query
-         * state.type will be either 'list' or 'plugin' to toggle views
-         * state.selection will hold the selected plugin id
-         */
-        this.state = {candidates: [], type: 'list', selection: null};
-    }
 
-    /* comparator for candiates, uses claim score **/
-    compareCandidates(a, b) {
-        if (a.score > b.score) return -1;
-        if (a.score < b.score) return 1;
-        return 0;
+/* comparator for objects that contain a 'score' field **/
+const compareCandidates = (a, b) => {
+    if (a.score > b.score) return -1;
+    if (a.score < b.score) return 1;
+    return 0;
+}
+
+
+/** display either a list of plugins that claimed the query, or plugin output **/
+function FAIRClaimResult({query, parentSize, setNavState, display}) {
+    const [selection, setSelection] = React.useState(null)
+    const [candidates, setCandidates] = React.useState([])
+
+    /** Toggle into a plugin-specific view **/
+    const selectPlugin = (id) => {
+        setSelection(id)
+        setNavState("selection")
     }
 
     /** look up plugins that claim a query string **/
-    claimQuery() {
-        let thislist = this;
-        let msg = {action: 'claim', query: this.props.query};
-        chrome.runtime.sendMessage(msg, function(response) {
-            let candidates = response.hits.sort(thislist.compareCandidates);
-            thislist.setState({candidates: candidates});
-            if (response.preferred !== null) {
-                thislist.selectPlugin(response.preferred);
-            }
-        });
-    }
-
-    /** on load, ask plugins to claim the query **/
-    componentDidMount() {
-        this.claimQuery();
-    }
-
-    /** force an update to the plugin cancidates when the query changes **/
-    componentDidUpdate(prevProps) {
-        if (this.props.query !== prevProps.query) {
-            this.claimQuery();
-        }
-    }
-
-    /** Toggle into a plugin-specific view **/
-    selectPlugin(id) {
-        this.setState({type: 'plugin', selection: id});
-        this.props.setNavState('selection', this.showList)
-    }
-
-    /** Toggle into a view showing query claim results **/
-    showList() {
-        this.setState({type: 'list', selection: null});
-        this.props.setNavState('search');
-    }
-
-    render() {
-        if (this.state.type === 'list') {
-            return (<FAIRCandidateList candidates={this.state.candidates}
-                                       selectPlugin={this.selectPlugin}
-                                       parentSize={this.props.parentSize}/>)
-        } else {
-            let selection = this.state.selection;
-            let candidate = (this.state.candidates).filter((x) => x['id'] === selection)[0];
-            // safety check (this is needed for when user changes the query
-            // while already looking at a specific plugin candidate)
-            if (is.undefined(candidate)) return (null);
-            return(
-                <FAIRCandidateSelection className='fair-output'
-                            id={selection}
-                            titles={[candidate['title'], candidate['subtitle']]}
-                            rating={candidate['rating']}
-                            query={this.props.query}
-                            onBack={this.showList}
-                            parentSize={this.props.parentSize}
-                />
-            )
-        }
-    }
-}
-
-
-/**
- * Holds the header with query box, list of plugins, and results
- */
-class FAIRHeaderBody extends React.Component {
-    constructor(props) {
-        super(props);
-        this.setNavState = this.setNavState.bind(this);
-        this.setQuery = this.setQuery.bind(this);
-        let querystr = "";
-        if (!is.null(this.props.range)) {
-            querystr = this.props.range.toString();
-            querystr = (querystr.trim()).replace(/\s+/g, ' ');
-        }
-        /* query: string, current string query for search,
-         * display: string either 'search' or  'selection',
-         * navclick: function called when navigation icon is clicked
-         */
-        this.state = {query: querystr, display: 'search', navClick: null}
-    }
-
-    /** Set the state of navigation, either search or selection **/
-    setNavState(type, navClick) {
-        if (type === 'search' || type === 'selection') {
-            this.setState({display: type, navClick: navClick})
-        }
-    }
-
-    /** transfer a value from the input box into the component state **/
-    setQuery(event) {
-        this.setState({query: event.target.value})
-    }
-
-    render() {
-        let navicon = [];
-        if (this.state.display === 'search') {
-            navicon.push(<FAIRIconLogo key='nav-search'
-                                       type='icon' path='fa search' />)
-        } else {
-            navicon.push(<FAIRIconLogo key='nav-selection'
-                                       type='icon' path='fa arrow-left-solid'
-                                       onClick={this.state.navClick} />)
-        }
-        return(
-            <div className='fair-header-body'>
-                <div className='fair-header fair-handle'>
-                    {navicon}
-                    <input className='fair-query' type='text'
-                           onMouseDown={e => e.stopPropagation()}
-                           defaultValue={this.state.query}
-                           onInput={this.setQuery}/>
-                </div>
-                <div className='fair-body'>
-                    <FAIRClaimResult query={this.state.query} setNavState={this.setNavState}
-                                     parentSize={this.props.parentSize}>
-                    </FAIRClaimResult>
-                </div>
-            </div>
-        );
-    }
-}
-
-
-/**
- * Create a DOM element next to a range with a button.
- * This will act as an anchor in the document for a FAIR container.
- *
- * @param range
- */
-function initFAIRAnchor(range) {
-    // create a span element with an icon
-    let anchor = document.createElement('span');
-    anchor.className = 'fair-button';
-    let msg = {action: 'icon', path: 'fa syringe'}
-    chrome.runtime.sendMessage(msg, function(response) {
-        let template = document.createElement('template');
-        template.innerHTML = response.data.trim();
-        let el = template.content.firstChild;
-        el.setAttribute('width', '12');
-        el.setAttribute('style', 'width: 12px; display: inline');
-        anchor.appendChild(el);
-    });
-    range.collapse(false);
-    range.insertNode(anchor);
-    return anchor;
-}
-
-
-/**
- * Holds a div with control buttons and the content.
- */
-class FAIRContainer extends React.Component {
-    constructor(props) {
-        super(props);
-        this.close = this.close.bind(this);
-        this.toggleVisibility = this.toggleVisibility.bind(this);
-        this.state = {anchor: null, x:null, y:null, size: [480, 520]};
-    }
-
-    /** At beginning, inject an anchor element and position to FAIR container **/
-    componentDidMount() {
-        let container = this;
-        let parent = ReactDOM.findDOMNode(this);
-        let anchor = null;
-        // collect information about the anchor point and the browser window
-        let bounding = {left: 20, top: 20};
-        let viewport = {width: window.innerWidth, height: window.innerHeight};
-        if (!is.null(this.props.range)) {
-            bounding = this.props.range.getBoundingClientRect();
-            anchor = initFAIRAnchor(this.props.range);
-            anchor.className = 'fair-anchor';
-            anchor.addEventListener('click', function() {
-                container.toggleVisibility();
+    React.useEffect(() => {
+        if (display === "list") {
+            let msg = {action: 'claim', query: query};
+            chrome.runtime.sendMessage(msg, function(response) {
+                setCandidates(response.hits.sort(compareCandidates));
+                if (response.preferred !== null) {
+                    selectPlugin(response.preferred);
+                }
             });
         }
-        let fontsize = 2*Number(getComputedStyle(document.body, '').fontSize.match(/(\d+)px/)[1]);
-        let offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
-        // determine position of the popup
-        let parent_pos = [offset.left+bounding.left, offset.top+bounding.top+fontsize];
-        if (bounding.top > viewport.height/2 && bounding.top > (this.state.size[1] + fontsize)/2) {
-            parent_pos[1] -= (this.state.size[1] + 2*fontsize)/2;
-            parent_pos[0] += bounding.width + fontsize;
-        }
-        if (bounding.left > viewport.width/2 && bounding.left + this.state.size[0] > viewport.width) {
-            parent_pos[0] = bounding.left - this.state.size[0] - fontsize
-        }
-        parent.style.left = parent_pos[0] + 'px';
-        parent.style.top = parent_pos[1] + 'px';
-        this.setState({ x: parent_pos[0], y: parent_pos[1] });
-        // remember links to the parent and to the anchor
-        this.setState({parent: parent, anchor: anchor});
-    };
+    }, [])
 
-    /** Delete this container entirely. */
-    close() {
-        let parent = this.state.parent.parentNode;
-        parent.parentNode.removeChild(parent);
-        if (this.state.anchor != null) {
-            let anchor = this.state.anchor;
-            anchor.parentNode.removeChild(anchor);
-        }
-    }
-
-    /** Hide the container temporarily **/
-    toggleVisibility() {
-        if (this.state.anchor != null) {
-            let current = this.state.parent.style.display;
-            this.state.parent.style.display = (current==='none') ? 'block': 'none';
-        } else {
-            this.close();
-        }
-    }
-
-    render() {
-        return (
-            <Rnd size={{ width: this.state.size[0], height: this.state.size[1] }}
-              className="fair-outer"
-              cancel="div.fair-body > *"
-
-              onDragStop={(e, d) => {
-                  this.setState({ x: d.x, y: d.y });
-                }}
-                onResizeStop={(e, direction, ref, delta, position) => {
-                  this.setState({
-                    size: [ref.offsetWidth, ref.offsetHeight],
-                    parent_size: [ref.offsetWidth, ref.offsetHeight],
-                    ...position
-                  });
-                }}>
-                <div className='fair-inner fair-container'>
-                    <div className='fair-button-panel'>
-                        <FAIRIconLogo type='icon' path='fa window-minimize-solid'
-                                      onClick={this.toggleVisibility}></FAIRIconLogo>
-                        <FAIRIconLogo type='icon' path='fa times-solid'
-                                      onClick={this.close}></FAIRIconLogo>
-                    </div>
-                    <FAIRHeaderBody range={this.props.range} parentSize={this.state.size}/>
-                </div>
-            </Rnd>
+    if (display === 'list') {
+        return (<FAIRCandidateList candidates={candidates}
+                                   selectPlugin={selectPlugin}
+                                   parentSize={parentSize}/>)
+    } else {
+        let candidate = candidates.filter((x) => x['id'] === selection)[0];
+        // safety check (this is needed for when user changes the query
+        // while already looking at a specific plugin candidate)
+        if (is.undefined(candidate)) return (null);
+        return(
+            <FAIRCandidateSelection className='fair-output'
+                                    id={selection}
+                                    titles={[candidate['title'], candidate['subtitle']]}
+                                    rating={candidate['rating']}
+                                    query={query} />
         )
     }
 }
 
-/**
- * Create DOM div for the popup container
- *
- * @param range
- */
+
+/** display the header with query box, list of plugins, and results */
+function FAIRHeaderBody({range, parentSize}) {
+    let querystr = "";
+    if (!is.null(range)) {
+        querystr = range.toString();
+        querystr = (querystr.trim()).replace(/\s+/g, ' ');
+    }
+    const [query, setQuery] = React.useState(querystr)
+    const [display, setDisplay] = React.useState("list")
+
+    const backToList = () => {
+        setDisplay("list")
+    }
+    const setNavState = (type) => {
+        setDisplay(type)
+    }
+
+    let navicon = [];
+    if (display === 'list') {
+        navicon.push(<FAIRIconLogo key='nav-search'
+                                   type='icon' path='fa search' />)
+    } else {
+        navicon.push(<FAIRIconLogo key='nav-selection'
+                                   type='icon' path='fa arrow-left-solid'
+                                   onClick={backToList} />)
+    }
+
+    return(
+        <div className='fair-header-body'>
+            <div className='fair-header fair-handle'>
+                {navicon}
+                <input className='fair-query' type='text'
+                       onMouseDown={e => e.stopPropagation()}
+                       defaultValue={query}
+                       onInput={setQuery}/>
+            </div>
+            <div className='fair-body'>
+                <FAIRClaimResult query={query}
+                                 parentSize={parentSize}
+                                 setNavState={setNavState}
+                                 display={display}/>
+            </div>
+        </div>
+    );
+}
+
+
+/** launch a container/popup with control buttons and content. */
+function FAIRContainer({range, container})  {
+    const [size, setSize] = React.useState([480, 520])
+    const [pos, setPos] = React.useState([0, 0])
+
+    const close = () => {
+        document.body.removeChild(container)
+    }
+
+    // set initial position of the container near the selection
+    React.useEffect(() => {
+        let bounding = {left: 20, top: 20};
+        if (!is.null(range)) {
+            bounding = range.getBoundingClientRect();
+        }
+        const body_bounding = document.body.getBoundingClientRect()
+        let offset = { 'top': window.pageYOffset, 'left': window.pageXOffset};
+        const container_pos = [Math.round(offset.left + bounding.left + bounding.width/2),
+            Math.round(offset.top + bounding.top - body_bounding.height + bounding.height*1.5)];
+        if (container_pos[0] != pos[0] || container_pos[1] != pos[1]) {
+            setPos(container_pos);
+        }
+    })
+
+    return (
+        <Rnd size={{ width: size[0], height: size[1] }}
+             style={{ left: pos[0]+"px", top: pos[1]+"px"}}
+             className="fair-outer"
+             cancel="div.fair-body > *"
+             onResizeStop={(e, direction, ref, delta, position) => {
+                setSize([ref.offsetWidth, ref.offsetHeight])
+             }}>
+            <div className='fair-inner fair-container'>
+                <div className='fair-button-panel'>
+                    <FAIRIconLogo type='icon' path='fa times-solid'
+                                  onClick={close}></FAIRIconLogo>
+                </div>
+                <FAIRHeaderBody range={range} parentSize={size}/>
+            </div>
+        </Rnd>
+    )
+}
+
+
+/** create DOM div for the popup container */
 function initFAIRContainer(range) {
     let container = document.createElement('div');
     container.className = 'fair-reset';
-    ReactDOM.render(
-        <FAIRContainer range={range}/>,
-        container
-    );
+    const containerRoot = ReactDOM.createRoot(container)
+    containerRoot.render(<FAIRContainer range={range} container={container}/>)
     document.body.appendChild(container);
 }
 
 
-/** trigger init of FAIRContainer. Used by key listener and context menu. **/
+/** trigger FAIRContainer. Used by key listener and context menu. **/
 function triggerFAIRContainer() {
     let selection = window.getSelection();
     if (selection.toString()!=='') {
@@ -706,20 +481,15 @@ function triggerFAIRContainer() {
 }
 
 
-/**
- * Register listeners for keypresses
- */
+/** Register listeners for keypresses */
 window.addEventListener('keydown', function(e){
-    // keycode 90 means 'Z' (with a shift)
-    if (e.shiftKey && e.ctrlKey && e.keyCode === 90) {
+    if (e.shiftKey && e.ctrlKey && e.code === "KeyZ") {
         triggerFAIRContainer();
     }
 }, false);
 
 
-/**
- * Register listeners catching de-novo messages from background.js
- */
+/** Register listeners catching messages from background.js */
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     if (!sender.tab && request.action === "contextMenuClick") {
         triggerFAIRContainer();

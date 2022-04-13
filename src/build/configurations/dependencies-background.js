@@ -3,16 +3,15 @@
  *
  * **/
 
-
 module.exports = [
     {
         "from": [
-            "node_modules/sanitize-html/dist/sanitize-html.min.js"
+            "dist/library/library-min.js",
+            "dist/resources/bundle-background.js",
+            "dist/js/common.js",
+            "dist/js/state.js",
+            "dist/js/background.js"
         ],
-        "to": "dist/resources/bundle-background.js"
+        "to": "dist/js/service_worker.js"
     },
-    {
-        "from": ["node_modules/sanitize-html/LICENSE"],
-        "to": "dist/resources/LICENSE-sanitize-html"
-    }
 ]

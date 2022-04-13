@@ -54,7 +54,7 @@ fs.writeFileSync(manifest_file, manifest);
 console.log("Reading bundle configuration files");
 let dependencies_path = "./configurations/dependencies-";
 let dependencies = {};
-for (let type of ["development", "production", "background"]) {
+for (let type of ["background"]) {
     dependencies[type] = require(dependencies_path+type)
 }
 
@@ -77,13 +77,6 @@ function build_static(dependencies_array) {
 
 console.log("Building browser-side bundle");
 build_static(dependencies["background"]);
-
-/* if (type === "development" || type === "production") {
-    console.log("Building client-side bundle ("+type+")");
-    build_static(dependencies[type]);
-} else {
-    console.log("To build a bundle, specify either 'development' or 'production'")
-} */
 
 
 if (type === 'production') {
