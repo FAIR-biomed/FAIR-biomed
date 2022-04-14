@@ -289,7 +289,8 @@ function processQuery(id, queries, sendResponse, index) {
         handleResponse(sanitizeResponse(plugin.process(query)))
         return
     }
-    fetch(url)
+    const fetchHeaders = url.endsWith(".png") ? {} : {'Accept': 'application/json'}
+    fetch(url, {headers: fetchHeaders})
         .then(response => {
             if (!response.ok) {
                 handleResponse({status: 0, data: [err_msg.server_error, err_msg.more_info] })
