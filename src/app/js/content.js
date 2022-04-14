@@ -3,14 +3,14 @@
  *
  * */
 
-'use strict';
+'use strict'
 
 const React = require('react')
 const ReactDOM = require('react-dom/client')
 const Rnd = require('react-rnd').Rnd
 
 
-// load a few icons into an icon cache
+// load a few icons into the cache for faster loading
 const iconcache = {};
 ['fa star', 'fa star-filled', 'fa search', 'fa arrow-left-solid']
     .forEach(function(x) {
@@ -156,7 +156,6 @@ function FAIROutput({id, query}) {
     /** Upon generation of plugin-specific component, fetch plugin-based data **/
     if (usedQuery != query) {
         let msg = {action: 'run', id: id, query: query}
-        console.log("running FAIROutput with: "+JSON.stringify(msg))
         chrome.runtime.sendMessage(msg, function(response) {
             // when the query time out, the response might be null or undefined
             if (is.undefined(response)) {

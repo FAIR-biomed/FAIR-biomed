@@ -6,6 +6,6 @@
 
 
 document.addEventListener("DOMContentLoaded", function() {
-    let manifest = chrome.runtime.getManifest();
-    document.getElementById("popup-version").textContent = "v" + manifest.version;
-});
+    let manifest = chrome.runtime.getManifest()
+    document.getElementById("popup-version").textContent = "v" + manifest.version
+})

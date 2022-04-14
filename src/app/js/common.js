@@ -8,30 +8,30 @@
 const is = new function() {
 
     // simple typeof checks
-    this.array = (x) => (typeof(x) === 'object') && ((x) instanceof Array);
-    this.boolean = (x) => typeof(x) === 'boolean';
-    this.function = (x) => typeof(x) === 'function';
-    this.null = (x) => typeof(x) === 'object' && x===null;
-    this.number = (x) => typeof(x) === 'number';
-    this.object = (x) => typeof(x) === 'object';
-    this.string = (x) => typeof(x) === 'string';
-    this.undefined = (x) => typeof(x) === 'undefined';
+    this.array = (x) => (typeof(x) === 'object') && ((x) instanceof Array)
+    this.boolean = (x) => typeof(x) === 'boolean'
+    this.function = (x) => typeof(x) === 'function'
+    this.null = (x) => typeof(x) === 'object' && x===null
+    this.number = (x) => typeof(x) === 'number'
+    this.object = (x) => typeof(x) === 'object'
+    this.string = (x) => typeof(x) === 'string'
+    this.undefined = (x) => typeof(x) === 'undefined'
 
     // variants that do multiple checks
     // array1 checks if x contains only basic types
     this.array1 = function(x) {
         if (!this.array(x)) {
-            return false;
+            return false
         }
-        return !this.array2(x);
-    };
+        return !this.array2(x)
+    }
     // array2 check if x contains arrays as elements
     this.array2 = function(x) {
         if (!this.array(x)) {
-            return false;
+            return false
         }
         if (x.length===0) {
-            return false;
+            return false
         }
         return this.array(x[0])
     }
@@ -41,15 +41,15 @@ const is = new function() {
     // quasiNumeric determines if a string contains several characters [0-9]
     this.quasiNumeric = function(x, threshold) {
         if (typeof(threshold) === 'undefined') {
-            threshold = 1;
+            threshold = 1
         }
-        if (x.length<1) return false;
+        if (x.length<1) return false
 
-        let hits = x.split('').filter(x => this.digits.has(x));
-        return (hits.length / x.length) >= threshold;
-    };
+        let hits = x.split('').filter(x => this.digits.has(x))
+        return (hits.length / x.length) >= threshold
+    }
 
-}();
+}()
 
 
 /**
@@ -57,7 +57,7 @@ const is = new function() {
  * @returns {number}
  */
 const numberContent = function() {
-    return 0;
+    return 0
 }
 
 
@@ -65,6 +65,6 @@ const numberContent = function() {
 //  - as-is in the browser
 //  - as a module for testing
 if (typeof module !== 'undefined') {
-    module.exports.is = module.exports = is;
+    module.exports.is = module.exports = is
 }
 

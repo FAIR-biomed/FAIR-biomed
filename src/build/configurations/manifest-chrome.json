@@ -19,7 +19,7 @@
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "css": ["css/fair.css"],
-    "js": ["resources/bundle.js", "library/library-min.js", "js/common.js", "js/content.js"]
+    "js": ["resources/bundle.js", "js/common.js", "js/content.js"]
   }],
   "options_page": "html/options.html",
   "action": {

@@ -3,23 +3,23 @@
  *
  * */
 
-const React = require('react');
-const ReactDOM = require('react-dom/client');
+const React = require('react')
+const ReactDOM = require('react-dom/client')
 
 // cache for storing plugin icons
-const icons = {};
+const icons = {}
 
 
 /** fetch an icon from a cache or from disk **/
 function getIcon(iconpath, resolve) {
-    const ipath = iconpath.split(" ").join("/");
+    const ipath = iconpath.split(" ").join("/")
     if (typeof(icons[ipath]) !== "undefined") {
-        resolve(icons[ipath]);
+        resolve(icons[ipath])
     }
     fetch("/resources/"+ipath+".svg")
         .then(response => response.text())
         .then(data => {
-            icons[ipath] = data;
+            icons[ipath] = data
             resolve(data)
         })
 }
@@ -27,7 +27,7 @@ function getIcon(iconpath, resolve) {
 
 /** display a label/badge **/
 function PluginTag({tag}) {
-    return (<span className="fair-badge">{tag}</span>);
+    return (<span className="fair-badge">{tag}</span>)
 }
 
 
@@ -42,13 +42,13 @@ function PluginLogo({namespace, src}) {
 function PluginInfo({namespace, info, visible}) {
     const [infoText, setInfoText] = React.useState(info)
     React.useEffect(() => {
-        const infofile = namespace + '.' + info;
+        const infofile = namespace + '.' + info
         fetch("/library/info/" + infofile)
             .then(response => response.text())
             .then(data => setInfoText(data))
     }, [])
     if (!visible) return (null)
-    return(<div className="fair-container fair-fullwidth fair-info fair-info-detail"
+    return (<div className="fair-container fair-fullwidth fair-info fair-info-detail"
                 dangerouslySetInnerHTML={{__html: infoText }}></div>)
 }
 
@@ -75,11 +75,11 @@ function LibraryItem({plugin}) {
     // when the item first loads, look up its settings from local storage
     React.useEffect(() => {
         const fromDataOrDefault = function(data, key, idx, def) {
-            if (JSON.stringify(data)==="{}") return def;
-            if (idx >= data[key].length) return def;
-            return data[key][idx];
-        };
-        const key = "plugin:" + plugin.id;
+            if (JSON.stringify(data)==="{}") return def
+            if (idx >= data[key].length) return def
+            return data[key][idx]
+        }
+        const key = "plugin:" + plugin.id
         chrome.storage.sync.get(key, function(data) {
             const rating = fromDataOrDefault(data, key, STATE_INDEX_RATING, 0)
             setActive(fromDataOrDefault(data, key, STATE_INDEX_ACTIVE, true))
@@ -94,17 +94,17 @@ function LibraryItem({plugin}) {
     const handleActivation = () => {
         const newActive = !active
         setActive(newActive)
-        setPluginActivation(plugin.id, newActive);
+        setPluginActivation(plugin.id, newActive)
     }
     const handleRating = () => {
         const newRating = (rating+1) % 2
         setRating(newRating)
-        setPluginRating(plugin.id, newRating);
+        setPluginRating(plugin.id, newRating)
         getIcon(icon_paths[newRating], setIcon)
     }
     const tags = plugin.tags.map(function(x) {
-        return <PluginTag key={x} tag={x} />;
-    });
+        return <PluginTag key={x} tag={x} />
+    })
     return (
         <li className="fair-center-v">
             <div className="fair-row">
@@ -145,9 +145,9 @@ function LibraryItem({plugin}) {
 /** list showing all available plugins, with options to turn on/off **/
 function LibraryList({plugins, names}) {
     const items = names.map(function(id) {
-        return <LibraryItem key={id} plugin={plugins[id]}/>;
-    });
-    return (<ul className="fair-list">{items}</ul>);
+        return (<LibraryItem key={id} plugin={plugins[id]}/>)
+    })
+    return (<ul className="fair-list">{items}</ul>)
 }
 
 
@@ -155,25 +155,25 @@ function LibraryList({plugins, names}) {
 function LibraryGrid({names, plugins}) {
     let logo_filenames = new Set()
     let logos = names.map(function(id) {
-        let plugin = plugins[id];
-        if (logo_filenames.has(plugin.logo)) return (null);
-        logo_filenames.add(plugin.logo);
+        let plugin = plugins[id]
+        if (logo_filenames.has(plugin.logo)) return (null)
+        logo_filenames.add(plugin.logo)
         return (
             <div className="fair-library-grid-element fair-center-center"
                  key={"grid-logo-"+plugin.id}>
                 <PluginLogo id={plugin.id} src={plugin.logo} namespace={plugin.namespace}/>
             </div>
-        );
-    });
-    return (<div>{logos}</div>);
+        )
+    })
+    return (<div>{logos}</div>)
 }
 
 
 /** update the count values of all the plugins back to DARK_COUNT **/
 function resetAllPluginCounts() {
     library["names"].map(function (id) {
-        resetPluginCount(id);
-    });
+        resetPluginCount(id)
+    })
 }
 
 
@@ -181,16 +181,16 @@ function resetAllPluginCounts() {
 function BooleanSetting({setting, value}) {
     const [currentValue, setValue] = React.useState(value)
     const toggleValue = () => {
-        let newValue = (currentValue + 1) % 2;
-        setCustomization(setting, newValue);
+        let newValue = (currentValue + 1) % 2
+        setCustomization(setting, newValue)
         setValue(newValue)
     }
     React.useEffect(() => {
-        let key = "settings:" + setting;
+        let key = "settings:" + setting
         chrome.storage.sync.get(key, function (data) {
-            let newValue = (JSON.stringify(data) !== "{}") ? data[key] : 0;
+            let newValue = (JSON.stringify(data) !== "{}") ? data[key] : 0
             setValue(newValue)
-        });
+        })
     }, [])
     return(<SliderSwitch value={currentValue} onChange={toggleValue}/>)
 }
@@ -204,6 +204,6 @@ document.addEventListener("DOMContentLoaded", function () {
     gridRoot.render(<LibraryGrid names={library['names']} plugins={library['plugins']} className="container"/>)
     const settingsRoot = ReactDOM.createRoot(document.getElementById("fair-auto-last"))
     settingsRoot.render(<BooleanSetting setting={"auto_last"} value={false}/>)
-    document.getElementById("fair-reset-button").addEventListener("click", resetAllPluginCounts);
-});
+    document.getElementById("fair-reset-button").addEventListener("click", resetAllPluginCounts)
+})
 
