@@ -1,3 +1,14 @@
+# 0.2.0
+
+New plugins: none
+
+Other updates:
+
+ - migrated to chrome manifest to V3 (required by chrome app store)
+ - upgraded dependencies, including react to V18
+ - refactored UI code from class-based to function-based style
+
+
 # 0.1.3
 
 New plugins: none
