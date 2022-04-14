@@ -12,6 +12,6 @@ module.exports = [
             "dist/js/state.js",
             "dist/js/background.js"
         ],
-        "to": "dist/js/service_worker.js"
+        "to": "dist/service_worker.js"
     },
 ]
