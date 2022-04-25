@@ -83,6 +83,9 @@ div.fair-row {
 .fair-pointer {
     cursor: pointer;
 }
+.fair-move {
+    cursor: move;
+}
 ul.fair-list {
     padding-left: 0.8em;
     padding-right: 0.8em;
@@ -667,7 +670,9 @@ div.fair-outer svg {
 .fair-header .fair-icon svg path, .fair-result-toolbar .fair-icon svg path {
     fill: #fafafa;
 }
-
+.fair-message {
+    padding: 1em;
+}
 
 
 

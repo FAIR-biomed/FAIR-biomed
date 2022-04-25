@@ -20,15 +20,8 @@ const iconcache = {};
     });
 
 
-/**
- * Display an icon or a logo
- *
- * requires props:
- *  - type: logo or icon
- *  - path: string with path to file
- *
- * */
-function FAIRIconLogo({type, path, onClick}) {
+/** Display an icon or a logo */
+function FAIRIconLogo({type, path, onClick, cursor}) {
     const [data, setData] = React.useState(null)
 
     // fetch the icon from cache or from the extension
@@ -46,6 +39,9 @@ function FAIRIconLogo({type, path, onClick}) {
 
     if (data===null) return(null)
     let cursorClass = (onClick === null) ? '' : ' fair-pointer'
+    if (cursor === 'move') {
+        cursorClass = ' fair-move'
+    }
     return (
         <span className={'fair-'+type+cursorClass}
                  dangerouslySetInnerHTML={{__html: data}}
@@ -190,7 +186,7 @@ function FAIROutput({id, query}) {
     }
 
     if (usedQuery != query) {
-        return (<div>Please wait...</div>)
+        return (<div className="fair-message">Please wait...</div>)
     }
     // either output a single text object, or partition into sections
     let content = []
@@ -341,6 +337,14 @@ function FAIRClaimResult({query, setNavState, display}) {
         setNavState("selection")
     }
 
+    if (query === "") {
+        return (
+            <div className={"fair-message"}>
+                Enter a query string in the textbox beside the 'search' icon.
+            </div>
+        )
+    }
+
     /** look up plugins that claim a query string **/
     if (display === "list" && usedQuery != query) {
         let msg = {action: 'claim', query: query}
@@ -352,7 +356,6 @@ function FAIRClaimResult({query, setNavState, display}) {
             }
         })
     }
-
     if (display === 'list') {
         return (<FAIRCandidateList candidates={candidates}
                                    selectPlugin={selectPlugin} />)
@@ -395,7 +398,8 @@ function FAIRHeaderBody({range}) {
     let navicon = []
     if (display === 'list') {
         navicon.push(<FAIRIconLogo key='nav-search'
-                                   type='icon' path='fa search' />)
+                                   type='icon' path='fa search'
+                                   cursor="move"/>)
     } else {
         navicon.push(<FAIRIconLogo key='nav-selection'
                                    type='icon' path='fa arrow-left-solid'
@@ -425,7 +429,6 @@ function FAIRHeaderBody({range}) {
 function FAIRContainer({range, container})  {
     const [size, setSize] = React.useState([480, 520])
     const [pos, setPos] = React.useState([0, 0])
-
     const close = () => {
         document.body.removeChild(container)
     }
