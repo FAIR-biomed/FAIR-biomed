@@ -4,9 +4,10 @@ New plugins: none
 
 Other updates:
 
- - migrated to chrome manifest to V3 (required by chrome app store)
+ - migrated chrome manifest to V3 (required by chrome app store)
  - upgraded dependencies, including react to V18
  - refactored UI code from class-based to function-based style
+ - removed the "minimize" button from the main popup box
 
 
 # 0.1.3
