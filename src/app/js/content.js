@@ -432,7 +432,7 @@ function FAIRContainer({range, container})  {
 
     // set initial position of the container near the selection
     React.useEffect(() => {
-        let bounding = {left: 20, top: 20}
+        let bounding = {left: 20, top: 20, width: 0, height: 0}
         if (!is.null(range)) {
             bounding = range.getBoundingClientRect()
         }
