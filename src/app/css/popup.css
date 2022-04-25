@@ -53,19 +53,25 @@ img {
   justify-content: space-between;
   padding: 10px 20px;
 }
+p {
+  font-size: 1.1em;
+  color: #1b1e21;
+  line-height: 1.35;
+}
+p code {
+  background-color: #f4f4f4;
+  padding: 3px;
+}
 .flex {
   opacity: 1;
   transition: opacity 0.2s ease-in-out;
   width: 80px;
+  text-align: center;
 }
 .flex:hover {
   opacity: 0.4;
 }
-.flex .fa {
-  font-size: 30px;
-  color: #22b5bb;
-}
-.flex i {
-  text-align: center;
-  width: 100%;
+.flex svg {
+  width: 32px;
+  height: 32px;
 }

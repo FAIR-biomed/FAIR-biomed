@@ -1,3 +1,13 @@
+# 0.2.1
+
+New plugins: none
+
+Other updates:
+
+- fixed bug (introduced in v0.2.0) that triggered an infinite render loop when the extension popup launched without a text selection
+- removed dependence on bootstrap to avoid linking to external code
+
+
 # 0.2.0
 
 New plugins: none
