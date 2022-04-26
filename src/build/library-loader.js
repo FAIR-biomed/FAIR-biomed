@@ -64,6 +64,7 @@ function getDirContent(dirpath) {
 
 /**
  * load all plugins recursively starting from a directory
+ * (ignores plugins marked with deprecated=true
  *
  * @param dirpath string, path to look into
  * @returns
@@ -73,9 +74,10 @@ function loadPlugins(dirpath) {
     let content = getDirContent(dirpath);
     let plugins = content.plugins.map(function(x) {
         let plugin = require(x);
+        if (plugin.deprecated) return null
         plugin._filepath = x;
         return plugin
-    });
+    }).filter(function(x) { return x !== null })
     if (content.subdirs.length) {
         let subdir_plugins = (content.subdirs).map(loadPlugins);
         subdir_plugins.map(function(subplugins) {

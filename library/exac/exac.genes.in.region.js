@@ -5,6 +5,9 @@
 
 module.exports = new function() {
 
+    /** This plugin is deprecated because APIs are not responsive any more **/
+    this.deprecated = true
+
     /** variables **/
     this.id = 'exac.genes.in.region';
     this.title = 'ExAC Genes';
@@ -81,5 +84,4 @@ module.exports = new function() {
     };
 
 }();
-
 

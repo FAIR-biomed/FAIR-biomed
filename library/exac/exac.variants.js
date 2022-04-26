@@ -5,6 +5,9 @@
 
 module.exports = new function() {
 
+    /** This plugin is deprecated because APIs are not responsive any more **/
+    this.deprecated = true
+
     /** variables **/
     this.id = 'exac.variants';
     this.title = 'ExAC Variants';
@@ -85,5 +88,4 @@ module.exports = new function() {
     };
 
 }();
-
 
