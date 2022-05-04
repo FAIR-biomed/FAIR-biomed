@@ -2,6 +2,10 @@
 
 New plugins: none
 
+Deprecated plugins:
+
+- ExAC (non-responsive API)
+
 Other updates:
 
 - fixed bug (introduced in v0.2.0) that triggered an infinite render loop when the extension popup launched without a text selection
