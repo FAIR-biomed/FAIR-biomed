@@ -2,7 +2,8 @@
 
 div.fair-reset {
     all: unset !important;
-    z-index: 10;
+    display: block !important;
+    clear: both !important;
 }
 div.fair-outer {
     box-sizing: border-box;

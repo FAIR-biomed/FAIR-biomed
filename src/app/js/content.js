@@ -439,10 +439,12 @@ function FAIRContainer({range, container})  {
         if (!is.null(range)) {
             bounding = range.getBoundingClientRect()
         }
-        const body_bounding = document.body.getBoundingClientRect()
-        let offset = { 'top': window.pageYOffset, 'left': window.pageXOffset}
-        const container_pos = [Math.round(offset.left + bounding.left + bounding.width/2),
-            Math.round(offset.top + bounding.top - body_bounding.height + bounding.height*1.5)]
+        const scrollHeight = document.body.scrollHeight
+        const offset = { 'top': window.pageYOffset, 'left': window.pageXOffset}
+        const container_pos = [
+            Math.round(offset.left + bounding.left + bounding.width/2),
+            Math.round(offset.top + bounding.top + bounding.height - scrollHeight)
+        ]
         if (container_pos[0] != pos[0] || container_pos[1] != pos[1]) {
             setPos(container_pos)
         }
