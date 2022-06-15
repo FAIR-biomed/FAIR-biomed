@@ -1,3 +1,12 @@
+# 0.2.2
+
+New plugins: none
+
+Other updates:
+
+- fixed incorrect positioning of box on long pages
+
+
 # 0.2.1
 
 New plugins: none
