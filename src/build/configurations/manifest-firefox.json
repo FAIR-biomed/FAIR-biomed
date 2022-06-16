@@ -3,7 +3,7 @@
   "short_name": "FAIR-biomed",
   "version": "_version_",
   "description": "Open data resources in the biomedical domain",
-  "permissions": ["activeTab", "storage", "contextMenus"],
+  "permissions": ["storage", "contextMenus"],
   "background": {
     "scripts": ["library/library-min.js", "resources/bundle-background.js", "js/common.js",
       "js/state.js", "js/background.js"]

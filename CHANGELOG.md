@@ -1,3 +1,12 @@
+# 0.2.3
+
+New plugins: none
+
+Other updates:
+
+- removed 'activeTab' permission from manifest (following recommendation from chrom web store)
+
+
 # 0.2.2
 
 New plugins: none
