@@ -4,9 +4,6 @@
   "version": "_version_",
   "description": "Open data resources in the biomedical domain",
   "permissions": ["storage", "contextMenus"],
-  "host_permissions": [
-    "*://*/*"
-  ],
   "web_accessible_resources": [
     {
       "resources": [ "library/logo/*", "resources/fa/*", "resources/images/*" ],
